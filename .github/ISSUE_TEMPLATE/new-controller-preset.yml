@@ -1,20 +1,24 @@
 name: Request a controller preset
 description: Ask for a new layout when you do not have JSON ready yet (or attach a draft).
-title: "[Preset request] "
-labels: ["preset-request"]
+title: "[Preset request]: "
 body:
   - type: markdown
-    value: |
-      Use this if you **cannot open a pull request** yet. If you already have a `.json` file, open a [pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare) instead — the PR template has the full checklist.
+    attributes:
+      value: |
+        **Repository: [OpenRGB3DSpatialPresets](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets)** (controller layout JSON only).
 
-      See [CONTRIBUTING.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/blob/master/CONTRIBUTING.md) and [PRESET_FORMAT.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/blob/master/docs/PRESET_FORMAT.md).
+        Plugin bugs: [OpenRGB3DSpatialPlugin issues](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues/new?template=bug_report.yml).
+
+        If you already have a `.json` file, open a [pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare) instead.
+
+        Do not use **Blank issue** (maintainers only).
 
   - type: input
     id: brand_model
     attributes:
       label: Brand and model
       description: Hardware you want a preset for
-      placeholder: e.g. Corsair iCUE 220T RGB, Intel Arc A770 LE
+      placeholder: "Corsair iCUE 220T RGB, Intel Arc A770 LE"
     validations:
       required: true
 
@@ -23,19 +27,19 @@ body:
     attributes:
       label: Category
       options:
-        - fans
-        - graphics_cards
-        - motherboards
-        - ram_sticks
-        - keyboards
-        - mouses
-        - mousemats
-        - cpu_cooler
-        - led_strips
-        - headsets
-        - speakers
-        - cases
-        - other
+        - "fans"
+        - "graphics_cards"
+        - "motherboards"
+        - "ram_sticks"
+        - "keyboards"
+        - "mouses"
+        - "mousemats"
+        - "cpu_cooler"
+        - "led_strips"
+        - "headsets"
+        - "speakers"
+        - "cases"
+        - "other category"
     validations:
       required: true
 
@@ -43,8 +47,8 @@ body:
     id: openrgb_name
     attributes:
       label: OpenRGB device name (exact)
-      description: As shown in OpenRGB's device list — required for matching
-      placeholder: e.g. Corsair SP120 RGB PRO
+      description: As shown in OpenRGB device list (required for matching)
+      placeholder: "Corsair SP120 RGB PRO"
     validations:
       required: true
 
@@ -52,10 +56,8 @@ body:
     id: led_layout
     attributes:
       label: LED layout in OpenRGB
-      description: Zones, LED counts, and how they map physically (e.g. 3 fans × 8 LEDs on zone 0)
-      placeholder: |
-        Zone 0: 24 LEDs (3×8 front fans)
-        Zone 1: …
+      description: Zones, LED counts, physical mapping
+      placeholder: "Zone 0: 24 LEDs (3x8 front fans)"
     validations:
       required: true
 
@@ -63,7 +65,7 @@ body:
     id: use_case
     attributes:
       label: When should someone use this preset?
-      description: Single device vs part of a kit; position in case; simple vs ring layout
+      description: Single device vs kit; case position; simple vs ring layout
     validations:
       required: true
 
@@ -71,25 +73,26 @@ body:
     id: product_url
     attributes:
       label: Product link (optional)
-      placeholder: https://…
+      placeholder: "https://..."
 
   - type: textarea
     id: draft_json
     attributes:
       label: Draft JSON or export (optional)
       description: Paste exported JSON or attach a file in a follow-up comment
-      render: json
 
-  - type: checkboxes
+  - type: dropdown
     id: willing_pr
     attributes:
       label: Contribution
       options:
-        - label: I can open a pull request myself if given filename/format guidance
-        - label: I am only requesting; I cannot submit a PR
+        - "I can open a pull request with guidance"
+        - "Request only - I cannot submit a PR"
+    validations:
+      required: true
 
   - type: textarea
     id: extra
     attributes:
-      label: Anything else
-      description: OpenRGB version, OS, duplicate of existing preset, related presets needed together
+      label: Anything else (optional)
+      description: OpenRGB version, OS, related presets needed together

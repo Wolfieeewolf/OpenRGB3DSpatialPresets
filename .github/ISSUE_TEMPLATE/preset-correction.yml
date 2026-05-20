@@ -1,18 +1,22 @@
 name: Fix an existing preset
-description: Wrong LED indices, device name, or description for a preset already in the repo.
-title: "[Preset fix] "
-labels: ["preset-fix"]
+description: Wrong LED indices, device name, or description for a preset in this repo.
+title: "[Preset fix]: "
 body:
   - type: markdown
-    value: |
-      Prefer a **pull request** with the corrected JSON if you can. Use this issue for discussion or if you are unsure of the fix.
+    attributes:
+      value: |
+        **Repository: [OpenRGB3DSpatialPresets](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets)** (controller JSON in `controllers/`).
+
+        Plugin bugs: [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues/new?template=bug_report.yml).
+
+        Prefer a **pull request** with corrected JSON when you can.
 
   - type: input
     id: preset_file
     attributes:
       label: Preset file
       description: Path under controllers/
-      placeholder: e.g. controllers/corsair_icue_220t_sp120_front_bottom.json
+      placeholder: "controllers/corsair_icue_220t_sp120_front_bottom.json"
     validations:
       required: true
 
@@ -20,7 +24,7 @@ body:
     id: problem
     attributes:
       label: What is wrong?
-      placeholder: e.g. LED 3 and 4 swapped; controller_name should be "… 2"
+      placeholder: "LED 3 and 4 swapped; controller_name should be different"
     validations:
       required: true
 
@@ -38,10 +42,13 @@ body:
     validations:
       required: true
 
-  - type: checkboxes
-    id: tested
+  - type: dropdown
+    id: contribution
     attributes:
       label: Verification
       options:
-        - label: I tested the current preset with Add from preset
-        - label: I can submit a PR with a fix
+        - "I tested with Add from preset in the plugin"
+        - "I can submit a PR with a fix"
+        - "I cannot test or PR - discussion only"
+    validations:
+      required: true

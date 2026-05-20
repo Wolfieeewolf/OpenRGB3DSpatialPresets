@@ -2,15 +2,23 @@
 
 Thank you for helping grow the preset library. This repo only holds **controller layout JSON** for [OpenRGB 3D Spatial](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin).
 
-## Best way to contribute
+## Which repository?
+
+| Topic | Repository |
+|-------|------------|
+| Controller layout **JSON** (this repo) | **OpenRGB3DSpatialPresets** |
+| Plugin bugs, effects, UI, screen mirror | [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues) |
+| Monitor panel size (mm) | [DisplaySpecifications](https://www.displayspecifications.com) in the plugin (not stored here) |
+
+## Best way to contribute (this repo)
 
 | You have… | Use |
 |-----------|-----|
 | A working `.json` file (exported or edited) | **[Pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare)** — the PR template has a checklist |
-| Hardware but no layout yet | **[New controller preset](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new?template=new-controller-preset.yml)** issue |
-| A fix to an existing preset | **[Preset correction](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new?template=preset-correction.yml)** issue or PR |
+| Hardware but no layout yet | **[Preset request form](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new?template=new-controller-preset.yml)** |
+| A fix to an existing preset | **[Preset fix form](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new?template=preset-correction.yml)** or PR |
 
-Monitor sizes are **not** accepted here; use [DisplaySpecifications](https://www.displayspecifications.com) in the plugin.
+**Blank issues are disabled.** Maintainers: do not use **Blank issue**; pick a template from [New issue](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new).
 
 ## Before you open a PR
 

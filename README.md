@@ -48,11 +48,11 @@ Mappings still use `controller_name` **"Corsair SP120 RGB PRO"** so they match O
 
 ## Contributing
 
-**Have a JSON file ready?** Open a [pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare) — GitHub will show a checklist (device name, testing, when to use the preset).
+**Issues for this repo only** (controller JSON): [preset request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new?template=new-controller-preset.yml) · [preset fix](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new?template=preset-correction.yml)
 
-**Need a layout but no file yet?** Open a [preset request issue](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new?template=new-controller-preset.yml).
+**Plugin bugs or features** go to [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues), not here.
 
-See **[CONTRIBUTING.md](CONTRIBUTING.md)** and **[docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md)** for the full format and review criteria.
+**Have JSON ready?** [Pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare). See **[CONTRIBUTING.md](CONTRIBUTING.md)** and **[docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md)**.
 
 ## License
 

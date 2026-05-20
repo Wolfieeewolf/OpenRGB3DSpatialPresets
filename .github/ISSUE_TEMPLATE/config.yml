@@ -1,8 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: OpenRGB 3D Spatial plugin
-    url: https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues
-    about: Bugs or features in the plugin itself (not preset JSON)
-  - name: Contributing guide
+  - name: "Plugin bugs (other repo)"
+    url: https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues/new?template=bug_report.yml
+    about: OpenRGB3DSpatialPlugin - crashes, UI, effects, screen mirror (not preset JSON)
+  - name: "Plugin features (other repo)"
+    url: https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues/new?template=feature_request.yml
+    about: Suggestions for the 3D Spatial plugin itself
+  - name: Contributing presets (this repo)
     url: https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/blob/master/CONTRIBUTING.md
-    about: How to submit presets via pull request
+    about: PR checklist and JSON format for controller layouts
