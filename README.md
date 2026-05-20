@@ -25,6 +25,19 @@ Monitor panel sizes are not stored here. In the plugin, look up width and height
 
 You can also clone this repo and copy files from your checkout.
 
+### Included layouts
+
+| File | Device |
+|------|--------|
+| corsair_sp120_rgb_pro.json | Corsair SP120 RGB PRO (single fan) |
+| corsair_sp120_front_case_light_bottom.json | SP120 — front case ring (bottom) |
+| corsair_sp120_front_case_lights_middle.json | SP120 — front case ring (middle) |
+| corsair_sp120_front_case_lights_top.json | SP120 — front case ring (top) |
+| razer_deathadder_elite.json | Razer DeathAdder Elite |
+| amd_wraith_prism.json | AMD Wraith Prism |
+| msi_mpg_x570_gaming_edge_wifi_onboard_led.json | MSI MPG X570 GAMING EDGE WIFI onboard LEDs |
+| intel_arc_a770.json | Intel Arc A770 Limited Edition |
+
 ## Contributing
 
 1. Export a layout from the plugin (**Custom Controllers** → export), or copy an existing JSON and edit it.
