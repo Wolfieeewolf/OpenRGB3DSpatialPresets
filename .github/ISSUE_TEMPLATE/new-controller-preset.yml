@@ -1,0 +1,95 @@
+name: Request a controller preset
+description: Ask for a new layout when you do not have JSON ready yet (or attach a draft).
+title: "[Preset request] "
+labels: ["preset-request"]
+body:
+  - type: markdown
+    value: |
+      Use this if you **cannot open a pull request** yet. If you already have a `.json` file, open a [pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare) instead — the PR template has the full checklist.
+
+      See [CONTRIBUTING.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/blob/master/CONTRIBUTING.md) and [PRESET_FORMAT.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/blob/master/docs/PRESET_FORMAT.md).
+
+  - type: input
+    id: brand_model
+    attributes:
+      label: Brand and model
+      description: Hardware you want a preset for
+      placeholder: e.g. Corsair iCUE 220T RGB, Intel Arc A770 LE
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - fans
+        - graphics_cards
+        - motherboards
+        - ram_sticks
+        - keyboards
+        - mouses
+        - mousemats
+        - cpu_cooler
+        - led_strips
+        - headsets
+        - speakers
+        - cases
+        - other
+    validations:
+      required: true
+
+  - type: input
+    id: openrgb_name
+    attributes:
+      label: OpenRGB device name (exact)
+      description: As shown in OpenRGB's device list — required for matching
+      placeholder: e.g. Corsair SP120 RGB PRO
+    validations:
+      required: true
+
+  - type: textarea
+    id: led_layout
+    attributes:
+      label: LED layout in OpenRGB
+      description: Zones, LED counts, and how they map physically (e.g. 3 fans × 8 LEDs on zone 0)
+      placeholder: |
+        Zone 0: 24 LEDs (3×8 front fans)
+        Zone 1: …
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: When should someone use this preset?
+      description: Single device vs part of a kit; position in case; simple vs ring layout
+    validations:
+      required: true
+
+  - type: input
+    id: product_url
+    attributes:
+      label: Product link (optional)
+      placeholder: https://…
+
+  - type: textarea
+    id: draft_json
+    attributes:
+      label: Draft JSON or export (optional)
+      description: Paste exported JSON or attach a file in a follow-up comment
+      render: json
+
+  - type: checkboxes
+    id: willing_pr
+    attributes:
+      label: Contribution
+      options:
+        - label: I can open a pull request myself if given filename/format guidance
+        - label: I am only requesting; I cannot submit a PR
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: OpenRGB version, OS, duplicate of existing preset, related presets needed together

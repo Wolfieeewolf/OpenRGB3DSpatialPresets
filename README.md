@@ -48,11 +48,11 @@ Mappings still use `controller_name` **"Corsair SP120 RGB PRO"** so they match O
 
 ## Contributing
 
-1. Export a layout from the plugin (**Custom Controllers** → export), or copy an existing JSON and edit it.
-2. Add a new `.json` under `controllers/`.
-3. Open a pull request with brand/model in the filename (e.g. `corsair_sp120_rgb_pro.json`).
+**Have a JSON file ready?** Open a [pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare) — GitHub will show a checklist (device name, testing, when to use the preset).
 
-Controller presets should include `name`, `category`, `brand`, `model`, `mappings`, and spacing fields where relevant. See the plugin repo for format details.
+**Need a layout but no file yet?** Open a [preset request issue](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new?template=new-controller-preset.yml).
+
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** and **[docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md)** for the full format and review criteria.
 
 ## License
 

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: OpenRGB 3D Spatial plugin
+    url: https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues
+    about: Bugs or features in the plugin itself (not preset JSON)
+  - name: Contributing guide
+    url: https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/blob/master/CONTRIBUTING.md
+    about: How to submit presets via pull request

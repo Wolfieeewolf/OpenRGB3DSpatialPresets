@@ -1,0 +1,47 @@
+name: Fix an existing preset
+description: Wrong LED indices, device name, or description for a preset already in the repo.
+title: "[Preset fix] "
+labels: ["preset-fix"]
+body:
+  - type: markdown
+    value: |
+      Prefer a **pull request** with the corrected JSON if you can. Use this issue for discussion or if you are unsure of the fix.
+
+  - type: input
+    id: preset_file
+    attributes:
+      label: Preset file
+      description: Path under controllers/
+      placeholder: e.g. controllers/corsair_icue_220t_sp120_front_bottom.json
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      placeholder: e.g. LED 3 and 4 swapped; controller_name should be "… 2"
+    validations:
+      required: true
+
+  - type: input
+    id: openrgb_name
+    attributes:
+      label: Your OpenRGB device name (exact)
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: tested
+    attributes:
+      label: Verification
+      options:
+        - label: I tested the current preset with Add from preset
+        - label: I can submit a PR with a fix
