@@ -20,6 +20,15 @@ Thank you for helping grow the preset library. This repo only holds **controller
 
 **Blank issues are disabled.** Maintainers: do not use **Blank issue**; pick a template from [New issue](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/issues/new).
 
+### What makes a useful preset request
+
+- **One device or kit per issue** (not a shopping list of hardware).
+- **Exact OpenRGB device name** from your device list (or say you cannot find it).
+- **"Not sure"** on LED layout is OK if you describe zones/counts as well as you can.
+- If you already exported JSON, open a **[pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare)** instead of an issue.
+
+Vague one-liners may be closed so the form can be resubmitted with detail.
+
 ## Before you open a PR
 
 1. **Export from the plugin** (recommended): build the layout in OpenRGB 3D Spatial → **Custom Controllers** → export, or use **Add from preset** on a close match and adjust.

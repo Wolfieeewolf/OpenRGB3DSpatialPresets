@@ -9,15 +9,15 @@ body:
 
         Plugin bugs: [OpenRGB3DSpatialPlugin issues](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues/new?template=bug_report.yml).
 
-        If you already have a `.json` file, open a [pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare) instead.
+        **One device or kit per issue** — not a list of many products. Already have `.json`? Open a [pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare) instead of an issue.
 
         Do not use **Blank issue** (maintainers only).
 
   - type: input
     id: brand_model
     attributes:
-      label: Brand and model
-      description: Hardware you want a preset for
+      label: Brand and model (one product)
+      description: Single device or named kit (e.g. iCUE 220T front fan stack)
       placeholder: "Corsair iCUE 220T RGB, Intel Arc A770 LE"
     validations:
       required: true
@@ -96,3 +96,11 @@ body:
     attributes:
       label: Anything else (optional)
       description: OpenRGB version, OS, related presets needed together
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Before submitting
+      options:
+        - label: This is one device or kit with OpenRGB name and LED info (or I said what I do not know)
+          required: true
