@@ -1,1 +1,96 @@
-{"name":"220T Front Fan - Top","category":"fans","brand":"Corsair","model":"iCUE 220T RGB (front SP120 stack)","width":9,"height":9,"depth":1,"spacing_mm_x":5,"spacing_mm_y":5,"spacing_mm_z":5,"mappings":[{"x":8,"y":4,"z":0,"controller_name":"Corsair SP120 RGB PRO","controller_location":"1:1","zone_idx":0,"led_idx":16,"granularity":2},{"x":7,"y":1,"z":0,"controller_name":"Corsair SP120 RGB PRO","controller_location":"1:1","zone_idx":0,"led_idx":17,"granularity":2},{"x":4,"y":0,"z":0,"controller_name":"Corsair SP120 RGB PRO","controller_location":"1:1","zone_idx":0,"led_idx":18,"granularity":2},{"x":1,"y":1,"z":0,"controller_name":"Corsair SP120 RGB PRO","controller_location":"1:1","zone_idx":0,"led_idx":19,"granularity":2},{"x":0,"y":4,"z":0,"controller_name":"Corsair SP120 RGB PRO","controller_location":"1:1","zone_idx":0,"led_idx":20,"granularity":2},{"x":1,"y":7,"z":0,"controller_name":"Corsair SP120 RGB PRO","controller_location":"1:1","zone_idx":0,"led_idx":21,"granularity":2},{"x":4,"y":8,"z":0,"controller_name":"Corsair SP120 RGB PRO","controller_location":"1:1","zone_idx":0,"led_idx":22,"granularity":2},{"x":7,"y":7,"z":0,"controller_name":"Corsair SP120 RGB PRO","controller_location":"1:1","zone_idx":0,"led_idx":23,"granularity":2}]}
+{
+    "format": "OpenRGB3DSpatialCustomController",
+    "version": 1,
+    "name": "220T Front Fan - Top",
+    "category": "fans",
+    "brand": "Corsair",
+    "model": "iCUE 220T RGB (front SP120 stack)",
+    "width": 9,
+    "height": 9,
+    "depth": 1,
+    "spacing_mm_x": 5,
+    "spacing_mm_y": 5,
+    "spacing_mm_z": 5,
+    "mappings": [
+        {
+            "x": 8,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Corsair SP120 RGB PRO",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 16,
+            "granularity": 2
+        },
+        {
+            "x": 7,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Corsair SP120 RGB PRO",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 17,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Corsair SP120 RGB PRO",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 18,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Corsair SP120 RGB PRO",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 19,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Corsair SP120 RGB PRO",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 20,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 7,
+            "z": 0,
+            "controller_name": "Corsair SP120 RGB PRO",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 21,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 8,
+            "z": 0,
+            "controller_name": "Corsair SP120 RGB PRO",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 22,
+            "granularity": 2
+        },
+        {
+            "x": 7,
+            "y": 7,
+            "z": 0,
+            "controller_name": "Corsair SP120 RGB PRO",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 23,
+            "granularity": 2
+        }
+    ]
+}
