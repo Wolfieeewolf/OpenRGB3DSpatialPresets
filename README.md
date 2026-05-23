@@ -16,7 +16,7 @@ Monitor panel sizes are not stored here. In the plugin, look up width and height
 2. Copy preset files into:
 
    ```
-   plugins/settings/OpenRGB3DSpatialPlugin/controller_presets/
+   plugins/settings/OpenRGB3DSpatialPlugin/controllers/
    ```
 
    Copy any `.json` from [`controllers/`](controllers/) into that folder (one file = one preset).
@@ -52,7 +52,7 @@ Mappings still use `controller_name` **"Corsair SP120 RGB PRO"** so they match O
 
 **Plugin bugs or features** go to [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues), not here.
 
-**Have JSON ready?** [Pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare). See **[CONTRIBUTING.md](CONTRIBUTING.md)** and **[docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md)**.
+**Have JSON ready?** [Pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare). Copy **[template.controller.json](template.controller.json)** and follow **[docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md)** (OpenRGB device naming rules).
 
 ## License
 

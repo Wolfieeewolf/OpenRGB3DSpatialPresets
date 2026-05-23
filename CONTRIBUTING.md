@@ -43,7 +43,7 @@ Each file must be a single JSON object with at least:
 
 | Field | Purpose |
 |-------|---------|
-| `name` | Short label in **Add from preset** (e.g. `220T Front Fan - Bottom`) |
+| `name` | Layout title in the plugin — must follow [OpenRGB naming rules](docs/PRESET_FORMAT.md) (usually same as `controller_name`, or `{device} - {zone}` / kit label like `220T Front Fan - Bottom`) |
 | `category` | e.g. `fans`, `graphics_cards`, `motherboard`, `mouses` — see plugin preset picker |
 | `brand` | Manufacturer |
 | `model` | Product or kit name (can mention case/kit, e.g. `iCUE 220T RGB (front SP120 stack)`) |
