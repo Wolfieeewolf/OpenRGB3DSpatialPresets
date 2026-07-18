@@ -35,7 +35,9 @@ Vague one-liners may be closed so the form can be resubmitted with detail.
 2. Place **one preset per file** under `controllers/`.
 3. **Filename**: lowercase, underscores, brand and model first, e.g. `corsair_icue_220t_sp120_front_bottom.json`.
 4. Fill the **PR description** using the template (device names, testing, when to use this file).
-5. Update the **README** preset table if the preset is a named kit (case, GPU model, etc.) or needs a short “when to use” note.
+5. Set `brand`, `model`, and `category` on the JSON (required for the catalog).
+6. Regenerate the catalog: `python scripts/generate_preset_catalog.py`.
+7. For multi-file kits that need a short “when to use” note, add or update a sidecar under [`docs/device_notes/`](docs/device_notes/) (copy the `<!-- catalog -->` header from an existing note), then regenerate again.
 
 ## Required JSON fields
 

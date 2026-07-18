@@ -25,30 +25,9 @@ Monitor panel sizes are not stored here. In the plugin, look up width and height
 
 You can also clone this repo and copy files from your checkout.
 
-### Included layouts
+## Browse presets
 
-| File | Device / use |
-|------|----------------|
-| corsair_sp120_rgb_pro.json | Corsair SP120 RGB PRO — **one fan**, single LED in 3D (buy separately or any single-fan setup) |
-| corsair_icue_220t_sp120_front_bottom.json | **Corsair iCUE 220T RGB** — front intake, bottom fan (LEDs 0–7, ring layout) |
-| corsair_icue_220t_sp120_front_middle.json | **Corsair iCUE 220T RGB** — front intake, middle fan (LEDs 8–15) |
-| corsair_icue_220t_sp120_front_top.json | **Corsair iCUE 220T RGB** — front intake, top fan (LEDs 16–23) |
-| amd_wraith_prism.json | AMD Wraith Prism |
-| msi_mpg_x570_gaming_edge_wifi_onboard_led.json | MSI MPG X570 GAMING EDGE WIFI onboard LEDs |
-| intel_arc_a770.json | Intel Arc A770 Limited Edition |
-| logitech_g560_lightsync_speaker_left.json | Logitech G560 — left speaker (includes light blockers) |
-| logitech_g560_lightsync_speaker_right.json | Logitech G560 — right speaker (includes light blockers) |
-| razer_blackwidow_x_chroma.json | Razer BlackWidow X Chroma keyboard (includes light blockers) |
-| razer_deathadder_elite.json | Razer DeathAdder Elite (includes light blockers) |
-| razer_tartarus_v2.json | Razer Tartarus V2 keypad (includes light blockers) |
-
-#### Corsair SP120 / iCUE 220T RGB
-
-The [iCUE 220T RGB](https://www.corsair.com/us/en/p/case/icue-220t-rgb-tempered-glass-mid-tower-atx-smart-case-cc-9011133-ww/cc-9011133-ww) ships with **three** SP120 RGB PRO fans on the front. OpenRGB often exposes them as **one** device with **24 LEDs** on zone 0 (8 per fan). Use all three `corsair_icue_220t_sp120_front_*.json` presets and place them at bottom / middle / top in your 3D scene.
-
-If you only have **one** SP120 (not the 220T stack), use `corsair_sp120_rgb_pro.json` instead.
-
-Mappings still use `controller_name` **"Corsair SP120 RGB PRO"** so they match OpenRGB; edit that string in the JSON if your device name differs.
+See **[docs/PRESET_CATALOG.md](docs/PRESET_CATALOG.md)** for the full list grouped by category (brand, model, layout, file). Kit-specific notes (for example Corsair SP120 / iCUE 220T) live under the matching category section there.
 
 ## Contributing
 
@@ -57,6 +36,14 @@ Mappings still use `controller_name` **"Corsair SP120 RGB PRO"** so they match O
 **Plugin bugs or features** go to [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues), not here.
 
 **Have JSON ready?** [Pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare). Copy **[template.controller.json](template.controller.json)** and follow **[docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md)** (OpenRGB device naming rules).
+
+After adding or changing presets, regenerate the catalog:
+
+```
+python scripts/generate_preset_catalog.py
+```
+
+For multi-file kits that need a short “when to use” note, add a sidecar under [`docs/device_notes/`](docs/device_notes/) (see an existing note for the `<!-- catalog -->` header), then regenerate.
 
 ## License
 

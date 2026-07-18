@@ -79,9 +79,12 @@ See [`template.controller.json`](../template.controller.json) and [`controllers/
 - [ ] All mappings use `"controller_location": "1:1"`
 - [ ] Top-level `name` follows naming rules above
 - [ ] `brand` and `model` set for matching
+- [ ] `category` set (taxonomy slug; see catalog groupings)
 - [ ] `zone_idx` / `led_idx` verified
 - [ ] `light_blockers` included when the device layout needs occlusion gaps
 - [ ] Valid JSON, `snake_case` filename
 - [ ] Exported portable (`controller_location` is `"1:1"`, not a machine `HID:` path)
+- [ ] Catalog regenerated: `python scripts/generate_preset_catalog.py`
+- [ ] Kit notes under `docs/device_notes/` updated when needed
 
 Plugin reference (same rules): [OpenRGB3DSpatialPlugin `docs/controller-preset-format.md`](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/master/docs/controller-preset-format.md).

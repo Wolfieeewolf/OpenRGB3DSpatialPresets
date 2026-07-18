@@ -41,7 +41,8 @@ Copy from **OpenRGB’s device list** on the system where you built this preset:
 - [ ] JSON validates (single object, valid syntax)
 - [ ] Tested **Add from preset** and added to 3D scene
 - [ ] LEDs map to the correct physical lights
-- [ ] README table updated (if this is a kit or needs a "when to use" note)
+- [ ] Catalog regenerated (`python scripts/generate_preset_catalog.py`)
+- [ ] `docs/device_notes/` updated (if this is a kit that needs a "when to use" note)
 
 ### Related presets / duplicates
 
