@@ -33,10 +33,14 @@ You can also clone this repo and copy files from your checkout.
 | corsair_icue_220t_sp120_front_bottom.json | **Corsair iCUE 220T RGB** — front intake, bottom fan (LEDs 0–7, ring layout) |
 | corsair_icue_220t_sp120_front_middle.json | **Corsair iCUE 220T RGB** — front intake, middle fan (LEDs 8–15) |
 | corsair_icue_220t_sp120_front_top.json | **Corsair iCUE 220T RGB** — front intake, top fan (LEDs 16–23) |
-| razer_deathadder_elite.json | Razer DeathAdder Elite |
 | amd_wraith_prism.json | AMD Wraith Prism |
 | msi_mpg_x570_gaming_edge_wifi_onboard_led.json | MSI MPG X570 GAMING EDGE WIFI onboard LEDs |
 | intel_arc_a770.json | Intel Arc A770 Limited Edition |
+| logitech_g560_lightsync_speaker_left.json | Logitech G560 — left speaker (includes light blockers) |
+| logitech_g560_lightsync_speaker_right.json | Logitech G560 — right speaker (includes light blockers) |
+| razer_blackwidow_x_chroma.json | Razer BlackWidow X Chroma keyboard (includes light blockers) |
+| razer_deathadder_elite.json | Razer DeathAdder Elite (includes light blockers) |
+| razer_tartarus_v2.json | Razer Tartarus V2 keypad (includes light blockers) |
 
 #### Corsair SP120 / iCUE 220T RGB
 

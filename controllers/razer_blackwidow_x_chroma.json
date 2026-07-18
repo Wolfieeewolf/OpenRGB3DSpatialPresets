@@ -1,0 +1,1844 @@
+{
+    "format": "OpenRGB3DSpatialCustomController",
+    "version": 1,
+    "name": "Razer Blackwidow X Chroma",
+    "category": "keyboards",
+    "brand": "Razer",
+    "model": "BlackWidow X Chroma",
+    "width": 21,
+    "height": 7,
+    "depth": 2,
+    "spacing_mm_x": 20.0,
+    "spacing_mm_y": 20.0,
+    "spacing_mm_z": 5.0,
+    "column_widths_mm": [
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+    ],
+    "row_heights_mm": [
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+    ],
+    "layer_depths_mm": [
+        5.0,
+        1.0
+    ],
+    "layer_names": [
+        "Layer 1",
+        "Layer 2"
+    ],
+    "leds_per_cluster": 1,
+    "mappings": [
+        {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 1,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 3,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 4,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 5,
+            "granularity": 2
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 6,
+            "granularity": 2
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 7,
+            "granularity": 2
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 8,
+            "granularity": 2
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 9,
+            "granularity": 2
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 10,
+            "granularity": 2
+        },
+        {
+            "x": 10,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 11,
+            "granularity": 2
+        },
+        {
+            "x": 11,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 12,
+            "granularity": 2
+        },
+        {
+            "x": 12,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 13,
+            "granularity": 2
+        },
+        {
+            "x": 13,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 14,
+            "granularity": 2
+        },
+        {
+            "x": 14,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 15,
+            "granularity": 2
+        },
+        {
+            "x": 15,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 16,
+            "granularity": 2
+        },
+        {
+            "x": 16,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 17,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 23,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 24,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 25,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 26,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 27,
+            "granularity": 2
+        },
+        {
+            "x": 5,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 28,
+            "granularity": 2
+        },
+        {
+            "x": 6,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 29,
+            "granularity": 2
+        },
+        {
+            "x": 7,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 30,
+            "granularity": 2
+        },
+        {
+            "x": 8,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 31,
+            "granularity": 2
+        },
+        {
+            "x": 9,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 32,
+            "granularity": 2
+        },
+        {
+            "x": 10,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 33,
+            "granularity": 2
+        },
+        {
+            "x": 11,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 34,
+            "granularity": 2
+        },
+        {
+            "x": 12,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 35,
+            "granularity": 2
+        },
+        {
+            "x": 13,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 36,
+            "granularity": 2
+        },
+        {
+            "x": 14,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 37,
+            "granularity": 2
+        },
+        {
+            "x": 15,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 38,
+            "granularity": 2
+        },
+        {
+            "x": 16,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 39,
+            "granularity": 2
+        },
+        {
+            "x": 17,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 40,
+            "granularity": 2
+        },
+        {
+            "x": 18,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 41,
+            "granularity": 2
+        },
+        {
+            "x": 19,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 42,
+            "granularity": 2
+        },
+        {
+            "x": 20,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 43,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 45,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 46,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 47,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 48,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 49,
+            "granularity": 2
+        },
+        {
+            "x": 5,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 50,
+            "granularity": 2
+        },
+        {
+            "x": 6,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 51,
+            "granularity": 2
+        },
+        {
+            "x": 7,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 52,
+            "granularity": 2
+        },
+        {
+            "x": 8,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 53,
+            "granularity": 2
+        },
+        {
+            "x": 9,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 54,
+            "granularity": 2
+        },
+        {
+            "x": 10,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 55,
+            "granularity": 2
+        },
+        {
+            "x": 11,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 56,
+            "granularity": 2
+        },
+        {
+            "x": 12,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 57,
+            "granularity": 2
+        },
+        {
+            "x": 13,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 58,
+            "granularity": 2
+        },
+        {
+            "x": 14,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 59,
+            "granularity": 2
+        },
+        {
+            "x": 15,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 60,
+            "granularity": 2
+        },
+        {
+            "x": 16,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 61,
+            "granularity": 2
+        },
+        {
+            "x": 17,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 62,
+            "granularity": 2
+        },
+        {
+            "x": 18,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 63,
+            "granularity": 2
+        },
+        {
+            "x": 19,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 64,
+            "granularity": 2
+        },
+        {
+            "x": 20,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 65,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 67,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 68,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 69,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 70,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 71,
+            "granularity": 2
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 72,
+            "granularity": 2
+        },
+        {
+            "x": 6,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 73,
+            "granularity": 2
+        },
+        {
+            "x": 7,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 74,
+            "granularity": 2
+        },
+        {
+            "x": 8,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 75,
+            "granularity": 2
+        },
+        {
+            "x": 9,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 76,
+            "granularity": 2
+        },
+        {
+            "x": 10,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 77,
+            "granularity": 2
+        },
+        {
+            "x": 11,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 78,
+            "granularity": 2
+        },
+        {
+            "x": 13,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 80,
+            "granularity": 2
+        },
+        {
+            "x": 17,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 84,
+            "granularity": 2
+        },
+        {
+            "x": 18,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 85,
+            "granularity": 2
+        },
+        {
+            "x": 19,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 86,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 89,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 91,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 92,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 93,
+            "granularity": 2
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 94,
+            "granularity": 2
+        },
+        {
+            "x": 6,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 95,
+            "granularity": 2
+        },
+        {
+            "x": 7,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 96,
+            "granularity": 2
+        },
+        {
+            "x": 8,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 97,
+            "granularity": 2
+        },
+        {
+            "x": 9,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 98,
+            "granularity": 2
+        },
+        {
+            "x": 10,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 99,
+            "granularity": 2
+        },
+        {
+            "x": 11,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 100,
+            "granularity": 2
+        },
+        {
+            "x": 13,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 102,
+            "granularity": 2
+        },
+        {
+            "x": 15,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 104,
+            "granularity": 2
+        },
+        {
+            "x": 17,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 106,
+            "granularity": 2
+        },
+        {
+            "x": 18,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 107,
+            "granularity": 2
+        },
+        {
+            "x": 19,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 108,
+            "granularity": 2
+        },
+        {
+            "x": 20,
+            "y": 4,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 109,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 111,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 112,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 113,
+            "granularity": 2
+        },
+        {
+            "x": 6,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 117,
+            "granularity": 2
+        },
+        {
+            "x": 10,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 121,
+            "granularity": 2
+        },
+        {
+            "x": 11,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 122,
+            "granularity": 2
+        },
+        {
+            "x": 12,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 123,
+            "granularity": 2
+        },
+        {
+            "x": 13,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 124,
+            "granularity": 2
+        },
+        {
+            "x": 14,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 125,
+            "granularity": 2
+        },
+        {
+            "x": 15,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 126,
+            "granularity": 2
+        },
+        {
+            "x": 16,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 127,
+            "granularity": 2
+        },
+        {
+            "x": 18,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 129,
+            "granularity": 2
+        },
+        {
+            "x": 19,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 130,
+            "granularity": 2
+        },
+        {
+            "x": 10,
+            "y": 6,
+            "z": 0,
+            "controller_name": "Razer Blackwidow X Chroma",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 20,
+            "granularity": 2
+        }
+    ],
+    "light_blockers": [
+        {
+            "x": 0,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 8,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 16,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 17,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 9,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 18,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 10,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 10,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 19,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 11,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 11,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 20,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 12,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 12,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 13,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 13,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 14,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 14,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 7,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 7,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 15,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 7,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 15,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 7,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 7,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 16,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 8,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 16,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 8,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 8,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 8,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 17,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 9,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 17,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 9,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 9,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 9,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 18,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 10,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 18,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 10,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 10,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 10,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 19,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 11,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 19,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 11,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 11,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 11,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 20,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 12,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 20,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 12,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 12,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 12,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 13,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 13,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 13,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 13,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 14,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 14,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 14,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 14,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 15,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 15,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 15,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 15,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 16,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 16,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 16,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 16,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 8,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 17,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 17,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 17,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 17,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 9,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 18,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 18,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 18,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 18,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 10,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 19,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 19,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 19,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 19,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 11,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 20,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 20,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 20,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 20,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 12,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 13,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 7,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 14,
+            "y": 6,
+            "z": 1
+        },
+        {
+            "x": 15,
+            "y": 6,
+            "z": 1
+        }
+    ]
+}

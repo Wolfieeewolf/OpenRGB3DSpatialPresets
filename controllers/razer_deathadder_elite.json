@@ -4,13 +4,29 @@
     "name": "Razer DeathAdder Elite",
     "category": "mouses",
     "brand": "Razer",
-    "model": "Deathadder Elite",
+    "model": "DeathAdder Elite",
     "width": 1,
     "height": 2,
-    "depth": 1,
-    "spacing_mm_x": 75,
-    "spacing_mm_y": 75,
-    "spacing_mm_z": 75,
+    "depth": 2,
+    "spacing_mm_x": 15.0,
+    "spacing_mm_y": 75.0,
+    "spacing_mm_z": 5.0,
+    "column_widths_mm": [
+        15.0
+    ],
+    "row_heights_mm": [
+        75.0,
+        75.0
+    ],
+    "layer_depths_mm": [
+        5.0,
+        5.0
+    ],
+    "layer_names": [
+        "Layer 1",
+        "Layer 2"
+    ],
+    "leds_per_cluster": 1,
     "mappings": [
         {
             "x": 0,
@@ -31,6 +47,18 @@
             "zone_idx": 0,
             "led_idx": 0,
             "granularity": 2
+        }
+    ],
+    "light_blockers": [
+        {
+            "x": 0,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 1,
+            "z": 1
         }
     ]
 }

@@ -10,13 +10,19 @@ There are **two kinds** of JSON files. Only **portable presets** belong in this 
 
 | Field | Required | Purpose |
 | ----- | -------- | ------- |
+| `format` | yes | Always `OpenRGB3DSpatialCustomController` |
+| `version` | yes | Always `1` |
 | `name` | yes | Layout title in the plugin **Custom controllers** list (see naming rules) |
 | `brand` | recommended | Hardware vendor — helps match devices across PCs |
 | `model` | recommended | Product model |
 | `category` | optional | Taxonomy only (`graphics_cards`, `cpu_cooler`, `fans`, …) — **not** the layout title |
 | `width`, `height`, `depth` | yes | Grid size in cells |
-| `spacing_mm_x/y/z` | yes | LED spacing in millimetres |
+| `spacing_mm_x/y/z` | yes | Default LED spacing in millimetres |
+| `column_widths_mm` / `row_heights_mm` / `layer_depths_mm` | optional | Per-cell sizes (mm); when present, override uniform spacing for that axis |
+| `layer_names` | optional | Display names for each depth layer |
+| `leds_per_cluster` | optional | `1` (default) or `3` for clustered LEDs |
 | `mappings` | yes | LED assignments |
+| `light_blockers` | optional | Grid cells that occlude light (no LED mapping). Array of `{ "x", "y", "z" }` |
 
 **Every mapping:**
 
@@ -74,6 +80,8 @@ See [`template.controller.json`](../template.controller.json) and [`controllers/
 - [ ] Top-level `name` follows naming rules above
 - [ ] `brand` and `model` set for matching
 - [ ] `zone_idx` / `led_idx` verified
+- [ ] `light_blockers` included when the device layout needs occlusion gaps
 - [ ] Valid JSON, `snake_case` filename
+- [ ] Exported portable (`controller_location` is `"1:1"`, not a machine `HID:` path)
 
 Plugin reference (same rules): [OpenRGB3DSpatialPlugin `docs/controller-preset-format.md`](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/master/docs/controller-preset-format.md).

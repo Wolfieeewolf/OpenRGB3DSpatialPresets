@@ -1,4 +1,6 @@
 {
+    "format": "OpenRGB3DSpatialCustomController",
+    "version": 1,
     "name": "OpenRGB Device Name Here",
     "category": "optional_preset_taxonomy",
     "brand": "Vendor",
