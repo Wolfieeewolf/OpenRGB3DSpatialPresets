@@ -41,16 +41,23 @@ Vague one-liners may be closed so the form can be resubmitted with detail.
 
 ## Required JSON fields
 
-Each file must be a single JSON object with at least:
+Each file must be a single JSON object matching plugin **version 1** (`OpenRGB3DSpatialCustomController`). Missing required fields will not load.
 
 | Field | Purpose |
 |-------|---------|
+| `format` | Always `OpenRGB3DSpatialCustomController` |
+| `version` | Always `1` |
 | `name` | Layout title in the plugin — must follow [OpenRGB naming rules](docs/PRESET_FORMAT.md) (usually same as `controller_name`, or `{device} - {zone}` / kit label like `220T Front Fan - Bottom`) |
 | `category` | e.g. `fans`, `graphics_cards`, `motherboard`, `mouses` — see plugin preset picker |
 | `brand` | Manufacturer |
 | `model` | Product or kit name (can mention case/kit, e.g. `iCUE 220T RGB (front SP120 stack)`) |
 | `width`, `height`, `depth` | Grid size for LED positions |
 | `spacing_mm_x`, `spacing_mm_y`, `spacing_mm_z` | Millimeters between grid steps |
+| `column_widths_mm` | Array length = `width` (often `spacing_mm_x` repeated) |
+| `row_heights_mm` | Array length = `height` |
+| `layer_depths_mm` | Array length = `depth` |
+| `layer_names` | Array length = `depth` (e.g. `"Layer 1"`) |
+| `leds_per_cluster` | `1` or `3` |
 | `mappings` | Array of LED placements (see below) |
 
 Each mapping entry needs:
@@ -59,11 +66,11 @@ Each mapping entry needs:
 |-------|---------|
 | `x`, `y`, `z` | Position on the preset grid |
 | `controller_name` | **Exact** name as shown in OpenRGB (critical for matching) |
-| `controller_location` | Usually `1:1` — copy from an export on your system if matching fails |
+| `controller_location` | Always `1:1` in this repo (portable); machine `HID:` / `DDP:` paths are for personal backups only |
 | `zone_idx`, `led_idx` | Zone and LED index in OpenRGB |
 | `granularity` | Typically `2` (same as plugin exports) |
 
-Optional: multiple presets for one physical product (e.g. three front fans in one case) — use clear `name` / `model` text and filenames so users know they need more than one file.
+Optional: `light_blockers`; multiple presets for one physical product (e.g. three front fans in one case) — use clear `name` / `model` text and filenames so users know they need more than one file.
 
 See [docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md) for examples and naming tips.
 

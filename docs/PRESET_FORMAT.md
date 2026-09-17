@@ -4,6 +4,8 @@ Portable presets are loaded from `plugins/settings/OpenRGB3DSpatialPlugin/contro
 
 There are **two kinds** of JSON files. Only **portable presets** belong in this repository.
 
+The plugin loader (`OpenRGB3DSpatialCustomController` **version 1**) rejects files that omit required fields — there is no dual-format / migration path.
+
 ---
 
 ## Portable preset (shareable)
@@ -18,9 +20,11 @@ There are **two kinds** of JSON files. Only **portable presets** belong in this 
 | `category` | optional | Taxonomy only (`graphics_cards`, `cpu_cooler`, `fans`, …) — **not** the layout title |
 | `width`, `height`, `depth` | yes | Grid size in cells |
 | `spacing_mm_x/y/z` | yes | Default LED spacing in millimetres |
-| `column_widths_mm` / `row_heights_mm` / `layer_depths_mm` | optional | Per-cell sizes (mm); when present, override uniform spacing for that axis |
-| `layer_names` | optional | Display names for each depth layer |
-| `leds_per_cluster` | optional | `1` (default) or `3` for clustered LEDs |
+| `column_widths_mm` | yes | Per-column sizes (mm); length must match `width`. Uniform grids use `spacing_mm_x` repeated |
+| `row_heights_mm` | yes | Per-row sizes (mm); length must match `height` |
+| `layer_depths_mm` | yes | Per-layer sizes (mm); length must match `depth` |
+| `layer_names` | yes | Display names for each depth layer; length must match `depth` (e.g. `"Layer 1"`) |
+| `leds_per_cluster` | yes | `1` or `3` for clustered LEDs |
 | `mappings` | yes | LED assignments |
 | `light_blockers` | optional | Grid cells that occlude light (no LED mapping). Array of `{ "x", "y", "z" }` |
 
@@ -40,7 +44,7 @@ There are **two kinds** of JSON files. Only **portable presets** belong in this 
 
 ## Machine export (do not commit)
 
-Created when saving from the plugin on your PC. Uses real `HID:` / `DDP:` locations and no `brand`/`model`. Personal backup only.
+Created when saving from the plugin on your PC. Uses real `HID:` / `DDP:` locations and often omits `brand`/`model`. Personal backup only — convert to portable (`"1:1"` + brand/model/category) before opening a PR.
 
 ---
 
@@ -80,6 +84,7 @@ See [`template.controller.json`](../template.controller.json) and [`controllers/
 - [ ] Top-level `name` follows naming rules above
 - [ ] `brand` and `model` set for matching
 - [ ] `category` set (taxonomy slug; see catalog groupings)
+- [ ] `column_widths_mm` / `row_heights_mm` / `layer_depths_mm` / `layer_names` / `leds_per_cluster` present
 - [ ] `zone_idx` / `led_idx` verified
 - [ ] `light_blockers` included when the device layout needs occlusion gaps
 - [ ] Valid JSON, `snake_case` filename
@@ -87,4 +92,4 @@ See [`template.controller.json`](../template.controller.json) and [`controllers/
 - [ ] Catalog regenerated: `python scripts/generate_preset_catalog.py`
 - [ ] Kit notes under `docs/device_notes/` updated when needed
 
-Plugin reference (same rules): [OpenRGB3DSpatialPlugin `docs/controller-preset-format.md`](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/master/docs/controller-preset-format.md).
+Plugin contract: [OpenRGB3DSpatialPlugin CONTRIBUTING.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/CONTRIBUTING.md) (Custom controllers — version 1, required grid arrays).

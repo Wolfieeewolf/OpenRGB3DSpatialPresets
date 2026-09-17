@@ -11,6 +11,39 @@
     "spacing_mm_x": 11.9,
     "spacing_mm_y": 11.9,
     "spacing_mm_z": 10,
+    "column_widths_mm": [
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9
+    ],
+    "row_heights_mm": [
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9,
+        11.9
+    ],
+    "layer_depths_mm": [
+        10.0
+    ],
+    "layer_names": [
+        "Layer 1"
+    ],
+    "leds_per_cluster": 1,
     "mappings": [
         {
             "x": 5,

@@ -35,7 +35,7 @@ See **[docs/PRESET_CATALOG.md](docs/PRESET_CATALOG.md)** for the full list group
 
 **Plugin bugs or features** go to [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues), not here.
 
-**Have JSON ready?** [Pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare). Copy **[template.controller.json](template.controller.json)** and follow **[docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md)** (OpenRGB device naming rules).
+**Have JSON ready?** [Pull request](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/compare). Copy **[template.controller.json](template.controller.json)** and follow **[docs/PRESET_FORMAT.md](docs/PRESET_FORMAT.md)** (version 1 required fields + OpenRGB naming rules). Machine exports with `HID:` / `DDP:` locations are personal backups — convert to portable `"1:1"` before PR.
 
 After adding or changing presets, regenerate the catalog:
 

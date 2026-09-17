@@ -56,6 +56,7 @@ Copy from **OpenRGB’s device list** on the system where you built this preset:
 
 - [ ] One preset per `.json` file
 - [ ] Filename is lowercase with underscores (`brand_model_variant.json`)
-- [ ] `name`, `category`, `brand`, `model` are set
-- [ ] Every mapping uses the correct `controller_name`, `zone_idx`, and `led_idx`
+- [ ] `format` / `version` / `name` / `category` / `brand` / `model` are set
+- [ ] Grid arrays present: `column_widths_mm`, `row_heights_mm`, `layer_depths_mm`, `layer_names`, `leds_per_cluster`
+- [ ] Every mapping uses `"controller_location": "1:1"` plus correct `controller_name`, `zone_idx`, and `led_idx`
 - [ ] I agree to license this contribution under the repo license (see README)
