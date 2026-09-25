@@ -19,7 +19,7 @@ Monitor panel sizes are not stored here. In the plugin, look up width and height
    plugins/settings/OpenRGB3DSpatialPlugin/controllers/
    ```
 
-   Copy any `.json` from [`controllers/`](controllers/) into that folder (one file = one preset).
+   Copy a device folder, or a single `.json`, from [`controllers/`](controllers/) into that folder. Subfolders are fine. The plugin loads every controller JSON under `controllers/`, including `keyboards/razer` and `fans/corsair`.
 
 3. In the plugin: **Object Creator** → **Add from preset** for controllers.
 

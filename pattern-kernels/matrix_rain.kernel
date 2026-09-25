@@ -1,0 +1,11 @@
+# Name
+name: Matrix rain (1D)
+index: 25
+palette: matrix
+
+# Kernel
+float col = fractf(s01 * r);
+float drop = fractf(col * 7.0 + tsec * 0.45 + ph);
+if(drop > 0.88) k = 1.0;
+else if(drop > 0.55) k = drop * 2.0 - 1.1;
+else k = -1.0 + drop * 0.4;

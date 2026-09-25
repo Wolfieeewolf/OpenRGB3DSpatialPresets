@@ -1,0 +1,9 @@
+# Name
+name: Triple sine (Sin3)
+index: 48
+palette: sin3
+
+# Kernel
+float a = TWO_PI * (s01 * r + tsec * 0.09 + ph);
+float v = sin(a) + sin(a + 2.094) + sin(a + 4.189);
+k = clamp(v * 0.42, -1.0, 1.0);

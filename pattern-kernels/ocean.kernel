@@ -1,0 +1,8 @@
+# Name
+name: Ocean drift blend
+index: 21
+palette: ocean
+
+# Kernel
+float v = sin(TWO_PI * (s01 * r + tsec * 0.04)) * 0.5 + sin(TWO_PI * (s01 * r * 0.6 + ph + tsec * 0.07)) * 0.35 + sin(TWO_PI * (s01 * r * 2.1 + tsec * 0.03)) * 0.15;
+k = clamp(v, -1.0, 1.0);

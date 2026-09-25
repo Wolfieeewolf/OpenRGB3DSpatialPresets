@@ -1,0 +1,9 @@
+# Name
+name: Hue bounce dot
+index: 27
+palette: bounce
+
+# Kernel
+float pos = abs(2.0 * fractf(tsec * 0.15 + ph) - 1.0);
+float d = abs(fractf(s01 * r + 1.0 - pos) - 0.5) * 2.0;
+k = max(-1.0, 1.0 - d * 4.0);

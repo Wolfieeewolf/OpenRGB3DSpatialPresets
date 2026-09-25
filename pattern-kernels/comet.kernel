@@ -1,0 +1,6 @@
+# Name
+name: Comet / taper
+index: 5
+
+# Kernel
+k = pow(1.0 - u_phase, 2.2) * 2.0 - 1.0;

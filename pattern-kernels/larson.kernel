@@ -1,0 +1,8 @@
+# Name
+name: Oscillating sweep
+index: 15
+
+# Kernel
+float u = fractf(s01 * r * 0.5 + ph * 0.5);
+float tri = abs(2.0 * fractf(u * 2.0) - 1.0);
+k = tri * 2.0 - 1.0;

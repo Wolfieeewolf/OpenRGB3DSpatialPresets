@@ -1,0 +1,9 @@
+# Name
+name: Twinkle (sparse)
+index: 17
+palette: sparkle
+
+# Kernel
+float id = floor(s01 * r * 16.0);
+float h = hash11(id + floor(tsec * 3.0) * 0.01);
+k = (h > 0.92) ? 1.0 : -0.9;

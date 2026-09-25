@@ -1,0 +1,20 @@
+# Name
+name: Noise octaves (1D)
+index: 22
+
+# Kernel
+float sum = 0.0;
+float amp = 1.0;
+float x = s01 * r * 4.0 + ph;
+for(int o = 0; o < 4; o++)
+{
+    float i = floor(x);
+    float f = x - i;
+    float a = hash11(i);
+    float b = hash11(i + 1.0);
+    float s = f * f * (3.0 - 2.0 * f);
+    sum += (a + (b - a) * s) * amp;
+    amp *= 0.5;
+    x *= 2.0;
+}
+k = sum * 2.0 - 1.0;

@@ -1,0 +1,11 @@
+# Name
+name: Spectrum waves (smooth)
+index: 41
+palette: spectrum
+
+# Kernel
+float a = TWO_PI * (s01 * r + tsec * 0.085 + ph);
+float b = TWO_PI * (s01 * r * 1.62 - tsec * 0.052 + ph * 0.73);
+float c = TWO_PI * (s01 * r * 0.48 + tsec * 0.11 + sin(TWO_PI * ph) * 0.08);
+float wave = sin(a) + 0.55 * sin(b) + 0.28 * sin(c);
+k = clamp(wave * 0.38, -1.0, 1.0);

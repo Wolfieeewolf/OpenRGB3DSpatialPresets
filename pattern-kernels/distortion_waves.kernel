@@ -1,0 +1,11 @@
+# Name
+name: Distortion waves
+index: 45
+palette: distortion
+
+# Kernel
+float warp = 0.18 * sin(TWO_PI * (s01 * r * 0.7 + tsec * 0.09));
+float u = s01 * r + warp + ph;
+float v = sin(TWO_PI * u) * sin(TWO_PI * (u * 1.7 - tsec * 0.06));
+v += 0.35 * sin(TWO_PI * (u * 0.4 + tsec * 0.12));
+k = clamp(v * 0.85, -1.0, 1.0);

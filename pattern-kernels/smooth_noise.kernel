@@ -1,0 +1,12 @@
+# Name
+name: Smooth noise
+index: 9
+
+# Kernel
+float t = s01 * r * 5.0 + ph * 2.0;
+float i = floor(t);
+float f = t - i;
+float a = hash11(i);
+float b = hash11(i + 1.0);
+float s = f * f * (3.0 - 2.0 * f);
+k = (a + (b - a) * s) * 2.0 - 1.0;

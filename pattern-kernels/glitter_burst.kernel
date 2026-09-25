@@ -1,0 +1,10 @@
+# Name
+name: Glitter burst
+index: 18
+palette: sparkle
+
+# Kernel
+float t = s01 * r * 32.0 + tsec * 6.0;
+float h = hash11(floor(t) * 0.07);
+float tw = fractf(t);
+k = (h > 0.88) ? max(-1.0, 1.0 - tw * 4.0) : -0.85;

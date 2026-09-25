@@ -1,0 +1,12 @@
+# Name
+name: Meteor (head + tail)
+index: 43
+palette: meteor
+
+# Kernel
+float pos = fractf(tsec * (0.14 + 0.06 * hash11(ph * 3.1 + 0.2)) + ph * 0.35);
+float u = fractf(s01 * r - pos + 1.0);
+float head = smstep(0.0, 0.035, u) * (1.0 - smstep(0.035, 0.055, u));
+float tail = max(0.0, 1.0 - u * 5.5);
+tail = tail * tail * 0.92;
+k = clamp(max(head, tail) * 2.0 - 1.0, -1.0, 1.0);

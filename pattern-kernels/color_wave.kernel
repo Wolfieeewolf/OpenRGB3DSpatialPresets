@@ -1,0 +1,8 @@
+# Name
+name: Color wave (multi-sine)
+index: 16
+palette: spectrum
+
+# Kernel
+float v = sin(TWO_PI * (s01 * r + ph)) + 0.5 * sin(TWO_PI * (s01 * r * 1.13 + ph * 0.7 + 0.3)) + 0.25 * sin(TWO_PI * (s01 * r * 0.77 + tsec * 0.11));
+k = clamp(v * 0.45, -1.0, 1.0);

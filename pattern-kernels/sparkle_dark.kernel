@@ -1,0 +1,8 @@
+# Name
+name: Sparkle on dark
+index: 33
+palette: sparkle
+
+# Kernel
+float h = hash11(floor(s01 * r * 25.0) + ph);
+k = (h > 0.94) ? 1.0 : -0.95;

@@ -10,28 +10,28 @@ Browse controller layout presets by category. Install by copying files from [`co
 
 | Brand | Model | Layout | File |
 | ----- | ----- | ------ | ---- |
-| Intel | Arc A770 Limited Edition | Intel Arc A770 Limited Edition | [`intel_arc_a770.json`](../controllers/intel_arc_a770.json) |
+| Intel | Arc A770 Limited Edition | Intel Arc A770 Limited Edition | [`graphics-cards/intel/intel_arc_a770.json`](../controllers/graphics-cards/intel/intel_arc_a770.json) |
 
 ## Motherboards
 
 | Brand | Model | Layout | File |
 | ----- | ----- | ------ | ---- |
-| MSI | MPG X570 GAMING EDGE WIFI | MSI MPG X570 GAMING EDGE WIFI AM4 ATX Motherboard - Onboard LED | [`msi_mpg_x570_gaming_edge_wifi_onboard_led.json`](../controllers/msi_mpg_x570_gaming_edge_wifi_onboard_led.json) |
+| MSI | MPG X570 GAMING EDGE WIFI | MSI MPG X570 GAMING EDGE WIFI AM4 ATX Motherboard - Onboard LED | [`motherboards/msi/msi_mpg_x570_gaming_edge_wifi_onboard_led.json`](../controllers/motherboards/msi/msi_mpg_x570_gaming_edge_wifi_onboard_led.json) |
 
 ## CPU Coolers
 
 | Brand | Model | Layout | File |
 | ----- | ----- | ------ | ---- |
-| AMD | Wraith Prism | AMD Wraith Prism | [`amd_wraith_prism.json`](../controllers/amd_wraith_prism.json) |
+| AMD | Wraith Prism | AMD Wraith Prism | [`cpu-coolers/amd/amd_wraith_prism.json`](../controllers/cpu-coolers/amd/amd_wraith_prism.json) |
 
 ## Fans
 
 | Brand | Model | Layout | File |
 | ----- | ----- | ------ | ---- |
-| Corsair | iCUE 220T RGB (front SP120 stack) | 220T Front Fan - Bottom | [`corsair_icue_220t_sp120_front_bottom.json`](../controllers/corsair_icue_220t_sp120_front_bottom.json) |
-| Corsair | iCUE 220T RGB (front SP120 stack) | 220T Front Fan - Middle | [`corsair_icue_220t_sp120_front_middle.json`](../controllers/corsair_icue_220t_sp120_front_middle.json) |
-| Corsair | iCUE 220T RGB (front SP120 stack) | 220T Front Fan - Top | [`corsair_icue_220t_sp120_front_top.json`](../controllers/corsair_icue_220t_sp120_front_top.json) |
-| Corsair | SP120 RGB PRO | Corsair SP120 RGB PRO | [`corsair_sp120_rgb_pro.json`](../controllers/corsair_sp120_rgb_pro.json) |
+| Corsair | iCUE 220T RGB (front SP120 stack) | 220T Front Fan - Bottom | [`fans/corsair/icue-220t/corsair_icue_220t_sp120_front_bottom.json`](../controllers/fans/corsair/icue-220t/corsair_icue_220t_sp120_front_bottom.json) |
+| Corsair | iCUE 220T RGB (front SP120 stack) | 220T Front Fan - Middle | [`fans/corsair/icue-220t/corsair_icue_220t_sp120_front_middle.json`](../controllers/fans/corsair/icue-220t/corsair_icue_220t_sp120_front_middle.json) |
+| Corsair | iCUE 220T RGB (front SP120 stack) | 220T Front Fan - Top | [`fans/corsair/icue-220t/corsair_icue_220t_sp120_front_top.json`](../controllers/fans/corsair/icue-220t/corsair_icue_220t_sp120_front_top.json) |
+| Corsair | SP120 RGB PRO | Corsair SP120 RGB PRO | [`fans/corsair/corsair_sp120_rgb_pro.json`](../controllers/fans/corsair/corsair_sp120_rgb_pro.json) |
 
 ### Corsair SP120 / iCUE 220T RGB
 
@@ -45,21 +45,21 @@ Mappings still use `controller_name` **"Corsair SP120 RGB PRO"** so they match O
 
 | Brand | Model | Layout | File |
 | ----- | ----- | ------ | ---- |
-| Razer | BlackWidow X Chroma | Razer Blackwidow X Chroma | [`razer_blackwidow_x_chroma.json`](../controllers/razer_blackwidow_x_chroma.json) |
-| Razer | Tartarus V2 | Razer Tartarus V2 | [`razer_tartarus_v2.json`](../controllers/razer_tartarus_v2.json) |
+| Razer | BlackWidow X Chroma | Razer Blackwidow X Chroma | [`keyboards/razer/razer_blackwidow_x_chroma.json`](../controllers/keyboards/razer/razer_blackwidow_x_chroma.json) |
+| Razer | Tartarus V2 | Razer Tartarus V2 | [`keyboards/razer/razer_tartarus_v2.json`](../controllers/keyboards/razer/razer_tartarus_v2.json) |
 
 ## Mice
 
 | Brand | Model | Layout | File |
 | ----- | ----- | ------ | ---- |
-| Razer | DeathAdder Elite | Razer DeathAdder Elite | [`razer_deathadder_elite.json`](../controllers/razer_deathadder_elite.json) |
+| Razer | DeathAdder Elite | Razer DeathAdder Elite | [`mice/razer/razer_deathadder_elite.json`](../controllers/mice/razer/razer_deathadder_elite.json) |
 
 ## Speakers
 
 | Brand | Model | Layout | File |
 | ----- | ----- | ------ | ---- |
-| Logitech | G560 Lightsync Speaker | Logitech G560 Lightsync Speaker - Left | [`logitech_g560_lightsync_speaker_left.json`](../controllers/logitech_g560_lightsync_speaker_left.json) |
-| Logitech | G560 Lightsync Speaker | Logitech G560 Lightsync Speaker - Right | [`logitech_g560_lightsync_speaker_right.json`](../controllers/logitech_g560_lightsync_speaker_right.json) |
+| Logitech | G560 Lightsync Speaker | Logitech G560 Lightsync Speaker - Left | [`speakers/logitech/g560/logitech_g560_lightsync_speaker_left.json`](../controllers/speakers/logitech/g560/logitech_g560_lightsync_speaker_left.json) |
+| Logitech | G560 Lightsync Speaker | Logitech G560 Lightsync Speaker - Right | [`speakers/logitech/g560/logitech_g560_lightsync_speaker_right.json`](../controllers/speakers/logitech/g560/logitech_g560_lightsync_speaker_right.json) |
 
 ---
 

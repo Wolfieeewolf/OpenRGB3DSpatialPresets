@@ -1,0 +1,9 @@
+# Name
+name: Running dot
+index: 14
+palette: chase
+
+# Kernel
+float u = fractf(s01 * r - ph - tsec * 0.22);
+float w = smstep(0.0, 0.08, u) * (1.0 - smstep(0.12, 0.2, u));
+k = w * 2.0 - 1.0;

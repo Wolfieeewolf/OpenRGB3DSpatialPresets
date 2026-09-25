@@ -1,0 +1,8 @@
+# Name
+name: Tri-color chase
+index: 37
+palette: tricolor
+
+# Kernel
+float seg = mod(floor(s01 * r * 9.0 + ph * 9.0 + tsec * 2.0), 3.0);
+k = (seg < 0.5) ? 1.0 : (seg < 1.5) ? 0.0 : -1.0;

@@ -1,0 +1,8 @@
+# Name
+name: Random drift blocks
+index: 29
+
+# Kernel
+float id = floor(s01 * r * 8.0 + ph * 3.0);
+float h = hash11(id * 3.17 + floor(tsec * 2.0) * 0.1);
+k = h * 2.0 - 1.0;

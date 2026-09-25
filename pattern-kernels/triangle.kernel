@@ -1,0 +1,6 @@
+# Name
+name: Triangle
+index: 2
+
+# Kernel
+k = (1.0 - abs(2.0 * u_phase - 1.0)) * 2.0 - 1.0;

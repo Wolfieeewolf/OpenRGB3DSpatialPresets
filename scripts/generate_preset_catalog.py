@@ -66,11 +66,12 @@ def category_sort_key(slug: str) -> tuple[int, str]:
 
 def load_presets() -> list[dict]:
     presets: list[dict] = []
-    for path in sorted(CONTROLLERS_DIR.glob("*.json")):
+    for path in sorted(CONTROLLERS_DIR.rglob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
         presets.append(
             {
                 "file": path.name,
+                "rel": path.relative_to(CONTROLLERS_DIR).as_posix(),
                 "stem": path.stem,
                 "name": str(data.get("name") or path.stem),
                 "brand": str(data.get("brand") or "").strip() or "—",
@@ -161,7 +162,7 @@ def build_catalog(presets: list[dict], notes: list[dict]) -> str:
         lines.append("| Brand | Model | Layout | File |")
         lines.append("| ----- | ----- | ------ | ---- |")
         for row in rows:
-            file_link = f"[`{row['file']}`](../controllers/{row['file']})"
+            file_link = f"[`{row['rel']}`](../controllers/{row['rel']})"
             lines.append(
                 f"| {md_cell(row['brand'])} | {md_cell(row['model'])} | "
                 f"{md_cell(row['name'])} | {file_link} |"

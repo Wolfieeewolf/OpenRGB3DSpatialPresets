@@ -1,0 +1,6 @@
+# Name
+name: Saw / ramp
+index: 1
+
+# Kernel
+k = 2.0 * u_phase - 1.0;

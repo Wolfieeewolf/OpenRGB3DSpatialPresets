@@ -1,0 +1,7 @@
+# Name
+name: Wipe progress
+index: 30
+
+# Kernel
+float cut = fractf(ph + tsec * 0.12);
+k = (fractf(s01) < cut) ? 1.0 : -1.0;

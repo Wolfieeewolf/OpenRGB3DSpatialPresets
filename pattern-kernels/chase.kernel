@@ -1,0 +1,7 @@
+# Name
+name: Chase bands
+index: 4
+
+# Kernel
+float u = fractf(s01 * r * 3.0 + ph);
+k = smstep(0.0, 0.12, u) * (1.0 - smstep(0.88, 1.0, u)) * 2.0 - 1.0;

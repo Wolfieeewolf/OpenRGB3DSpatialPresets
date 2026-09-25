@@ -1,0 +1,6 @@
+# Name
+name: Color blend beat
+index: 34
+
+# Kernel
+k = sin(TWO_PI * (s01 * r * 0.5 + tsec * 0.08)) * cos(TWO_PI * tsec * 0.5);

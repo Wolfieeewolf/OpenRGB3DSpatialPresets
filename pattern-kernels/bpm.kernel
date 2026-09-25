@@ -1,0 +1,8 @@
+# Name
+name: BPM pulse
+index: 23
+palette: bpm
+
+# Kernel
+float beat = sin(TWO_PI * tsec * 1.5);
+k = (beat <= 0.0) ? -0.85 : beat * sin(TWO_PI * (s01 * r + ph));

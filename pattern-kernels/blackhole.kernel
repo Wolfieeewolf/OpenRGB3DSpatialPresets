@@ -1,0 +1,13 @@
+# Name
+name: Blackhole (center pull)
+index: 47
+palette: blackhole
+
+# Kernel
+float d = abs(s01 - 0.5) * 2.0;
+float pulse = 0.55 + 0.45 * sin(TWO_PI * (tsec * 0.14 + ph));
+float hole = smstep(0.0, 0.22 * pulse, d);
+float rim_center = 0.42 * pulse;
+float rim = 1.0 - smstep(0.0, 0.10, abs(d - rim_center));
+rim = rim * rim;
+k = clamp((rim * 0.85 + (1.0 - hole) * 0.15) * 2.0 - 1.0, -1.0, 1.0);
