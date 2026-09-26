@@ -1,5 +1,22 @@
 # Name
 name: Depth Tone
+class: DepthTone
+category: Spatial
+description: Hue steps across the room
+global: speed brightness frequency detail size scale fps color surface position strip bands path
+combo: depth_layout | Layout:
+option: Linear (axis)
+option: From room center
+slider: depth_tone_count 2 64 12 | Depth tones:
+slider: depth_dim_amount 0 100 22 unit pct | Center dim:
+param: depth_pos
+param: raw depth_tone_count
+param: unit depth_dim_amount
+param: path_axis
+param: combo depth_layout
+param: size_depth
+param: ndetail
+finish: atlas
 
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)

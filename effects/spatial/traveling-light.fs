@@ -1,5 +1,51 @@
 # Name
 name: Traveling Light
+class: TravelingLight
+category: Spatial
+description: A light traveling through the room
+global: speed brightness frequency detail size scale fps color surface position path plane strip bands
+pattern_label: Style:
+pattern_key: mode
+pattern: Comet
+pattern: Chase (multi)
+pattern: Marquee (band)
+pattern: ZigZag (snake)
+pattern: KITT Scanner
+pattern: Wipe
+pattern: Moving Panes
+pattern: Crossing Beams
+pattern: Rotating Beam
+pattern: Wave Fronts
+combo: front_shape | Front shape:
+option: Circles
+option: Squares
+option: Lines
+option: Diagonal
+combo: front_edge | Front edge:
+option: Round
+option: Sharp
+option: Square
+slider: front_thickness 5 100 30 | Front thickness:
+combo: wipe_edge_shape | Wipe edge:
+option: Round
+option: Sharp
+option: Square
+slider: num_divisions 2 16 4 | Panes divisions:
+slider: glow 10 100 50 unit pct | Glow (beams):
+param: pattern
+param: travel_progress
+param: size
+param: tight_inv
+param: path_axis
+param: plane
+param: unit glow
+param: combo wipe_edge_shape
+param: raw num_divisions
+param: combo front_shape
+param: combo front_edge
+param: cent front_thickness
+param: travel_freq
+finish: hex
 
 # Effect
 float smstep(float e0, float e1, float x)

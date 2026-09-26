@@ -1,6 +1,25 @@
-# Name
 name: Audio Level
-
+class: AudioLevel
+category: Audio
+description: Rising fill surface driven by Listen Role / Hz band
+drive: audio
+audio_preset: level
+global: audio speed brightness frequency detail size scale path strip bands color
+resolution: 20
+user_colors: 1
+slider: wave_amount 0 50 6 unit pct | Boundary wave: | Wobble on the lit/dark boundary.
+slider: edge_soft 2 50 8 unit pct | Edge softness: | Transition thickness at the fill surface.
+param: audio_fill
+param: cent wave_amount
+param: cent edge_soft
+param: path_axis
+param: size_audio
+param: audio_wave_freq
+param: detail
+param: speed_mul
+param: tight_mul
+param: audio_time_e
+finish: audio
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)
 {

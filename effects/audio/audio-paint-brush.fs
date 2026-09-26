@@ -1,6 +1,26 @@
-# Name
 name: Audio Paint Brush
-
+class: AudioPaintBrush
+category: Audio
+description: Soft Lissajous ribbons driven by bass / mid / treble bands
+drive: audio
+audio_preset: spectrum
+global: audio speed brightness frequency detail size scale color bands thickness
+resolution: 20
+user_colors: 1
+rainbow: true
+slider: chaos 0 150 45 unit pct | Phrase chaos: | Phase offset spread between ribbons.
+slider: ribbon_count 1 4 3 | Ribbons: | How many Lissajous brushes to draw.
+param: audio_bass
+param: audio_mid_val
+param: audio_hi_val
+param: audio_tboost
+param: gthickness
+param: size_audio
+param: detail_norm
+param: audio_hue_scroll
+param: cent chaos
+param: raw ribbon_count
+finish: audio
 # Effect
 float softband(float d, float w)
 {

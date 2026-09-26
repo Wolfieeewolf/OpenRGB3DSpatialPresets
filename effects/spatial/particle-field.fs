@@ -1,5 +1,34 @@
 # Name
 name: Particle Field
+class: ParticleField
+category: Spatial
+description: Particles drifting through the room
+global: speed brightness frequency detail size scale fps color surface position strip bands count
+pattern_label: Mode:
+pattern_key: pf_mode
+pattern: Float / Fuzzy
+pattern: Snow
+pattern: Embers
+pattern: Sparkle
+pattern: Attract
+pattern: Rain
+pattern: Fireworks
+slider: pf_size 15 140 70 unit pct | Particle size:
+slider: pf_thickness 20 140 100 unit pct | Softness:
+slider: pf_motion 10 250 70 unit | Motion:
+slider: pf_noise 0 150 30 unit pct | Noise:
+slider: pf_fill 35 160 90 unit pct | Fill:
+param: motion_clock
+param: pattern
+param: gcount 4 48
+param: psize
+param: pthick
+param: unit pf_motion
+param: unit pf_noise
+param: unit pf_fill
+param: hue_scroll_s
+param: freq_n
+finish: hex
 
 # Effect
 float pfHash(float seed, float salt)

@@ -1,5 +1,27 @@
 # Name
 name: Harmonic Pulse
+class: HarmonicPulse
+category: Spatial
+description: Room-wide harmonic pulse
+global: speed brightness frequency detail size scale fps color surface position strip bands
+pattern_index: 1
+pattern_label: Color pulse:
+pattern_key: harmonic_color_mode
+pattern: One color (brightness pulse)
+pattern: Two colors (snap A↔B)
+pattern: Two colors (soft A↔B)
+pattern: Multi color (chase)
+slider: harmonic_spatial_amount 0 100 85 unit pct | Spatial waves:
+slider: harmonic_flow_amount 40 250 115 unit pct | Pulse energy:
+slider: harmonic_pulse_contrast 35 200 85 unit pct | Pulse contrast:
+slider: harmonic_zoom_wobble 0 300 55 unit | Zoom wobble:
+param: harmonic_motion
+param: harmonic_freq
+param: unit harmonic_zoom_wobble
+param: unit harmonic_pulse_contrast
+param: harmonic_density
+param: unit harmonic_spatial_amount
+finish: hex
 
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)

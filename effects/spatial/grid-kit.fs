@@ -1,5 +1,31 @@
 # Name
 name: Grid Kit
+class: GridKit
+category: Spatial
+description: Sweeping bands, boxes, and bolts
+global: speed brightness frequency detail size scale fps color surface position strip bands path thickness
+pattern_label: Mode:
+pattern_key: mode
+pattern: Plane Sweep
+pattern: Wireframe Box
+pattern: Moving Boxes
+pattern: Rubik Cube
+pattern: Sphere Roam
+pattern: Axis Send
+pattern: Lightning
+slider: density 15 100 65 unit pct | Density:
+slider: sway 0 150 70 unit pct | Sway:
+param: pattern
+param: progress_wrap
+param: gthickness
+param: size_star
+param: path_axis
+param: ndetail
+param: hue_scroll_s
+param: unit sway
+param: unit density
+param: phase37
+finish: hex
 
 # Effect
 float softband(float d, float w)

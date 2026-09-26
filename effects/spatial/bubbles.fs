@@ -1,5 +1,27 @@
 # Name
 name: Bubbles
+class: Bubbles
+category: Spatial
+description: Bubbles rising through the room
+global: speed brightness frequency detail size scale fps color surface position strip bands count
+slider: bubble_thickness 2 100 65 unit pct | Ring thickness:
+slider: rise_speed 10 400 140 unit | Rise speed:
+slider: spawn_interval 20 250 95 unit | Spawn interval:
+slider: max_radius 50 350 190 unit | Bubble size:
+slider: horizontal_fill 50 180 135 unit pct | Horizontal fill:
+slider: overlap_spacing 10 100 65 unit pct | Min spacing:
+slider: launch_randomness 0 100 55 unit pct | Launch randomness:
+param: time
+param: gcount 4 48
+param: bubble_thick
+param: bubble_rise
+param: bubble_interval
+param: bubble_radius
+param: unit horizontal_fill
+param: unit launch_randomness
+param: hue_scroll_s
+param: unit overlap_spacing
+finish: hex
 
 # Effect
 float hash01(float seed, float salt)

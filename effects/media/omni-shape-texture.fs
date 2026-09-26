@@ -1,6 +1,30 @@
 # Name
-name: Omni Shape Texture
-
+name: Omni shape texture
+class: OmniShapeTexture
+category: Media
+description: Image or GIF mapped onto a crisp 3D shape envelope at the effect origin. Morph blends to the next shape. Spin rotates the mapping; Scroll / Warp / Phase drive UV motion. For GIFs, Speed is frames per second (0 = frozen).
+global: media speed brightness frequency size scale bands
+resolution: 28
+needs_frequency: true
+user_colors: 0
+combo: base_shape 0 | Shape:
+option: Sphere | Round ball shell.
+option: Cube | Axis-aligned cube with hard faces.
+option: Octahedron | Diamond / octahedron.
+option: Cylinder | Vertical cylinder (flat top/bottom).
+option: Hex prism | Hexagonal prism.
+option: Triangle prism | Triangular prism.
+slider: morph_percent 0 100 0 | Morph: | Blend toward the next shape.
+slider: spin_percent 0 100 40 | Spin: | Yaw/pitch rotation rate of the shape mapping.
+slider: ambience_dist_falloff 0 100 0 | Distance dim: | Strong dimming by distance from the effect origin.
+slider: ambience_falloff_curve 0 100 0 | Falloff curve: | Power curve for distance dim.
+slider: ambience_edge_soft 0 100 0 | Edge fade: | Fade toward room bounds and sharpen silhouette.
+slider: ambience_propagation 0 100 0 | Wave delay: | Spin / UV motion lags with distance.
+slider: motion_scroll 0 200 40 | Scroll: | Texture scroll across the shape surface. 0 = off.
+slider: motion_warp 0 200 0 | Warp: | Strong UV distortion. 0 = off.
+slider: motion_phase 0 200 35 | Phase: | Scroll/warp tempo. 0 = off.
+slider: media_resolution 0 100 100 | Resolution: | Per-layer sampling (0 = blocky, 100 = full).
+finish: rgb
 # Effect
 float smstep(float e0, float e1, float x)
 {
@@ -178,7 +202,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float mb = shapeMetric(l, shape_b);
     float metric = mix(ma, mb, morph);
 
-    /* Crisp shell mask — expands with Size as a hard shape, not a sphere blob. */
+    /* Crisp shell mask â€” expands with Size as a hard shape, not a sphere blob. */
     float band = 0.018 + 0.008 * (1.0 - clamp(detail * 0.08, 0.0, 1.0));
     float mask = 1.0 - smstep(R - band * 0.1, R + band * 0.7, metric);
     if(metric > R + band)

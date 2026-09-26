@@ -1,5 +1,26 @@
 # Name
 name: Wave
+class: Wave
+category: Spatial
+description: Traveling room wave
+global: speed brightness frequency detail size scale fps color surface position strip bands thickness edge
+resolution: 18
+pattern_label: Style:
+pattern_key: wave_style
+pattern: Sinus (Mega-Cube) | Classic mega-cube style sinusoid in radius and travel.
+pattern: Radial (concentric) | Concentric ripples from the horizontal center.
+pattern: Linear (flat wave) | Plane wave along the direction slider.
+pattern: Ocean drift (waves) | Layered ocean-like motion with softer peaks.
+pattern: Gradient wave | Smoother gradient roll without sharp crests.
+slider: wave_amplitude 20 200 100 unit pct | Amplitude: | Peak height of the surface
+slider: wave_direction_deg 0 360 0 | Wave direction: | Direction of the linear wave
+param: progress_tau
+param: wave_freq
+param: unit wave_amplitude
+param: pattern
+param: deg wave_direction_deg
+param: gthickness
+finish: hex
 
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)

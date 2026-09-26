@@ -1,5 +1,36 @@
 # Name
-name: Starfield
+name: Space
+class: Starfield
+category: Spatial
+description: Stars and tunnels filling the room
+global: speed brightness frequency detail size scale fps color surface position strip bands count
+pattern_label: Mode:
+pattern_key: mode
+pattern: Stars
+pattern: Twinkle
+pattern: Warp
+pattern: Hyperdrive
+pattern: Blackhole
+pattern: Wormhole
+pattern: Point Tunnel
+pattern: Fibonacci Sphere
+pattern: Crystal
+pattern: Plasma Globe
+slider: star_size 5 100 32 unit pct | Thickness:
+slider: fill_amount 40 100 100 unit pct | Field of view:
+slider: drift_amount 0 100 18 unit pct | Sway:
+slider: twinkle_speed 0 100 25 unit pct | Sparkle:
+param: progress_raw
+param: anim_time
+param: pattern
+param: gcount 12 48
+param: unit star_size
+param: size_star
+param: unit fill_amount
+param: unit drift_amount
+param: unit twinkle_speed
+param: hue_scroll1
+finish: hex
 
 # Effect
 float hash11(float n)

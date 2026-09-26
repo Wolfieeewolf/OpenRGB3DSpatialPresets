@@ -1,5 +1,17 @@
 # Name
 name: Bouncing Ball
+class: BouncingBall
+category: Spatial
+description: Balls bouncing through the room
+global: speed brightness frequency detail size scale fps color surface position strip bands count
+param: ball_sim
+param: gcount 1 32
+param: ball_radius
+param: const1
+param: motion
+param: hue_scroll_s
+param: hue_density
+finish: hex
 
 # Effect
 float hash01(float n)

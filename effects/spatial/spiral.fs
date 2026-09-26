@@ -1,5 +1,33 @@
 # Name
 name: Spiral
+class: Spiral
+global: speed brightness frequency detail size scale fps color surface position strip bands
+category: Spatial
+description: Spin and spiral arms. Coil bends rays into swirls. Height coil adds helix lift.
+colors: FF0000 00FF00 0000FF
+rainbow: true
+resolution: 24
+user_colors: 2
+needs_frequency: false
+needs_arms: true
+supports_strip_colormap: true
+supports_height_bands: true
+finish: spiral
+pattern_key: pattern_type
+param: progress
+param: spiral_freq
+param: pattern
+param: raw num_arms
+param: unit gap_size
+param: detail
+param: unit coil_amount
+param: unit height_coil_amount
+
+# Controls
+slider: num_arms 2 8 3 | Arms: | Number of spiral arms
+slider: gap_size 10 80 30 | Gap Size: | Gap size between blades
+slider: coil_amount 0 100 0 | Coil: | 0 is straight spin arms. Higher is a tighter spiral.
+slider: height_coil_amount 0 100 0 | Height coil: | 0 is a flat spin. Higher is a vertical helix.
 
 # Patterns
 pattern: Smooth Spiral | Soft spiral ribbons with a bright crisp centerline.

@@ -1,5 +1,27 @@
 # Name
 name: Color Wheel
+class: ColorWheel
+category: Spatial
+description: Spinning hue on the selected plane
+global: speed brightness frequency detail size scale fps color surface position plane
+rainbow: true
+combo: direction | Direction:
+option: Clockwise
+option: Counter-clockwise
+combo: hue_geometry_mode | Hue geometry:
+option: Radial (classic)
+option: Shear (bands)
+option: Rings (concentric)
+option: Pie slices
+slider: hue_repeats 1 100 1 | Hue repeats:
+param: progress
+param: sign direction
+param: raw hue_repeats
+param: plane
+param: combo hue_geometry_mode
+param: freq_spin
+param: size_floor
+finish: atlas
 
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)

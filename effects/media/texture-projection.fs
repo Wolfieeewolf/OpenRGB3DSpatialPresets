@@ -1,6 +1,26 @@
 # Name
-name: Texture Projection
-
+name: Texture projection
+class: TextureProjection
+category: Media
+description: Map an image or GIF onto your 3D layout (planar or spherical). Scroll pans the texture; Warp distorts UVs; Phase steers scroll and warp. For GIFs, Speed is frames per second (0 = frozen). Size zooms; Scale adds repeats.
+global: media speed brightness frequency size scale bands
+resolution: 18
+needs_frequency: true
+user_colors: 0
+combo: projection_mode 0 | Projection:
+option: Planar: floor (X × Z) | UV mapping uses active grid bounds on two axes; sphere uses direction from the effect origin.
+option: Planar: wall X–Y |
+option: Planar: wall Y–Z |
+option: Sphere around effect origin |
+slider: ambience_dist_falloff 0 100 0 | Distance dim: | Darkens LEDs farther from the effect origin.
+slider: ambience_falloff_curve 0 100 0 | Falloff curve: | Shapes how fast the vignette drops.
+slider: ambience_edge_soft 0 100 0 | Edge fade: | Fades toward room walls/floor/ceiling.
+slider: ambience_propagation 0 100 0 | Wave delay: | Motion lags farther from the origin.
+slider: motion_scroll 0 200 40 | Scroll: | Pans the texture continuously. 0 = still.
+slider: motion_warp 0 200 0 | Warp: | Waves the UV. 0 = off.
+slider: motion_phase 0 200 35 | Phase: | Steers scroll into V and speeds warp pulsing.
+slider: media_resolution 0 100 100 | Resolution: | Per-layer sampling (0 = blocky, 100 = full).
+finish: rgb
 # Effect
 float smstep(float e0, float e1, float x)
 {

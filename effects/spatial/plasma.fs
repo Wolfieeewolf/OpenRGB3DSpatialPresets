@@ -1,5 +1,17 @@
 # Name
 name: Plasma
+class: Plasma
+global: speed brightness frequency detail size scale fps color surface position strip bands
+category: Spatial
+description: Layered room plasma from the selected pattern
+colors: 00FF00 FF00FF FFFF00
+finish: depth
+supports_strip_colormap: true
+supports_height_bands: true
+pattern_key: pattern_type
+param: progress
+param: freq_scale
+param: pattern
 
 # Patterns
 pattern: Classic | Layered sines in X/Y plus mild radial and Z terms.

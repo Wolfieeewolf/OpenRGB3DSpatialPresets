@@ -1,5 +1,35 @@
 # Name
 name: Hex Lattice
+class: HexLattice
+category: Spatial
+global: speed brightness frequency detail size scale fps color surface position strip
+description: Honeycomb lattice of hex prisms. Speed drives motion, Frequency cycles hue, Detail sets hex count, Size scales the cells.
+rainbow: true
+resolution: 22
+user_colors: 1
+supports_strip_colormap: true
+finish: hex
+pattern_label: Flow mode:
+pattern_key: hexlattice_flow_mode
+flow: 0.68
+flow: 1
+flow: 1.55
+param: flow_progress
+param: hue_time
+param: detail_norm
+param: size_floor
+param: unit hexlattice_breathing_amount
+param: unit hexlattice_pulse_amount
+param: unit hexlattice_turbulence_amount
+param: flow_mul
+
+# Controls
+slider: hexlattice_breathing_amount 0 200 35 unit pct | Breathing amount:
+slider: hexlattice_pulse_amount 0 200 25 unit pct | Pulse amount:
+pattern: Calm
+pattern: Active
+pattern: Aggressive
+slider: hexlattice_turbulence_amount 0 200 15 unit pct | Turbulence amount:
 
 # Effect
 float wave01(float x)

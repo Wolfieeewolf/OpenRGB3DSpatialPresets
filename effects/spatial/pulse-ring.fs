@@ -1,5 +1,33 @@
 # Name
 name: Pulse Ring
+class: PulseRing
+category: Spatial
+description: Expanding shell through the room
+global: speed brightness frequency detail size scale fps color surface position strip bands thickness
+pattern_label: Style:
+pattern_key: ring_style
+pattern: Pulse
+pattern: Radial Rainbow
+combo: pulse_shape 3 | Pulse shape:
+option: Circle (flat ring)
+option: Sphere
+option: Hexagon
+option: Triangle
+option: Square
+slider: hole_size 0 75 8 unit pct | Hole size:
+slider: pulse_amplitude 20 200 100 unit pct | Pulse amplitude:
+slider: direction_deg 0 360 0 | Phase:
+param: progress_wrap
+param: unit hole_size
+param: gthickness
+param: unit pulse_amplitude
+param: ndetail
+param: pattern
+param: turn direction_deg
+param: combo pulse_shape
+param: size_ring
+param: hue_scroll_s
+finish: hex
 
 # Effect
 float hexMetric(vec2 p)

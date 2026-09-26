@@ -8,7 +8,10 @@ Monitor panel sizes are not stored here. In the plugin, look up width and height
 
 | Folder | Contents |
 |--------|----------|
-| [`controllers/`](controllers/) | Custom controller layout JSON (LED positions in 3D space) |
+| [`controllers/`](controllers/) | Device layouts |
+| [`effects/`](effects/) | Effects, grouped as `spatial/`, `audio/`, `media/`, and `shader-field/` |
+| [`patterns/`](patterns/) | Shared patterns |
+| [`timelines/`](timelines/) | Shows, with block types in `blocks/` |
 
 ## How to install
 

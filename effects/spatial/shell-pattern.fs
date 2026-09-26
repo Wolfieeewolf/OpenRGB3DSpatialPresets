@@ -1,6 +1,38 @@
 # Name
 name: Shell Pattern
-
+class: ShellPattern
+category: Spatial
+description: Shell contour extrude and cube displays from Display and Pattern
+global: speed brightness frequency detail size scale fps color surface position strip bands thickness edge
+resolution: 22
+pattern_source: kernels
+pattern_label: Pattern:
+pattern_key: shellpattern_pattern_id
+combo: shellpattern_display_mode 1 | Display:
+option: Shell (wave height)
+option: Extrude (solid by coordinate)
+option: Shell (radial XZ)
+option: Contour bands
+option: Bars (rising columns)
+option: Ripples (water rings)
+option: Droplets (falling)
+option: Fireworks (bursts)
+option: Explosion (blast + sparks)
+option: Rain (streaks)
+slider: shellpattern_wave_amplitude 20 200 85 unit pct | Shell amplitude: | Wave / fill strength. Global Size scales feature size.
+param: combo shellpattern_display_mode
+param: shell_amp
+param: motion_clock
+param: shell_sigma
+param: ndetail
+param: size
+param: freq_n
+param: pattern
+param: motion_clock
+param: strip_reps
+param: strip_unfold
+param: strip_dir
+finish: hex
 # Effect
 float fractf(float x) { return x - floor(x); }
 float hash11(float x) { return fractf(sin(x * 12.9898) * 43758.547); }
@@ -25,7 +57,7 @@ float evalStripKernelSigned(int kid, float s01, float phase01, float repeats, fl
     float TWO_PI = 6.2831853;
     float k = sin(TWO_PI * u_phase);
 
-    /* 8 visible families from kid — keep this short so GLSL 1.10 compilers succeed. */
+    /* 8 visible families from kid â€” keep this short so GLSL 1.10 compilers succeed. */
     float fam = floor(mod(float(kid) + 0.01, 8.0));
     if(fam < 0.5)
         k = sin(TWO_PI * u_phase);
@@ -106,7 +138,7 @@ float stripUnfoldCoord01(float lx, float ly, float lz, int unfold_mode, float di
     else if(unfold_mode == 6)
         s = clamp((abs(lx) + abs(ly) + abs(lz)) / 3.0, 0.0, 1.0);
     else
-        /* 7 EffectPhaseOnly needs phase/time — use stripUnfoldKernelInputs. */
+        /* 7 EffectPhaseOnly needs phase/time â€” use stripUnfoldKernelInputs. */
         s = 0.5;
 
     return clamp(s, 0.0, 1.0);

@@ -1,5 +1,27 @@
 # Name
-name: Dna Helix
+name: DNA Helix
+class: DNAHelix
+category: Spatial
+description: Twisting double strand
+global: speed brightness frequency detail size scale fps color surface position strip bands
+rainbow: true
+pattern_label: Look:
+pattern_key: dna_helix_shape
+pattern: Classic helix
+pattern: Thick rope
+pattern: Twisted ribbons
+pattern: Ladder (strong rungs)
+slider: dna_helix_radius_pct 15 90 55 pct | Helix radius:
+slider: dna_helix_twists 50 2400 600 unit | Twists:
+slider: dna_helix_thickness_pct 2 70 14 pct | Strand thickness:
+slider: dna_helix_rung_pct 0 100 55 pct | Rungs:
+param: progress_wrap1
+param: dna_twists
+param: dna_radius
+param: dna_thick
+param: dna_rung
+param: pattern
+finish: hex
 
 # Effect
 float smstep(float e0, float e1, float x)
