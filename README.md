@@ -18,11 +18,13 @@ Monitor panel sizes are not stored here. In the plugin, look up width and height
 | [`patterns/`](patterns/) | Strip / colormap kernels (`*.kernel`) |
 | [`timelines/`](timelines/) | Shows; reusable blocks under [`timelines/blocks/`](timelines/blocks/) |
 
-Authoring rules for effect engines live in the plugin: [effects-engines.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/feat/folder-loaded-presets/Documentation/effects-engines.md) (branch may move to `main` after merge).
+Authoring rules for effect engines live in the plugin: [effects-engines.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/effects-engines.md).
 
 ## How to install
 
-Plugin data root (OpenRGB config directory):
+**In the plugin:** Effect Library → **Install Stock Pack** (or **Install from Zip…** with this repo as a zip / GitHub archive).
+
+**Manual:** plugin data root (OpenRGB config directory):
 
 ```text
 plugins/settings/OpenRGB3DSpatialPlugin/
