@@ -1,7 +1,7 @@
 # Name
 name: Hex Lattice
 class: HexLattice
-category: Spatial
+category: Volume
 global: speed brightness frequency detail size scale fps color surface position strip
 description: Honeycomb lattice of hex prisms. Speed drives motion, Frequency cycles hue, Detail sets hex count, Size scales the cells.
 rainbow: true

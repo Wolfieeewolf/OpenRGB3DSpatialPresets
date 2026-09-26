@@ -1,7 +1,7 @@
 # Name
 name: Shell Pattern
 class: ShellPattern
-category: Spatial
+category: Volume
 description: Shell contour extrude and cube displays from Display and Pattern
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness edge
 resolution: 22

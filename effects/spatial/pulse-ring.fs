@@ -1,7 +1,7 @@
 # Name
 name: Pulse Ring
 class: PulseRing
-category: Spatial
+category: Volume
 description: Expanding shell through the room
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness
 pattern_label: Style:

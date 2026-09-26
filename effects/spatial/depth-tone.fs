@@ -1,7 +1,7 @@
 # Name
 name: Depth Tone
 class: DepthTone
-category: Spatial
+category: Volume
 description: Hue steps across the room
 global: speed brightness frequency detail size scale fps color surface position strip bands path
 combo: depth_layout | Layout:

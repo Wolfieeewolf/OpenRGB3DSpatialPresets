@@ -1,7 +1,7 @@
 # Name
 name: Wave
 class: Wave
-category: Spatial
+category: Volume
 description: Traveling room wave
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness edge
 resolution: 18

@@ -1,7 +1,7 @@
 # Name
 name: Traveling Light
 class: TravelingLight
-category: Spatial
+category: Volume
 description: A light traveling through the room
 global: speed brightness frequency detail size scale fps color surface position path plane strip bands
 pattern_label: Style:

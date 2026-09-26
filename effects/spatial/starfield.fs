@@ -1,7 +1,7 @@
 # Name
 name: Space
 class: Starfield
-category: Spatial
+category: Volume
 description: Stars and tunnels filling the room
 global: speed brightness frequency detail size scale fps color surface position strip bands count
 pattern_label: Mode:

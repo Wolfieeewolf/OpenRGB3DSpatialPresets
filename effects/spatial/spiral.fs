@@ -2,7 +2,7 @@
 name: Spiral
 class: Spiral
 global: speed brightness frequency detail size scale fps color surface position strip bands
-category: Spatial
+category: Volume
 description: Spin and spiral arms. Coil bends rays into swirls. Height coil adds helix lift.
 colors: FF0000 00FF00 0000FF
 rainbow: true

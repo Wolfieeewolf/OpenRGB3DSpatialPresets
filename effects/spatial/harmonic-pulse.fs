@@ -1,7 +1,7 @@
 # Name
 name: Harmonic Pulse
 class: HarmonicPulse
-category: Spatial
+category: Volume
 description: Room-wide harmonic pulse
 global: speed brightness frequency detail size scale fps color surface position strip bands
 pattern_index: 1

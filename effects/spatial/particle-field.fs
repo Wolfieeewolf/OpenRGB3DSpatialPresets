@@ -1,7 +1,7 @@
 # Name
 name: Particle Field
 class: ParticleField
-category: Spatial
+category: Volume
 description: Particles drifting through the room
 global: speed brightness frequency detail size scale fps color surface position strip bands count
 pattern_label: Mode:

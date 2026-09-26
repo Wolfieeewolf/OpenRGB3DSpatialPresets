@@ -1,7 +1,7 @@
 # Name
 name: Color Wheel
 class: ColorWheel
-category: Spatial
+category: Volume
 description: Spinning hue on the selected plane
 global: speed brightness frequency detail size scale fps color surface position plane
 rainbow: true

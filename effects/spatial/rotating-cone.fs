@@ -1,7 +1,7 @@
 # Name
 name: Rotating Cone Spotlights
 class: RotatingConeSpotlights
-category: Spatial
+category: Volume
 description: Searchlights on Center Floor Ceiling or Walls
 global: speed brightness frequency size scale fps color surface position strip bands count
 resolution: 28

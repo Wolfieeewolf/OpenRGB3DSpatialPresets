@@ -1,7 +1,7 @@
 # Name
 name: Bubbles
 class: Bubbles
-category: Spatial
+category: Volume
 description: Bubbles rising through the room
 global: speed brightness frequency detail size scale fps color surface position strip bands count
 slider: bubble_thickness 2 100 65 unit pct | Ring thickness:

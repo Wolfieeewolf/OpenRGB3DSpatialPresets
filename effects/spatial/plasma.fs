@@ -2,7 +2,7 @@
 name: Plasma
 class: Plasma
 global: speed brightness frequency detail size scale fps color surface position strip bands
-category: Spatial
+category: Volume
 description: Layered room plasma from the selected pattern
 colors: 00FF00 FF00FF FFFF00
 finish: depth

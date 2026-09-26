@@ -1,7 +1,7 @@
 # Name
 name: Surface Ambient
 class: SurfaceAmbient
-category: Spatial
+category: Volume
 description: Room-shell materials with locked presets or Motion plus colours
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness
 resolution: 30

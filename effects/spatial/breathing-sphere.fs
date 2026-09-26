@@ -1,7 +1,7 @@
 # Name
 name: Breathing Sphere
 class: BreathingSphere
-category: Spatial
+category: Volume
 description: Breathing shell or whole-room inhale wave
 global: speed brightness frequency detail size scale fps color surface position strip bands
 resolution: 28

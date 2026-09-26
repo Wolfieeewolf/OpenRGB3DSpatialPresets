@@ -11,10 +11,10 @@ Monitor panel sizes are not stored here. In the plugin, look up width and height
 | Folder | Contents |
 |--------|----------|
 | [`controllers/`](controllers/) | 3D device layouts (JSON) |
-| [`effects/spatial/`](effects/spatial/) | Room volume effects (`volumeMain` + FolderVolume header) |
-| [`effects/audio/`](effects/audio/) | Audio volume effects (same host; shared FFT engine in the plugin) |
-| [`effects/media/`](effects/media/) | Texture / shape media effects |
-| [`effects/shader-field/`](effects/shader-field/) | 2D Shader Field presets (`spatialMain`) |
+| [`effects/spatial/`](effects/spatial/) | **Volume** engine looks (`volumeMain` + FolderVolume header) |
+| [`effects/audio/`](effects/audio/) | **Audio** engine looks (shared FFT in the plugin) |
+| [`effects/media/`](effects/media/) | **Media** engine looks (texture / shape) |
+| [`effects/shader-field/`](effects/shader-field/) | **Shader Field** engine looks (`spatialMain`) |
 | [`patterns/`](patterns/) | Strip / colormap kernels (`*.kernel`) |
 | [`timelines/`](timelines/) | Shows; reusable blocks under [`timelines/blocks/`](timelines/blocks/) |
 

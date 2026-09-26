@@ -1,7 +1,7 @@
 # Name
 name: DNA Helix
 class: DNAHelix
-category: Spatial
+category: Volume
 description: Twisting double strand
 global: speed brightness frequency detail size scale fps color surface position strip bands
 rainbow: true

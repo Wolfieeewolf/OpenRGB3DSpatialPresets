@@ -1,7 +1,7 @@
 # Name
 name: Grid Kit
 class: GridKit
-category: Spatial
+category: Volume
 description: Sweeping bands, boxes, and bolts
 global: speed brightness frequency detail size scale fps color surface position strip bands path thickness
 pattern_label: Mode:

@@ -1,7 +1,7 @@
 # Name
 name: Bouncing Ball
 class: BouncingBall
-category: Spatial
+category: Volume
 description: Balls bouncing through the room
 global: speed brightness frequency detail size scale fps color surface position strip bands count
 param: ball_sim
