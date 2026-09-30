@@ -22,15 +22,21 @@ Authoring rules for effect engines live in the plugin: [effects-engines.md](http
 
 ## How to install
 
-**In the plugin:** Effect Library → **Install Stock Pack** (or **Install from Zip…** with this repo as a zip / GitHub archive).
+**Windows MSI / installer** (when available) can drop stock content into the plugin data root.
 
-**Manual:** plugin data root (OpenRGB config directory):
+**Manual copy** — plugin data root (OpenRGB config directory):
 
 ```text
 plugins/settings/OpenRGB3DSpatialPlugin/
 ```
 
-Copy from this repo into matching folders under that root:
+On Windows that is typically:
+
+```text
+%AppData%\OpenRGB\plugins\settings\OpenRGB3DSpatialPlugin\
+```
+
+Copy from this repo into matching folders under that root (overwrite is fine — keep folder names):
 
 | From this repo | Into plugin data |
 |----------------|------------------|
@@ -38,6 +44,18 @@ Copy from this repo into matching folders under that root:
 | `effects/` | `…/effects/` (keep `spatial`, `audio`, `media`, `shader-field`) |
 | `patterns/` | `…/patterns/` |
 | `timelines/` | `…/timelines/` (include `blocks/`) |
+
+**Verify stock content (CI / local):**
+
+```text
+python scripts/smoke_presets.py
+```
+
+Optional GLSL 410 compile check when `moderngl` is installed (`pip install moderngl`):
+
+```text
+python scripts/smoke_presets.py --compile-glsl
+```
 
 ### Controllers only
 

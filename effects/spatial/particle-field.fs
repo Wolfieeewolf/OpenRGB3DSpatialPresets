@@ -108,8 +108,8 @@ float pfFlake(vec3 dlt, float soft, float rot)
     float s2 = sin(rot + 1.04719755);
     vec2 q2 = vec2(c2 * dlt.x + s2 * dlt.z, -s2 * dlt.x + c2 * dlt.z);
     float a2 = exp(-(q2.x * q2.x) / (arm_w * arm_w)) * exp(-(q2.y * q2.y) / (arm_l * arm_l));
-    float flat = exp(-(dlt.y * dlt.y) / (s * s * 0.70));
-    return clamp((max(a0, max(a1, a2)) * 1.05 + disc) * flat, 0.0, 1.0);
+    float y_fall = exp(-(dlt.y * dlt.y) / (s * s * 0.70));
+    return clamp((max(a0, max(a1, a2)) * 1.05 + disc) * y_fall, 0.0, 1.0);
 }
 /* Spark / diffraction star (plus + X). */
 float pfStar(vec3 dlt, float soft, float rot)

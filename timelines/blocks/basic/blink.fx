@@ -1,6 +1,6 @@
 # Name
 name: Blink
-description: On for half the period, then off
+description: Colour on, then off (no colour) for half the period
 section: basic
 
 # Look
@@ -19,4 +19,4 @@ phase = fmod(time_ms, period) / period
 if phase >= 0.5
 off
 end
-paint(0)
+paint_stop(0)

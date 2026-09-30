@@ -9,7 +9,6 @@ rainbow: true
 resolution: 24
 user_colors: 2
 needs_frequency: false
-needs_arms: true
 supports_strip_colormap: true
 supports_height_bands: true
 finish: spiral
