@@ -35,7 +35,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float axis_rolled = fract(axis + roll_phase + 1.0);
 
     float u = (floor(axis_rolled * band_count) + 0.5) / band_count;
-    float band_value = texture2D(u_media, vec2(u, 0.5)).r;
+    float band_value = texture(u_media, vec2(u, 0.5)).r;
     /* Host already applies noise gate + peak_boost to the texture — no second multiply here. */
 
     /* Bar mask: LED lights if it lies below the band height (fills from floor). */

@@ -56,7 +56,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float age01 = clamp(1.0 - disp01 + scroll_off * 0.15, 0.0, 1.0);
         float u = (floor(path01 * (col_count - 1.0) + 0.5) + 0.5) / col_count;
         float v = (floor(age01 * (row_count - 1.0) + 0.5) + 0.5) / row_count;
-        float band = texture2D(u_media, vec2(u, v)).r;
+        float band = texture(u_media, vec2(u, v)).r;
         /* Contrast gate: min ~0.08 before lighting — no wash on ambient noise. */
         float gate_t = clamp((band - 0.08) / 0.10, 0.0, 1.0);
         gate_t = gate_t * gate_t * (3.0 - 2.0 * gate_t);
@@ -65,7 +65,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     else
     {
         float u = (floor(path01 * (col_count - 1.0) + 0.5) + 0.5) / col_count;
-        float level = texture2D(u_media, vec2(u, 0.5)).r;
+        float level = texture(u_media, vec2(u, 0.5)).r;
         /* Softstep gate before bar mask — quiet columns stay dark. */
         float gate_t = clamp((level - 0.06) / 0.10, 0.0, 1.0);
         gate_t = gate_t * gate_t * (3.0 - 2.0 * gate_t);

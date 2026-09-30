@@ -172,9 +172,9 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float curve = clamp(u_params[9], 0.0, 1.0);
     float edge = clamp(u_params[10], 0.0, 1.0);
     float R = max(u_params[11], 0.05);
-    float packed = u_params[12];
-    float wrap = step(1.5, packed);
-    float prop = (wrap > 0.5) ? (packed - 2.0) : packed;
+    float pack_val = u_params[12];
+    float wrap = step(1.5, pack_val);
+    float prop = (wrap > 0.5) ? (pack_val - 2.0) : pack_val;
 
     vec3 l = (p01 - vec3(0.5)) * 2.0;
     float dist_n = length(l) * 0.5 * 1.7320508;
@@ -250,8 +250,8 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         ub = clamp(ub, 0.0, 1.0); vb = clamp(vb, 0.0, 1.0);
     }
 
-    vec3 ca = texture2D(u_media, vec2(ua, 1.0 - va)).rgb;
-    vec3 cb = texture2D(u_media, vec2(ub, 1.0 - vb)).rgb;
+    vec3 ca = texture(u_media, vec2(ua, 1.0 - va)).rgb;
+    vec3 cb = texture(u_media, vec2(ub, 1.0 - vb)).rgb;
     vec3 rgb = mix(ca, cb, morph);
 
     float d_face = min(min(min(p01.x, 1.0 - p01.x), min(p01.y, 1.0 - p01.y)), min(p01.z, 1.0 - p01.z));

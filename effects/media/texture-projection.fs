@@ -141,7 +141,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         v = floor(v * steps_v) / steps_v;
     }
 
-    vec3 rgb = texture2D(u_media, vec2(u, 1.0 - v)).rgb;
+    vec3 rgb = texture(u_media, vec2(u, 1.0 - v)).rgb;
 
     float d_face = min(min(min(p01.x, 1.0 - p01.x), min(p01.y, 1.0 - p01.y)), min(p01.z, 1.0 - p01.z));
     float ag = ambienceGain(clamp(dist_n, 0.0, 1.0), d_face, fd, curve, edge);

@@ -79,11 +79,11 @@ int mapSurface(int combo)
     if(combo == 3) return 4;
     return 0;
 }
-void layoutApex(int layout, int count, int surface, int i, float cu, float cv, out float u, out float v)
+void conePlaceApex(int place, int count, int surface, int i, float cu, float cv, out float u, out float v)
 {
     u = clamp(cu, 0.0, 1.0);
     v = clamp(cv, 0.0, 1.0);
-    int use = layout;
+    int use = place;
     if(use == 0)
     {
         if(count <= 1) use = 1;
@@ -223,7 +223,7 @@ float coneAngle(int src, float clock)
 {
     return fract(clock * 0.50 + float(src) * 0.19) * 6.2831853;
 }
-vec3 evalCone(int i, int count, int mirror, int surface, int layout,
+vec3 evalCone(int i, int count, int mirror, int surface, int place,
               float cu, float cv,
               float floor_y, float ceil_y,
               float xmin, float xmax, float zmin, float zmax,
@@ -234,11 +234,11 @@ vec3 evalCone(int i, int count, int mirror, int surface, int layout,
         return vec3(-1.0e6, hue_static, 0.0);
     float u = 0.5;
     float v = 0.5;
-    layoutApex(layout, count, surface, i, cu, cv, u, v);
+    conePlaceApex(place, count, surface, i, cu, cv, u, v);
     int surf = surface;
-    if(layout == 4 || (layout == 0 && count == 4 && surface == 4))
+    if(place == 4 || (place == 0 && count == 4 && surface == 4))
         surf = 4;
-    if(layout == 4)
+    if(place == 4)
         surf = 4;
     vec3 apex = resolveApex(surf, u, v, floor_y, ceil_y, xmin, xmax, zmin, zmax);
     vec3 aim = coneAim(i, clock, wander, restAim(surf, apex));
@@ -267,19 +267,19 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float xmax = u_params[10];
     float zmin = u_params[11];
     float zmax = u_params[12];
-    int layout = int(clamp(u_params[13], 0.0, 5.0) + 0.5);
+    int place = int(clamp(u_params[13], 0.0, 5.0) + 0.5);
 
     vec3 best = vec3(-1.0e6, hue_static, 0.0);
-    vec3 c0 = evalCone(0, count, mirror, surface, layout, u_params[14], u_params[15],
+    vec3 c0 = evalCone(0, count, mirror, surface, place, u_params[14], u_params[15],
                        floor_y, ceil_y, xmin, xmax, zmin, zmax,
                        clock, wander, scale, hue_static, p01);
-    vec3 c1 = evalCone(1, count, mirror, surface, layout, u_params[16], u_params[17],
+    vec3 c1 = evalCone(1, count, mirror, surface, place, u_params[16], u_params[17],
                        floor_y, ceil_y, xmin, xmax, zmin, zmax,
                        clock, wander, scale, hue_static, p01);
-    vec3 c2 = evalCone(2, count, mirror, surface, layout, u_params[18], u_params[19],
+    vec3 c2 = evalCone(2, count, mirror, surface, place, u_params[18], u_params[19],
                        floor_y, ceil_y, xmin, xmax, zmin, zmax,
                        clock, wander, scale, hue_static, p01);
-    vec3 c3 = evalCone(3, count, mirror, surface, layout, u_params[20], u_params[21],
+    vec3 c3 = evalCone(3, count, mirror, surface, place, u_params[20], u_params[21],
                        floor_y, ceil_y, xmin, xmax, zmin, zmax,
                        clock, wander, scale, hue_static, p01);
     if(c0.z > 0.5 && c0.x > best.x) best = c0;
