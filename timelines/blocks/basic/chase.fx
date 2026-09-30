@@ -20,7 +20,6 @@ knobs: speed direction pulse
 # Effect
 head = clamp(pulse, 0.02, 1)
 delta = abs(axis - progress)
-delta = min(delta, 1 - delta)
 if delta > head
 off
 end

@@ -21,10 +21,11 @@ spd = max(0.05, speed)
 period = max(60, floor(max(60, period_ms) / spd + 0.5))
 local = max(0, time_ms)
 epoch = floor(local / period)
-roll = hash_byte(xor(seed, 12648430), epoch, period, 0)
+# hash_byte's 2nd arg is local_ms (divided by period) — use epoch*period like twinkle.
+roll = hash_byte(xor(seed, 12648430), epoch * period, period, 0)
 density = 0.25 + 0.5 * clamp(intensity, 0, 1)
 if roll > density
 off
 end
-pick = hash_byte(xor(seed, 12648430), epoch, period, 8)
+pick = hash_byte(xor(seed, 12648430), epoch * period, period, 8)
 paint(pick)
