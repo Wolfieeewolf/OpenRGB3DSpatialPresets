@@ -83,7 +83,12 @@ FINISH_VALUES = {
     "audio",
 }
 
-VOLUME_FOLDERS = ("spatial", "audio", "media")
+# FolderVolume categories under effects/ (legacy name "spatial" → volume).
+VOLUME_FOLDERS = ("volume", "audio", "media")
+EFFECTS = ROOT / "effects"
+ACTION_EDITOR = ROOT / "action-editor"
+TRIGGERS = ROOT / "triggers"
+MOVIE_SYNC = ROOT / "movie-sync"
 
 
 def split_fs_header_body(text: str) -> tuple[dict[str, list[str]], str, list[str]]:
@@ -140,7 +145,7 @@ def resolve_shader_body(path: Path, header: dict[str, list[str]], body: str) -> 
     if not sid:
         return body
     for folder in VOLUME_FOLDERS:
-        cand = ROOT / "effects" / folder / f"{sid}.fs"
+        cand = EFFECTS / folder / f"{sid}.fs"
         if cand.is_file():
             _, obody, _ = split_fs_header_body(cand.read_text(encoding="utf-8"))
             return obody
@@ -258,9 +263,8 @@ void main() {
             print(f"note: {msg}; skipping compile")
         return
 
-    effects = ROOT / "effects"
     for folder in VOLUME_FOLDERS:
-        for path in sorted((effects / folder).glob("*.fs")):
+        for path in sorted((EFFECTS / folder).glob("*.fs")):
             header, body, _ = split_fs_header_body(path.read_text(encoding="utf-8"))
             body = resolve_shader_body(path, header, body)
             frag = volume_head + body + volume_tail
@@ -269,7 +273,7 @@ void main() {
             except Exception as e:
                 issues.append(f"{path}: GLSL compile failed: {str(e).splitlines()[0]}")
 
-    sf = effects / "shader-field"
+    sf = EFFECTS / "shader-field"
     if sf.is_dir():
         for path in sorted(sf.glob("*.fs")):
             _, body, _ = split_fs_header_body(path.read_text(encoding="utf-8"))
@@ -291,26 +295,36 @@ def main() -> int:
     args = ap.parse_args()
     issues: list[str] = []
 
-    effects = ROOT / "effects"
+    if not EFFECTS.is_dir():
+        issues.append(f"missing folder {EFFECTS}")
+
     for folder in VOLUME_FOLDERS:
-        d = effects / folder
+        d = EFFECTS / folder
         if not d.is_dir():
             issues.append(f"missing folder {d}")
             continue
         for path in sorted(d.glob("*.fs")):
             check_volume_fs(path, issues)
 
-    sf = effects / "shader-field"
+    sf = EFFECTS / "shader-field"
     if sf.is_dir():
         for path in sorted(sf.glob("*.fs")):
             check_shader_field_fs(path, issues)
 
-    blocks = ROOT / "timelines" / "blocks"
-    if blocks.is_dir():
-        for path in sorted(blocks.rglob("*.fx")):
+    toolbox = ACTION_EDITOR / "toolbox"
+    if toolbox.is_dir():
+        for path in sorted(toolbox.rglob("*.fx")):
             check_fx(path, issues)
     else:
-        issues.append(f"missing folder {blocks}")
+        issues.append(f"missing folder {toolbox}")
+
+    trigger_effects = TRIGGERS / "effects"
+    if not trigger_effects.is_dir():
+        issues.append(f"missing folder {trigger_effects}")
+
+    movie_effects = MOVIE_SYNC / "effects"
+    if not movie_effects.is_dir():
+        issues.append(f"missing folder {movie_effects}")
 
     if args.compile_glsl or args.require_compile:
         try_compile_glsl(issues, require=args.require_compile)
@@ -321,10 +335,15 @@ def main() -> int:
             print(f"  - {i}")
         return 1
 
-    n_vol = sum(len(list((effects / f).glob("*.fs"))) for f in VOLUME_FOLDERS if (effects / f).is_dir())
+    n_vol = sum(len(list((EFFECTS / f).glob("*.fs"))) for f in VOLUME_FOLDERS if (EFFECTS / f).is_dir())
     n_sf = len(list(sf.glob("*.fs"))) if sf.is_dir() else 0
-    n_fx = len(list(blocks.rglob("*.fx"))) if blocks.is_dir() else 0
-    print(f"OK: {n_vol} volume/media/audio .fs, {n_sf} shader-field .fs, {n_fx} timeline .fx")
+    n_fx = len(list(toolbox.rglob("*.fx"))) if toolbox.is_dir() else 0
+    n_trig = len(list(trigger_effects.glob("*.action.json"))) if trigger_effects.is_dir() else 0
+    n_movie = len(list(movie_effects.rglob("*.action.json"))) if movie_effects.is_dir() else 0
+    print(
+        f"OK: {n_vol} volume/media/audio .fs, {n_sf} shader-field .fs, "
+        f"{n_fx} action-editor .fx, {n_trig} trigger actions, {n_movie} movie-sync looks"
+    )
     return 0
 
 

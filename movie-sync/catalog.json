@@ -1,0 +1,41 @@
+{
+  "format": "openrgb3d.movie_sync_catalog",
+  "version": 1,
+  "effects": [
+    {
+      "id": "explosion",
+      "name": "Explosion",
+      "category": "explosions",
+      "action": "explosions/explosion.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "laser_sweep",
+      "name": "Laser sweep",
+      "category": "wraps",
+      "action": "wraps/laser_sweep.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "room_wash",
+      "name": "Room wash",
+      "category": "washes",
+      "action": "washes/room_wash.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "ocean_horizon",
+      "name": "Ocean horizon",
+      "category": "washes",
+      "action": "washes/ocean_horizon.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "title_flash",
+      "name": "Title flash",
+      "category": "pulses",
+      "action": "pulses/title_flash.action.json",
+      "photosensitive": true
+    }
+  ]
+}
