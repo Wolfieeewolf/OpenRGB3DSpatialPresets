@@ -1,0 +1,73 @@
+// Roomscape — bright wash + dense fireflies
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "roomscape_strata_fireflies",
+  "name": "Roomscape - Strata + fireflies",
+  "duration_ms": 8000,
+  "loop": "forever",
+  "priority": 20,
+  "tracks": [
+    {
+      "name": "Wash",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_room_glow",
+          "effect": "field_room_glow",
+          "start_ms": 0,
+          "end_ms": 8000,
+          "intensity": 0.85,
+          "min_intensity": 0.3,
+          "max_intensity": 1.0,
+          "color": "#FF8C3C",
+          "color_from": "#261010",
+          "color_to": "#5872E6",
+          "gradient": [
+            { "pos": 0.0, "color": "#261010" },
+            { "pos": 0.45, "color": "#FF8C3C" },
+            { "pos": 1.0, "color": "#5872E6" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.55,
+          "pulse_length": 0.75,
+          "period_ms": 1000,
+          "effect_size": 1.35,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Fireflies",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "particle_fireflies",
+          "effect": "particle_fireflies",
+          "start_ms": 0,
+          "end_ms": 8000,
+          "intensity": 1.0,
+          "min_intensity": 0.15,
+          "max_intensity": 1.0,
+          "color": "#FFDC50",
+          "color_from": "#FFDC50",
+          "color_to": "#FFFFFF",
+          "gradient": [
+            { "pos": 0.0, "color": "#FFA020" },
+            { "pos": 1.0, "color": "#FFFFC0" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.95,
+          "pulse_length": 0.8,
+          "period_ms": 1000,
+          "effect_size": 1.3,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

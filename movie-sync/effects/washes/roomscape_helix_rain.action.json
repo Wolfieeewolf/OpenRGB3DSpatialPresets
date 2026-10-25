@@ -1,0 +1,103 @@
+// Movie Sync — room glow + dense rain + thick helix (show-off)
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "roomscape_helix_rain",
+  "name": "Roomscape - Helix + rain",
+  "duration_ms": 9000,
+  "loop": "while_active",
+  "priority": 19,
+  "tracks": [
+    {
+      "name": "Glow",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_strata",
+          "effect": "field_strata",
+          "start_ms": 0,
+          "end_ms": 9000,
+          "intensity": 0.7,
+          "min_intensity": 0.25,
+          "max_intensity": 1.0,
+          "color": "#1A4060",
+          "color_from": "#081828",
+          "color_to": "#6090C0",
+          "gradient": [
+            { "pos": 0.0, "color": "#081828" },
+            { "pos": 1.0, "color": "#6090C0" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.45,
+          "pulse_length": 0.7,
+          "period_ms": 1000,
+          "effect_size": 1.3,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Rain",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "particle_rain",
+          "effect": "particle_rain",
+          "start_ms": 0,
+          "end_ms": 9000,
+          "intensity": 1.0,
+          "min_intensity": 0.15,
+          "max_intensity": 1.0,
+          "color": "#8CBEFF",
+          "color_from": "#4060A0",
+          "color_to": "#E0F0FF",
+          "gradient": [
+            { "pos": 0.0, "color": "#4060A0" },
+            { "pos": 1.0, "color": "#E0F0FF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.15,
+          "pulse_length": 0.85,
+          "period_ms": 1000,
+          "effect_size": 1.4,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Helix",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "ribbon_helix",
+          "effect": "ribbon_helix",
+          "start_ms": 0,
+          "end_ms": 9000,
+          "intensity": 1.0,
+          "min_intensity": 0.2,
+          "max_intensity": 1.0,
+          "color": "#53BC28",
+          "color_from": "#53BC28",
+          "color_to": "#F967FB",
+          "gradient": [
+            { "pos": 0.0, "color": "#53BC28" },
+            { "pos": 0.5, "color": "#6958D5" },
+            { "pos": 1.0, "color": "#F967FB" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.95,
+          "pulse_length": 0.75,
+          "period_ms": 1000,
+          "effect_size": 1.35,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

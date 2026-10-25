@@ -40,8 +40,12 @@ u = dx * tx + dy * ty + dz * tz
 v = dx * bx + dy * by + dz * bz
 ang = atan2(v, u) / (2 * 3.141592653589793) + 0.5
 ang = ang - floor(ang)
+head = fmod(time_ms * 0.001 * max(0.05, speed), 1)
+if invert == 1
+head = 1 - head
+end
 width = clamp(pulse, 0.06, 0.5)
-delta = ang - progress
+delta = ang - head
 delta = delta - floor(delta + 0.5)
 lead = width * 0.25
 trail = width
@@ -57,4 +61,4 @@ if cover <= 0.001
 off
 end
 intensity = intensity * cover
-paint(progress)
+paint(head)

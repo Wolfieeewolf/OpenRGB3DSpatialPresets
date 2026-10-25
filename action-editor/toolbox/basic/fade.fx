@@ -14,5 +14,5 @@ knobs: color_to
 color: ends
 
 # Effect
-t = time_ms / max(1, (period_ms))
+# Span progress = start→end of the clip (role). Do not key off period.
 paint(progress)

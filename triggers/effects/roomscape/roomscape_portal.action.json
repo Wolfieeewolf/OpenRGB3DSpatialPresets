@@ -1,0 +1,43 @@
+// Roomscape show-off — portal vortex
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "roomscape_portal",
+  "name": "Roomscape - Portal",
+  "duration_ms": 8000,
+  "loop": "forever",
+  "priority": 24,
+  "tracks": [
+    {
+      "name": "Portal",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_portal",
+          "effect": "field_portal",
+          "start_ms": 0,
+          "end_ms": 8000,
+          "intensity": 1.0,
+          "min_intensity": 0.15,
+          "max_intensity": 1.0,
+          "color": "#B44CFF",
+          "color_from": "#201040",
+          "color_to": "#FFFFFF",
+          "gradient": [
+            { "pos": 0.0, "color": "#201040" },
+            { "pos": 0.5, "color": "#B44CFF" },
+            { "pos": 1.0, "color": "#FFFFFF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.15,
+          "pulse_length": 0.65,
+          "period_ms": 1000,
+          "effect_size": 1.2,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

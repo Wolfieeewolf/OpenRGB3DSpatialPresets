@@ -19,7 +19,7 @@ knobs: speed direction
 
 # Effect
 along = sample_axis()
-pos = fmod(along * 5 + progress * 5 + 1, 1)
+pos = fmod(along * 5 + time_ms * 0.001 * max(0.05, speed) * 5 + 1, 1)
 if pos > 0.62
 off
 end

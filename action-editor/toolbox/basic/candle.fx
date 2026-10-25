@@ -16,8 +16,9 @@ space: axis
 knobs: min_intensity
 
 # Effect
-n1 = hash_byte(seed, floor(local_ms / 30), 30, 0)
-n2 = hash_byte(seed, floor(local_ms / 30), 30, 8)
+# time_ms (continuous when playing) — local_ms jumped on pack loop seams.
+n1 = hash_byte(seed, floor(time_ms / 30), 30, 0)
+n2 = hash_byte(seed, floor(time_ms / 30), 30, 8)
 flicker = 0.55 + 0.45 * (0.65 * n1 + 0.35 * n2)
 lo = clamp(min_intensity, 0, 1)
 hi = clamp(max_intensity, lo, 1)

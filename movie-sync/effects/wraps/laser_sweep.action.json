@@ -1,41 +1,56 @@
-// =============================================================================
-// Movie Cue look â€” wraps/laser_sweep
-// Layout follows library/movie-cue/_template.action.json
-// =============================================================================
+// Movie Sync — thick beam sweeping the whole room
 {
-  // --- Pack identity ---------------------------------------------------------
   "format": "openrgb3d.action",
-  "version": 4,
+  "version": 5,
   "id": "laser_sweep",
   "name": "Laser sweep",
-
-  // --- Playback --------------------------------------------------------------
   "duration_ms": 1800,
   "loop": "once",
   "priority": 35,
-
-  // --- Tracks ----------------------------------------------------------------
   "tracks": [
     {
-      "name": "All LEDs",
+      "name": "Underwash",
       "target": { "kind": "all" },
       "clips": [
         {
-          // --- Clip look / type ---------------------------------------------
-          "type": "wipe",
-          "effect": "wipe",
-
-          // --- Timing within the pack ----------------------------------------
+          "type": "field_strata",
+          "effect": "field_strata",
           "start_ms": 0,
           "end_ms": 1800,
-
-          // --- Brightness ----------------------------------------------------
-          "intensity": 0.8,
+          "intensity": 0.55,
+          "min_intensity": 0.2,
+          "max_intensity": 1.0,
+          "color": "#003050",
+          "color_from": "#001020",
+          "color_to": "#00A0C0",
+          "gradient": [
+            { "pos": 0.0, "color": "#001020" },
+            { "pos": 1.0, "color": "#00A0C0" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.8,
+          "pulse_length": 0.65,
+          "period_ms": 1000,
+          "effect_size": 1.3,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Laser",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "laser_sweep",
+          "effect": "laser_sweep",
+          "start_ms": 0,
+          "end_ms": 1800,
+          "intensity": 1.0,
           "min_intensity": 0.15,
           "max_intensity": 1.0,
-
-          // --- Colour --------------------------------------------------------
-          "color": "#00FFFF",
+          "color": "#00E5FF",
           "color_from": "#001133",
           "color_to": "#FFFFFF",
           "gradient": [
@@ -43,16 +58,13 @@
             { "pos": 0.45, "color": "#00E5FF" },
             { "pos": 1.0, "color": "#FFFFFF" }
           ],
-
-          // --- Motion / space ------------------------------------------------
           "direction": "right",
           "axis_space": "room",
           "axis_mode": "preset",
-          "axis_yaw_deg": 0.0,
-          "axis_pitch_deg": 0.0,
           "speed": 1.0,
-          "pulse_length": 0.25,
+          "pulse_length": 0.75,
           "period_ms": 1000,
+          "effect_size": 1.4,
           "reverse": false
         }
       ]

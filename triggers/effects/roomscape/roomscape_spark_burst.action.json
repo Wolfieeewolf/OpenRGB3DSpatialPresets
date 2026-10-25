@@ -1,0 +1,73 @@
+// Roomscape — fat centre spark blast
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "roomscape_spark_burst",
+  "name": "Roomscape - Spark burst",
+  "duration_ms": 2800,
+  "loop": "once",
+  "priority": 28,
+  "tracks": [
+    {
+      "name": "Flash",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_flash",
+          "effect": "field_flash",
+          "start_ms": 0,
+          "end_ms": 500,
+          "intensity": 0.9,
+          "min_intensity": 0.15,
+          "max_intensity": 1.0,
+          "color": "#FFE8A0",
+          "color_from": "#FF4000",
+          "color_to": "#FFFFFF",
+          "gradient": [
+            { "pos": 0.0, "color": "#FF4000" },
+            { "pos": 1.0, "color": "#FFFFFF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.2,
+          "pulse_length": 0.7,
+          "period_ms": 1000,
+          "effect_size": 1.35,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Sparks",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "spark_burst",
+          "effect": "spark_burst",
+          "start_ms": 40,
+          "end_ms": 2800,
+          "intensity": 1.0,
+          "min_intensity": 0.1,
+          "max_intensity": 1.0,
+          "color": "#FFB450",
+          "color_from": "#FF4000",
+          "color_to": "#FFE8A0",
+          "gradient": [
+            { "pos": 0.0, "color": "#FF4000" },
+            { "pos": 0.45, "color": "#FFB450" },
+            { "pos": 1.0, "color": "#FFE8A0" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.0,
+          "pulse_length": 0.8,
+          "period_ms": 1000,
+          "effect_size": 1.4,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

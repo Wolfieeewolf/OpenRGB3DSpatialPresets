@@ -1,41 +1,55 @@
-// =============================================================================
-// Movie Cue look â€” washes/ocean_horizon
-// Needs library/packs/blocks/volume/ocean_horizon.fx loaded (restart OpenRGB after install).
-// Layout follows library/movie-cue/_template.action.json
-// =============================================================================
+// Movie Sync — big cool wash under ocean horizon (room-filling)
 {
-  // --- Pack identity ---------------------------------------------------------
   "format": "openrgb3d.action",
-  "version": 4,
+  "version": 5,
   "id": "ocean_horizon",
   "name": "Ocean horizon",
-
-  // --- Playback --------------------------------------------------------------
-  "duration_ms": 10000,
+  "duration_ms": 12000,
   "loop": "while_active",
   "priority": 18,
-
-  // --- Tracks ----------------------------------------------------------------
   "tracks": [
     {
-      "name": "All LEDs",
+      "name": "Room glow",
       "target": { "kind": "all" },
       "clips": [
         {
-          // --- Clip look / type ---------------------------------------------
+          "type": "field_room_glow",
+          "effect": "field_room_glow",
+          "start_ms": 0,
+          "end_ms": 12000,
+          "intensity": 0.75,
+          "min_intensity": 0.3,
+          "max_intensity": 1.0,
+          "color": "#0E5A7A",
+          "color_from": "#0A2A4A",
+          "color_to": "#E8F4FF",
+          "gradient": [
+            { "pos": 0.0, "color": "#0A2A4A" },
+            { "pos": 1.0, "color": "#A8D4F0" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.4,
+          "pulse_length": 0.7,
+          "period_ms": 1000,
+          "effect_size": 1.3,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Horizon",
+      "target": { "kind": "all" },
+      "clips": [
+        {
           "type": "ocean_horizon",
           "effect": "ocean_horizon",
-
-          // --- Timing within the pack ----------------------------------------
           "start_ms": 0,
-          "end_ms": 10000,
-
-          // --- Brightness ----------------------------------------------------
-          "intensity": 0.8,
-          "min_intensity": 0.15,
+          "end_ms": 12000,
+          "intensity": 1.0,
+          "min_intensity": 0.25,
           "max_intensity": 1.0,
-
-          // --- Colour --------------------------------------------------------
           "color": "#0A2A4A",
           "color_from": "#0A2A4A",
           "color_to": "#E8F4FF",
@@ -47,16 +61,13 @@
             { "pos": 0.75, "color": "#5BA3E0" },
             { "pos": 1.0, "color": "#E8F4FF" }
           ],
-
-          // --- Motion / space ------------------------------------------------
           "direction": "right",
           "axis_space": "room",
           "axis_mode": "preset",
-          "axis_yaw_deg": 0.0,
-          "axis_pitch_deg": 0.0,
-          "speed": 0.5,
-          "pulse_length": 0.25,
-          "period_ms": 10000,
+          "speed": 0.6,
+          "pulse_length": 0.4,
+          "period_ms": 12000,
+          "effect_size": 1.25,
           "reverse": false
         }
       ]

@@ -15,8 +15,10 @@ space: world
 knobs: speed
 
 # Effect
+# Continuous time — progress wrap made the whole field jump on loop seams.
+t = time_ms * 0.001 * max(0.05, speed)
 rise = 1 - height
-flicker = noise(nx * 4, height * 3 + progress * 6, nz * 4)
+flicker = noise(nx * 4, height * 3 + t * 2.2, nz * 4)
 heat = clamp(rise * (0.4 + 0.6 * flicker) + 0.08 * flicker, 0, 1)
 if heat < 0.08
 off

@@ -18,10 +18,14 @@ space: axis
 knobs: speed direction pulse
 
 # Effect
+head_pos = fmod(time_ms * 0.001 * max(0.05, speed), 1)
+if invert == 1
+head_pos = 1 - head_pos
+end
 head = clamp(pulse, 0.02, 1)
-delta = abs(axis - progress)
+delta = abs(axis - head_pos)
 if delta > head
 off
 end
 intensity = intensity * (1 - (delta / head))
-paint(progress)
+paint(head_pos)

@@ -1,0 +1,73 @@
+// Movie Sync show-off — spinning portal + soft electric accents
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "roomscape_portal",
+  "name": "Roomscape - Portal",
+  "duration_ms": 8000,
+  "loop": "while_active",
+  "priority": 22,
+  "tracks": [
+    {
+      "name": "Portal",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_portal",
+          "effect": "field_portal",
+          "start_ms": 0,
+          "end_ms": 8000,
+          "intensity": 1.0,
+          "min_intensity": 0.15,
+          "max_intensity": 1.0,
+          "color": "#B44CFF",
+          "color_from": "#201040",
+          "color_to": "#FFFFFF",
+          "gradient": [
+            { "pos": 0.0, "color": "#201040" },
+            { "pos": 0.5, "color": "#B44CFF" },
+            { "pos": 1.0, "color": "#FFFFFF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.1,
+          "pulse_length": 0.65,
+          "period_ms": 1000,
+          "effect_size": 1.2,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Sparks",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_electric",
+          "effect": "field_electric",
+          "start_ms": 0,
+          "end_ms": 8000,
+          "intensity": 0.7,
+          "min_intensity": 0.05,
+          "max_intensity": 1.0,
+          "color": "#A0C8FF",
+          "color_from": "#4060A0",
+          "color_to": "#FFFFFF",
+          "gradient": [
+            { "pos": 0.0, "color": "#4060A0" },
+            { "pos": 1.0, "color": "#FFFFFF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.3,
+          "pulse_length": 0.55,
+          "period_ms": 1000,
+          "effect_size": 1.15,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

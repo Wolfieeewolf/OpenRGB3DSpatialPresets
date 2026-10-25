@@ -1,4 +1,11 @@
+# Name
 name: Text / Marquee
-description: Scroll or hold text across track LEDs.
-knobs: direction speed period media_text
+description: Scroll or hold text across track LEDs
+section: media
+
+# Look
 swatch: 255 220 60
+
+# Playback
+space: axis
+knobs: direction speed period media_text

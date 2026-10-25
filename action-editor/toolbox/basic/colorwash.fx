@@ -14,6 +14,6 @@ space: axis
 knobs: speed direction
 
 # Effect
-t = progress + axis * 0.35
+t = time_ms * 0.001 * max(0.05, speed) + axis * 0.35
 t = t - floor(t)
 paint(t)

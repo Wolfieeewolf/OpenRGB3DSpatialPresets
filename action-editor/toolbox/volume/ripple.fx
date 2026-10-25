@@ -16,12 +16,13 @@ knobs: speed pulse
 
 # Effect
 band = clamp(pulse, 0.06, 0.4)
+front = fmod(time_ms * 0.001 * max(0.05, speed), 1)
 cover = 0
-wave = abs(radius - progress)
+wave = abs(radius - front)
 if wave <= band
 cover = 1 - (wave / band)
 end
-wave2 = abs(radius - fmod(progress + 0.5, 1))
+wave2 = abs(radius - fmod(front + 0.5, 1))
 if wave2 <= band
 cover = max(cover, (1 - (wave2 / band)) * 0.75)
 end

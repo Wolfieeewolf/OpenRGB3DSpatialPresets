@@ -13,7 +13,7 @@ space: axis
 knobs: speed direction pulse
 
 # Effect
-head = progress
+head = fmod(time_ms * 0.001 * max(0.05, speed), 1)
 along = axis
 if invert == 1
 head = 1 - head

@@ -21,6 +21,9 @@ void volumeMain(out vec4 out_color, in vec3 p01) {
     float cover = 1.0 - smoothstep(0.0, band, d);
     cover *= 1.0 - smoothstep(0.7, 1.0, prog);
     float core = exp(-r * 2.2) * (1.0 - prog);
+    float dens = (cover + core) * inten;
+    dens *= 1.0 - smoothstep(0.88, 1.0, prog);
+    if(dens < 1e-4) { out_color = vec4(0.0); return; }
     vec3 col = mix(vec3(1.0, 0.2, 0.05), vec3(1.0, 0.9, 0.4), clamp(1.0 - r, 0.0, 1.0));
-    out_color = vec4(col * (cover + core) * inten, 1.0);
+    out_color = vec4(col * dens, dens);
 }

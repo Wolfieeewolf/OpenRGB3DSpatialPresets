@@ -15,12 +15,14 @@ The plugin is the **engine only** — all looks live here. **Same folder names a
 | `controllers/` | Object Creator → Add from preset |
 | `effects/volume\|audio\|media\|shader-field\|patterns/` | Effect Library |
 | `action-editor/toolbox/` | Action Editor → Tools |
+| `action-editor/{gradients,colors,curves}.json` | Action Editor swatches (plugin create-on-save) |
 | `triggers/effects/` | Trigger action timelines |
+| `triggers/triggers.json` | When → play bindings (plugin create-on-save) |
 | `movie-sync/` | Movie Sync catalog + looks + VLC helper |
 
 ```text
-OpenRGB3DSpatialPresets/
-  controllers/
+OpenRGB3DSpatialPresets/          (= AppData …/OpenRGB3DSpatialPlugin/)
+  controllers/                    (nested brand/device OK)
   effects/
     volume/
     audio/
@@ -29,8 +31,12 @@ OpenRGB3DSpatialPresets/
     patterns/
   action-editor/
     toolbox/
+    gradients.json                (optional; plugin writes on save)
+    colors.json
+    curves.json
   triggers/
     effects/
+    triggers.json                 (optional; plugin writes on save)
   movie-sync/
     catalog.json
     effects/

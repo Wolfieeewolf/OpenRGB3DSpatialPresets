@@ -1,54 +1,39 @@
-// =============================================================================
-// Movie Cue look â€” pulses/title_flash
-// Photosensitive â€” catalog marks photosensitive:true; needs Allow strobe checked.
-// Layout follows library/movie-cue/_template.action.json
-// =============================================================================
+// Movie Sync — room-filling white blast (photosensitive)
 {
-  // --- Pack identity ---------------------------------------------------------
   "format": "openrgb3d.action",
-  "version": 4,
+  "version": 5,
   "id": "title_flash",
   "name": "Title flash",
-
-  // --- Playback --------------------------------------------------------------
-  "duration_ms": 900,
+  "duration_ms": 800,
   "loop": "once",
   "priority": 50,
-
-  // --- Tracks ----------------------------------------------------------------
   "tracks": [
     {
-      "name": "All LEDs",
+      "name": "Flash",
       "target": { "kind": "all" },
       "clips": [
         {
-          // --- Clip look / type ---------------------------------------------
-          "type": "pulse",
-          "effect": "pulse",
-
-          // --- Timing within the pack ----------------------------------------
+          "type": "field_flash",
+          "effect": "field_flash",
           "start_ms": 0,
-          "end_ms": 900,
-
-          // --- Brightness ----------------------------------------------------
-          "intensity": 0.75,
-          "min_intensity": 0.15,
+          "end_ms": 800,
+          "intensity": 1.0,
+          "min_intensity": 0.2,
           "max_intensity": 1.0,
-
-          // --- Colour --------------------------------------------------------
           "color": "#FFFFFF",
-          "color_from": "#FFFFFF",
+          "color_from": "#A0A8C0",
           "color_to": "#FFFFFF",
-
-          // --- Motion / space ------------------------------------------------
+          "gradient": [
+            { "pos": 0.0, "color": "#8088A0" },
+            { "pos": 1.0, "color": "#FFFFFF" }
+          ],
           "direction": "right",
           "axis_space": "room",
           "axis_mode": "preset",
-          "axis_yaw_deg": 0.0,
-          "axis_pitch_deg": 0.0,
           "speed": 1.0,
-          "pulse_length": 0.08,
+          "pulse_length": 0.8,
           "period_ms": 1000,
+          "effect_size": 1.45,
           "reverse": false
         }
       ]

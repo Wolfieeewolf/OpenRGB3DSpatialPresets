@@ -21,9 +21,11 @@ movie-sync/
   vlc/
 ```
 
-Looks use the same file format as trigger actions (`openrgb3d.action` v4):
+Looks use the same file format as trigger actions (`openrgb3d.action` v5; v4 still loads and rewrites):
 
 - `movie-sync/effects/_template.action.json`
 - `triggers/effects/_template.action.json`
 
-Tools (`.fx`): `action-editor/toolbox/`.
+Tools (`.fx`): `action-editor/toolbox/`. For room depth prefer **volume** tools (`field_*`, `spark_burst`, `particle_*`, `neon_ribbon` / `ribbon_helix`) over basic `solid` / `wipe` / `pulse` — those read flat on a real LED map.
+
+Showcase packs: `triggers/effects/roomscape/` plus `movie-sync/effects/washes/roomscape_helix_rain.action.json`.

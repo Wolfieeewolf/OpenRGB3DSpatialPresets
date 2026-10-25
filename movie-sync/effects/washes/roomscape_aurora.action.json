@@ -1,0 +1,43 @@
+// Movie Sync show-off — aurora curtains (wow wash)
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "roomscape_aurora",
+  "name": "Roomscape - Aurora",
+  "duration_ms": 10000,
+  "loop": "while_active",
+  "priority": 20,
+  "tracks": [
+    {
+      "name": "Aurora",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_aurora",
+          "effect": "field_aurora",
+          "start_ms": 0,
+          "end_ms": 10000,
+          "intensity": 1.0,
+          "min_intensity": 0.2,
+          "max_intensity": 1.0,
+          "color": "#28FFA0",
+          "color_from": "#0A2040",
+          "color_to": "#D0A0FF",
+          "gradient": [
+            { "pos": 0.0, "color": "#0A2040" },
+            { "pos": 0.45, "color": "#28FFA0" },
+            { "pos": 1.0, "color": "#D0A0FF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.85,
+          "pulse_length": 0.7,
+          "period_ms": 1000,
+          "effect_size": 1.25,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

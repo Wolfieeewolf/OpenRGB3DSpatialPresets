@@ -18,7 +18,11 @@ axis: angle
 
 # Effect
 width = clamp(pulse, 0.04, 0.55)
-delta = axis - progress
+head = fmod(time_ms * 0.001 * max(0.05, speed), 1)
+if invert == 1
+head = 1 - head
+end
+delta = axis - head
 delta = delta - floor(delta + 0.5)
 lead = width * 0.22
 trail = width
@@ -48,4 +52,4 @@ if cover <= 0.001
 off
 end
 intensity = intensity * cover
-paint(progress)
+paint(head)

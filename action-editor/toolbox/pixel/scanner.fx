@@ -15,7 +15,8 @@ space: axis
 knobs: speed direction pulse
 
 # Effect
-head = progress * 2
+t = fmod(time_ms * 0.001 * max(0.05, speed), 2)
+head = t
 if head > 1
 head = 2 - head
 end

@@ -17,7 +17,7 @@ space: world
 knobs: speed
 
 # Effect
-t = progress * 3
+t = time_ms * 0.001 * max(0.05, speed) * 3
 n = noise(nx * 2.5 + t, ny * 2.5 - t * 0.6, nz * 2.5 + t * 0.35)
 n2 = noise(nx * 5 - t * 0.5, ny * 5 + t * 0.4, nz * 5)
 field = clamp(0.5 * n + 0.5 * n2, 0, 1)

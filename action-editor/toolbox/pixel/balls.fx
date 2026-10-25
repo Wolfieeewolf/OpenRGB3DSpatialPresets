@@ -16,13 +16,14 @@ knobs: speed pulse
 
 # Effect
 rad = clamp(pulse * 0.5, 0.1, 0.35)
+t = time_ms * 0.001 * max(0.05, speed)
 best = 1
 i = 0
 while i < 4
 ph = i / 4
-cx = 0.5 + 0.38 * sin((progress + ph) * 6.2831853)
-cy = 0.5 + 0.38 * cos((progress * 1.2 + ph) * 6.2831853)
-cz = 0.5 + 0.38 * sin((progress * 0.85 + ph * 1.7) * 6.2831853)
+cx = 0.5 + 0.38 * sin((t + ph) * 6.2831853)
+cy = 0.5 + 0.38 * cos((t * 1.2 + ph) * 6.2831853)
+cz = 0.5 + 0.38 * sin((t * 0.85 + ph * 1.7) * 6.2831853)
 ddx = nx - cx
 ddy = ny - cy
 ddz = nz - cz
@@ -44,4 +45,4 @@ if best > rad
 off
 end
 intensity = intensity * (1 - best / rad)
-paint(progress)
+paint(t - floor(t))

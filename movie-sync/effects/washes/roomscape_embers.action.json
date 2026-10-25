@@ -1,0 +1,73 @@
+// Movie Sync — rising embers / floating dust ambient
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "roomscape_embers",
+  "name": "Roomscape - Embers",
+  "duration_ms": 10000,
+  "loop": "while_active",
+  "priority": 18,
+  "tracks": [
+    {
+      "name": "Underwash",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_strata",
+          "effect": "field_strata",
+          "start_ms": 0,
+          "end_ms": 10000,
+          "intensity": 0.45,
+          "min_intensity": 0.15,
+          "max_intensity": 1.0,
+          "color": "#201008",
+          "color_from": "#100808",
+          "color_to": "#402010",
+          "gradient": [
+            { "pos": 0.0, "color": "#100808" },
+            { "pos": 1.0, "color": "#402010" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.35,
+          "pulse_length": 0.6,
+          "period_ms": 1000,
+          "effect_size": 1.3,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Embers",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "particle_embers",
+          "effect": "particle_embers",
+          "start_ms": 0,
+          "end_ms": 10000,
+          "intensity": 1.0,
+          "min_intensity": 0.2,
+          "max_intensity": 1.0,
+          "color": "#FF8C28",
+          "color_from": "#401000",
+          "color_to": "#FFE0A0",
+          "gradient": [
+            { "pos": 0.0, "color": "#401000" },
+            { "pos": 0.5, "color": "#FF8C28" },
+            { "pos": 1.0, "color": "#FFE0A0" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.7,
+          "pulse_length": 0.7,
+          "period_ms": 1000,
+          "effect_size": 1.35,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}
