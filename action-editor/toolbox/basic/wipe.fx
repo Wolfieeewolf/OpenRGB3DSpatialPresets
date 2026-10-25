@@ -15,6 +15,7 @@ space: axis
 knobs: speed direction
 
 # Effect
+# progress = sweep (span × speed, no wrap) so once + speed > 1 finishes early, no restart flash
 edge = 0.08
 front = progress * (1 + 2 * edge) - edge
 d = front - axis

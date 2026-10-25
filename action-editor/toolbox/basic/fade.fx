@@ -14,5 +14,5 @@ knobs: color_to
 color: ends
 
 # Effect
-# Span progress = start→end of the clip (role). Do not key off period.
+# Sweep progress = start→end of the clip (speed may finish early). Do not key off period.
 paint(progress)

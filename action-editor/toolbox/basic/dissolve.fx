@@ -20,6 +20,7 @@ knobs: speed
 
 # Effect
 threshold = hash_phase(xor(seed, 1597463007), 0, 1)
+# progress = sweep (no mid-clip wrap when speed > 1)
 if progress + 0.001 < threshold
 off
 end
