@@ -1,6 +1,6 @@
 # Name
 name: GIF
-description: Animated GIF over the block length. Optional scroll
+description: Play an animated GIF across the lights; optional scroll
 section: media
 
 # Look

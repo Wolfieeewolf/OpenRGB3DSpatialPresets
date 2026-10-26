@@ -1,5 +1,5 @@
 name: Sparse spark
-description: Sparse sparkle field in room volume
+description: Sparse sparkles flickering through the room
 duration_ms: 1600
 loop: once
 section: pixel

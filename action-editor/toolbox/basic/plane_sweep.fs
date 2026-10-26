@@ -1,5 +1,5 @@
 name: Plane sweep
-description: Room-plane wipe through Spatial Anchor volume
+description: A bright plane wiping through the room
 duration_ms: 1200
 loop: once
 section: basic

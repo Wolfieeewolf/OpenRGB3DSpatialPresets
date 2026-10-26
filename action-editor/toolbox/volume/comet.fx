@@ -1,12 +1,14 @@
 # Name
 name: Comet
-description: A head with a short trail
+description: Bright head with a short trail along the row
 section: volume
 
 # Look
 swatch: 180 220 255
 icon: gradh 0.08 0.4 0.7 0.2 none hot
 icon: round 0.08 0.4 0.7 0.2 0.1
+icon: brush hot
+icon: ellipse 0.72 0.36 0.2 0.26
 
 # Playback
 space: axis

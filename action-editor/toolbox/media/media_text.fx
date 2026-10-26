@@ -1,6 +1,6 @@
 # Name
 name: Text / Marquee
-description: Scroll or hold text across track LEDs
+description: Scroll or hold text across the lights
 section: media
 
 # Look

@@ -5,8 +5,9 @@ section: volume
 
 # Look
 swatch: 255 120 200
-icon: brush dim
+icon: pen dim 0.06
 icon: ellipse 0.1 0.1 0.8 0.8
+icon: pen none 0
 icon: brush hot
 icon: ellipse 0.3 0.3 0.4 0.4
 

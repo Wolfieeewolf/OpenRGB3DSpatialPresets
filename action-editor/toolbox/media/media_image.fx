@@ -1,6 +1,6 @@
 # Name
 name: Image
-description: Still image mapped onto Device UV. Optional scroll
+description: Map a still image onto the lights; optional scroll
 section: media
 
 # Look

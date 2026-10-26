@@ -1,14 +1,15 @@
 # Name
 name: Plane sweep
-description: GPU plane wipe through the room volume
+description: A bright plane wiping through the room
 section: basic
 
 # Look
 swatch: 80 180 255
-icon: brush dim
-icon: rect 0.08 0.2 0.84 0.6
-icon: brush hot
+icon: pen hot 0.05
 icon: rect 0.42 0.12 0.12 0.76
+icon: pen none 0
+icon: brush ink
+icon: ellipse 0.5 0.5 0.55 0.55
 
 # Playback
 space: world

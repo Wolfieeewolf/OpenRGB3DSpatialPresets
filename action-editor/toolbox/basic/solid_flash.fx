@@ -1,12 +1,15 @@
 # Name
 name: Solid flash
-description: GPU full-volume flash sampled onto room LEDs
+description: Room-filling flash that pops then dies
 section: basic
 
 # Look
 swatch: 255 255 255
-icon: brush hot
-icon: round 0.1 0.1 0.8 0.8 0.12
+icon: pen hot 0.05
+icon: ellipse 0.5 0.5 0.55 0.55
+icon: pen none 0
+icon: brush ink
+icon: ellipse 0.5 0.5 0.35 0.35
 
 # Playback
 space: world

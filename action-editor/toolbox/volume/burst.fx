@@ -1,6 +1,6 @@
 # Name
 name: Burst
-description: A shell expands outward
+description: A shell expands outward from the centre
 section: volume
 
 # Look

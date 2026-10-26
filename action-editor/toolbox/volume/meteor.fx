@@ -1,6 +1,6 @@
 # Name
 name: Meteor
-description: A bright head with a fading trail
+description: Bright head with a fading trail through the room
 section: volume
 
 # Look

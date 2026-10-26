@@ -1,5 +1,5 @@
 # Name
-name: Sphere Wipe
+name: Sphere wipe
 description: A sphere grows from the centre
 section: volume
 alias: sphere_wipe
