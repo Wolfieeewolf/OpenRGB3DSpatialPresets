@@ -4,6 +4,8 @@
 
 Place `Movie.movie_sync.json` next to the video. Each cue’s `effect_id` must exist in the Movie Sync catalog (`movie-sync/catalog.json`).
 
+**Author while watching (VLC):** install `movie-sync/vlc/openrgb_movie_sync_author.lua` as a VLC extension, keep OpenRGB Movie Sync Script API on, mark start/end on the playhead, pick a catalog look, and save. See [vlc/README.md](../vlc/README.md). Hand-editing JSON is still fine.
+
 ## Looks
 
 1. Author in **Action Editor** → **Save for → Movie Sync** → pick a category
