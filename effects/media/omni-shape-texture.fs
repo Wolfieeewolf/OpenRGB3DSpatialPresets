@@ -203,7 +203,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float mb = shapeMetric(l, shape_b);
     float metric = mix(ma, mb, morph);
 
-    /* Crisp shell mask â€” expands with Size as a hard shape, not a sphere blob. */
+    /* Crisp shell mask -- expands with Size as a hard shape, not a sphere blob. */
     float band = 0.018 + 0.008 * (1.0 - clamp(detail * 0.08, 0.0, 1.0));
     float mask = 1.0 - smstep(R - band * 0.1, R + band * 0.7, metric);
     if(metric > R + band)

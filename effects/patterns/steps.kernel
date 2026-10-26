@@ -4,6 +4,6 @@ index: 10
 
 # Kernel
 float u = fractf(s01 * r + ph + 400.0);
-float step = floor(u * 8.0);
-step = clamp(step, 0.0, 7.0);
-k = (step / 7.0) * 2.0 - 1.0;
+float s = floor(u * 8.0);
+s = clamp(s, 0.0, 7.0);
+k = (s / 7.0) * 2.0 - 1.0;

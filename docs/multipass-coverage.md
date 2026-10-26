@@ -34,6 +34,10 @@
 
 | Path | Status | Date | Notes |
 |------|--------|------|-------|
-| `effects/**` | pending | | FolderVolume / library looks |
+| `effects/audio/**` | fixed | 2026-10-27 | 6 keep · 1 fixed: "Phrase" → "Phase" typo in audio-paint-brush.fs |
+| `effects/media/**` | fixed | 2026-10-27 | 1 keep · 1 fixed: mojibake em-dash in omni-shape-texture.fs comment |
+| `effects/patterns/**` | fixed | 2026-10-27 | 45 keep · 1 fixed: `step` var shadowing GLSL built-in in steps.kernel |
+| `effects/shader-field/**` | keep | 2026-10-27 | 41 files clean; stub/full header split documented in README |
+| `effects/volume/**` | fixed | 2026-10-27 | 19 keep · 2 fixed: mojibake em-dashes in shell-pattern.fs (×2) and surface-ambient.fs (×9) |
 | `controllers/**` | pending | | |
 | VLC / movie-sync helpers | pending | | |

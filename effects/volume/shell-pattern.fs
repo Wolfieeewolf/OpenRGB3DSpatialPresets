@@ -57,7 +57,7 @@ float evalStripKernelSigned(int kid, float s01, float phase01, float repeats, fl
     float TWO_PI = 6.2831853;
     float k = sin(TWO_PI * u_phase);
 
-    /* 8 visible families from kid â€” keep this short so GLSL 1.10 compilers succeed. */
+    /* 8 visible families from kid -- keep this short so GLSL 1.10 compilers succeed. */
     float fam = floor(mod(float(kid) + 0.01, 8.0));
     if(fam < 0.5)
         k = sin(TWO_PI * u_phase);
@@ -138,7 +138,7 @@ float stripUnfoldCoord01(float lx, float ly, float lz, int unfold_mode, float di
     else if(unfold_mode == 6)
         s = clamp((abs(lx) + abs(ly) + abs(lz)) / 3.0, 0.0, 1.0);
     else
-        /* 7 EffectPhaseOnly needs phase/time â€” use stripUnfoldKernelInputs. */
+        /* 7 EffectPhaseOnly needs phase/time -- use stripUnfoldKernelInputs. */
         s = 0.5;
 
     return clamp(s, 0.0, 1.0);

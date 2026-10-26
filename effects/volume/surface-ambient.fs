@@ -66,7 +66,7 @@ float saFbm(vec2 p)
     }
     return v;
 }
-/* iq-style ridge â€” cracks / crust. */
+/* iq-style ridge -- cracks / crust. */
 float saRidge(vec2 p)
 {
     float v = 0.0;
@@ -98,7 +98,7 @@ float saCellular(vec2 p)
     }
     return sqrt(max(md, 0.0));
 }
-/* Domain warp â€” organic flow instead of flat noise wash. */
+/* Domain warp -- organic flow instead of flat noise wash. */
 vec2 saWarp(vec2 p, float t, float amt)
 {
     float n1 = saFbm(p * 1.35 + vec2(t * 0.21, -t * 0.17));
@@ -133,7 +133,7 @@ vec3 saEvalPreset(int style, int role, float alongA, float alongB, float up01,
 
     if(style == 0)
     {
-        /* Fire â€” domain-warped rising tongues + sparse white-hot cores. */
+        /* Fire -- domain-warped rising tongues + sparse white-hot cores. */
         if(role == 0)
         {
             vec2 q = saWarp(vec2(alongA, alongB) * (2.4 * f), t * 0.6, 0.28);
@@ -177,7 +177,7 @@ vec3 saEvalPreset(int style, int role, float alongA, float alongB, float up01,
     }
     else if(style == 1)
     {
-        /* Water â€” caustics, specular glints, pouring sheets. */
+        /* Water -- caustics, specular glints, pouring sheets. */
         if(role == 0)
         {
             vec2 p = vec2(alongA, alongB);
@@ -212,7 +212,7 @@ vec3 saEvalPreset(int style, int role, float alongA, float alongB, float up01,
     }
     else if(style == 2)
     {
-        /* Slime â€” cellular blobs, viscous drip, glossy highlights. */
+        /* Slime -- cellular blobs, viscous drip, glossy highlights. */
         if(role == 0)
         {
             vec2 q = saWarp(vec2(alongA, alongB) * (2.0 * f), t * 0.35, 0.20);
@@ -251,7 +251,7 @@ vec3 saEvalPreset(int style, int role, float alongA, float alongB, float up01,
     }
     else if(style == 3)
     {
-        /* Lava â€” crust ridges, glowing veins, heavy flow. */
+        /* Lava -- crust ridges, glowing veins, heavy flow. */
         if(role == 0)
         {
             vec2 q = saWarp(vec2(alongA, alongB) * (1.5 * f), t * 0.45, 0.16);
@@ -286,7 +286,7 @@ vec3 saEvalPreset(int style, int role, float alongA, float alongB, float up01,
     }
     else if(style == 4)
     {
-        /* Embers â€” sparse point-cloud sparks over a coal bed. */
+        /* Embers -- sparse point-cloud sparks over a coal bed. */
         if(role == 0)
         {
             vec2 q = saWarp(vec2(alongA, alongB) * (2.1 * f), t * 0.4, 0.14);
@@ -329,7 +329,7 @@ vec3 saEvalPreset(int style, int role, float alongA, float alongB, float up01,
     }
     else if(style == 5)
     {
-        /* Ocean â€” layered caustics + slow swell. */
+        /* Ocean -- layered caustics + slow swell. */
         float current = alongA + alongB * 0.35;
         if(role == 0)
         {
@@ -361,7 +361,7 @@ vec3 saEvalPreset(int style, int role, float alongA, float alongB, float up01,
     }
     else
     {
-        /* Steam â€” soft volumetric blobs + wispy rising edges. */
+        /* Steam -- soft volumetric blobs + wispy rising edges. */
         if(role == 0)
         {
             float edge = max(abs(alongA - 0.5), abs(alongB - 0.5)) * 2.0;

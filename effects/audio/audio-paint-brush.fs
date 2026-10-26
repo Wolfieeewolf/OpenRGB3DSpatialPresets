@@ -8,7 +8,7 @@ global: audio speed brightness frequency detail size scale color bands thickness
 resolution: 20
 user_colors: 1
 rainbow: true
-slider: chaos 0 150 45 unit pct | Phrase chaos: | Phase offset spread between ribbons.
+slider: chaos 0 150 45 unit pct | Phase chaos: | Phase offset spread between ribbons.
 slider: ribbon_count 1 4 3 | Ribbons: | How many Lissajous brushes to draw.
 param: audio_bass
 param: audio_mid_val
