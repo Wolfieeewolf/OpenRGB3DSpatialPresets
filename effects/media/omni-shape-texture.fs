@@ -3,6 +3,7 @@ name: Omni shape texture
 class: OmniShapeTexture
 category: Media
 description: Image or GIF mapped onto a crisp 3D shape envelope at the effect origin. Morph blends to the next shape. Spin rotates the mapping; Scroll / Warp / Phase drive UV motion. For GIFs, Speed is frames per second (0 = frozen).
+media_layout: omni
 global: media speed brightness frequency size scale bands
 resolution: 28
 needs_frequency: true

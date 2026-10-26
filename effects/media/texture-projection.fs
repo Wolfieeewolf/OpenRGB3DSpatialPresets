@@ -3,6 +3,7 @@ name: Texture projection
 class: TextureProjection
 category: Media
 description: Map an image or GIF onto your 3D layout (planar or spherical). Scroll pans the texture; Warp distorts UVs; Phase steers scroll and warp. For GIFs, Speed is frames per second (0 = frozen). Size zooms; Scale adds repeats.
+media_layout: projection
 global: media speed brightness frequency size scale bands
 resolution: 18
 needs_frequency: true
