@@ -22,4 +22,4 @@ duty = clamp(pulse, 0.05, 0.95)
 if phase > duty
 off
 end
-paint(progress)
+paint_stop(0)

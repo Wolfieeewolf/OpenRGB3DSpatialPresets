@@ -31,7 +31,7 @@
           "direction": "right",
           "axis_space": "room",
           "axis_mode": "preset",
-          "speed": 0.85,
+          "speed": 0.9,
           "pulse_length": 0.7,
           "period_ms": 1000,
           "effect_size": 1.25,

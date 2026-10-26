@@ -22,7 +22,7 @@ period = max(60, floor(max(60, period_ms) / spd + 0.5))
 local = max(0, time_ms)
 epoch = floor(local / period)
 roll = hash_byte(xor(seed, 12648430), epoch * period, period, 0)
-density = 0.25 + 0.5 * clamp(intensity, 0, 1)
+density = clamp(min_intensity, 0.05, 0.95)
 if roll > density
 off
 end

@@ -12,7 +12,7 @@ icon: rect 0.52 0.18 0.40 0.64
 
 # Playback
 space: axis
-knobs: speed period direction
+knobs: speed period
 
 # Effect
 spd = max(0.05, speed)
