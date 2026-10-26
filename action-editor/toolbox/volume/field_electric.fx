@@ -1,6 +1,6 @@
 # Name
 name: Field electric
-description: GPU lightning forks through the room (Action volume-field)
+description: Crackling lightning forks jumping through the room
 section: volume
 
 # Look

@@ -1,6 +1,6 @@
 # Name
 name: Field room glow
-description: GPU full-room Atmos wash — fills every LED (Action volume-field)
+description: Full-room wash — every LED stays lit with slow colour drift
 section: volume
 
 # Look

@@ -1,6 +1,6 @@
 # Name
 name: Neon ribbon
-description: GPU neon tube sampled onto room LEDs (Action ribbon-field engine)
+description: Neon tube arcing through the room
 section: volume
 
 # Look
@@ -11,12 +11,12 @@ icon: pen none 0
 icon: brush ink
 icon: ellipse 0.5 0.5 0.55 0.28
 
-# Playback — ribbons: soft neon tube in room space (true volumeMain)
+# Playback
 space: world
 ribbons: arc
 knobs: speed pulse
 
-# Effect — ribbon_* samples the GPU tube at this LED
+# Effect
 v = ribbon_paint()
 if v <= 0.001
 off

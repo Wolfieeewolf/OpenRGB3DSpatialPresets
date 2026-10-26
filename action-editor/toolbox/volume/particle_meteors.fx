@@ -1,6 +1,6 @@
 # Name
 name: Particle meteors
-description: GPU meteor streaks diving through the room (Action particle-field)
+description: Meteor streaks diving through the room
 section: volume
 
 # Look

@@ -1,5 +1,5 @@
 name: Radial burst
-description: Expanding shell from Spatial Anchor (p01 0.5)
+description: Expanding shell from the room centre
 duration_ms: 1400
 loop: once
 section: volume

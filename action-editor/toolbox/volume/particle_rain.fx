@@ -1,6 +1,6 @@
 # Name
 name: Particle rain
-description: GPU rain streaks sampled onto room LEDs (Action particle-field engine)
+description: Rain streaks with wind shear through the room
 section: volume
 
 # Look

@@ -1,6 +1,6 @@
 # Name
 name: Laser sweep
-description: GPU beam sweeping across the room (Action ribbon-field engine)
+description: Bright beam sweeping across the room
 section: volume
 
 # Look
@@ -11,7 +11,7 @@ icon: pen none 0
 icon: brush ink
 icon: ellipse 0.5 0.5 0.6 0.22
 
-# Playback — ribbons: sweep is a moving plane/beam through room space
+# Playback
 space: world
 ribbons: sweep
 knobs: speed pulse

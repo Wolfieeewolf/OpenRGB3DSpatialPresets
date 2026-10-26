@@ -1,5 +1,5 @@
 name: Portal vortex
-description: Spinning energy portal disc with pull toward centre
+description: Spinning energy portal with pull toward the centre
 duration_ms: 6000
 loop: while_active
 section: volume

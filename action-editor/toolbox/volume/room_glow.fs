@@ -1,5 +1,5 @@
 name: Room glow
-description: Full-room Atmos wash — every LED stays lit with slow colour drift
+description: Full-room wash — every LED stays lit with slow colour drift
 duration_ms: 10000
 loop: while_active
 section: volume

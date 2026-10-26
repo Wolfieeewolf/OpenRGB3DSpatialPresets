@@ -1,6 +1,6 @@
 # Name
 name: Field ripple
-description: GPU volume ripple sampled onto room LEDs (Action volume-field engine)
+description: Thick radial ripple that floods the room then fades
 section: volume
 
 # Look
@@ -11,12 +11,12 @@ icon: pen none 0
 icon: brush ink
 icon: ellipse 0.5 0.5 0.28 0.28
 
-# Playback — shader body: sibling ripple_ring.fs (or effects/volume/)
+# Playback
 space: world
 shader: ripple_ring
 knobs: speed pulse
 
-# Effect — field_* samples the prepared GPU atlas at this LED
+# Effect
 v = field_paint()
 if v <= 0.001
 off

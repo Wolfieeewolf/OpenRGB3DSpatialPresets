@@ -1,6 +1,6 @@
 # Name
 name: Spark burst
-description: GPU particle burst sampled onto room LEDs (Action particle-field engine)
+description: Explosive spark cloud from the room centre
 section: volume
 
 # Look
@@ -12,12 +12,12 @@ icon: brush ink
 icon: ellipse 0.5 0.5 0.42 0.42
 icon: ellipse 0.5 0.5 0.62 0.62
 
-# Playback — particles: burst density cloud in room space (true volumeMain)
+# Playback
 space: world
 particles: burst
 knobs: speed pulse
 
-# Effect — particle_* samples the GPU field at this LED
+# Effect
 v = particle_paint()
 if v <= 0.001
 off

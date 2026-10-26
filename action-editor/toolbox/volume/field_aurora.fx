@@ -1,6 +1,6 @@
 # Name
 name: Field aurora
-description: GPU aurora curtains through the room (Action volume-field)
+description: Vertical aurora ribbons drifting through the room
 section: volume
 
 # Look

@@ -1,10 +1,10 @@
 # Name
 name: Field burst
-description: GPU radial burst sampled onto room LEDs (Action volume-field engine)
+description: Expanding shell from the room centre
 section: volume
 
 # Look
-swatch: 255 90 40
+swatch: 255 80 20
 icon: pen hot 0.05
 icon: ellipse 0.5 0.5 0.2 0.2
 icon: ellipse 0.5 0.5 0.45 0.45

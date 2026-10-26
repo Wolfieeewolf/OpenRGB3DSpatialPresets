@@ -1,6 +1,6 @@
 # Name
 name: Field strata
-description: GPU height-banded wash sampled onto room LEDs (Action volume-field engine)
+description: Cool height-banded wash across floor, mid, and sky
 section: volume
 
 # Look

@@ -1,6 +1,6 @@
 # Name
 name: Particle fireflies
-description: GPU firefly points sampled onto room LEDs (Action particle-field engine)
+description: Soft firefly points drifting and blinking
 section: volume
 
 # Look

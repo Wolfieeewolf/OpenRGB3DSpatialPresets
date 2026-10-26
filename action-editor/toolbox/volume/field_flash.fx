@@ -1,6 +1,6 @@
 # Name
 name: Field flash
-description: GPU full-room title flash (Action volume-field engine)
+description: Room-filling white blast that pops then dies
 section: volume
 
 # Look

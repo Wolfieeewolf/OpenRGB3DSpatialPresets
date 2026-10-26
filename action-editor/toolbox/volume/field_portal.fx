@@ -1,6 +1,6 @@
 # Name
 name: Field portal
-description: GPU spinning portal vortex (Action volume-field)
+description: Spinning energy portal with pull toward the centre
 section: volume
 
 # Look

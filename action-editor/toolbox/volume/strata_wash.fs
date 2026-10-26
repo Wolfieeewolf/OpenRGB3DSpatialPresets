@@ -1,5 +1,5 @@
 name: Strata wash
-description: Bright cool room wash with strong floor / mid / sky bands
+description: Cool height-banded wash across floor, mid, and sky
 duration_ms: 10000
 loop: while_active
 section: volume

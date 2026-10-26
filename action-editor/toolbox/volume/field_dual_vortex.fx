@@ -1,6 +1,6 @@
 # Name
 name: Field dual vortex
-description: GPU twin counter-rotating swirls (Action volume-field)
+description: Twin counter-rotating swirls filling the room
 section: volume
 
 # Look

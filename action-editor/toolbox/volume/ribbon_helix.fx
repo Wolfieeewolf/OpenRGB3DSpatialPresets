@@ -1,6 +1,6 @@
 # Name
 name: Ribbon helix
-description: GPU neon helix tube sampled onto room LEDs (Action ribbon-field engine)
+description: Neon helix tube spinning through the room
 section: volume
 
 # Look

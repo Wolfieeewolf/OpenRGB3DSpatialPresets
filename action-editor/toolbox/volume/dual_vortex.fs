@@ -1,5 +1,5 @@
 name: Dual vortex
-description: Twin counter-rotating swirls filling the room with colour
+description: Twin counter-rotating swirls filling the room
 duration_ms: 8000
 loop: while_active
 section: volume
