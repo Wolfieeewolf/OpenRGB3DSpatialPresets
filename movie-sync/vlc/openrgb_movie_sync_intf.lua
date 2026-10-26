@@ -149,7 +149,7 @@ local function ensure_media()
   if media and try_arm_sidecar(media) then
     return
   end
-  vlc.msg.info("[OpenRGB Movie Sync] no .movie_sync.json / .movie_sync.json sidecar next to this video")
+  vlc.msg.info("[OpenRGB Movie Sync] no .movie_sync.json sidecar next to this video")
 end
 
 local function check_duration()

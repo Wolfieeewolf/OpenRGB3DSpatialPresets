@@ -8,7 +8,7 @@ function descriptor()
     author = "OpenRGB3DSpatial",
     url = "https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin",
     shortdesc = "Fire shared movie-effect catalog cues into OpenRGB",
-    description = "Loads a .movie_cues.json script and POSTs effect_id cues to the OpenRGB Movie Scripts API.",
+    description = "Loads a .movie_sync.json (or legacy .movie_cues.json) script and POSTs effect_id cues to the OpenRGB Movie Scripts API.",
     capabilities = {"menu", "input-listener"}
   }
 end
@@ -103,7 +103,7 @@ function meta_changed()
 end
 
 local function load_script_dialog()
-  local path = vlc.dialog().file_picker(false, "Movie cue script", "JSON files (*.movie_cues.json;*.json)|*.movie_cues.json;*.json|All (*.*)|*.*")
+  local path = vlc.dialog().file_picker(false, "Movie cue script", "JSON files (*.movie_sync.json;*.movie_cues.json;*.json)|*.movie_sync.json;*.movie_cues.json;*.json|All (*.*)|*.*")
   if not path or path == "" then return end
   script_path = path
   local list, dur, tol, feat, sch, std, region = parse_json_file(path)

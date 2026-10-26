@@ -10,4 +10,4 @@ Stock looks are layout-agnostic (`target: all`). Volume shaders expand from the 
 | strata | Height bands (horizon / floor / ceiling) |
 | utility | Flat wash / blackout / strobe OK |
 
-Authoring: [movie-cue-authoring.md](movie-cue-authoring.md).
+Authoring: [movie-sync-authoring.md](movie-sync-authoring.md).
