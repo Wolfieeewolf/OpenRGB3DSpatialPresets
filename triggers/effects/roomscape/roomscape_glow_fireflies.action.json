@@ -1,9 +1,9 @@
-// Roomscape — bright wash + dense fireflies
+// Roomscape — bright room glow + dense fireflies
 {
   "format": "openrgb3d.action",
   "version": 5,
-  "id": "roomscape_strata_fireflies",
-  "name": "Roomscape - Strata + fireflies",
+  "id": "roomscape_glow_fireflies",
+  "name": "Roomscape - Glow + fireflies",
   "duration_ms": 8000,
   "loop": "forever",
   "priority": 20,
