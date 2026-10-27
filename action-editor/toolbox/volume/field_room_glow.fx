@@ -1,6 +1,6 @@
 # Name
 name: Field room glow
-description: Full-room wash — every LED stays lit with slow colour drift
+description: Full-room wash - every LED stays lit with slow colour drift
 section: volume
 
 # Look

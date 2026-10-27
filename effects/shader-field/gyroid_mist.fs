@@ -1,5 +1,5 @@
 # Name
-name: Gyroid Mist — soft SDF wash
+name: Gyroid Mist - soft SDF wash
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

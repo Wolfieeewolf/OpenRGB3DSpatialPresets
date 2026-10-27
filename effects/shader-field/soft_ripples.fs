@@ -1,5 +1,5 @@
 # Name
-name: Soft Ripples — expanding rings
+name: Soft Ripples - expanding rings
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

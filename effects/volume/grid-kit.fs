@@ -151,7 +151,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 1)
     {
-        /* Wireframe Box — room-filling edges + faint faces so the cube reads. */
+        /* Wireframe Box - room-filling edges + faint faces so the cube reads. */
         float box_s = 0.96 * clamp(size_m, 0.55, 1.55);
         vec3 b = vec3(box_s);
         float ew = half_w * 2.1;
@@ -194,7 +194,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 3)
     {
-        /* Rubik Cube — 3×3 stickers, classic face colors, scramble↔solve forever. */
+        /* Rubik Cube - 3×3 stickers, classic face colors, scramble↔solve forever. */
         float box_s = 0.94 * clamp(size_m, 0.55, 1.45);
         vec3 b = vec3(box_s);
         float cell = max(box_s * 2.0 / 3.0, 0.12);
@@ -262,7 +262,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 4)
     {
-        /* Sphere Roam — solid soft ball + trail (not a hollow shell). */
+        /* Sphere Roam - solid soft ball + trail (not a hollow shell). */
         float a = progress * 6.2831853;
         float span = 0.78 * clamp(size_m, 0.55, 1.65);
         vec3 c = vec3(
@@ -288,7 +288,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 5)
     {
-        /* Axis Send — elongated sparks traveling the full axis span. */
+        /* Axis Send - elongated sparks traveling the full axis span. */
         float best = 0.0;
         float best_h = 0.0;
         float n_vis = mix(6.0, 12.0, density);
@@ -335,7 +335,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
-        /* Lightning — longer visible bolts. */
+        /* Lightning - longer visible bolts. */
         float best = 0.0;
         float best_h = 0.0;
         float bolts = mix(2.0, 3.0, density);

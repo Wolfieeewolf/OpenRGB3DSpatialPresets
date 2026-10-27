@@ -1,7 +1,7 @@
 // =============================================================================
 // Movie Sync look template  (openrgb3d.action v5)
 // Copy into a category folder, e.g. washes/my_look.action.json
-// then register id in catalog.json (or Reload — ScanCategoryFolders also picks up new files).
+// then register id in catalog.json (or Reload - ScanCategoryFolders also picks up new files).
 // Prefer Action Editor volume tools for room depth:
 //   field_ripple / field_strata / field_burst / spark_burst /
 //   particle_rain / particle_fireflies / neon_ribbon / ribbon_helix

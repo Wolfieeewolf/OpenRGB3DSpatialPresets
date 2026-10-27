@@ -64,7 +64,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     float energy_gate = clamp(drive * 0.55 + mid01 * 0.25 + high01 * 0.35 + low01 * 0.12, 0.0, 1.0);
 
-    /* Tighter gate (0.10–0.16) — ambient hiss keeps the cloud fully dark. */
+    /* Tighter gate (0.10-0.16) - ambient hiss keeps the cloud fully dark. */
     float gate_mask = clamp((energy_gate - 0.10) / 0.06, 0.0, 1.0);
     gate_mask = gate_mask * gate_mask * (3.0 - 2.0 * gate_mask);
     energy_gate *= gate_mask;
@@ -79,7 +79,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float radial   = length(c);
     float radial_n = clamp(radial / 0.8660254, 0.0, 1.0);
 
-    /* Soft hull — breathes with bass + note energy. */
+    /* Soft hull - breathes with bass + note energy. */
     float breathe = 1.0 + 0.28 * low01 + 0.18 * drive;
     float hull_r  = hull_size * breathe * (0.72 + 0.48 * size_m);
     float shell_w = (0.035 + 0.055 / falloff) * size_m / tight;
@@ -150,7 +150,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float particle_layer = best_p * (0.55 + 0.45 * high01 + 0.25 * mid01);
     float intensity = clamp(hull_layer * 0.55 + particle_layer * 1.35, 0.0, 1.0);
     intensity *= energy_gate;
-    /* Quiet dark — suppress near-silent sparkle. Uses tighter range than before (0.10–0.16). */
+    /* Quiet dark - suppress near-silent sparkle. Uses tighter range than before (0.10-0.16). */
     intensity *= sparkSmoothstep(0.10, 0.16, energy_gate);
 
     float hue01 = 0.55;
@@ -160,6 +160,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         hue01 = clamp(u_params[12], 0.0, 1.0);
 
     float gradient = clamp(0.55 * (1.0 - radial_n) + 0.45 * intensity, 0.0, 1.0);
-    /* Output: (intensity, note_hue01, gradient) — host reads .y/.z for note sparkle coloring. */
+    /* Output: (intensity, note_hue01, gradient) - host reads .y/.z for note sparkle coloring. */
     out_color = vec4(intensity, hue01, gradient, 1.0);
 }

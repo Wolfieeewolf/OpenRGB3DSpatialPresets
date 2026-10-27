@@ -1,5 +1,5 @@
 # Name
-name: Room Plasma — colorful swirl
+name: Room Plasma - colorful swirl
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

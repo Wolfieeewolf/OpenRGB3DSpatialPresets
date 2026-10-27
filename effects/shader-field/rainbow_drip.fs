@@ -1,5 +1,5 @@
 # Name
-name: Rainbow Drip — falling color streaks
+name: Rainbow Drip - falling color streaks
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

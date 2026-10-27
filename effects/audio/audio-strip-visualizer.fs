@@ -35,7 +35,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float scroll_off = fract(u_params[5]);
     float speed_mul  = max(u_params[6], 0.15);
 
-    /* Frequency / column count baked in — changing these requires a host rebuild. */
+    /* Frequency / column count baked in - changing these requires a host rebuild. */
     const float col_count = 64.0;
     const float row_count = 72.0;
 
@@ -57,7 +57,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float u = (floor(path01 * (col_count - 1.0) + 0.5) + 0.5) / col_count;
         float v = (floor(age01 * (row_count - 1.0) + 0.5) + 0.5) / row_count;
         float band = texture(u_media, vec2(u, v)).r;
-        /* Contrast gate: min ~0.08 before lighting — no wash on ambient noise. */
+        /* Contrast gate: min ~0.08 before lighting - no wash on ambient noise. */
         float gate_t = clamp((band - 0.08) / 0.10, 0.0, 1.0);
         gate_t = gate_t * gate_t * (3.0 - 2.0 * gate_t);
         energy = band * gate_t;
@@ -66,7 +66,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     {
         float u = (floor(path01 * (col_count - 1.0) + 0.5) + 0.5) / col_count;
         float level = texture(u_media, vec2(u, 0.5)).r;
-        /* Softstep gate before bar mask — quiet columns stay dark. */
+        /* Softstep gate before bar mask - quiet columns stay dark. */
         float gate_t = clamp((level - 0.06) / 0.10, 0.0, 1.0);
         gate_t = gate_t * gate_t * (3.0 - 2.0 * gate_t);
         level = level * gate_t;

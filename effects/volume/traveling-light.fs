@@ -109,7 +109,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     if(mode == 4)
     {
-        // KITT — soft scanner
+        // KITT - soft scanner
         float axis_val = axisComp(p01, ax);
         float p_step = (progress < 0.5) ? (2.0 * progress) : (2.0 * (1.0 - progress));
         float beam = p_step;
@@ -121,7 +121,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 5)
     {
-        // Wipe — triangular ping-pong with soft plane
+        // Wipe - triangular ping-pong with soft plane
         float prog2 = fract(progress * 0.5) * 2.0;
         if(prog2 > 1.0) prog2 = 2.0 - prog2;
         float edge_distance = abs(p01.x - prog2);
@@ -156,7 +156,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 7)
     {
-        // Crossing Beams — smooth glow falloff
+        // Crossing Beams - smooth glow falloff
         float sine_x = sin(progress * 3.14159265);
         float sine_y = sin(progress * 3.14159265 * 1.3);
         float xp = 0.5 + sine_x * 0.5;
@@ -171,7 +171,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 8)
     {
-        // Rotating Beam — soft wedge
+        // Rotating Beam - soft wedge
         float beam_angle = progress * 6.2831853;
         float point_angle = (plane == 0) ? atan(l.z, l.x) : ((plane == 1) ? atan(l.x, l.y) : atan(l.z, l.y));
         float diff = mod(point_angle - beam_angle + 3.14159265, 6.2831853);
@@ -186,7 +186,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 9)
     {
-        // Wave Fronts — traveling soft band / expanding ring (not a room-wide sin flash)
+        // Wave Fronts - traveling soft band / expanding ring (not a room-wide sin flash)
         float pos01 = 0.0;
         if(front_shape == 0)
         {
@@ -236,7 +236,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
 
         intensity = frontEdgeProfile(d, front_thick, front_edge);
-        // Mild depth cue — keep walls readable
+        // Mild depth cue - keep walls readable
         float radial = length(l) * 0.5;
         float depth = 0.72 + 0.28 * (1.0 - min(1.0, radial / 1.7320508) * 0.55);
         intensity *= depth;
@@ -283,7 +283,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
         else if(mode == 3)
         {
-            // ZigZag — soft snake along folded path
+            // ZigZag - soft snake along folded path
             float prim = axisComp(p01, ax);
             float sec = (ax == 0) ? p01.y : ((ax == 1) ? p01.z : p01.x);
             float n_cols = 16.0;
@@ -307,7 +307,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
         else
         {
-            // Comet — soft head + quadratic tail
+            // Comet - soft head + quadratic tail
             float head = progress;
             float dist = head - axis_val;
             if(dist >= -tail_len * 0.18 && dist <= tail_len)

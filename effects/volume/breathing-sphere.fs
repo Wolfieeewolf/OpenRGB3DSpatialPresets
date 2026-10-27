@@ -12,7 +12,7 @@ option: Square | Axis-aligned cube silhouette.
 option: Rectangle | Rectangular box matching room width vs depth.
 option: Triangle | Triangular prism (flat sides).
 option: Pentagon | Pentagonal prism (flat sides).
-option: Whole room (inhale wave) | No shell — inhale/exhale color wave from the effect origin.
+option: Whole room (inhale wave) | No shell - inhale/exhale color wave from the effect origin.
 combo: edge_profile 1 | Edge:
 option: Soft | Gentle boundary falloff.
 option: Crisp | Hard silhouette. Breath pulse keeps the chosen shape.

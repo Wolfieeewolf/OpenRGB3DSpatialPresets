@@ -1,4 +1,4 @@
-// Movie Sync — full-room Atmos glow (every LED stays lit)
+// Movie Sync - full-room Atmos glow (every LED stays lit)
 {
   "format": "openrgb3d.action",
   "version": 5,

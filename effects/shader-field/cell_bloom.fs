@@ -1,5 +1,5 @@
 # Name
-name: Cell Bloom — organic cells
+name: Cell Bloom - organic cells
 
 # Effect
 float cbHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}

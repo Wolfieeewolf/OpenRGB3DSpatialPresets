@@ -150,7 +150,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     if(mode == 4)
     {
-        /* Blackhole — room-scaled accretion disk + event horizon + photon ring. */
+        /* Blackhole - room-scaled accretion disk + event horizon + photon ring. */
         float r_xy = max(radial, 1e-4);
         float horizon = 0.16 * (0.85 + 0.55 * size_m);
         float disk_outer = span * 1.02;
@@ -171,14 +171,14 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
         intensity = disk * (0.25 + 0.50 * spiral + 0.25 * arms) + photon * 1.55 + lens + jet;
         intensity *= 1.0 - in_horizon;
-        /* Gentle room edge falloff — keep disk readable to the walls. */
+        /* Gentle room edge falloff - keep disk readable to the walls. */
         intensity *= 1.0 - smoothstep(1.15, 1.55, length(vec2(led_vx, led_vy)) / max(fov * 0.5, 1.0));
         palette01 = fract(1.0 - r_xy / max(disk_outer, 0.1) + hue_scroll);
         hotness = saturate(1.0 - (r_xy - horizon) / max(disk_outer * 0.55, 0.2)) * 0.60 + photon * 0.45;
     }
     else if(mode == 5)
     {
-        /* Wormhole — large tunnel through the room with rings + helix. */
+        /* Wormhole - large tunnel through the room with rings + helix. */
         float depth = saturate(led_vz * 0.5 + 0.5);
         float tunnel_r = 0.58 * (0.75 + 0.55 * size_m);
         float wall_w = max(0.045, thickness * 0.62 * size_m);
@@ -201,7 +201,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 6)
     {
-        /* Point Tunnel — Second Reality style ring dots, room-scaled. */
+        /* Point Tunnel - Second Reality style ring dots, room-scaled. */
         float TAU = 6.2831853;
         float cam_z = progress * 2.6;
         float n_pts = max(float(count), 12.0);
@@ -257,7 +257,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 7)
     {
-        /* Fibonacci Sphere — room-filling rotating shell of points. */
+        /* Fibonacci Sphere - room-filling rotating shell of points. */
         float golden = 2.39996323;
         float n = max(float(count), 12.0);
         float rad = span;
@@ -292,7 +292,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 8)
     {
-        /* Crystal — room-filling octahedron lattice. */
+        /* Crystal - room-filling octahedron lattice. */
         float n = max(float(count), 12.0);
         float rad = span;
         float point_sz = max(0.034, max(thickness * 0.46 * size_m, voxel));
@@ -329,7 +329,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 9)
     {
-        /* Plasma Globe — room-filling glass shell + arcs. */
+        /* Plasma Globe - room-filling glass shell + arcs. */
         float R = span;
         float rr = length(led_p);
         float shell_w = max(0.042, max(thickness * 0.48 * size_m, voxel));
@@ -365,7 +365,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 0 || mode == 1)
     {
-        /* Stars / Twinkle — volumetric points filling the whole occupancy box. */
+        /* Stars / Twinkle - volumetric points filling the whole occupancy box. */
         float soft = max(0.028, max(thickness * 0.55 * size_m, voxel));
         float travel = progress * ((mode == 0) ? 0.45 : 0.08);
         float best = 0.0;
@@ -422,7 +422,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
-        /* Warp / Hyperdrive — fly-through with long radial streaks. */
+        /* Warp / Hyperdrive - fly-through with long radial streaks. */
         float soft = max(0.026, max(thickness * 0.50 * size_m, voxel));
         float travel = progress * ((mode == 3) ? 1.55 : 0.95);
         float streak_mul = (mode == 3) ? (12.0 + 14.0 * size_m) : (7.0 + 9.0 * size_m);
@@ -461,7 +461,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
                 bright = 0.18 + 1.15 * nearness;
 
             float contrib = max(streak, core * 0.85) * bright * slot_on;
-            /* Soft FOV gate — keep edges lit for room fill. */
+            /* Soft FOV gate - keep edges lit for room fill. */
             contrib *= 1.0 - smoothstep(1.35, 1.85, length(vec2(led_vx, led_vy)) / max(span, 0.5));
 
             if(contrib > best)

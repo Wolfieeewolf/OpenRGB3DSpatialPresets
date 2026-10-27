@@ -24,7 +24,7 @@ void volumeMain(out vec4 out_color, in vec3 p01) {
     ring *= 0.55 + 0.45 * spiral;
     float disc = (1.0 - smoothstep(0.0, 0.38 * scale + 0.22, r)) * (0.25 + 0.2 * spiral);
     float core = exp(-r * 9.0) * (0.65 + 0.35 * sin(t * 5.5));
-    // Vertical thickness — portal disc, not a flat floor stamp
+    // Vertical thickness - portal disc, not a flat floor stamp
     float yfall = 1.0 - smoothstep(0.18, 0.55, abs(d.y));
     // Orbiting spark beads on the ring (sparse-LED friendly)
     float beads = 0.0;

@@ -48,7 +48,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     for(int i = 0; i < 48; i++)
     {
         float fi = float(i);
-        /* Avoid identifier "active" — reserved on some GLSL 1.10 drivers. */
+        /* Avoid identifier "active" - reserved on some GLSL 1.10 drivers. */
         float slot_on = 1.0 - step(float(count), fi);
         float seed = fi * 265.443 + 101.390;
         float cycle_mul = (1.0 + 0.35 * launch_jitter) + (2.0 * launch_jitter) * hash01(seed, 11.0);

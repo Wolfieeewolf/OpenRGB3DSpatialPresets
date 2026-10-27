@@ -1,10 +1,10 @@
 # Controller preset JSON format
 
-Portable presets are loaded from `plugins/settings/OpenRGB3DSpatialPlugin/controllers/` (copy files from this repo’s [`controllers/`](../controllers/) folder).
+Portable presets are loaded from `plugins/settings/OpenRGB3DSpatialPlugin/controllers/` (copy files from this repo's [`controllers/`](../controllers/) folder).
 
 There are **two kinds** of JSON files. Only **portable presets** belong in this repository.
 
-The plugin loader (`OpenRGB3DSpatialCustomController` **version 1**) rejects files that omit required fields — there is no dual-format / migration path.
+The plugin loader (`OpenRGB3DSpatialCustomController` **version 1**) rejects files that omit required fields - there is no dual-format / migration path.
 
 ---
 
@@ -15,9 +15,9 @@ The plugin loader (`OpenRGB3DSpatialCustomController` **version 1**) rejects fil
 | `format` | yes | Always `OpenRGB3DSpatialCustomController` |
 | `version` | yes | Always `1` |
 | `name` | yes | Layout title in the plugin **Custom controllers** list (see naming rules) |
-| `brand` | recommended | Hardware vendor — helps match devices across PCs |
+| `brand` | recommended | Hardware vendor - helps match devices across PCs |
 | `model` | recommended | Product model |
-| `category` | optional | Taxonomy only (`graphics_cards`, `cpu_cooler`, `fans`, …) — **not** the layout title |
+| `category` | optional | Taxonomy only (`graphics_cards`, `cpu_cooler`, `fans`, ...) - **not** the layout title |
 | `width`, `height`, `depth` | yes | Grid size in cells |
 | `spacing_mm_x/y/z` | yes | Default LED spacing in millimetres |
 | `column_widths_mm` | yes | Per-column sizes (mm); length must match `width`. Uniform grids use `spacing_mm_x` repeated |
@@ -44,7 +44,7 @@ The plugin loader (`OpenRGB3DSpatialCustomController` **version 1**) rejects fil
 
 ## Machine export (do not commit)
 
-Created when saving from the plugin on your PC. Uses real `HID:` / `DDP:` locations and often omits `brand`/`model`. Personal backup only — convert to portable (`"1:1"` + brand/model/category) before opening a PR.
+Created when saving from the plugin on your PC. Uses real `HID:` / `DDP:` locations and often omits `brand`/`model`. Personal backup only - convert to portable (`"1:1"` + brand/model/category) before opening a PR.
 
 ---
 
@@ -54,8 +54,8 @@ Created when saving from the plugin on your PC. Uses real `HID:` / `DDP:` locati
 | ------------- | ----------- |
 | Device **name** | `controller_name` in every mapping (verbatim) |
 | **Vendor** | optional `brand` |
-| **Description** | reference only — do not use as layout `name` |
-| **Location** | never in presets — use `"1:1"` |
+| **Description** | reference only - do not use as layout `name` |
+| **Location** | never in presets - use `"1:1"` |
 
 ### Layout `name` (top-level)
 
@@ -63,11 +63,11 @@ Created when saving from the plugin on your PC. Uses real `HID:` / `DDP:` locati
 | --------- | ------ |
 | Full device layout | Same as `controller_name` |
 | Partial zone on one device | `{controller_name} - {short label}` |
-| Several layouts, same device (e.g. 220T front stack) | Short layout label OK (`220T Front Fan - Bottom`) — keep real `controller_name` in mappings |
+| Several layouts, same device (e.g. 220T front stack) | Short layout label OK (`220T Front Fan - Bottom`) - keep real `controller_name` in mappings |
 
 ### Do **not** use as layout `name`
 
-Device types (`Cooler`, `Fan`, `Mouse`, `GPU`, …), category slugs (`graphics_cards`, `cpu_cooler`), or placeholders (`Graphics Card`, `Onboard LED` alone).
+Device types (`Cooler`, `Fan`, `Mouse`, `GPU`, ...), category slugs (`graphics_cards`, `cpu_cooler`), or placeholders (`Graphics Card`, `Onboard LED` alone).
 
 ---
 
@@ -92,4 +92,4 @@ See [`template.controller.json`](../template.controller.json) and [`controllers/
 - [ ] Catalog regenerated: `python scripts/generate_preset_catalog.py`
 - [ ] Kit notes under `docs/device_notes/` updated when needed
 
-Plugin contract: [OpenRGB3DSpatialPlugin CONTRIBUTING.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/CONTRIBUTING.md) (Custom controllers — version 1, required grid arrays).
+Plugin contract: [OpenRGB3DSpatialPlugin CONTRIBUTING.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/CONTRIBUTING.md) (Custom controllers - version 1, required grid arrays).

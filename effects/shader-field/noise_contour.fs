@@ -1,5 +1,5 @@
 # Name
-name: Noise Contour — topo bands
+name: Noise Contour - topo bands
 
 # Effect
 float ncHash11(float t){return fract(sin(t*56789.0)*56789.0);}

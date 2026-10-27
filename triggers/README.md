@@ -1,4 +1,4 @@
-# Triggers — stock actions
+# Triggers - stock actions
 
 Finished `*.action.json` timelines under `effects/` for **Triggers** (when → play).
 

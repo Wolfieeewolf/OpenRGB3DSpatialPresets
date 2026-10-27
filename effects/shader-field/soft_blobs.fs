@@ -1,5 +1,5 @@
 # Name
-name: Soft Blobs — neon metaballs
+name: Soft Blobs - neon metaballs
 
 # Effect
 vec3 sbPalette(float t){vec3 a=vec3(0.660,0.560,0.680);vec3 b=vec3(0.718,0.438,0.720);vec3 c=vec3(0.520,0.100,0.520);vec3 d=vec3(-0.60,-0.30,-0.09);return a+b*cos(6.28318*(c*t+d));}

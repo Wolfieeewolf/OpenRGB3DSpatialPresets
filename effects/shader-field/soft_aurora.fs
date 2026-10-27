@@ -1,5 +1,5 @@
 # Name
-name: Soft Aurora — curtain bands
+name: Soft Aurora - curtain bands
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

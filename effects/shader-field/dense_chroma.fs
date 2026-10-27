@@ -1,5 +1,5 @@
 # Name
-name: Dense Chroma — packed color plasma
+name: Dense Chroma - packed color plasma
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

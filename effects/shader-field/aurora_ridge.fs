@@ -1,5 +1,5 @@
 # Name
-name: Aurora Ridge — horizon curtain
+name: Aurora Ridge - horizon curtain
 
 # Effect
 float arRnd(vec2 p,float n){return fract(abs(sin(p.x*123.4+p.y*432.1)*(p.x*3.7+p.x*p.y*4.5+256.7+n*654.3)+n*321.1));}

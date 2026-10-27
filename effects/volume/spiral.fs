@@ -44,7 +44,7 @@ float spSoft(float d, float w)
     float s = max(w, 0.012);
     return exp(-(d * d) / (s * s));
 }
-/* Soft fill + bright crisp core — spiral arms stay legible. */
+/* Soft fill + bright crisp core - spiral arms stay legible. */
 float spRidge(float d, float soft_w, float crisp_w)
 {
     float body = spSoft(d, soft_w) * 0.58;
@@ -95,7 +95,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     if(pattern_type == 0)
     {
-        /* Smooth Spiral — soft ribbons with a crisp centerline. */
+        /* Smooth Spiral - soft ribbons with a crisp centerline. */
         float d = spArmDist(spiral_angle, num_arms);
         float ridge = spRidge(d, soft_w, crisp_w);
         float secondary = spRidge(spArmDist(spiral_angle * 0.5 + norm_twist * freq_scale_e, num_arms),
@@ -106,7 +106,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(pattern_type == 1)
     {
-        /* Pinwheel — filled wedges; Coil bends straight rays into a spiral. */
+        /* Pinwheel - filled wedges; Coil bends straight rays into a spiral. */
         float d = spArmDist(spiral_angle, num_arms);
         float fill = 1.0 - smoothstep(half_arm * 0.55, half_arm * 1.05, d);
         float edge = spSoft(d - half_arm * 0.85, crisp_w * 0.85);
@@ -116,12 +116,12 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(pattern_type == 2)
     {
-        /* Saw Blade — radial blades with serrated teeth on the leading edge. */
+        /* Saw Blade - radial blades with serrated teeth on the leading edge. */
         float period = spPeriod(num_arms);
         float aa = mod(spiral_angle, period);
         if(aa < 0.0) aa += period;
         float blade_w = period * (1.0 - gap_factor) * 0.92;
-        /* Triangular teeth along radius — more teeth with more arms/detail. */
+        /* Triangular teeth along radius - more teeth with more arms/detail. */
         float teeth_n = mix(5.0, 11.0, clamp(detail_n, 0.0, 1.0));
         float tooth = abs(fract(r01 * teeth_n * (0.85 + 0.15 * num_arms)) - 0.5) * 2.0;
         float tooth_depth = 0.38 * (0.55 + 0.45 * (1.0 - gap_factor));
@@ -138,13 +138,13 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float trail_edge = spSoft(aa - trailing, crisp_w);
             in_blade = spSaturate(body * 0.85 + face + trail_edge * 0.35);
         }
-        /* Outer rim of the disk — saw tip ring. */
+        /* Outer rim of the disk - saw tip ring. */
         float rim = spSoft(r01 - 0.92, 0.045) * 0.35 * (0.5 + 0.5 * tooth);
         spiral_value = spSaturate(in_blade * (0.45 + 0.55 * r01) + rim);
     }
     else if(pattern_type == 3)
     {
-        /* Swirl Circles — concentric rings that Coil twists into spirals. */
+        /* Swirl Circles - concentric rings that Coil twists into spirals. */
         float rings = mix(3.0, 8.0, clamp(detail_n, 0.0, 1.0));
         float ring_phase = r01 * rings * two_pi - progress_e * 0.85 + spiral_angle * (0.15 + 0.85 * coil01);
         float d_ring = abs(sin(ring_phase * 0.5));
@@ -158,7 +158,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(pattern_type == 4)
     {
-        /* Hypnotic — multi-frequency twist with crisp interference ridges. */
+        /* Hypnotic - multi-frequency twist with crisp interference ridges. */
         float a0 = spiral_angle;
         float a1 = spiral_angle * 0.5 + norm_twist * freq_scale_e * 2.5 + progress_e * 0.55;
         float a2 = spiral_angle * 1.5 - r01 * (detail_e * 0.35) - progress_e * 0.9;
@@ -176,7 +176,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(pattern_type == 5)
     {
-        /* Simple Spin — clean rotating rays; Coil = swirl, Height = helix. */
+        /* Simple Spin - clean rotating rays; Coil = swirl, Height = helix. */
         float d = spArmDist(spiral_angle, num_arms);
         float fill = 1.0 - smoothstep(half_arm * 0.35, half_arm * 0.95, d);
         float core = spSoft(d, crisp_w * 0.75);
@@ -187,7 +187,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
-        /* Tornado / Twister — funnel wall + wind ribbons from floor→ceiling. */
+        /* Tornado / Twister - funnel wall + wind ribbons from floor→ceiling. */
         float funnel = mix(0.98, 0.10, pow(ly, 0.85));
         float wall_w = mix(0.14, 0.055, clamp(detail_n, 0.0, 1.0));
         float wall = spRidge(abs(r01 - funnel), wall_w * 1.35, wall_w * 0.40);

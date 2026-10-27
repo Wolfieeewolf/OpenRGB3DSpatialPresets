@@ -1,5 +1,5 @@
 name: Room glow
-description: Full-room wash — every LED stays lit with slow colour drift
+description: Full-room wash - every LED stays lit with slow colour drift
 duration_ms: 10000
 loop: while_active
 section: volume
@@ -14,7 +14,7 @@ void volumeMain(out vec4 out_color, in vec3 p01) {
     float inten = clamp(u_params[1], 0.0, 1.0);
     float scale = clamp(u_params[2], 0.05, 1.0);
     float t = u_time * (0.22 + 0.32 * scale);
-    // Soft volumetric fill — never drops near zero (Atmos room light)
+    // Soft volumetric fill - never drops near zero (Atmos room light)
     float wave = 0.5 + 0.5 * sin(p01.x * 3.0 + p01.z * 2.3 + t);
     float wave2 = 0.5 + 0.5 * sin(p01.y * 3.6 - t * 0.75 + p01.x * 1.4);
     float wave3 = 0.5 + 0.5 * sin(p01.z * 2.8 + p01.y * 1.5 + t * 0.55);

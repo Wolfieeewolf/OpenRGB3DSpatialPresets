@@ -1,4 +1,4 @@
-// Triggers — whole-room ripple that dies clean on once
+// Triggers - whole-room ripple that dies clean on once
 {
   "format": "openrgb3d.action",
   "version": 5,

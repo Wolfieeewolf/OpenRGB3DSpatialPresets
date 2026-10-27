@@ -1,5 +1,5 @@
 # Name
-name: Atom Plasma — compact lobes
+name: Atom Plasma - compact lobes
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

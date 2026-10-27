@@ -1,7 +1,7 @@
 name: Noise fire column
 class: volume_noise_fire_column
 category: Volume
-description: Height-driven noise fire column (kit) — fuel in XZ, heat along Y, not a soft blob
+description: Height-driven noise fire column (kit) - fuel in XZ, heat along Y, not a soft blob
 global: color speed brightness size scale detail
 user_colors: 1
 soft_catch: 0.045

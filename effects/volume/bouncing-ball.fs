@@ -57,7 +57,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float y0 = mix(lo, hi, hy);
         float z0 = mix(lo, hi, hz);
 
-        /* Independent axis speeds — vertical matches horizontal so ceiling is hit. */
+        /* Independent axis speeds - vertical matches horizontal so ceiling is hit. */
         float vx = (hash01(fk * 733.0) * 2.0 - 1.0) * speed * mix(0.75, 1.15, hash01(fk * 11.0));
         float vy = (hash01(fk * 577.0) * 2.0 - 1.0) * speed * mix(0.85, 1.25, hash01(fk * 19.0));
         float vz = (hash01(fk * 829.0) * 2.0 - 1.0) * speed * mix(0.75, 1.15, hash01(fk * 29.0));

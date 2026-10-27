@@ -133,7 +133,7 @@ float pfStar(vec3 dlt, float soft, float rot)
     float halo = exp(-(d * d) / (s * s * 1.4)) * 0.30;
     return clamp(core + halo + max(plus, crossv) * 0.90, 0.0, 1.0);
 }
-/* Soft drifting wisp — elongated, still fills space. */
+/* Soft drifting wisp - elongated, still fills space. */
 float pfWisp(vec3 dlt, vec3 axis, float soft)
 {
     float s = max(soft, 0.024);
@@ -160,7 +160,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float hue01 = hue_scroll;
     float golden = 2.39996323;
     float span = mix(0.28, 0.92, clamp((fill - 0.35) / 0.65, 0.0, 1.0));
-    /* Never thinner than ~2 atlas voxels — LED sampling needs this. */
+    /* Never thinner than ~2 atlas voxels - LED sampling needs this. */
     float voxel = 2.0 / max(u_res, 8.0);
 
     for(int i = 0; i < 48; i++)
@@ -189,7 +189,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
         if(mode == 0)
         {
-            /* Float / Fuzzy — soft wisps. */
+            /* Float / Fuzzy - soft wisps. */
             vec3 n = pfDrift(base, clock * (0.55 + 0.45 * motion));
             c = pfWrap01(base + n * (0.10 * noise_amt + 0.045 * motion));
             rad *= 1.25;
@@ -199,7 +199,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
         else if(mode == 1)
         {
-            /* Snow — falling flakes with sway + rotation. */
+            /* Snow - falling flakes with sway + rotation. */
             float cycle = 2.8 + 2.4 * pfHash(seed, 5.0);
             ph = fract(clock * (0.42 * motion) / cycle + pfHash(seed, 6.0));
             c.y = 1.0 - ph;
@@ -215,7 +215,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
         else if(mode == 2)
         {
-            /* Embers — rising sparks with upward trail + flicker. */
+            /* Embers - rising sparks with upward trail + flicker. */
             float cycle = 2.2 + 2.2 * pfHash(seed, 8.0);
             ph = fract(clock * (0.38 * motion) / cycle + pfHash(seed, 9.0));
             c.y = ph;
@@ -234,7 +234,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
         else if(mode == 3)
         {
-            /* Sparkle — diffraction stars that blink. */
+            /* Sparkle - diffraction stars that blink. */
             float cycle = 1.6 + 1.8 * pfHash(seed, 12.0);
             ph = fract(clock * (0.55 * motion) / cycle + pfHash(seed, 13.0));
             float env = pfSmstep(0.0, 0.04, ph) * (1.0 - pfSmstep(0.08, 0.18, ph));
@@ -250,7 +250,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
         else if(mode == 4)
         {
-            /* Attract — points with short orbital trail. */
+            /* Attract - points with short orbital trail. */
             float t = clock * (0.70 * motion);
             float pull = 0.28 + 0.50 * pfHash(seed, 16.0);
             vec3 orbit_p;
@@ -267,7 +267,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
         else if(mode == 5)
         {
-            /* Rain — thin needles (still LED-wide). */
+            /* Rain - thin needles (still LED-wide). */
             float cycle = 0.85 + 0.90 * pfHash(seed, 21.0);
             ph = fract(clock * (0.95 * motion) / cycle + pfHash(seed, 22.0));
             c.y = 1.0 - ph;
@@ -283,7 +283,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
         else
         {
-            /* Fireworks — radial spark streaks from burst. */
+            /* Fireworks - radial spark streaks from burst. */
             float burst_id = floor(fi / 6.0);
             float slot = mod(fi, 6.0);
             float cycle = 2.0 + 1.6 * pfHash(burst_id * 17.1 + 3.0, 30.0);

@@ -1,4 +1,4 @@
--- OpenRGB 3D Spatial — Movie Sync cue author (VLC Lua EXTENSION)
+-- OpenRGB 3D Spatial - Movie Sync cue author (VLC Lua EXTENSION)
 -- Install: copy to %APPDATA%/vlc/lua/extensions/openrgb_movie_sync_author.lua
 -- View → Add Interface is NOT required; enable under View → OpenRGB Movie Sync Author
 -- (or Extensions menu, depending on VLC build).
@@ -297,8 +297,8 @@ local function refresh_marks_label()
   if not state.lbl_marks then
     return
   end
-  local s = state.mark_start and (tostring(state.mark_start) .. " ms") or "—"
-  local e = state.mark_end and (tostring(state.mark_end) .. " ms") or "— (pulse)"
+  local s = state.mark_start and (tostring(state.mark_start) .. " ms") or " - "
+  local e = state.mark_end and (tostring(state.mark_end) .. " ms") or " -  (pulse)"
   state.lbl_marks:set_text("Start: " .. s .. "   End: " .. e)
 end
 
@@ -324,7 +324,7 @@ local function fill_effect_dropdown()
     table.insert(labels, e.label)
   end
   if #labels == 0 then
-    table.insert(labels, "(no looks — start Movie Sync Script API)")
+    table.insert(labels, "(no looks - start Movie Sync Script API)")
   end
   pcall(function()
     state.dd_effect:clear()
@@ -348,13 +348,13 @@ local function reload_catalog()
   if not body then
     state.effects = {}
     fill_effect_dropdown()
-    set_status("Catalog failed — " .. tostring(err))
+    set_status("Catalog failed - " .. tostring(err))
     return
   end
   state.effects = parse_catalog(body)
   fill_effect_dropdown()
   if #state.effects == 0 then
-    set_status("Catalog empty — add Movie Sync looks, then Reload catalog")
+    set_status("Catalog empty - add Movie Sync looks, then Reload catalog")
   else
     set_status(string.format("Loaded %d look(s) from OpenRGB", #state.effects))
   end
@@ -363,7 +363,7 @@ end
 local function mark_start()
   local now = input_ms()
   if not now then
-    set_status("No media playhead — open a video first")
+    set_status("No media playhead - open a video first")
     return
   end
   state.mark_start = now
@@ -377,7 +377,7 @@ end
 local function mark_end()
   local now = input_ms()
   if not now then
-    set_status("No media playhead — open a video first")
+    set_status("No media playhead - open a video first")
     return
   end
   if not state.mark_start then
@@ -396,7 +396,7 @@ end
 local function clear_end()
   state.mark_end = nil
   refresh_marks_label()
-  set_status("Cleared end — next save will be a pulse")
+  set_status("Cleared end - next save will be a pulse")
 end
 
 local function preview_selected()
@@ -411,16 +411,16 @@ local function preview_selected()
     json_escape(id))
   local resp, err = http_post(port, "/v1/effect", body)
   if not resp then
-    set_status("Preview failed — " .. tostring(err))
+    set_status("Preview failed - " .. tostring(err))
     return
   end
-  set_status("Previewed “" .. id .. "”")
+  set_status("Previewed "" .. id .. """)
 end
 
 local function save_cue()
   local media = current_media_path()
   if not media then
-    set_status("No media path — open a local video file")
+    set_status("No media path - open a local video file")
     return
   end
   if not state.mark_start then
@@ -440,7 +440,7 @@ local function save_cue()
     end
   end
   if not known then
-    set_status("Unknown look id — Reload catalog")
+    set_status("Unknown look id - Reload catalog")
     return
   end
 
@@ -490,7 +490,7 @@ local function save_cue()
   state.mark_start = nil
   state.mark_end = nil
   refresh_marks_label()
-  set_status(string.format("Saved %s cue “%s” — %d cue(s) in sidecar", edge, id, #cues))
+  set_status(string.format("Saved %s cue "%s" - %d cue(s) in sidecar", edge, id, #cues))
 end
 
 local function close_dialog()
@@ -519,8 +519,8 @@ local function open_dialog()
   dlg:add_button("Reload catalog", reload_catalog, 1, 2, 1, 1)
   dlg:add_button("Refresh time", refresh_time_label, 2, 2, 1, 1)
 
-  state.lbl_time = dlg:add_label("Playhead: —", 1, 3, 2, 1)
-  state.lbl_marks = dlg:add_label("Start: —   End: — (pulse)", 1, 4, 2, 1)
+  state.lbl_time = dlg:add_label("Playhead:  - ", 1, 3, 2, 1)
+  state.lbl_marks = dlg:add_label("Start: -   End: - (pulse)", 1, 4, 2, 1)
 
   dlg:add_label("Look", 1, 5, 1, 1)
   state.dd_effect = dlg:add_dropdown(2, 5, 1, 1)

@@ -198,7 +198,7 @@ def check_fx(path: Path, issues: list[str]) -> None:
         args = [a.strip() for a in m.group(1).split(",")]
         if len(args) >= 2 and re.fullmatch(r"epoch", args[1]):
             issues.append(
-                f"{path}: hash_byte 2nd arg is bare 'epoch' — use epoch*period (see twinkle.fx)"
+                f"{path}: hash_byte 2nd arg is bare 'epoch' - use epoch*period (see twinkle.fx)"
             )
 
 

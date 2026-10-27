@@ -1,4 +1,4 @@
--- OpenRGB 3D Spatial — Movie Sync poller (VLC Lua INTERFACE)
+-- OpenRGB 3D Spatial - Movie Sync poller (VLC Lua INTERFACE)
 -- Install: copy to %APPDATA%/vlc/lua/intf/openrgb_movie_sync.lua
 -- vlcrc: extraintf=luaintf
 --         lua-intf=openrgb_movie_sync

@@ -2,7 +2,7 @@
 
 Community **controller layouts** and **content** for the [OpenRGB 3D Spatial](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin) plugin.
 
-The plugin is the **engine only** — all looks live here. **Same folder names as the plugin data root** — install is copy-paste.
+The plugin is the **engine only** - all looks live here. **Same folder names as the plugin data root** - install is copy-paste.
 
 ```text
 %AppData%\OpenRGB\plugins\settings\OpenRGB3DSpatialPlugin\
@@ -21,7 +21,7 @@ The plugin is the **engine only** — all looks live here. **Same folder names a
 | `movie-sync/` | Movie Sync catalog + looks + VLC helper |
 
 ```text
-OpenRGB3DSpatialPresets/          (= AppData …/OpenRGB3DSpatialPlugin/)
+OpenRGB3DSpatialPresets/          (= AppData .../OpenRGB3DSpatialPlugin/)
   controllers/                    (nested brand/device OK)
   effects/
     volume/

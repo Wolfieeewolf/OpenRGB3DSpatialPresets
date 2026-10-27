@@ -9,7 +9,7 @@ resolution: 24
 user_colors: 1
 needs_frequency: true
 slider: particle_amount 0 100 14 | Surface sparks: | Sparse spark particles on the shell (0 = smooth ring only).
-slider: onset_trigger 5 95 32 unit pct | Beat trigger: | Onset sensitivity — raise to ignore quiet hits, lower for hair trigger.
+slider: onset_trigger 5 95 32 unit pct | Beat trigger: | Onset sensitivity - raise to ignore quiet hits, lower for hair trigger.
 param: audio_beat_mode
 param: size_audio
 param: detail
@@ -71,7 +71,7 @@ float pulseClassicShell(float distance, float radius_basis, float age, float pul
     float secondary = 1.0 - pulseSmoothstep(secondary_radius - wave_thickness * 0.45,
                                             secondary_radius + wave_thickness * 0.55,
                                             distance);
-    /* Quieter secondary — was 0.62, less wash. */
+    /* Quieter secondary - was 0.62, less wash. */
     secondary *= exp(-abs(distance - secondary_radius) * 0.11) * 0.42;
 
     float shock_age = exp(-age * 2.4);
@@ -80,7 +80,7 @@ float pulseClassicShell(float distance, float radius_basis, float age, float pul
         * sin(distance * freq_rip * 10.0 - burst_phase * 6.2831853);
     shock *= exp(-distance * 0.065);
 
-    /* Quieter core — was 0.4. */
+    /* Quieter core - was 0.4. */
     float core = 0.0;
     if(distance < explosion_radius * 0.24)
         core = (1.0 - distance / (explosion_radius * 0.24 + 1e-4)) * 0.28;
@@ -220,7 +220,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
-        /* Removed ×1.28 boost — host handles brightness. */
+        /* Removed ×1.28 boost - host handles brightness. */
         energy = c0;
         if(c1 > energy) { energy = c1; best_idx = 1.0; }
         if(c2 > energy) { energy = c2; best_idx = 2.0; }
@@ -231,6 +231,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     float gradient     = clamp(distance / radius_basis, 0.0, 1.0);
     float pulse_idx01  = (best_idx + 0.5) / 5.0;
-    /* Pack: (energy, gradient, pulse_idx01) — host reads .z for color slot lookup. */
+    /* Pack: (energy, gradient, pulse_idx01) - host reads .z for color slot lookup. */
     out_color = vec4(energy, gradient, pulse_idx01, 1.0);
 }

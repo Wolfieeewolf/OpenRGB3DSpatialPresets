@@ -1,5 +1,5 @@
 # Name
-name: Checker Drift — moving lattice
+name: Checker Drift - moving lattice
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

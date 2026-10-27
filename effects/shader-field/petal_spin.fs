@@ -1,5 +1,5 @@
 # Name
-name: Petal Spin — rotating soft petals
+name: Petal Spin - rotating soft petals
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

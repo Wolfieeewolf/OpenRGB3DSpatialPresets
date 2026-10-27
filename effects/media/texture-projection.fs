@@ -10,8 +10,8 @@ needs_frequency: true
 user_colors: 0
 combo: projection_mode 0 | Projection:
 option: Planar: floor (X × Z) | UV mapping uses active grid bounds on two axes; sphere uses direction from the effect origin.
-option: Planar: wall X–Y |
-option: Planar: wall Y–Z |
+option: Planar: wall X-Y |
+option: Planar: wall Y-Z |
 option: Sphere around effect origin |
 slider: ambience_dist_falloff 0 100 0 | Distance dim: | Darkens LEDs farther from the effect origin.
 slider: ambience_falloff_curve 0 100 0 | Falloff curve: | Shapes how fast the vignette drops.

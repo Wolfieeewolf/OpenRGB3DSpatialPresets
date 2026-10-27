@@ -1,4 +1,4 @@
-// Triggers — sequence-axis wipe + scanner trail, once→black
+// Triggers - sequence-axis wipe + scanner trail, once→black
 {
   "format": "openrgb3d.action",
   "version": 5,

@@ -18,7 +18,7 @@ space: world
 knobs: speed
 
 # Effect
-# Role is snow flakes — not meteors (that alias stole the id from GPU meteors).
+# Role is snow flakes - not meteors (that alias stole the id from GPU meteors).
 h = hash01_mix(seed, 9743197, 17)
 fall = fmod(time_ms * 0.001 * max(0.05, speed) + h, 1)
 flake_h = 1 - fall

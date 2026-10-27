@@ -1,4 +1,4 @@
--- OpenRGB 3D Spatial — Movie Lights (VLC Lua extension)
+-- OpenRGB 3D Spatial - Movie Lights (VLC Lua extension)
 -- View → OpenRGB Movie Lights after install. Bring your own media.
 
 function descriptor()
@@ -127,7 +127,7 @@ local function load_script_dialog()
 end
 
 function menu()
-  return { "Load script…", "Arm / resume cues", "Disarm", "Fire test explosion" }
+  return { "Load script...", "Arm / resume cues", "Disarm", "Fire test explosion" }
 end
 
 function trigger_menu(id)

@@ -20,7 +20,7 @@ void volumeMain(out vec4 out_color, in vec3 p01) {
     // Soft ion haze so the room never goes fully black between bolts
     float haze = 0.04 + 0.03 * sin(p01.x * 4.0 + t * 0.5) * sin(p01.z * 3.0 - t * 0.4);
     dens += haze * (0.5 + 0.5 * scale);
-    // Forking bolts — overlap two seed windows so reshuffles don't hard-cut
+    // Forking bolts - overlap two seed windows so reshuffles don't hard-cut
     for(int b = 0; b < 5; ++b)
     {
         float fb = float(b);

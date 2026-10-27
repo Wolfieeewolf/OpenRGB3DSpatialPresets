@@ -24,7 +24,7 @@ void volumeMain(out vec4 out_color, in vec3 p01) {
     float c3 = sin((x * 3.8 + z * 7.5) + t * 0.65 + y * 1.2);
     float ribbon = 0.5 + 0.3 * c1 + 0.24 * c2 + 0.16 * c3;
     ribbon = pow(clamp(ribbon, 0.0, 1.0), 1.25);
-    // Soft vertical band — bright mid, never a hard cutoff that leaves floors dead
+    // Soft vertical band - bright mid, never a hard cutoff that leaves floors dead
     float height = smoothstep(0.02, 0.28, y) * (1.0 - smoothstep(0.82, 1.0, y));
     height = max(height, 0.22);
     float dens = ribbon * (0.4 + 0.6 * height);

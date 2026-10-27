@@ -2,7 +2,7 @@
 
 ## Sidecar cues
 
-Place `Movie.movie_sync.json` next to the video. Each cue’s `effect_id` must exist in the Movie Sync catalog (`movie-sync/catalog.json`).
+Place `Movie.movie_sync.json` next to the video. Each cue's `effect_id` must exist in the Movie Sync catalog (`movie-sync/catalog.json`).
 
 **Author while watching (VLC):** install `movie-sync/vlc/openrgb_movie_sync_author.lua` as a VLC extension, keep OpenRGB Movie Sync Script API on, mark start/end on the playhead, pick a catalog look, and save. See [vlc/README.md](../vlc/README.md). Hand-editing JSON is still fine.
 
@@ -28,6 +28,6 @@ Looks use the same file format as trigger actions (`openrgb3d.action` v5; v4 sti
 - `movie-sync/effects/_template.action.json`
 - `triggers/effects/_template.action.json`
 
-Tools (`.fx`): `action-editor/toolbox/`. For room depth prefer **volume** tools (`field_*`, `spark_burst`, `particle_*`, `neon_ribbon` / `ribbon_helix`) over basic `solid` / `wipe` / `pulse` — those read flat on a real LED map.
+Tools (`.fx`): `action-editor/toolbox/`. For room depth prefer **volume** tools (`field_*`, `spark_burst`, `particle_*`, `neon_ribbon` / `ribbon_helix`) over basic `solid` / `wipe` / `pulse` - those read flat on a real LED map.
 
 Showcase packs: `triggers/effects/roomscape/` plus `movie-sync/effects/washes/roomscape_helix_rain.action.json`.

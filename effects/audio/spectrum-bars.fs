@@ -36,18 +36,18 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     float u = (floor(axis_rolled * band_count) + 0.5) / band_count;
     float band_value = texture(u_media, vec2(u, 0.5)).r;
-    /* Host already applies noise gate + peak_boost to the texture — no second multiply here. */
+    /* Host already applies noise gate + peak_boost to the texture - no second multiply here. */
 
     /* Bar mask: LED lights if it lies below the band height (fills from floor). */
     float bt = clamp((band_value - p01.y + 0.025) / 0.05, 0.0, 1.0);
     float bar = bt * bt * (3.0 - 2.0 * bt);
 
-    /* Thinner radial influence — keeps column look, not radial blob. */
+    /* Thinner radial influence - keeps column look, not radial blob. */
     vec3 c = p01 - vec3(0.5);
     float radial = clamp(length(c) / 0.8660254, 0.0, 1.0);
     float radial_profile = clamp(1.0 - radial * 0.40, 0.60, 1.0);
 
-    /* Very subtle sweep (0.94–1.0) — old 0.70 floor caused ambient flicker. */
+    /* Very subtle sweep (0.94-1.0) - old 0.70 floor caused ambient flicker. */
     float sweep = 0.94 + 0.06 * sin((u_params[5] + axis_rolled) * 6.2831853);
 
     float energy = band_value * bar * radial_profile * sweep;

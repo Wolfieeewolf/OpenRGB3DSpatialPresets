@@ -1,4 +1,4 @@
-// Triggers — bright chase head across the room, once→black
+// Triggers - bright chase head across the room, once→black
 {
   "format": "openrgb3d.action",
   "version": 5,
