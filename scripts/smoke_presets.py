@@ -40,6 +40,7 @@ KNOWN_HEADER_KEYS = {
     "needs_frequency",
     "needs_arms",  # reserved no-op (catalog skip); prefer slider: num_arms
     "show_axis",  # reserved no-op
+    "soft_catch",  # legacy no-op (FolderVolume / catalog skip)
     "user_colors",
     "pattern_label",
     "combo",
