@@ -2,7 +2,7 @@
 name: Breathing Sphere
 class: BreathingSphere
 category: Volume
-description: Breathing shell or whole-room inhale wave
+description: Soft breathing shell or whole-room inhale that fills sparse LED rooms
 global: speed brightness frequency detail size scale fps color surface position strip bands
 resolution: 28
 rainbow: true
@@ -13,12 +13,12 @@ option: Rectangle | Rectangular box matching room width vs depth.
 option: Triangle | Triangular prism (flat sides).
 option: Pentagon | Pentagonal prism (flat sides).
 option: Whole room (inhale wave) | No shell - inhale/exhale color wave from the effect origin.
-combo: edge_profile 1 | Edge:
+combo: edge_profile 0 | Edge:
 option: Soft | Gentle boundary falloff.
 option: Crisp | Hard silhouette. Breath pulse keeps the chosen shape.
 slider: breath_pulse_pct 0 100 55 pct | Breath pulse: | How far the shell grows/shrinks each breath. 0 = static.
 slider: center_hole_pct 0 100 0 pct | Center hole: | 0 = solid; higher carves an empty core. Ignored in whole-room mode.
-param: progress_tau
+param: anim_time
 param: ndetail
 param: combo edge_profile
 param: unit center_hole_pct
@@ -37,6 +37,13 @@ float smstep(float e0, float e1, float x)
 {
     float t = clamp((x - e0) / max(e1 - e0, 1e-5), 0.0, 1.0);
     return t * t * (3.0 - 2.0 * t);
+}
+float bsSoft(float d, float soft)
+{
+    float s = max(soft, 0.028);
+    float core = exp(-(d * d) / (s * s * 0.40));
+    float halo = exp(-(d * d) / (s * s * 1.70)) * 0.40;
+    return clamp(core + halo, 0.0, 1.0);
 }
 float polyRadialXZ(vec2 p, float n)
 {
@@ -81,7 +88,9 @@ float shellCover(int shape, float sx, float sy, float sz, float ax, float az)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    float breath_phase = u_params[0];
+    /* Continuous anim_time breath - no progress wrap flash. */
+    float time_sec = u_params[0];
+    float breath_phase = time_sec * 1.15;
     float detail = max(u_params[1], 0.05);
     int edge = int(clamp(u_params[2], 0.0, 1.0) + 0.5);
     float hole_frac = clamp(u_params[3], 0.0, 0.95);
@@ -103,11 +112,12 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float dist_norm = clamp(length(l) * 0.5, 0.0, 1.5);
         float inhale = sin(breath_phase) * pulse_strength;
         float exhale = sin(breath_phase + 1.2) * pulse_strength;
-        float spat = 9.0 + 5.0 * detail;
+        float spat = 7.0 + 4.0 * detail;
         float wave = sin(inhale * 3.14159265 * 1.15 - dist_norm * spat) * pulse_strength;
-        float ripple = sin(breath_phase * 2.1 - dist_norm * 6.2831853 * 2.2 + l.y * 0.02 * detail) * pulse_strength;
+        float ripple = sin(breath_phase * 2.1 - dist_norm * 6.2831853 * 1.8 + l.y * 0.02 * detail) * pulse_strength;
         float rush = sin(exhale * 1.7 + (l.x + l.z) * 0.015 * detail) * 0.4 * pulse_strength;
-        float air = 0.78 + 0.22 * (0.5 + 0.5 * sin(breath_phase * 1.05)) * (0.55 + 0.45 * pulse_strength);
+        float air = 0.72 + 0.28 * (0.5 + 0.5 * wave) * (0.55 + 0.45 * pulse_strength);
+        air += 0.08 * ripple + 0.05 * rush;
         if(pulse_strength < 0.001)
             air = 0.85;
         float hue01 = clamp(dist_norm, 0.0, 1.0);
@@ -119,25 +129,26 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float sphere_intensity = 0.0;
     float norm_in_shell = 0.0;
 
-    float band = (edge == 1) ? 0.018 : 0.16;
-    band = max(band * (0.7 + 0.3 / max(detail, 0.2)), (edge == 1) ? 0.012 : 0.02);
+    float band = (edge == 1) ? 0.032 : 0.20;
+    band = max(band * (0.7 + 0.3 / max(detail, 0.2)), (edge == 1) ? 0.024 : 0.032);
 
     if(hole_frac <= 0.001)
     {
         if(edge == 1)
         {
-            float inside = 1.0 - smstep(R - band * 0.12, R + band * 0.55, distance);
-            float surface = 1.0 - smstep(0.0, band * 0.55, abs(distance - R));
-            inside = max(inside, surface * 0.4 * step(distance, R + band));
-            if(distance > R + band)
+            float inside = 1.0 - smstep(R - band * 0.15, R + band * 0.65, distance);
+            float surface = bsSoft(abs(distance - R), band * 0.70);
+            inside = max(inside, surface * 0.55 * step(distance, R + band * 1.2));
+            if(distance > R + band * 1.4)
                 inside = 0.0;
             sphere_intensity = clamp(inside, 0.0, 1.0);
         }
         else
         {
-            float inside = 1.0 - smstep(R - band * 0.35, R + band, distance);
-            float soft_out = 1.0 - smstep(R, R + band * 2.2, distance);
-            inside = max(inside, soft_out * 0.35);
+            float inside = 1.0 - smstep(R - band * 0.40, R + band, distance);
+            float soft_out = bsSoft(max(0.0, distance - R), band * 1.35) * 0.55;
+            float soft_in = bsSoft(max(0.0, R - distance), band * 1.10) * 0.35;
+            inside = max(inside, max(soft_out, soft_in));
             sphere_intensity = clamp(inside, 0.0, 1.0);
         }
         norm_in_shell = clamp(distance / (R + 1e-5), 0.0, 1.2);
@@ -145,10 +156,10 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     else
     {
         float r_in = hole_frac * R * 0.9;
-        float iw = (edge == 1) ? band * 0.4 : band * 1.1;
-        float ow = (edge == 1) ? band * 0.5 : band * 1.6;
+        float iw = (edge == 1) ? band * 0.55 : band * 1.25;
+        float ow = (edge == 1) ? band * 0.65 : band * 1.85;
         float inner_open = smstep(r_in - iw, r_in + iw, distance);
-        float outer_open = 1.0 - smstep(R - ow * 0.2, R + ow, distance);
+        float outer_open = 1.0 - smstep(R - ow * 0.25, R + ow, distance);
         float span_eff = max(R - r_in, R * 0.08);
         float u = clamp((distance - r_in) / span_eff, 0.0, 1.0);
         float bell = sin(u * 3.14159265);
@@ -159,7 +170,11 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             if(distance > R + ow)
                 outer_open = 0.0;
         }
-        sphere_intensity = clamp(inner_open * outer_open * (0.15 + 0.85 * bell), 0.0, 1.0);
+        else
+        {
+            bell = max(bell, bsSoft(abs(distance - 0.5 * (R + r_in)), span_eff * 0.35) * 0.45);
+        }
+        sphere_intensity = clamp(inner_open * outer_open * (0.18 + 0.82 * bell), 0.0, 1.0);
         norm_in_shell = clamp((distance - r_in) / max(R - r_in, 1e-4), 0.0, 1.2);
     }
 

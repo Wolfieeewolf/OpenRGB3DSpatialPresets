@@ -2,7 +2,7 @@
 name: Pulse Ring
 class: PulseRing
 category: Volume
-description: Expanding shell through the room
+description: Soft expanding shells that stay visible on sparse LED rooms
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness
 pattern_label: Style:
 pattern_key: ring_style
@@ -14,10 +14,10 @@ option: Sphere
 option: Hexagon
 option: Triangle
 option: Square
-slider: hole_size 0 75 8 unit pct | Hole size:
-slider: pulse_amplitude 20 200 100 unit pct | Pulse amplitude:
-slider: direction_deg 0 360 0 | Phase:
-param: progress_wrap
+slider: hole_size 0 75 8 unit pct | Hole size: | Inner dead zone
+slider: pulse_amplitude 20 200 100 unit pct | Pulse amplitude: | Shell brightness
+slider: direction_deg 0 360 0 | Phase: | Ring phase offset
+param: anim_time
 param: unit hole_size
 param: gthickness
 param: unit pulse_amplitude
@@ -52,16 +52,18 @@ float footprintXZ(vec2 p, int shape)
         return max(abs(p.x), abs(p.y));
     return length(p);
 }
-float sharpBand(float dist_to_edge, float half_w)
+float softBand(float dist_to_edge, float half_w)
 {
-    float t = 1.0 - smoothstep(0.0, max(half_w, 0.008), abs(dist_to_edge));
-    return t * t;
+    float s = max(half_w, 0.028);
+    float core = exp(-(dist_to_edge * dist_to_edge) / (s * s * 0.40));
+    float halo = exp(-(dist_to_edge * dist_to_edge) / (s * s * 1.70)) * 0.40;
+    return clamp(core + halo, 0.0, 1.0);
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    float progress = u_params[0];
+    float time_sec = u_params[0];
     float hole_r = clamp(u_params[1], 0.0, 0.7);
-    float sigma = max(u_params[2], 0.01);
+    float sigma = max(u_params[2], 0.018);
     float amp = clamp(u_params[3], 0.2, 2.0);
     float detail = clamp(u_params[4], 0.05, 1.0);
     int style = int(u_params[5] + 0.5);
@@ -71,13 +73,11 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float hue_scroll = fract(u_params[9]);
     vec3 p = p01 * 2.0 - 1.0;
     float inv_size = 1.0 / max(size_scale, 0.25);
-    /* Sphere corners sit near length≈1.73; flat shapes near ≈1.0 on the faces.
-       Expand far enough at Size 100 that the pulse reaches the room edges. */
     float extent = (shape == 1) ? 1.55 : 1.12;
     float usable = max(0.12, extent - hole_r);
 
-    float half_w = max(0.010, sigma * mix(0.55, 0.18, detail));
-    float y_half = mix(0.34, 0.10, detail);
+    float half_w = max(0.028, sigma * mix(0.70, 0.26, detail));
+    float y_half = mix(0.40, 0.14, detail);
 
     float d = 0.0;
     float height_mul = 1.0;
@@ -89,7 +89,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     else
     {
         d = footprintXZ(p.xz, shape) * inv_size;
-        height_mul = 1.0 - smoothstep(y_half, y_half + 0.035, abs(p.y));
+        height_mul = 1.0 - smoothstep(y_half, y_half + 0.045, abs(p.y));
     }
 
     float intensity = 0.0;
@@ -98,18 +98,22 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     if(style == 1)
     {
-        float fill = smoothstep(hole_r - 0.02, hole_r + 0.01, d);
+        float fill = smoothstep(hole_r - 0.03, hole_r + 0.02, d);
         float outer_end = (shape == 1) ? 1.65 : 1.22;
-        float outer = 1.0 - smoothstep(extent * 0.92, outer_end, d);
+        float outer = 1.0 - smoothstep(extent * 0.90, outer_end, d);
         intensity = fill * outer * height_mul;
         color_drv = az01;
     }
     else
     {
-        float expand = fract(progress + phase_offset);
+        /* Continuous expand from anim_time - soft dual crest avoids wrap flash. */
+        float expand = fract(time_sec * 0.28 + phase_offset);
         float center = hole_r + expand * usable;
-        intensity = sharpBand(d - center, half_w) * height_mul;
-        intensity *= smoothstep(hole_r - 0.03, hole_r + 0.01, d);
+        float prev = hole_r + (expand - 1.0) * usable;
+        float ring0 = softBand(d - center, half_w);
+        float ring1 = softBand(d - prev, half_w) * (1.0 - expand);
+        intensity = max(ring0, ring1) * height_mul;
+        intensity *= smoothstep(hole_r - 0.04, hole_r + 0.02, d);
         intensity *= amp;
         color_drv = fract(clamp((d - hole_r) / usable, 0.0, 1.0) * 0.85 + hue_scroll);
     }
