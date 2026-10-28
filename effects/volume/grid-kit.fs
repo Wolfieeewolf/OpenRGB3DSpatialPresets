@@ -125,6 +125,34 @@ int nearestFace(vec3 p, vec3 b)
     if(dzm < best) { best = dzm; face = 5; }
     return face;
 }
+/* Twist one Rubik layer around face axis. soft_w>0.5 = feathered anim edge. */
+vec3 gkTwistLayer(vec3 q, int face, float layer, float ang, float cell, float soft_w)
+{
+    float lc = q.x;
+    if(face >= 2 && face < 4)
+        lc = q.y;
+    else if(face >= 4)
+        lc = q.z;
+    float target = layer * cell;
+    float on = step(abs(lc - target), cell * 0.52);
+    if(soft_w > 0.5)
+        on = 1.0 - smoothstep(cell * 0.40, cell * 0.58, abs(lc - target));
+    float sgn = (mod(float(face), 2.0) < 0.5) ? 1.0 : -1.0;
+    vec3 r = q;
+    if(face < 2)
+        r = gkRotX(q, ang * sgn);
+    else if(face < 4)
+        r = gkRotY(q, ang * sgn);
+    else
+        r = gkRotZ(q, ang * sgn);
+    return mix(q, r, on);
+}
+void gkRubikMove(float mid, float cycle_id, out int face, out float layer, out float dir)
+{
+    face = int(floor(hash21(vec2(mid + 0.17, cycle_id * 0.13 + 1.1)) * 6.0));
+    layer = floor(hash21(vec2(mid + 0.31, cycle_id * 0.17 + 2.2)) * 3.0) - 1.0;
+    dir = (hash21(vec2(mid + 0.53, cycle_id * 0.19 + 3.3)) > 0.5) ? 1.0 : -1.0;
+}
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
     int mode = int(clamp(u_params[0], 0.0, 6.0) + 0.5);
@@ -255,37 +283,106 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 3)
     {
-        /* Rubik — Speed slows/stops turns; Density = scramble; Sway = twist; Thick/Detail = grooves. */
+        /* Rubik — committed 90° layer turns (no snap-back).
+         * Cycle: scramble → hold messy → solve → hold clean → new random scramble…
+         * Clock is offset so the look starts already scrambled. Density = move count. */
         float box_s = 0.88 * clamp(size_m, 0.55, 1.45);
         vec3 b = vec3(box_s);
         float cell = max(box_s * 2.0 / 3.0, 0.12);
+        float half_pi = 1.5707963;
 
-        float cycle = fract(motion * (0.08 + 0.06 * density) + phase2 * 0.02);
-        float scramble = 1.0 - abs(2.0 * cycle - 1.0);
-        scramble = smoothstep(0.08, 0.90, scramble) * mix(0.35, 1.0, density);
+        float n_moves = floor(mix(6.0, 12.0, density) + 0.5);
+        float hold_dur = mix(1.35, 2.10, 1.0 - 0.35 * density);
+        float half = n_moves;
+        float cycle_len = half + hold_dur + half + hold_dur;
+        float clock_m = motion * mix(0.48, 0.95, density) + phase2 * 0.11;
+        /* Skip past the first scramble so we open on a messed-up cube. */
+        float shifted = clock_m + half;
+        float cycle_id = floor(shifted / cycle_len);
+        float t = mod(shifted, cycle_len);
 
-        float turn_clock = motion * (0.55 + 0.25 * density);
-        float turn_id = floor(turn_clock);
-        float turn_u = fract(turn_clock);
-        float turn_ease = smoothstep(0.0, 0.45, turn_u) * (1.0 - smoothstep(0.75, 1.0, turn_u));
-        float spin = turn_ease * 1.5707963 * mix(0.55, 1.0, clamp(sway / 1.5, 0.0, 1.0));
-        int turn_face = int(mod(turn_id, 6.0));
-        float layer = floor(mod(turn_id * 1.7, 3.0)) - 1.0;
+        /* Phases: scramble → hold scrambled → solve → hold solved. */
+        int n_done = 0;
+        int cur_idx = -1;
+        float cur_ang = 0.0;
+        float sway_n = clamp(sway / 1.5, 0.0, 1.0);
 
-        vec3 q = p;
-        float layer_coord = q.x;
-        if(turn_face == 2 || turn_face == 3)
-            layer_coord = q.y;
-        else if(turn_face == 4 || turn_face == 5)
-            layer_coord = q.z;
-        float on_slice = 1.0 - smoothstep(cell * 0.42, cell * 0.62, abs(layer_coord - layer * cell));
-        float twist = spin * on_slice * mix(0.20, 1.0, scramble);
-        if(turn_face == 0 || turn_face == 1)
-            q = mix(q, gkRotX(q, twist * (turn_face == 0 ? 1.0 : -1.0)), on_slice);
-        else if(turn_face == 2 || turn_face == 3)
-            q = mix(q, gkRotY(q, twist * (turn_face == 2 ? 1.0 : -1.0)), on_slice);
+        if(t < half)
+        {
+            float u = t;
+            int step_i = int(min(floor(u), n_moves - 1.0));
+            float frac = clamp(u - float(step_i), 0.0, 1.0);
+            float e = smoothstep(0.0, 1.0, frac);
+            e = e + sin(3.14159265 * e) * 0.10 * sway_n * (1.0 - frac);
+            cur_idx = step_i;
+            n_done = step_i;
+            cur_ang = clamp(e, 0.0, 1.0) * half_pi;
+        }
+        else if(t < half + hold_dur)
+        {
+            n_done = int(n_moves);
+            cur_idx = -1;
+            cur_ang = 0.0;
+        }
+        else if(t < half + hold_dur + half)
+        {
+            float u = t - half - hold_dur;
+            int step_i = int(min(floor(u), n_moves - 1.0));
+            float frac = clamp(u - float(step_i), 0.0, 1.0);
+            float e = smoothstep(0.0, 1.0, frac);
+            e = e + sin(3.14159265 * e) * 0.10 * sway_n * (1.0 - frac);
+            cur_idx = int(n_moves) - 1 - step_i;
+            n_done = cur_idx;
+            cur_ang = (1.0 - clamp(e, 0.0, 1.0)) * half_pi;
+        }
         else
-            q = mix(q, gkRotZ(q, twist * (turn_face == 4 ? 1.0 : -1.0)), on_slice);
+        {
+            n_done = 0;
+            cur_idx = -1;
+            cur_ang = 0.0;
+        }
+
+        /* Forward warp for spinning geometry. */
+        vec3 q = p;
+        for(int i = 0; i < 12; i++)
+        {
+            float on_i = 1.0 - step(float(n_done), float(i));
+            int mf;
+            float ml;
+            float md;
+            gkRubikMove(float(i), cycle_id, mf, ml, md);
+            vec3 q2 = gkTwistLayer(q, mf, ml, md * half_pi, cell, 0.0);
+            q = mix(q, q2, on_i);
+        }
+        if(cur_idx >= 0)
+        {
+            int cf;
+            float cl;
+            float cd;
+            gkRubikMove(float(cur_idx), cycle_id, cf, cl, cd);
+            q = gkTwistLayer(q, cf, cl, cd * cur_ang, cell, 1.0);
+        }
+
+        /* Inverse map → home facelets for true sticker colors. */
+        vec3 h = p;
+        if(cur_idx >= 0)
+        {
+            int cf;
+            float cl;
+            float cd;
+            gkRubikMove(float(cur_idx), cycle_id, cf, cl, cd);
+            h = gkTwistLayer(h, cf, cl, -cd * cur_ang, cell, 1.0);
+        }
+        for(int i = 11; i >= 0; i--)
+        {
+            float on_i = 1.0 - step(float(n_done), float(i));
+            int mf;
+            float ml;
+            float md;
+            gkRubikMove(float(i), cycle_id, mf, ml, md);
+            vec3 h2 = gkTwistLayer(h, mf, ml, -md * half_pi, cell, 0.0);
+            h = mix(h, h2, on_i);
+        }
 
         vec3 aq = abs(q);
         float m = max(aq.x, max(aq.y, aq.z));
@@ -294,14 +391,14 @@ void volumeMain(out vec4 out_color, in vec3 p01)
                       * step(abs(q.y), b.y + half_w * 2.0)
                       * step(abs(q.z), b.z + half_w * 2.0);
 
-        int face = nearestFace(q, b);
+        int face = nearestFace(h, b);
         vec2 uv;
         if(face == 0 || face == 1)
-            uv = q.yz;
+            uv = h.yz;
         else if(face == 2 || face == 3)
-            uv = q.xz;
+            uv = h.xz;
         else
-            uv = q.xy;
+            uv = h.xy;
         vec2 cell_i = floor((uv + box_s) / cell);
         cell_i = clamp(cell_i, vec2(0.0), vec2(2.0));
 
@@ -309,14 +406,13 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float groove = softband(min(local.x, local.y), half_w * mix(0.45, 0.75, detail));
         float sticker = shell * in_face * (1.0 - groove * 0.80);
 
-        float solved_id = (float(face) + 0.5) / 6.0;
-        float scramble_id = (floor(hash21(cell_i + vec2(float(face) * 3.1, turn_id * 0.01)) * 6.0) + 0.5) / 6.0;
-        color_drv = mix(solved_id, scramble_id, scramble * 0.85);
-        color_drv = fract(color_drv + hue_scroll * 0.15);
+        /* Six solid face hues; stickers track through every committed turn. */
+        color_drv = (float(face) + 0.5) / 6.0;
+        color_drv = fract(color_drv + hue_scroll * 0.12);
 
         float edges = boxEdgeGlow(q, b, half_w * 1.45);
         intensity = max(sticker * 1.05, edges * 0.70);
-        intensity *= 0.88 + 0.12 * sin(motion * 0.90 + scramble * 1.5);
+        intensity *= 0.90 + 0.10 * (0.5 + 0.5 * sin(motion * 0.35));
     }
     else if(mode == 4)
     {

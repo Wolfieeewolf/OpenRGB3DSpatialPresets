@@ -250,7 +250,7 @@ After hygiene in this campaign: touched files → `hygiene`/`fixed`; untouched �
 | `effects/volume/color-wheel.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/depth-tone.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/dna-helix.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
-| `effects/volume/grid-kit.fs` | fixed | 2026-10-28 | Moving Boxes 4→7; globals via motion_clock/freq_n; Thickness/Path/Size live |
+| `effects/volume/grid-kit.fs` | fixed | 2026-10-28 | Rubik: committed 90° solve/scramble cycles; Moving Boxes 7; globals wired |
 | `effects/volume/harmonic-pulse.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/hex-lattice.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/noise_fire_column.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
