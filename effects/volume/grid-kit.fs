@@ -221,33 +221,34 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         /* Moving Boxes — wider orbits; Speed/Freq = roam rate; Size = box + orbit. */
         float best = 0.0;
         float best_h = 0.0;
-        float n_vis = mix(2.0, 4.0, density);
+        float n_vis = mix(4.0, 7.0, density);
         float orbit = mix(0.78, 1.05, clamp(sway / 1.5, 0.0, 1.0)) * clamp(size_m, 0.55, 1.75);
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 7; i++)
         {
             float fi = float(i);
             float slot_on = 1.0 - step(n_vis, fi);
-            float seed = fi * 1.7 + 0.3;
-            float ax = motion * (0.70 + 0.22 * fi) + seed + phase2 * 1.7;
-            float ay = motion * (0.55 + 0.16 * fi) + seed * 0.7;
-            float ph = fi * 1.5707963;
+            float seed = fi * 1.37 + 0.3;
+            float ax = motion * (0.62 + 0.19 * fi) + seed + phase2 * 1.7;
+            float ay = motion * (0.48 + 0.14 * fi) + seed * 0.7;
+            float ph = fi * 0.8975979;
+            float r_scale = mix(0.72, 1.0, hash21(vec2(seed, 0.4)));
             vec3 c = vec3(
-                sin(ax + ph) * orbit,
-                sin(ay * 1.15 + seed) * (orbit * 0.55),
-                cos(ax * 0.92 + ph) * orbit);
+                sin(ax + ph) * orbit * r_scale,
+                sin(ay * 1.15 + seed) * (orbit * 0.55) * r_scale,
+                cos(ax * 0.92 + ph * 1.3) * orbit * r_scale);
             /* Bias roam plane from Path axis. */
             if(axis == 1)
                 c = vec3(c.x, c.z, c.y);
             else if(axis == 2)
                 c = vec3(c.z, c.y, c.x);
-            float half_box = mix(0.10, 0.18, 0.5 + 0.5 * hash21(vec2(seed, 2.1)))
+            float half_box = mix(0.08, 0.15, 0.5 + 0.5 * hash21(vec2(seed, 2.1)))
                            * clamp(size_m, 0.55, 1.45);
             vec3 d = abs(p - c) - vec3(half_box);
             float box_d = length(max(d, 0.0)) + min(max(d.x, max(d.y, d.z)), 0.0);
             float glow = softband(box_d, half_w * 1.70) * slot_on;
             best = max(best, glow);
             if(glow >= best - 1e-5)
-                best_h = fract(fi * 0.17 + hue_scroll + motion * 0.03);
+                best_h = fract(fi * 0.13 + hue_scroll + motion * 0.03);
         }
         intensity = best;
         color_drv = best_h;
