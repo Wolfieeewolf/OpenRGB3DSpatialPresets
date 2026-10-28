@@ -253,7 +253,7 @@ After hygiene in this campaign: touched files â†’ `hygiene`/`fixed`; untouched â
 | `effects/volume/grid-kit.fs` | fixed | 2026-10-28 | Tempo fix: drop busy stack; calm rates; Rubik solve/scramble; Boxes 7 |
 | `effects/volume/harmonic-pulse.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/hex-lattice.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
-| `effects/volume/noise_fire_column.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
+| `effects/volume/noise_fire_column.fs` | fixed | 2026-10-28 | Wire globals: motion_clock/Size/Detail/Freq/Thickness; hex finish for Color |
 | `effects/volume/particle-field.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/plasma.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/pulse-ring.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
