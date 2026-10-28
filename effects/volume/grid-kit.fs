@@ -16,7 +16,7 @@ pattern: Lightning
 slider: density 20 100 70 unit pct | Density: | Feature count / fill / scramble amount
 slider: sway 0 150 70 unit pct | Sway: | Wobble, orbit spread, bolt jag
 param: pattern
-param: anim_time
+param: motion_clock
 param: gthickness
 param: size_star
 param: path_axis
@@ -24,10 +24,15 @@ param: ndetail
 param: hue_scroll_s
 param: unit sway
 param: unit density
+param: freq_n
 param: phase37
 finish: hex
 
 # Effect
+/* Globals → params:
+ * Speed → motion_clock (0 stops). Frequency → freq_n + hue_scroll_s.
+ * Detail → ndetail (edge sharpness). Size → size_star. Thickness → gthickness.
+ * Path → path_axis. Scale = occupancy (engine atlas, not packed here). */
 float softband(float d, float w)
 {
     float hw = max(w, 0.024);
@@ -123,30 +128,36 @@ int nearestFace(vec3 p, vec3 b)
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
     int mode = int(clamp(u_params[0], 0.0, 6.0) + 0.5);
-    float time_sec = u_params[1];
-    float thick = max(u_params[2], 0.022);
+    /* motion_clock = time * GetMotionHz() * speed_mul — Speed 0 freezes. */
+    float clock = u_params[1];
+    float thick = max(u_params[2], 0.01);
     float size_m = clamp(u_params[3], 0.35, 2.5);
     int axis = int(clamp(u_params[4], 0.0, 2.0) + 0.5);
     float detail = clamp(u_params[5], 0.05, 1.0);
     float hue_scroll = fract(u_params[6]);
     float sway = clamp(u_params[7], 0.0, 1.5);
     float density = clamp(u_params[8], 0.15, 1.0);
-    float phase2 = fract(u_params[9]);
+    float freq_n = clamp(u_params[9], 0.0, 1.0);
+    float phase2 = fract(u_params[10]);
+
+    /* Frequency scales how busy motion is (on top of Speed's clock rate). */
+    float busy = 0.45 + 0.90 * freq_n;
+    float motion = clock * busy;
 
     vec3 p = (p01 - 0.5) * 2.0;
-    float half_w = max(0.028, thick * mix(0.90, 0.42, detail));
+    /* Thickness maps more strongly so the global slider is obvious. */
+    float half_w = max(0.022, thick * mix(1.35, 0.55, detail));
     float intensity = 0.0;
     float color_drv = hue_scroll;
 
     if(mode == 0)
     {
-        /* Plane Sweep - primary + echo crests, sway wobble, density stack. */
-        float rate = 0.22 + 0.18 * density;
-        float progress = fract(time_sec * rate + phase2 * 0.05);
+        /* Plane Sweep — Speed/Freq drive sweep; Density = crests; Sway = wobble; Path = axis. */
+        float progress = fract(motion * (0.55 + 0.35 * density) + phase2 * 0.05);
         float tri = 1.0 - abs(2.0 * progress - 1.0);
         float span = 0.92 * clamp(size_m, 0.55, 1.90);
         float center = (tri * 2.0 - 1.0) * span;
-        float wob = sin(time_sec * (0.70 + 0.55 * sway) + phase2 * 6.2831853) * sway * 0.12;
+        float wob = sin(motion * (1.10 + 0.80 * sway) + phase2 * 6.2831853) * sway * 0.14;
         float coord = (axis == 0) ? p.x : ((axis == 1) ? p.y : p.z);
         float lat0 = (axis == 0) ? p.y : p.x;
         float lat1 = (axis == 2) ? p.y : p.z;
@@ -158,46 +169,56 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         {
             float fi = float(i);
             float slot = 1.0 - step(crests, fi);
-            float off = (fi - 0.5 * (crests - 1.0)) * mix(0.18, 0.34, density);
+            float off = (fi - 0.5 * (crests - 1.0)) * mix(0.18, 0.36, density);
             float c = center + off * span;
-            float band = softband(coord - c, half_w * (2.20 - 0.35 * fi));
-            float wake = softband(coord - (c - sign(center + 1e-4) * 0.10), half_w * 3.2) * 0.35;
+            float band = softband(coord - c, half_w * (2.25 - 0.35 * fi));
+            float wake = softband(coord - (c - sign(center + 1e-4) * 0.12), half_w * 3.3) * 0.38;
             best = max(best, max(band, wake) * slot * (1.0 - 0.18 * fi));
         }
-        /* Soft cross-bands for excitement without washing the room. */
-        float cross = softband(lat0 - sin(time_sec * 0.55 + center) * 0.35 * sway, half_w * 2.8) * 0.22 * density;
+        float cross = softband(lat0 - sin(motion * 0.85 + center) * 0.38 * sway, half_w * 2.9) * 0.24 * density;
         intensity = max(best, cross);
         color_drv = fract(0.5 + 0.5 * progress + 0.35 * lat0 + 0.20 * lat1 + hue_scroll);
     }
     else if(mode == 1)
     {
-        /* Wireframe Box - rotating cube + traveling face highlight (was static). */
+        /* Wireframe Box — rotates with Speed; Frequency = spin/hotspot rate; Size = cube. */
         float box_s = 0.72 * clamp(size_m, 0.55, 1.65);
         vec3 b = vec3(box_s);
-        float spin = time_sec * (0.28 + 0.22 * density);
-        float tip = time_sec * (0.18 + 0.20 * sway) + phase2 * 6.2831853;
+        float spin = motion * (0.55 + 0.35 * density);
+        float tip = motion * (0.35 + 0.40 * sway) + phase2 * 6.2831853;
         vec3 q = p;
-        q = gkRotY(q, spin);
-        q = gkRotX(q, tip * 0.55 * (0.35 + 0.65 * sway));
-        float ew = half_w * mix(2.0, 2.8, density);
+        if(axis == 0)
+        {
+            q = gkRotX(q, spin);
+            q = gkRotY(q, tip * 0.45);
+        }
+        else if(axis == 1)
+        {
+            q = gkRotY(q, spin);
+            q = gkRotX(q, tip * 0.45 * (0.35 + 0.65 * sway));
+        }
+        else
+        {
+            q = gkRotZ(q, spin);
+            q = gkRotY(q, tip * 0.45);
+        }
+        float ew = half_w * mix(2.0, 3.0, density);
         float edges = boxEdgeGlow(q, b, ew);
         float faces = 0.0;
         for(int f = 0; f < 6; f++)
             faces = max(faces, facePlane(q, b, ew * 1.15, f));
 
-        /* Traveling face / edge hotspot so motion reads on sparse LEDs. */
-        int hot = int(mod(floor(time_sec * (0.55 + 0.45 * density) + phase2 * 3.0), 6.0));
+        int hot = int(mod(floor(motion * (1.10 + 0.70 * density) + phase2 * 3.0), 6.0));
         float hot_face = facePlane(q, b, ew * 1.55, hot);
-        float pulse = 0.70 + 0.30 * sin(time_sec * (1.4 + sway) + float(hot));
+        float pulse = 0.70 + 0.30 * sin(motion * (2.2 + sway) + float(hot));
         intensity = max(edges * 1.05, faces * 0.28);
         intensity = max(intensity, hot_face * 0.95 * pulse);
-        /* Axis bias uses Path axis as preferred spin plane cue in hue. */
         float ax_c = (axis == 0) ? q.x : ((axis == 1) ? q.y : q.z);
         color_drv = fract(atan(q.z, q.x) / 6.2831853 + 0.5 + hue_scroll + 0.10 * ax_c + float(hot) * 0.08);
     }
     else if(mode == 2)
     {
-        /* Moving Boxes - wider orbits so boxes stay apart. */
+        /* Moving Boxes — wider orbits; Speed/Freq = roam rate; Size = box + orbit. */
         float best = 0.0;
         float best_h = 0.0;
         float n_vis = mix(2.0, 4.0, density);
@@ -207,14 +228,18 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float fi = float(i);
             float slot_on = 1.0 - step(n_vis, fi);
             float seed = fi * 1.7 + 0.3;
-            float ax = time_sec * (0.42 + 0.14 * fi) + seed + phase2 * 1.7;
-            float ay = time_sec * (0.33 + 0.10 * fi) + seed * 0.7;
-            /* Phase-offset each box around the room so they don't cluster. */
+            float ax = motion * (0.70 + 0.22 * fi) + seed + phase2 * 1.7;
+            float ay = motion * (0.55 + 0.16 * fi) + seed * 0.7;
             float ph = fi * 1.5707963;
             vec3 c = vec3(
                 sin(ax + ph) * orbit,
                 sin(ay * 1.15 + seed) * (orbit * 0.55),
                 cos(ax * 0.92 + ph) * orbit);
+            /* Bias roam plane from Path axis. */
+            if(axis == 1)
+                c = vec3(c.x, c.z, c.y);
+            else if(axis == 2)
+                c = vec3(c.z, c.y, c.x);
             float half_box = mix(0.10, 0.18, 0.5 + 0.5 * hash21(vec2(seed, 2.1)))
                            * clamp(size_m, 0.55, 1.45);
             vec3 d = abs(p - c) - vec3(half_box);
@@ -222,25 +247,23 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float glow = softband(box_d, half_w * 1.70) * slot_on;
             best = max(best, glow);
             if(glow >= best - 1e-5)
-                best_h = fract(fi * 0.17 + hue_scroll + time_sec * 0.02);
+                best_h = fract(fi * 0.17 + hue_scroll + motion * 0.03);
         }
         intensity = best;
         color_drv = best_h;
     }
     else if(mode == 3)
     {
-        /* Rubik Cube - slower, less flashy; density/sway/size/thick/detail wired. */
+        /* Rubik — Speed slows/stops turns; Density = scramble; Sway = twist; Thick/Detail = grooves. */
         float box_s = 0.88 * clamp(size_m, 0.55, 1.45);
         vec3 b = vec3(box_s);
         float cell = max(box_s * 2.0 / 3.0, 0.12);
 
-        /* Slow solved↔scramble breathe; density raises scramble depth. */
-        float cycle = fract(time_sec * (0.035 + 0.025 * density) + phase2 * 0.02);
+        float cycle = fract(motion * (0.08 + 0.06 * density) + phase2 * 0.02);
         float scramble = 1.0 - abs(2.0 * cycle - 1.0);
         scramble = smoothstep(0.08, 0.90, scramble) * mix(0.35, 1.0, density);
 
-        /* Turns ~every 2.5–4s instead of ~1.2s; sway softens twist. */
-        float turn_clock = time_sec * (0.28 + 0.12 * density);
+        float turn_clock = motion * (0.55 + 0.25 * density);
         float turn_id = floor(turn_clock);
         float turn_u = fract(turn_clock);
         float turn_ease = smoothstep(0.0, 0.45, turn_u) * (1.0 - smoothstep(0.75, 1.0, turn_u));
@@ -286,27 +309,29 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float sticker = shell * in_face * (1.0 - groove * 0.80);
 
         float solved_id = (float(face) + 0.5) / 6.0;
-        /* Stable scramble palette - hash without time in the seed (was flashing). */
         float scramble_id = (floor(hash21(cell_i + vec2(float(face) * 3.1, turn_id * 0.01)) * 6.0) + 0.5) / 6.0;
         color_drv = mix(solved_id, scramble_id, scramble * 0.85);
         color_drv = fract(color_drv + hue_scroll * 0.15);
 
         float edges = boxEdgeGlow(q, b, half_w * 1.45);
         intensity = max(sticker * 1.05, edges * 0.70);
-        /* Soft breathe instead of hard flash. */
-        intensity *= 0.88 + 0.12 * sin(time_sec * 0.55 + scramble * 1.5);
+        intensity *= 0.88 + 0.12 * sin(motion * 0.90 + scramble * 1.5);
     }
     else if(mode == 4)
     {
-        float a = time_sec * (0.45 + 0.30 * density);
+        float a = motion * (0.75 + 0.45 * density);
         float span = 0.78 * clamp(size_m, 0.55, 1.65);
         vec3 c = vec3(
             sin(a) * 0.72,
             sin(a * 1.3 + phase2 * 6.2831853) * 0.52,
             cos(a * 0.85 + 1.1) * 0.72) * span;
+        if(axis == 1)
+            c = vec3(c.x, c.z, c.y);
+        else if(axis == 2)
+            c = vec3(c.z, c.y, c.x);
         float rad = mix(0.20, 0.38, 0.35 + 0.65 * density) * clamp(size_m, 0.55, 1.55);
         float d0 = length(p - c);
-        intensity = softband(d0, rad * 0.85);
+        intensity = softband(d0, max(rad * 0.85, half_w));
         for(int i = 1; i <= 4; i++)
         {
             float fi = float(i);
@@ -315,11 +340,15 @@ void volumeMain(out vec4 out_color, in vec3 p01)
                 sin(a2) * 0.72,
                 sin(a2 * 1.3 + phase2 * 6.2831853) * 0.52,
                 cos(a2 * 0.85 + 1.1) * 0.72) * span;
+            if(axis == 1)
+                c2 = vec3(c2.x, c2.z, c2.y);
+            else if(axis == 2)
+                c2 = vec3(c2.z, c2.y, c2.x);
             float d2 = length(p - c2);
             float r2 = rad * (1.0 - 0.12 * fi);
-            intensity = max(intensity, softband(d2, r2 * 0.90) * (1.0 - 0.18 * fi));
+            intensity = max(intensity, softband(d2, max(r2 * 0.90, half_w)) * (1.0 - 0.18 * fi));
         }
-        color_drv = fract(time_sec * 0.08 + hue_scroll);
+        color_drv = fract(motion * 0.12 + hue_scroll);
     }
     else if(mode == 5)
     {
@@ -335,8 +364,8 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float h2 = hash21(vec2(fi * 0.91, 4.2));
             float lat0 = (h * 2.0 - 1.0) * 0.82 * span;
             float lat1 = (h2 * 2.0 - 1.0) * 0.82 * span;
-            float speed = 0.30 + 0.50 * hash21(vec2(fi, 7.1));
-            float pos = (fract(time_sec * speed * 0.20 + h) * 2.0 - 1.0) * 0.96 * span;
+            float speed = 0.45 + 0.75 * hash21(vec2(fi, 7.1));
+            float pos = (fract(motion * speed * 0.35 + h) * 2.0 - 1.0) * 0.96 * span;
             vec3 c;
             vec3 dir;
             if(axis == 0)
@@ -377,8 +406,8 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         {
             float fb = float(b);
             float slot_on = 1.0 - step(bolts, fb);
-            float seed = fb * 2.3 + floor(time_sec * 0.55 + fb);
-            float flash = fract(time_sec * (0.35 + fb * 0.12) + hash21(vec2(seed, 0.2)));
+            float seed = fb * 2.3 + floor(motion * (0.90 + 0.50 * freq_n) + fb);
+            float flash = fract(motion * (0.55 + fb * 0.18) + hash21(vec2(seed, 0.2)));
             float alive = (1.0 - smoothstep(0.0, 0.78, flash)) * slot_on;
             vec3 a0 = vec3(
                 hash21(vec2(seed, 1.0)) * 2.0 - 1.0,
