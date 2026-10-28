@@ -261,7 +261,7 @@ After hygiene in this campaign: touched files → `hygiene`/`fixed`; untouched �
 | `effects/volume/rotating-cone.fs` | pending | | Judgment → Claude ~2026-11-23 |
 | `effects/volume/shell-pattern.fs` | pending | | Judgment → Claude ~2026-11-23 |
 | `effects/volume/spiral.fs` | hygiene | 2026-10-27 | ASCII dash/quote/ellipsis hygiene (hybrid pass) |
-| `effects/volume/starfield.fs` | hygiene | 2026-10-27 | ASCII dash/quote/ellipsis hygiene (hybrid pass) |
+| `effects/volume/starfield.fs` | fixed | 2026-10-28 | Full multipass: continuous-time fly-through (no progress wrap flash); fatter sparse-LED kernels; stratified star fill; clearer knobs/description |
 | `effects/volume/surface-ambient.fs` | pending | | Judgment → Claude ~2026-11-23 |
 | `effects/volume/traveling-light.fs` | hygiene | 2026-10-27 | ASCII dash/quote/ellipsis hygiene (hybrid pass) |
 | `effects/volume/wave.fs` | pending | | Judgment → Claude ~2026-11-23 |
