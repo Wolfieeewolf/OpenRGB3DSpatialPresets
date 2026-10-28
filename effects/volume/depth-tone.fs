@@ -2,14 +2,14 @@
 name: Depth Tone
 class: DepthTone
 category: Volume
-description: Hue steps across the room
+description: Soft hue steps across the room that stay bright on sparse LEDs
 global: speed brightness frequency detail size scale fps color surface position strip bands path
 combo: depth_layout | Layout:
 option: Linear (axis)
 option: From room center
-slider: depth_tone_count 2 64 12 | Depth tones:
-slider: depth_dim_amount 0 100 22 unit pct | Center dim:
-param: depth_pos
+slider: depth_tone_count 2 64 12 | Depth tones: | How many hue bands across the span
+slider: depth_dim_amount 0 100 22 unit pct | Center dim: | Soft mid-room dimming
+param: anim_time
 param: raw depth_tone_count
 param: unit depth_dim_amount
 param: path_axis
@@ -21,7 +21,8 @@ finish: atlas
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    float pos = u_params[0];
+    /* Continuous anim_time scroll - no progress wrap flash. */
+    float pos = u_params[0] * 0.18;
     float hue_span = u_params[1];
     float percent_dim = u_params[2];
     int axis = int(clamp(u_params[3], 0.0, 2.0) + 0.5);
@@ -55,7 +56,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float hue_turns = fract(phase_use + 1.0);
     float ang = hue_turns * 6.2831853;
     float center = 1.0 - abs(d_mapped - 0.5) * 2.0;
-    /* Keep a bright floor so center-dim never kills the room. */
-    float v = clamp(1.0 - percent_dim * center * 0.85, 0.42, 1.0);
+    float v = clamp(1.0 - percent_dim * center * 0.75, 0.48, 1.0);
     out_color = vec4(cos(ang) * 0.5 + 0.5, sin(ang) * 0.5 + 0.5, v, 1.0);
 }

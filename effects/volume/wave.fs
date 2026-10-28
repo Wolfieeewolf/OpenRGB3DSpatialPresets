@@ -2,7 +2,7 @@
 name: Wave
 class: Wave
 category: Volume
-description: Traveling room wave
+description: Soft traveling room wave that stays lit on sparse LED grids
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness edge
 resolution: 18
 pattern_label: Style:
@@ -14,7 +14,7 @@ pattern: Ocean drift (waves) | Layered ocean-like motion with softer peaks.
 pattern: Gradient wave | Smoother gradient roll without sharp crests.
 slider: wave_amplitude 20 200 100 unit pct | Amplitude: | Peak height of the surface
 slider: wave_direction_deg 0 360 0 | Wave direction: | Direction of the linear wave
-param: progress_tau
+param: anim_time
 param: wave_freq
 param: unit wave_amplitude
 param: pattern
@@ -25,12 +25,13 @@ finish: hex
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    float travel = u_params[0];
+    /* Continuous anim_time - no progress wrap flash. */
+    float travel = u_params[0] * 1.15;
     float freq = max(u_params[1], 0.2);
     float amp = max(u_params[2], 0.2);
     int style = int(u_params[3] + 0.5);
     float dir_rad = u_params[4];
-    float sigma = max(u_params[5], 0.02);
+    float sigma = max(u_params[5], 0.032);
 
     vec3 l = p01 * 2.0 - 1.0;
     float r = length(l.xz);
@@ -39,36 +40,23 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float surface_y;
 
     if(style == 1)
-    {
         surface_y = amp * sin(freq * r * 3.0 + travel);
-    }
     else if(style == 2)
-    {
         surface_y = amp * sin(freq * wave_pos * 4.0 + travel);
-    }
     else if(style == 3)
-    {
         surface_y = amp * (sin(freq * r + travel) * 0.5 +
                            sin(phase * 0.7 + freq * r * 1.5 + travel * 1.2) * 0.3 +
                            sin(phase * 0.5 + r * 2.0 + travel * 0.8) * 0.2);
-    }
     else if(style == 4)
-    {
         surface_y = amp * (0.5 + 0.5 * sin(freq * r + wave_pos * 2.0 + travel));
-    }
     else
-    {
         surface_y = amp * sin(freq * r + wave_pos * 2.0 + travel);
-    }
 
     float d = abs(l.y - surface_y);
-    float d_cutoff = 3.0 * sigma * max(1.0, amp);
-    float intensity = 0.0;
-    if(d <= d_cutoff)
-    {
-        intensity = exp(-d * d / (sigma * sigma));
-        intensity = min(1.0, intensity);
-    }
+    float soft = max(sigma, 0.032);
+    float core = exp(-(d * d) / (soft * soft * 0.45));
+    float halo = exp(-(d * d) / (soft * soft * 1.75)) * 0.40;
+    float intensity = clamp(core + halo, 0.0, 1.0);
     float pos_norm = clamp((surface_y / amp + 1.0) * 0.5, 0.0, 1.0);
     out_color = vec4(intensity, pos_norm, 0.0, 1.0);
 }

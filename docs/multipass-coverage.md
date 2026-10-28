@@ -244,27 +244,27 @@ After hygiene in this campaign: touched files → `hygiene`/`fixed`; untouched �
 
 | Path | Status | Date | Notes |
 |------|--------|------|-------|
-| `effects/volume/bouncing-ball.fs` | hygiene | 2026-10-27 | ASCII dash/quote/ellipsis hygiene (hybrid pass) |
+| `effects/volume/bouncing-ball.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/breathing-sphere.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/bubbles.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
-| `effects/volume/color-wheel.fs` | pending | | Judgment → Claude ~2026-11-23 |
-| `effects/volume/depth-tone.fs` | pending | | Judgment → Claude ~2026-11-23 |
+| `effects/volume/color-wheel.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
+| `effects/volume/depth-tone.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/dna-helix.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/grid-kit.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
-| `effects/volume/harmonic-pulse.fs` | pending | | Judgment → Claude ~2026-11-23 |
-| `effects/volume/hex-lattice.fs` | pending | | Judgment → Claude ~2026-11-23 |
+| `effects/volume/harmonic-pulse.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
+| `effects/volume/hex-lattice.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/noise_fire_column.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/particle-field.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/plasma.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/pulse-ring.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/README.md` | hygiene | 2026-10-27 | ASCII dash/quote/ellipsis hygiene (hybrid pass) |
-| `effects/volume/rotating-cone.fs` | pending | | Judgment → Claude ~2026-11-23 |
-| `effects/volume/shell-pattern.fs` | pending | | Judgment → Claude ~2026-11-23 |
+| `effects/volume/rotating-cone.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
+| `effects/volume/shell-pattern.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/spiral.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/starfield.fs` | fixed | 2026-10-28 | Full multipass: continuous-time fly-through (no progress wrap flash); fatter sparse-LED kernels; stratified star fill; clearer knobs/description |
-| `effects/volume/surface-ambient.fs` | pending | | Judgment → Claude ~2026-11-23 |
+| `effects/volume/surface-ambient.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/traveling-light.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
-| `effects/volume/wave.fs` | pending | | Judgment → Claude ~2026-11-23 |
+| `effects/volume/wave.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 
 ### movie-sync
 

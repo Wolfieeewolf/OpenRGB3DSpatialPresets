@@ -2,7 +2,7 @@
 name: Color Wheel
 class: ColorWheel
 category: Volume
-description: Spinning hue on the selected plane
+description: Soft spinning hue on the selected plane for sparse LED rooms
 global: speed brightness frequency detail size scale fps color surface position plane
 rainbow: true
 combo: direction | Direction:
@@ -13,8 +13,8 @@ option: Radial (classic)
 option: Shear (bands)
 option: Rings (concentric)
 option: Pie slices
-slider: hue_repeats 1 100 1 | Hue repeats:
-param: progress
+slider: hue_repeats 1 100 1 | Hue repeats: | Rainbow cycles across the plane
+param: anim_time
 param: sign direction
 param: raw hue_repeats
 param: plane
@@ -26,9 +26,9 @@ finish: atlas
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    float progress = u_params[0];
+    /* Continuous anim_time - no progress wrap flash. */
+    float progress = u_params[0] * 0.22;
     float dir = u_params[1];
-    /* wrap = rainbow cycles across one radial/turn span; 100 ≈ LED-thin coverage. */
     float wrap = clamp(u_params[2], 0.1, 100.0);
     int pl = int(u_params[3] + 0.5);
     int geom = int(u_params[4] + 0.5);
@@ -71,8 +71,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         angle = atan(v, u) * wrap;
     }
 
-    // Rings animate via the progress term inside angle; adding the global spin
-    // for geom 2 would cancel it exactly (speed would do nothing).
     float hue_turns = angle / 6.2831855 + freq_spin * 0.02;
     if(geom != 2)
         hue_turns += progress * dir;

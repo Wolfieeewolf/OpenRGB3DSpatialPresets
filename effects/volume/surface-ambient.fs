@@ -2,7 +2,7 @@
 name: Surface Ambient
 class: SurfaceAmbient
 category: Volume
-description: Room-shell materials with locked presets or Motion plus colours
+description: Soft room-shell materials (fire, water, lava) for sparse LED rooms
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness
 resolution: 30
 user_colors: 1
@@ -476,7 +476,7 @@ float saApplyMotion(int motion, int role, float alongA, float alongB, float up01
 
 float saShellIntensity(float dist, float extent, float h_pct, float sigma)
 {
-    float height_ext = max(0.02, h_pct) * max(0.001, extent);
+    float height_ext = max(0.032, h_pct) * max(0.001, extent);
     if(dist < 0.0 || dist > height_ext)
         return 0.0;
     float d_sigma = max(1e-4, sigma * extent);
@@ -489,7 +489,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     int style = int(floor(u_params[1] + 0.5));
     int motion = int(floor(u_params[2] + 0.5));
     float h_pct = max(0.05, u_params[3]);
-    float sigma = max(0.02, u_params[4]);
+    float sigma = max(0.032, u_params[4]);
     float freq = max(0.05, u_params[5]);
     float speed = max(0.0, u_params[6]);
     float band_mul = max(0.0, u_params[7]);

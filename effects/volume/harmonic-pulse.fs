@@ -2,7 +2,7 @@
 name: Harmonic Pulse
 class: HarmonicPulse
 category: Volume
-description: Room-wide harmonic pulse
+description: Soft room-wide harmonic pulse readable on sparse LED grids
 global: speed brightness frequency detail size scale fps color surface position strip bands
 pattern_index: 1
 pattern_label: Color pulse:
@@ -11,10 +11,10 @@ pattern: One color (brightness pulse)
 pattern: Two colors (snap A↔B)
 pattern: Two colors (soft A↔B)
 pattern: Multi color (chase)
-slider: harmonic_spatial_amount 0 100 85 unit pct | Spatial waves:
-slider: harmonic_flow_amount 40 250 115 unit pct | Pulse energy:
-slider: harmonic_pulse_contrast 35 200 85 unit pct | Pulse contrast:
-slider: harmonic_zoom_wobble 0 300 55 unit | Zoom wobble:
+slider: harmonic_spatial_amount 0 100 85 unit pct | Spatial waves: | How much the pulse varies in space
+slider: harmonic_flow_amount 40 250 115 unit pct | Pulse energy: | Beat / flow strength
+slider: harmonic_pulse_contrast 35 200 85 unit pct | Pulse contrast: | Peak vs trough contrast
+slider: harmonic_zoom_wobble 0 300 55 unit | Zoom wobble: | Breathing zoom of the field
 param: harmonic_motion
 param: harmonic_freq
 param: unit harmonic_zoom_wobble
@@ -34,6 +34,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float pulse_mix = clamp(u_params[5], 0.0, 1.0);
     const float TWO_PI = 6.2831853;
 
+    /* Continuous u_time - no progress wrap flash. */
     float beat = 0.5 + 0.5 * sin(u_time * motion * TWO_PI);
     float beat2 = 0.5 + 0.5 * sin(u_time * motion * 1.618 * TWO_PI + 1.2);
     float master = clamp(0.65 * beat + 0.35 * beat2, 0.0, 1.0);
@@ -53,11 +54,11 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         0.25 * sin(zf * TWO_PI + t1 - t2));
     field = clamp(field, 0.0, 1.0);
 
-    float val = mix(master, field * (0.35 + 0.65 * master), pulse_mix);
+    float val = mix(master, field * (0.40 + 0.60 * master), pulse_mix);
     val = pow(clamp(val, 0.0, 1.0), contrast);
-    val = clamp(0.18 + 0.82 * val, 0.0, 1.0);
+    /* Mild floor so sparse LEDs never go fully black in troughs. */
+    val = clamp(0.22 + 0.78 * val, 0.0, 1.0);
 
-    /* Hue follows spatial cycles tightly (≈ spatial_freq bands across the room). */
     float phase01 = fract(xf + yf * 0.71 + zf * 0.43 + master * 0.08 + u_time * motion * 0.12);
     out_color = vec4(val, phase01, master, 1.0);
 }

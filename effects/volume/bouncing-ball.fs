@@ -2,10 +2,10 @@
 name: Bouncing Ball
 class: BouncingBall
 category: Volume
-description: Balls bouncing through the room
+description: Soft bouncing balls that stay visible on sparse LED grids
 global: speed brightness frequency detail size scale fps color surface position strip bands count
 param: ball_sim
-param: gcount 1 32
+param: gcount 2 32
 param: ball_radius
 param: const1
 param: motion
@@ -18,7 +18,6 @@ float hash01(float n)
 {
     return fract(sin(n) * 43758.5453);
 }
-/* Elastic 1D bounce between [lo, hi] at constant |speed|. */
 float bounce1D(float x0, float v, float t, float lo, float hi)
 {
     float L = max(hi - lo, 1e-4);
@@ -28,11 +27,18 @@ float bounce1D(float x0, float v, float t, float lo, float hi)
     if(m < 0.0) m += period;
     return (m <= L) ? (lo + m) : (hi - (m - L));
 }
+float bbSoft(float d, float soft)
+{
+    float s = max(soft, 0.028);
+    float core = exp(-(d * d) / (s * s * 0.32));
+    float halo = exp(-(d * d) / (s * s * 1.75)) * 0.42;
+    return clamp(core + halo, 0.0, 1.0);
+}
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
     float sim_t = u_params[0];
-    int count = int(clamp(u_params[1], 1.0, 32.0) + 0.5);
-    float radius = clamp(u_params[2], 0.025, 0.28);
+    int count = int(clamp(u_params[1], 2.0, 32.0) + 0.5);
+    float radius = clamp(u_params[2], 0.030, 0.28);
     float glow_mul = max(u_params[3], 1.0);
     float motion = clamp(u_params[4], 0.0, 1.0);
     float hue_scroll = fract(u_params[5]);
@@ -40,7 +46,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     float lo = radius;
     float hi = 1.0 - radius;
-    /* Speed scales travel rate; keep a usable mid-slider floor so motion reads. */
     float speed = mix(0.18, 0.85, pow(max(motion, 0.02), 0.50));
 
     float intensity = 0.0;
@@ -57,11 +62,9 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float y0 = mix(lo, hi, hy);
         float z0 = mix(lo, hi, hz);
 
-        /* Independent axis speeds - vertical matches horizontal so ceiling is hit. */
         float vx = (hash01(fk * 733.0) * 2.0 - 1.0) * speed * mix(0.75, 1.15, hash01(fk * 11.0));
         float vy = (hash01(fk * 577.0) * 2.0 - 1.0) * speed * mix(0.85, 1.25, hash01(fk * 19.0));
         float vz = (hash01(fk * 829.0) * 2.0 - 1.0) * speed * mix(0.75, 1.15, hash01(fk * 29.0));
-        /* Ensure no axis is nearly still (would skip floor/ceiling). */
         vy += (1.0 - 2.0 * step(0.5, hash01(fk * 41.0))) * speed * 0.35;
 
         float t = sim_t + hash01(fk * 47.0) * 3.0;
@@ -70,7 +73,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float pz = bounce1D(z0, vz, t, lo, hi);
         vec3 c = vec3(px, py, pz);
 
-        /* Mild squash near any wall so impacts read without looking like floor-only hops. */
         float wall_x = 1.0 - smoothstep(0.0, radius * 2.0, min(px - lo, hi - px));
         float wall_y = 1.0 - smoothstep(0.0, radius * 2.0, min(py - lo, hi - py));
         float wall_z = 1.0 - smoothstep(0.0, radius * 2.0, min(pz - lo, hi - pz));
@@ -83,12 +85,8 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         dlt.z /= max(wz, 0.35);
         float d = length(dlt);
 
-        float core_r = radius * 0.92;
-        float glow_r = radius * (1.35 + 0.35 * glow_mul);
-        float core = max(0.0, 1.0 - d / max(core_r, 1e-4));
-        core = core * core;
-        float outer = 0.45 * max(0.0, 1.0 - d / max(glow_r, 1e-4));
-        float v = clamp(core * 1.35 + outer, 0.0, 1.0) * slot_on;
+        float soft = max(radius * (0.95 + 0.35 * glow_mul), 0.028);
+        float v = bbSoft(d, soft) * slot_on;
         if(v > intensity)
         {
             intensity = v;

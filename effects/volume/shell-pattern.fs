@@ -2,7 +2,7 @@
 name: Shell Pattern
 class: ShellPattern
 category: Volume
-description: Shell contour extrude and cube displays from Display and Pattern
+description: Soft shell, bars, and bursts that stay lit on sparse LED rooms
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness edge
 resolution: 22
 pattern_source: kernels
@@ -33,6 +33,7 @@ param: strip_reps
 param: strip_unfold
 param: strip_dir
 finish: hex
+
 # Effect
 float fractf(float x) { return x - floor(x); }
 float hash11(float x) { return fractf(sin(x * 12.9898) * 43758.547); }
@@ -185,8 +186,10 @@ float cubeHash11(float n)
 }
 float softBand(float d, float sigma)
 {
-    float s = max(sigma, 0.02);
-    return exp(-(d * d) / (s * s));
+    float s = max(sigma, 0.028);
+    float core = exp(-(d * d) / (s * s * 0.45));
+    float halo = exp(-(d * d) / (s * s * 1.70)) * 0.38;
+    return clamp(core + halo, 0.0, 1.0);
 }
 float lifeEnv(float life)
 {
@@ -346,7 +349,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     int disp = int(clamp(u_params[0], 0.0, 9.0) + 0.5);
     float amp = clamp(u_params[1], 0.2, 2.5);
     float clock = u_params[2];
-    float sigma = max(u_params[3], 0.03);
+    float sigma = max(u_params[3], 0.028);
     float detail = clamp(u_params[4], 0.0, 1.0);
     float size_m = clamp(u_params[5], 0.08, 3.0);
     float freq_n = clamp(u_params[6], 0.0, 1.0);

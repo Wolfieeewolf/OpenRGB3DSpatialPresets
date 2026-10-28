@@ -2,7 +2,7 @@
 name: Rotating Cone Spotlights
 class: RotatingConeSpotlights
 category: Volume
-description: Searchlights on Center Floor Ceiling or Walls
+description: Soft searchlight cones on floor, ceiling, walls, or center
 instances: 1
 global: speed brightness frequency size scale fps color surface position strip bands count
 resolution: 28
@@ -290,6 +290,9 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     float dist = clamp(best.x, -1.0, 1.0);
     float sat = clamp(1.0 - dist, 0.0, 1.0);
-    float val = clamp(pow(max(0.0, 1.0 + dist), 4.0), 0.0, 1.0);
+    /* Softer falloff so sparse LEDs still catch the beam. */
+    float val = clamp(pow(max(0.0, 1.0 + dist), 2.6), 0.0, 1.0);
+    float halo = clamp(exp(-(dist * dist) / 0.18) * 0.28, 0.0, 0.35);
+    val = clamp(val + halo, 0.0, 1.0);
     out_color = vec4(sat, val, best.y, 1.0);
 }
