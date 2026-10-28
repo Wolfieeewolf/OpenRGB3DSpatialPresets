@@ -250,7 +250,7 @@ After hygiene in this campaign: touched files â†’ `hygiene`/`fixed`; untouched â
 | `effects/volume/color-wheel.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/depth-tone.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/dna-helix.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
-| `effects/volume/grid-kit.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
+| `effects/volume/grid-kit.fs` | fixed | 2026-10-28 | Re-multipass: Wireframe rotates + traveling face highlight; Rubik slower/less flashy with knobs wired; Moving Boxes wider orbits; Plane Sweep multi-crest + wake |
 | `effects/volume/harmonic-pulse.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/hex-lattice.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
 | `effects/volume/noise_fire_column.fs` | fixed | 2026-10-28 | Full multipass: continuous-time motion (no progress wrap flash); fatter sparse-LED kernels; clearer knobs/description |
