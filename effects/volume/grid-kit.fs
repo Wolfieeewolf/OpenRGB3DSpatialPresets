@@ -29,10 +29,8 @@ param: phase37
 finish: hex
 
 # Effect
-/* Globals → params:
- * Speed → motion_clock (0 stops; ~0.4 Hz at 100). Frequency → mild motion nudge + hue_scroll_s.
- * Detail → ndetail (edge sharpness). Size → size_star. Thickness → gthickness.
- * Path → path_axis. Scale = occupancy (engine atlas, not packed here). */
+# Globals: Speed=motion_clock (0 stops; ~0.4 Hz at 100). Frequency=mild motion nudge + hue_scroll_s.
+# Detail=ndetail. Size=size_star. Thickness=gthickness. Path=path_axis. Scale=occupancy (atlas).
 float softband(float d, float w)
 {
     float hw = max(w, 0.024);

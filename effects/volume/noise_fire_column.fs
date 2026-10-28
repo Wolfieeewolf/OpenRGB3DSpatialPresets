@@ -20,10 +20,8 @@ param: gthickness
 finish: hex
 
 # Effect
-/* Globals → params:
- * Speed → motion_clock (0 stops). Frequency → freq_n + hue_scroll_s.
- * Detail → ndetail (noise grain). Size → size_star (column scale).
- * Thickness → gthickness (edge softness). Color via hex finish. */
+# Globals: Speed=motion_clock (0 stops). Frequency=freq_n + hue_scroll_s.
+# Detail=ndetail. Size=size_star. Thickness=gthickness. Color via hex finish.
 float nfcHash(float n)
 {
     return fract(sin(n) * 43758.5453123);
