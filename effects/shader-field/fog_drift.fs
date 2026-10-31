@@ -1,5 +1,6 @@
 # Name
-name: Fog Drift - soft rolling haze
+name: Fog Drift
+description: Soft rolling haze.
 
 # Effect
 float fdHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}

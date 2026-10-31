@@ -1,5 +1,6 @@
 # Name
-name: Plasmic Ribbons - flowing bands
+name: Plasmic Ribbons
+description: Flowing bands.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

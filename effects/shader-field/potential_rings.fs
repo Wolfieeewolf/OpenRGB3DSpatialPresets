@@ -1,5 +1,6 @@
 # Name
-name: Potential Rings - soft EM field
+name: Potential Rings
+description: Soft electromagnetic-style rings from a field potential.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

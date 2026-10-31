@@ -1,5 +1,6 @@
 # Name
-name: Arc Static - soft electric wash
+name: Arc Static
+description: Soft electric wash.
 
 # Effect
 float asHash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}

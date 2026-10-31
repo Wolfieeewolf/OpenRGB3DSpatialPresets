@@ -1,5 +1,6 @@
 # Name
-name: Corner Waves - four-corner rings
+name: Corner Waves
+description: Four-corner rings.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

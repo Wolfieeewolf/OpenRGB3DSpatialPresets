@@ -1,5 +1,6 @@
 # Name
-name: Checker Drift - moving lattice
+name: Checker Drift
+description: Moving checker lattice with drifting glow.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

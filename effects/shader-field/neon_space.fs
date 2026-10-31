@@ -1,5 +1,6 @@
 # Name
-name: Neon Space - soft star haze
+name: Neon Space
+description: Soft star haze.
 
 # Effect
 float nsHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}

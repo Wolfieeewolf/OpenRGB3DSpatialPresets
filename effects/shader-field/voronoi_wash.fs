@@ -1,5 +1,6 @@
 # Name
-name: Voronoi Wash - soft cells
+name: Voronoi Wash
+description: Soft cells.
 
 # Effect
 float vwHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}

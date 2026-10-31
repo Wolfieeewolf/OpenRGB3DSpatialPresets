@@ -1,5 +1,6 @@
 # Name
-name: Oil Slick - iridescent layers
+name: Oil Slick
+description: Iridescent layers.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

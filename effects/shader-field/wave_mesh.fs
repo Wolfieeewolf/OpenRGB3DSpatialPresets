@@ -1,5 +1,6 @@
 # Name
-name: Wave Mesh - interference lattice
+name: Wave Mesh
+description: Interference lattice.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

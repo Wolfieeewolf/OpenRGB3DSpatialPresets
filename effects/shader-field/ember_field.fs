@@ -1,5 +1,6 @@
 # Name
-name: Ripple Ember - fire rings
+name: Ripple Ember
+description: Expanding fire rings with warm ember falloff.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

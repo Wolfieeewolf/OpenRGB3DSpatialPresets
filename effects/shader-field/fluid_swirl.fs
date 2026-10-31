@@ -1,5 +1,6 @@
 # Name
-name: Fluid Swirl - soft current
+name: Fluid Swirl
+description: Soft current.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

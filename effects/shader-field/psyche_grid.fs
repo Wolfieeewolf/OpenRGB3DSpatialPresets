@@ -1,5 +1,6 @@
 # Name
-name: Psyche Grid - soft 60s lattice
+name: Psyche Grid
+description: Soft 60s lattice.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

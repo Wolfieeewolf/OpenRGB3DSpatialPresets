@@ -1,5 +1,6 @@
 # Name
-name: Melt Petals - soft floral wash
+name: Melt Petals
+description: Soft floral wash.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

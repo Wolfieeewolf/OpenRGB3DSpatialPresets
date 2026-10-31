@@ -1,5 +1,6 @@
 # Name
-name: Neon Warp - tunnel glow
+name: Neon Warp
+description: Tunnel glow.
 
 # Effect
 vec3 nwPalette(float t){vec3 a=vec3(0.960,0.260,0.580);vec3 b=vec3(0.900,0.138,0.450);vec3 c=vec3(0.520,0.200,0.520);vec3 d=vec3(-0.60,-0.90,-0.09);return a+b*cos(6.28318*(c*t+d));}

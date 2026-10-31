@@ -1,5 +1,6 @@
 # Name
-name: Atom Plasma - compact lobes
+name: Atom Plasma
+description: Compact plasma lobes that stay readable on sparse LED grids.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

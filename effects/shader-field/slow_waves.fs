@@ -1,5 +1,6 @@
 # Name
-name: Slow Waves - soft blue bands
+name: Slow Waves
+description: Soft blue bands.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

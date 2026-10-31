@@ -1,5 +1,6 @@
 # Name
-name: Oozy Flow - soft molten wash
+name: Oozy Flow
+description: Soft molten wash.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

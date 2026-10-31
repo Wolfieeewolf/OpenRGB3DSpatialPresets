@@ -1,5 +1,6 @@
 # Name
-name: Vortex Swirl - spiral field
+name: Vortex Swirl
+description: Spiral field.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

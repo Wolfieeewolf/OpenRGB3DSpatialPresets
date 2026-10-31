@@ -20,6 +20,18 @@ After hygiene in this campaign: touched files → `hygiene`/`fixed`; untouched �
 
 **Hygiene scan (no edits):** `effects/patterns/**`, `controllers/**`, `template.controller.json`, most toolbox `.fx` without fancy dashes - still `pending` for Claude judgment (not `keep`).
 
+## UI accessibility / content copy (pass 5 content half)
+
+Plugin Qt chrome is tracked in OpenRGB3DSpatialPlugin. This repo owns **user-visible content strings**: `name` / `description` / knob labels in `.fs` / `.fx` / packs / controllers.
+
+| Scope | Status | Date | Notes |
+|-------|--------|------|-------|
+| `effects/volume|audio|media/**` `.fs` headers | keep | 2026-11-01 | Already had real `name` + `description` |
+| `action-editor/toolbox/**` `.fx` headers | keep | 2026-11-01 | Names/descriptions present; full role judgment still pending Claude |
+| `effects/shader-field/**` (34 files) | fixed | 2026-11-01 | Split `name: Title - blurb` → short `name` + `description:` (was falling back to generic Shader Field tip in UI) |
+| Triggers / Movie Sync packs | keep | 2026-11-01 | Human `name` fields; pack JSON has no separate description key in schema |
+| Controllers | keep | 2026-11-01 | Layout titles OK per PRESET_FORMAT (partial zones may append zone label) |
+
 ## Per-file inventory
 ### action-editor
 

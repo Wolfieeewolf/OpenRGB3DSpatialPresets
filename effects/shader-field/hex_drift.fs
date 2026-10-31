@@ -1,5 +1,6 @@
 # Name
-name: Hex Drift - lattice wash
+name: Hex Drift
+description: Lattice wash.
 
 # Effect
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

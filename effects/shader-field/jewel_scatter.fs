@@ -1,5 +1,6 @@
 # Name
-name: Jewel Scatter - soft sparkle dots
+name: Jewel Scatter
+description: Soft sparkle dots.
 
 # Effect
 float jsHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
