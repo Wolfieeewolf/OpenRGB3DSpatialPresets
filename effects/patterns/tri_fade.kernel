@@ -1,0 +1,10 @@
+# Name
+name: Tri-level fade
+index: 35
+palette: trifade
+
+# Kernel
+float u = fractf(s01 * r + ph);
+if(u < 0.33) k = -1.0;
+else if(u < 0.66) k = 0.0;
+else k = 1.0;

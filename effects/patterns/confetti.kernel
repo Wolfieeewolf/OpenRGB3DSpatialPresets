@@ -1,0 +1,17 @@
+# Name
+name: Confetti (sparse pops)
+index: 40
+palette: sparkle
+
+# Kernel
+float cell = floor(s01 * r * 22.0 + ph * 6.0 + 50.0);
+float h = hash11(cell * 0.19 + 2.7);
+if(h < 0.965) k = -0.92;
+else
+{
+    float spd = 0.65 + hash11(cell * 0.41) * 2.2;
+    float t = fractf(tsec * spd + cell * 0.037);
+    float flash = (t < 0.14) ? (1.0 - smstep(0.0, 0.14, t)) : 0.0;
+    flash = flash * flash;
+    k = flash * 2.0 - 1.0;
+}

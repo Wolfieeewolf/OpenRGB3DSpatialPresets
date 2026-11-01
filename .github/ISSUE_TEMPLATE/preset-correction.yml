@@ -1,0 +1,54 @@
+name: Fix an existing preset
+description: Wrong LED indices, device name, or description for a preset in this repo.
+title: "[Preset fix]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Repository: [OpenRGB3DSpatialPresets](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets)** (controller JSON in `controllers/`).
+
+        Plugin bugs: [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/issues/new?template=bug_report.yml).
+
+        Prefer a **pull request** with corrected JSON when you can.
+
+  - type: input
+    id: preset_file
+    attributes:
+      label: Preset file
+      description: Path under controllers/
+      placeholder: "controllers/corsair_icue_220t_sp120_front_bottom.json"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      placeholder: "LED 3 and 4 swapped; controller_name should be different"
+    validations:
+      required: true
+
+  - type: input
+    id: openrgb_name
+    attributes:
+      label: Your OpenRGB device name (exact)
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Verification
+      options:
+        - "I tested with Add from preset in the plugin"
+        - "I can submit a PR with a fix"
+        - "I cannot test or PR - discussion only"
+    validations:
+      required: true

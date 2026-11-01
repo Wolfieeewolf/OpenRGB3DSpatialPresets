@@ -1,0 +1,6 @@
+# Name
+name: Sine
+index: 0
+
+# Kernel
+k = sin(TWO_PI * (s01 * r + ph));

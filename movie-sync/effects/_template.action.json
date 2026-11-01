@@ -1,0 +1,52 @@
+// =============================================================================
+// Movie Sync look template  (openrgb3d.action v5)
+// Copy into a category folder, e.g. washes/my_look.action.json
+// then register id in catalog.json (or Reload - ScanCategoryFolders also picks up new files).
+// Prefer Action Editor volume tools for room depth:
+//   field_ripple / field_strata / field_burst / spark_burst /
+//   particle_rain / particle_fireflies / neon_ribbon / ribbon_helix
+// Basic tools (solid / wipe / pulse) look flat in a real room.
+// =============================================================================
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "my_movie_effect_id",
+  "name": "My Movie Effect",
+  "duration_ms": 2000,
+  "loop": "once",
+  "priority": 20,
+  "tracks": [
+    {
+      "name": "All LEDs",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "spark_burst",
+          "effect": "spark_burst",
+          "start_ms": 0,
+          "end_ms": 2000,
+          "intensity": 0.9,
+          "min_intensity": 0.1,
+          "max_intensity": 1.0,
+          "color": "#FF2800",
+          "color_from": "#140000",
+          "color_to": "#FFFFB4",
+          "gradient": [
+            { "pos": 0.0, "color": "#140000" },
+            { "pos": 0.35, "color": "#FF2800" },
+            { "pos": 0.7, "color": "#FFA000" },
+            { "pos": 1.0, "color": "#FFFFB4" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.0,
+          "pulse_length": 0.35,
+          "period_ms": 1000,
+          "effect_size": 1.0,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

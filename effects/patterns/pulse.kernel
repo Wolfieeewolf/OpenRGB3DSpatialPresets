@@ -1,0 +1,7 @@
+# Name
+name: Pulse train
+index: 6
+
+# Kernel
+float w = 0.5 + 0.5 * sin(TWO_PI * u_phase);
+k = w * 2.0 - 1.0;

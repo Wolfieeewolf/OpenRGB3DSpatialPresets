@@ -1,0 +1,13 @@
+# Name
+name: Juggle (multi dot)
+index: 24
+
+# Kernel
+float v = -1.0;
+for(int b = 0; b < 3; b++)
+{
+    float c = fractf(ph + tsec * 0.11 * float(b + 1) + float(b) * 0.33);
+    float d = abs(fractf(s01 * r + 1.0 - c) - 0.5);
+    v = max(v, 1.0 - d * 8.0);
+}
+k = clamp(v, -1.0, 1.0);

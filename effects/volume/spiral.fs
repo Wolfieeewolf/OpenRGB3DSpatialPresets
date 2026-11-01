@@ -1,0 +1,205 @@
+# Name
+name: Spiral
+class: Spiral
+global: speed brightness frequency detail size scale fps color surface position strip bands
+category: Volume
+description: Soft spinning arms and funnels that stay lit on sparse LED rooms
+colors: FF0000 00FF00 0000FF
+rainbow: true
+resolution: 24
+user_colors: 2
+needs_frequency: false
+supports_strip_colormap: true
+supports_height_bands: true
+finish: spiral
+pattern_key: pattern_type
+param: anim_time
+param: spiral_freq
+param: pattern
+param: raw num_arms
+param: unit gap_size
+param: detail
+param: unit coil_amount
+param: unit height_coil_amount
+
+# Controls
+slider: num_arms 2 8 3 | Arms: | Number of spiral arms
+slider: gap_size 10 80 28 | Gap Size: | Gap between blades
+slider: coil_amount 0 100 0 | Coil: | 0 = straight spin arms; higher = tighter spiral
+slider: height_coil_amount 0 100 0 | Height coil: | 0 = flat spin; higher = vertical helix
+
+# Patterns
+pattern: Smooth Spiral | Soft spiral ribbons with a bright crisp centerline.
+pattern: Pinwheel | Filled pinwheel wedges. Straight rays when Coil is low.
+pattern: Saw Blade | Saw blade with serrated teeth along each arm.
+pattern: Swirl Circles | Concentric rings that Coil twists into swirls.
+pattern: Hypnotic | Busy multi-frequency twist with crisp interference ridges.
+pattern: Simple Spin | Clean rotating rays. Coil bends them.
+pattern: Tornado / Twister | Funnel wall and wind ribbons climbing the room.
+
+# Effect
+float spSaturate(float v) { return clamp(v, 0.0, 1.0); }
+float spSoft(float d, float w)
+{
+    float s = max(w, 0.028);
+    float core = exp(-(d * d) / (s * s * 0.45));
+    float halo = exp(-(d * d) / (s * s * 1.65)) * 0.38;
+    return clamp(core + halo, 0.0, 1.0);
+}
+float spRidge(float d, float soft_w, float crisp_w)
+{
+    float body = spSoft(d, soft_w) * 0.58;
+    float core = spSoft(d, max(crisp_w, 0.018));
+    return spSaturate(max(body, core));
+}
+float spPeriod(float arms)
+{
+    return 6.2831853 / max(arms, 1.0);
+}
+float spArmDist(float spiral_angle, float arms)
+{
+    float period = spPeriod(arms);
+    float aa = mod(spiral_angle + period * 0.5, period) - period * 0.5;
+    return abs(aa);
+}
+void volumeMain(out vec4 out_color, in vec3 p01)
+{
+    /* Continuous anim_time - no progress wrap flash. */
+    float progress_e = u_params[0];
+    float freq_scale_e = max(u_params[1], 0.01);
+    int pattern_type = int(clamp(u_params[2], 0.0, 6.0) + 0.5);
+    float num_arms = max(u_params[3], 1.0);
+    float gap_factor = clamp(u_params[4], 0.0, 0.95);
+    float detail_e = max(u_params[5], 0.05);
+    float coil01 = clamp(u_params[6], 0.0, 1.0);
+    float height01 = clamp(u_params[7], 0.0, 1.0);
+
+    float lx = p01.x * 2.0 - 1.0;
+    float ly = clamp(p01.y, 0.0, 1.0);
+    float lz = p01.z * 2.0 - 1.0;
+    float angle = atan(lz, lx);
+    float norm_radius = clamp(length(vec2(lx, lz)), 0.0, 1.4142135);
+    float r01 = clamp(norm_radius / 1.05, 0.0, 1.0);
+    float norm_twist = ly;
+    float two_pi = 6.2831853;
+    float detail_n = clamp(detail_e / 20.0, 0.0, 1.5);
+
+    float radial_coil = r01 * coil01 * two_pi * (2.4 + 1.6 * detail_n);
+    float z_twist = norm_twist * height01 * two_pi * (1.15 + 0.85 * detail_n);
+    float spiral_angle = angle * num_arms + radial_coil + z_twist - progress_e * 0.85;
+
+    float soft_w = mix(0.70, 0.28, clamp(detail_n, 0.0, 1.0)) * (0.55 + 0.45 * (1.0 - gap_factor));
+    float crisp_w = mix(0.22, 0.075, clamp(detail_n, 0.0, 1.0));
+    float half_arm = spPeriod(num_arms) * 0.5 * (1.0 - gap_factor * 0.92);
+    float spiral_value = 0.0;
+
+    if(pattern_type == 0)
+    {
+        float d = spArmDist(spiral_angle, num_arms);
+        float ridge = spRidge(d, soft_w, crisp_w);
+        float secondary = spRidge(spArmDist(spiral_angle * 0.5 + norm_twist * freq_scale_e, num_arms),
+                                  soft_w * 1.35, crisp_w * 1.4) * 0.28;
+        float lift = 0.5 + 0.5 * cos(norm_twist * freq_scale_e * 3.0 + progress_e * 0.45);
+        spiral_value = spSaturate(ridge * (0.75 + 0.25 * lift) + secondary);
+        spiral_value *= 0.55 + 0.45 * (1.0 - r01 * 0.35);
+    }
+    else if(pattern_type == 1)
+    {
+        float d = spArmDist(spiral_angle, num_arms);
+        float fill = 1.0 - smoothstep(half_arm * 0.55, half_arm * 1.05, d);
+        float edge = spSoft(d - half_arm * 0.85, crisp_w * 0.85);
+        float core = spSoft(d, crisp_w);
+        spiral_value = spSaturate(fill * 0.72 + edge * 0.55 + core * 0.95);
+        spiral_value *= 0.40 + 0.60 * (1.0 - exp(-r01 * (1.2 + detail_n)));
+    }
+    else if(pattern_type == 2)
+    {
+        float period = spPeriod(num_arms);
+        float aa = mod(spiral_angle, period);
+        if(aa < 0.0) aa += period;
+        float blade_w = period * (1.0 - gap_factor) * 0.92;
+        float teeth_n = mix(5.0, 11.0, clamp(detail_n, 0.0, 1.0));
+        float tooth = abs(fract(r01 * teeth_n * (0.85 + 0.15 * num_arms)) - 0.5) * 2.0;
+        float tooth_depth = 0.38 * (0.55 + 0.45 * (1.0 - gap_factor));
+        float leading = blade_w * (1.0 - tooth_depth * (1.0 - tooth));
+        float trailing = blade_w * 0.12;
+
+        float in_blade = 0.0;
+        if(aa < leading && aa > trailing * 0.25)
+        {
+            float across = aa / max(leading, 1e-4);
+            float body = 1.0 - smoothstep(0.82, 1.0, across);
+            float face = spSoft(aa - leading, crisp_w * 0.7) * 1.15;
+            float trail_edge = spSoft(aa - trailing, crisp_w);
+            in_blade = spSaturate(body * 0.85 + face + trail_edge * 0.35);
+        }
+        float rim = spSoft(r01 - 0.92, 0.055) * 0.38 * (0.5 + 0.5 * tooth);
+        spiral_value = spSaturate(in_blade * (0.45 + 0.55 * r01) + rim);
+    }
+    else if(pattern_type == 3)
+    {
+        float rings = mix(3.0, 8.0, clamp(detail_n, 0.0, 1.0));
+        float ring_phase = r01 * rings * two_pi - progress_e * 0.55 + spiral_angle * (0.15 + 0.85 * coil01);
+        float d_ring = abs(sin(ring_phase * 0.5));
+        float soft_ring = spSoft(d_ring, soft_w * 0.55);
+        float crisp_ring = spSoft(d_ring, crisp_w * 0.45);
+        float arm_hint = spRidge(spArmDist(spiral_angle, num_arms), soft_w * 1.2, crisp_w) * 0.35 * coil01;
+        float thresh = 0.10 + 0.40 * gap_factor;
+        float ring_v = spSaturate(max(soft_ring * 0.65, crisp_ring) - thresh);
+        spiral_value = spSaturate(ring_v + arm_hint);
+        spiral_value *= 0.50 + 0.50 * (1.0 - r01 * 0.25);
+    }
+    else if(pattern_type == 4)
+    {
+        float a0 = spiral_angle;
+        float a1 = spiral_angle * 0.5 + norm_twist * freq_scale_e * 2.5 + progress_e * 0.35;
+        float a2 = spiral_angle * 1.5 - r01 * (detail_e * 0.35) - progress_e * 0.55;
+        float d0 = abs(sin(a0));
+        float d1 = abs(sin(a1));
+        float d2 = abs(sin(a2));
+        float body = spSoft(d0, soft_w * 0.70) * 0.55
+                   + spSoft(d1, soft_w * 0.85) * 0.30
+                   + spSoft(d2, soft_w * 1.00) * 0.20;
+        float ridge = max(spSoft(d0, crisp_w * 0.55),
+                      max(spSoft(d1, crisp_w * 0.70) * 0.75,
+                          spSoft(d2, crisp_w * 0.80) * 0.55));
+        float thresh = 0.06 + 0.38 * gap_factor;
+        spiral_value = spSaturate(max(body, ridge) - thresh);
+    }
+    else if(pattern_type == 5)
+    {
+        float d = spArmDist(spiral_angle, num_arms);
+        float fill = 1.0 - smoothstep(half_arm * 0.35, half_arm * 0.95, d);
+        float core = spSoft(d, crisp_w * 0.75);
+        float glow = spSoft(d, soft_w) * 0.45;
+        spiral_value = spSaturate(fill * 0.70 + core + glow);
+        spiral_value *= 0.38 + 0.62 * (1.0 - min(1.0, r01) * 0.55);
+        spiral_value = spSaturate(spiral_value + 0.08 * (1.0 - r01));
+    }
+    else
+    {
+        float funnel = mix(0.98, 0.10, pow(ly, 0.85));
+        float wall_w = mix(0.18, 0.070, clamp(detail_n, 0.0, 1.0));
+        float wall = spRidge(abs(r01 - funnel), wall_w * 1.45, wall_w * 0.45);
+
+        float wind_twist = angle * num_arms
+                         + ly * two_pi * (1.2 + 3.2 * height01 + 1.5 * coil01)
+                         + r01 * coil01 * two_pi * 1.8
+                         - progress_e * 1.05;
+        float d_wind = spArmDist(wind_twist, num_arms);
+        float ribbon = spRidge(d_wind, soft_w * 0.95, crisp_w * 0.85);
+        float near_wall = spSoft(abs(r01 - funnel), wall_w * 2.4);
+        ribbon *= 0.35 + 0.65 * near_wall;
+
+        float debris_r = funnel * (0.35 + 0.45 * abs(sin(ly * 9.0 + progress_e * 1.3 + angle * 2.0)));
+        float debris = spSoft(abs(r01 - debris_r), 0.085) * 0.42
+                     * (0.4 + 0.6 * abs(sin(angle * num_arms * 2.0 - progress_e * 1.8)));
+
+        float spine = (1.0 - smoothstep(0.0, funnel * 0.35, r01)) * 0.20 * (0.5 + 0.5 * ly);
+
+        spiral_value = spSaturate(wall * 0.95 + ribbon * 1.05 + debris + spine);
+        spiral_value *= 0.55 + 0.45 * (1.0 - gap_factor * 0.5);
+    }
+
+    out_color = vec4(clamp(spiral_value, 0.0, 1.0), 0.0, 0.0, 1.0);
+}

@@ -1,0 +1,8 @@
+# Name
+name: Plasma (sin product)
+index: 26
+palette: spectrum
+
+# Kernel
+float v = sin(TWO_PI * (s01 + ph)) * cos(TWO_PI * (s01 * r * 0.5 + tsec * 0.07)) * sin(TWO_PI * (s01 * r + ph * 0.3));
+k = clamp(v * 1.25, -1.0, 1.0);

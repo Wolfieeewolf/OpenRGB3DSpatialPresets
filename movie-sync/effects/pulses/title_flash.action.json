@@ -1,0 +1,42 @@
+// Movie Sync - room-filling white blast (photosensitive)
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "title_flash",
+  "name": "Title flash",
+  "duration_ms": 800,
+  "loop": "once",
+  "priority": 50,
+  "tracks": [
+    {
+      "name": "Flash",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_flash",
+          "effect": "field_flash",
+          "start_ms": 0,
+          "end_ms": 800,
+          "intensity": 1.0,
+          "min_intensity": 0.2,
+          "max_intensity": 1.0,
+          "color": "#FFFFFF",
+          "color_from": "#A0A8C0",
+          "color_to": "#FFFFFF",
+          "gradient": [
+            { "pos": 0.0, "color": "#8088A0" },
+            { "pos": 1.0, "color": "#FFFFFF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.0,
+          "pulse_length": 0.8,
+          "period_ms": 1000,
+          "effect_size": 1.45,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+// Movie Sync - big cool wash under ocean horizon (room-filling)
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "ocean_horizon",
+  "name": "Ocean horizon",
+  "duration_ms": 12000,
+  "loop": "while_active",
+  "priority": 18,
+  "tracks": [
+    {
+      "name": "Room glow",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_room_glow",
+          "effect": "field_room_glow",
+          "start_ms": 0,
+          "end_ms": 12000,
+          "intensity": 0.75,
+          "min_intensity": 0.3,
+          "max_intensity": 1.0,
+          "color": "#0E5A7A",
+          "color_from": "#0A2A4A",
+          "color_to": "#E8F4FF",
+          "gradient": [
+            { "pos": 0.0, "color": "#0A2A4A" },
+            { "pos": 1.0, "color": "#A8D4F0" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.4,
+          "pulse_length": 0.7,
+          "period_ms": 1000,
+          "effect_size": 1.3,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Horizon",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "ocean_horizon",
+          "effect": "ocean_horizon",
+          "start_ms": 0,
+          "end_ms": 12000,
+          "intensity": 1.0,
+          "min_intensity": 0.25,
+          "max_intensity": 1.0,
+          "color": "#0A2A4A",
+          "color_from": "#0A2A4A",
+          "color_to": "#E8F4FF",
+          "gradient": [
+            { "pos": 0.0, "color": "#0A2A4A" },
+            { "pos": 0.25, "color": "#0E5A7A" },
+            { "pos": 0.45, "color": "#2AA8C8" },
+            { "pos": 0.55, "color": "#A8D4F0" },
+            { "pos": 0.75, "color": "#5BA3E0" },
+            { "pos": 1.0, "color": "#E8F4FF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 0.6,
+          "pulse_length": 0.4,
+          "period_ms": 12000,
+          "effect_size": 1.25,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

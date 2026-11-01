@@ -1,0 +1,9 @@
+# Name
+name: Dot bounce
+index: 36
+palette: bounce
+
+# Kernel
+float u = abs(2.0 * fractf(tsec * 0.4 + 0.25) - 1.0);
+float d = abs(fractf(s01 * r) - u);
+k = max(-1.0, 1.0 - d * 10.0);

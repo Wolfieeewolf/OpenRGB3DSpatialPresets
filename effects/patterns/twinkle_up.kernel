@@ -1,0 +1,8 @@
+# Name
+name: Twinkle rise
+index: 31
+
+# Kernel
+float h = hash11(floor(s01 * r * 20.0) + floor(tsec * 4.0) * 0.1);
+float rise = fractf(tsec * 2.0 + s01);
+k = (h > 0.85) ? (2.0 * rise - 1.0) : -0.9;

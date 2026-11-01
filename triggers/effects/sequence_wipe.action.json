@@ -1,0 +1,78 @@
+// Triggers - sequence-axis wipe + scanner trail, once→black
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "sequence_wipe",
+  "name": "Sequence wipe",
+  "duration_ms": 3000,
+  "loop": "once",
+  "priority": 15,
+  "tracks": [
+    {
+      "name": "All LEDs",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "wipe",
+          "effect": "wipe",
+          "start_ms": 0,
+          "end_ms": 2200,
+          "intensity": 1.0,
+          "min_intensity": 0.15,
+          "max_intensity": 1.0,
+          "color": "#281450",
+          "color_from": "#281450",
+          "color_to": "#FFF0C8",
+          "gradient": [
+            { "pos": 0.0, "color": "#281450" },
+            { "pos": 0.4, "color": "#FF5028" },
+            { "pos": 0.75, "color": "#FFB43C" },
+            { "pos": 1.0, "color": "#FFF0C8" }
+          ],
+          "intensity_curve": [
+            { "pos": 0.0, "value": 1.0 },
+            { "pos": 0.4, "value": 0.75 },
+            { "pos": 1.0, "value": 0.0 }
+          ],
+          "direction": "right",
+          "axis_space": "sequence",
+          "axis_mode": "preset",
+          "speed": 1.0,
+          "pulse_length": 0.25,
+          "period_ms": 1000,
+          "reverse": false
+        },
+        {
+          "type": "scanner",
+          "effect": "scanner",
+          "start_ms": 400,
+          "end_ms": 3000,
+          "intensity": 1.0,
+          "min_intensity": 0.15,
+          "max_intensity": 1.0,
+          "color": "#140000",
+          "color_from": "#140000",
+          "color_to": "#FFFFB4",
+          "gradient": [
+            { "pos": 0.0, "color": "#140000" },
+            { "pos": 0.35, "color": "#FF2800" },
+            { "pos": 0.7, "color": "#FFA000" },
+            { "pos": 1.0, "color": "#FFFFB4" }
+          ],
+          "intensity_curve": [
+            { "pos": 0.0, "value": 1.0 },
+            { "pos": 0.7, "value": 0.9 },
+            { "pos": 1.0, "value": 0.0 }
+          ],
+          "direction": "right",
+          "axis_space": "sequence",
+          "axis_mode": "preset",
+          "speed": 1.0,
+          "pulse_length": 0.12,
+          "period_ms": 1000,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

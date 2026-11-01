@@ -1,0 +1,9 @@
+# Name
+name: Multi-slot chase
+index: 13
+palette: chase
+
+# Kernel
+float idx = floor(s01 * r * 12.0 + ph * 12.0 + tsec * 1.5);
+float bucket = mod(idx, 3.0);
+k = (bucket < 0.5) ? 1.0 : -0.75;

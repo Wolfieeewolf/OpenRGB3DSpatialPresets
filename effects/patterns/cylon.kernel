@@ -1,0 +1,12 @@
+# Name
+name: Dual beacon sweep
+index: 28
+palette: cylon
+
+# Kernel
+float u = abs(fractf(s01 * r + ph) - 0.5) * 2.0;
+float eye = fractf(tsec * 0.18);
+float d1 = abs(u - eye * 2.0);
+float d2 = abs(u - fractf(eye + 0.5) * 2.0);
+float v = max(1.0 - d1 * 5.0, 1.0 - d2 * 5.0);
+k = clamp(v * 2.0 - 1.0, -1.0, 1.0);

@@ -1,0 +1,6 @@
+# Name
+name: Gradient (position)
+index: 12
+
+# Kernel
+k = 2.0 * s01 - 1.0;

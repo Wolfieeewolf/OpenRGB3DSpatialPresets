@@ -1,0 +1,7 @@
+# Name
+name: Ripple (from center)
+index: 38
+
+# Kernel
+float d = abs(s01 - 0.5) * 2.0;
+k = sin(TWO_PI * (2.0 * d - fractf(ph + tsec * 0.25) * 2.0));

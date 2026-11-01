@@ -1,0 +1,569 @@
+{
+    "format": "OpenRGB3DSpatialCustomController",
+    "version": 1,
+    "name": "Razer Tartarus V2",
+    "category": "keyboards",
+    "brand": "Razer",
+    "model": "Tartarus V2",
+    "width": 7,
+    "height": 6,
+    "depth": 2,
+    "spacing_mm_x": 20.0,
+    "spacing_mm_y": 20.0,
+    "spacing_mm_z": 5.0,
+    "column_widths_mm": [
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+    ],
+    "row_heights_mm": [
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+    ],
+    "layer_depths_mm": [
+        5.0,
+        1.0
+    ],
+    "layer_names": [
+        "Layer 1",
+        "Layer 2"
+    ],
+    "leds_per_cluster": 1,
+    "mappings": [
+        {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 0,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 1,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 2,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 3,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 0,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 4,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 6,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 7,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 8,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 9,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 1,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 10,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 12,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 13,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 14,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 15,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 2,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 16,
+            "granularity": 2
+        },
+        {
+            "x": 0,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 18,
+            "granularity": 2
+        },
+        {
+            "x": 1,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 19,
+            "granularity": 2
+        },
+        {
+            "x": 2,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 20,
+            "granularity": 2
+        },
+        {
+            "x": 3,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 21,
+            "granularity": 2
+        },
+        {
+            "x": 4,
+            "y": 3,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 22,
+            "granularity": 2
+        },
+        {
+            "x": 6,
+            "y": 5,
+            "z": 0,
+            "controller_name": "Razer Tartarus V2",
+            "controller_location": "1:1",
+            "zone_idx": 0,
+            "led_idx": 23,
+            "granularity": 2
+        }
+    ],
+    "light_blockers": [
+        {
+            "x": 0,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 0,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 1,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 2,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 3,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 4,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 5,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 5,
+            "y": 4,
+            "z": 0
+        },
+        {
+            "x": 5,
+            "y": 2,
+            "z": 0
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 0
+        },
+        {
+            "x": 5,
+            "y": 5,
+            "z": 0
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "z": 0
+        },
+        {
+            "x": 5,
+            "y": 1,
+            "z": 0
+        },
+        {
+            "x": 0,
+            "y": 4,
+            "z": 0
+        },
+        {
+            "x": 1,
+            "y": 4,
+            "z": 0
+        },
+        {
+            "x": 2,
+            "y": 4,
+            "z": 0
+        },
+        {
+            "x": 3,
+            "y": 4,
+            "z": 0
+        },
+        {
+            "x": 4,
+            "y": 4,
+            "z": 0
+        },
+        {
+            "x": 0,
+            "y": 5,
+            "z": 0
+        },
+        {
+            "x": 1,
+            "y": 5,
+            "z": 0
+        },
+        {
+            "x": 2,
+            "y": 5,
+            "z": 0
+        },
+        {
+            "x": 3,
+            "y": 5,
+            "z": 0
+        },
+        {
+            "x": 4,
+            "y": 5,
+            "z": 0
+        },
+        {
+            "x": 6,
+            "y": 4,
+            "z": 0
+        },
+        {
+            "x": 6,
+            "y": 2,
+            "z": 0
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "z": 0
+        },
+        {
+            "x": 6,
+            "y": 3,
+            "z": 0
+        },
+        {
+            "x": 6,
+            "y": 1,
+            "z": 0
+        },
+        {
+            "x": 6,
+            "y": 2,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 4,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 3,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 1,
+            "z": 1
+        },
+        {
+            "x": 6,
+            "y": 5,
+            "z": 1
+        }
+    ]
+}

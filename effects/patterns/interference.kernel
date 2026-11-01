@@ -1,0 +1,6 @@
+# Name
+name: Two-tone beat
+index: 7
+
+# Kernel
+k = sin(TWO_PI * (s01 * r + ph)) * sin(TWO_PI * (s01 * r * 0.37 - ph * 1.7));

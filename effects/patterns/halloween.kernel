@@ -1,0 +1,8 @@
+# Name
+name: Halloween flicker
+index: 32
+palette: halloween
+
+# Kernel
+float n = hash11(floor(tsec * 30.0) + s01 * 13.0);
+k = (n > 0.4) ? 0.9 : -1.0 + n * 0.5;

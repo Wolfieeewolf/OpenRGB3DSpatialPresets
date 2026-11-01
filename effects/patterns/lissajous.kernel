@@ -1,0 +1,10 @@
+# Name
+name: Lissajous (1D)
+index: 46
+palette: lissajous
+
+# Kernel
+float a = TWO_PI * (s01 * r + tsec * 0.10 + ph);
+float x = sin(a * 2.0);
+float y = sin(a * 3.0 + 1.2);
+k = clamp(0.5 * (x + y), -1.0, 1.0);

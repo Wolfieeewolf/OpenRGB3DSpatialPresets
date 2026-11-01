@@ -1,0 +1,73 @@
+// Movie Sync - room flash + fat one-shot spark blast
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "explosion",
+  "name": "Explosion",
+  "duration_ms": 1600,
+  "loop": "once",
+  "priority": 40,
+  "tracks": [
+    {
+      "name": "Blast fill",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "field_flash",
+          "effect": "field_flash",
+          "start_ms": 0,
+          "end_ms": 450,
+          "intensity": 1.0,
+          "min_intensity": 0.1,
+          "max_intensity": 1.0,
+          "color": "#FFE8A0",
+          "color_from": "#FF4000",
+          "color_to": "#FFFFFF",
+          "gradient": [
+            { "pos": 0.0, "color": "#FF4000" },
+            { "pos": 1.0, "color": "#FFFFFF" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.2,
+          "pulse_length": 0.7,
+          "period_ms": 1000,
+          "effect_size": 1.4,
+          "reverse": false
+        }
+      ]
+    },
+    {
+      "name": "Sparks",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "spark_burst",
+          "effect": "spark_burst",
+          "start_ms": 30,
+          "end_ms": 1600,
+          "intensity": 1.0,
+          "min_intensity": 0.1,
+          "max_intensity": 1.0,
+          "color": "#FFB450",
+          "color_from": "#FF2800",
+          "color_to": "#FFFFB4",
+          "gradient": [
+            { "pos": 0.0, "color": "#FF2800" },
+            { "pos": 0.4, "color": "#FFB450" },
+            { "pos": 1.0, "color": "#FFFFB4" }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.0,
+          "pulse_length": 0.8,
+          "period_ms": 1000,
+          "effect_size": 1.4,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

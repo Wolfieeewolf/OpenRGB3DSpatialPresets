@@ -1,0 +1,76 @@
+{
+  "format": "openrgb3d.movie_sync_catalog",
+  "version": 1,
+  "effects": [
+    {
+      "id": "explosion",
+      "name": "Explosion",
+      "category": "explosions",
+      "action": "explosions/explosion.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "roomscape_meteor_storm",
+      "name": "Roomscape - Meteor storm",
+      "category": "explosions",
+      "action": "explosions/roomscape_meteor_storm.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "laser_sweep",
+      "name": "Laser sweep",
+      "category": "wraps",
+      "action": "wraps/laser_sweep.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "room_wash",
+      "name": "Room wash",
+      "category": "washes",
+      "action": "washes/room_wash.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "ocean_horizon",
+      "name": "Ocean horizon",
+      "category": "washes",
+      "action": "washes/ocean_horizon.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "roomscape_helix_rain",
+      "name": "Roomscape - Helix + rain",
+      "category": "washes",
+      "action": "washes/roomscape_helix_rain.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "roomscape_aurora",
+      "name": "Roomscape - Aurora",
+      "category": "washes",
+      "action": "washes/roomscape_aurora.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "roomscape_portal",
+      "name": "Roomscape - Portal",
+      "category": "washes",
+      "action": "washes/roomscape_portal.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "roomscape_embers",
+      "name": "Roomscape - Embers",
+      "category": "washes",
+      "action": "washes/roomscape_embers.action.json",
+      "photosensitive": false
+    },
+    {
+      "id": "title_flash",
+      "name": "Title flash",
+      "category": "pulses",
+      "action": "pulses/title_flash.action.json",
+      "photosensitive": true
+    }
+  ]
+}

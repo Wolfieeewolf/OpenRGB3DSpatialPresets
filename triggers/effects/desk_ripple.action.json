@@ -1,0 +1,50 @@
+// Triggers - whole-room ripple that dies clean on once
+{
+  "format": "openrgb3d.action",
+  "version": 5,
+  "id": "desk_ripple",
+  "name": "Desk ripple",
+  "duration_ms": 5000,
+  "loop": "once",
+  "priority": 20,
+  "tracks": [
+    {
+      "name": "Ripple",
+      "target": { "kind": "all" },
+      "clips": [
+        {
+          "type": "ripple",
+          "effect": "ripple",
+          "start_ms": 0,
+          "end_ms": 5000,
+          "intensity": 1.0,
+          "min_intensity": 0.1,
+          "max_intensity": 1.0,
+          "color": "#FF4020",
+          "color_from": "#FF0000",
+          "color_to": "#8000FF",
+          "gradient": [
+            { "pos": 0.0, "color": "#FF0000" },
+            { "pos": 0.2, "color": "#FF8000" },
+            { "pos": 0.4, "color": "#FFFF00" },
+            { "pos": 0.6, "color": "#00FF00" },
+            { "pos": 0.8, "color": "#0080FF" },
+            { "pos": 1.0, "color": "#8000FF" }
+          ],
+          "intensity_curve": [
+            { "pos": 0.0, "value": 1.0 },
+            { "pos": 0.75, "value": 0.85 },
+            { "pos": 1.0, "value": 0.0 }
+          ],
+          "direction": "right",
+          "axis_space": "room",
+          "axis_mode": "preset",
+          "speed": 1.0,
+          "pulse_length": 0.2,
+          "period_ms": 1000,
+          "reverse": false
+        }
+      ]
+    }
+  ]
+}

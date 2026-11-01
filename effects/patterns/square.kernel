@@ -1,0 +1,6 @@
+# Name
+name: Square (half)
+index: 3
+
+# Kernel
+k = (u_phase < 0.5) ? 1.0 : -1.0;
