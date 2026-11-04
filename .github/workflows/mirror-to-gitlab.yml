@@ -1,0 +1,40 @@
+name: Mirror to GitLab
+
+# GitHub is canonical. Force-updates the GitLab backup copy.
+
+on:
+  push:
+    branches: [master]
+    tags:
+      - 'v*'
+
+jobs:
+  mirror:
+    if: github.repository == 'Wolfieeewolf/OpenRGB3DSpatialPresets'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push to GitLab
+        env:
+          GITLAB_MIRROR_TOKEN: ${{ secrets.GITLAB_MIRROR_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GITLAB_MIRROR_TOKEN:-}" ]; then
+            echo "GITLAB_MIRROR_TOKEN not set — skipping GitLab mirror"
+            exit 0
+          fi
+          GITLAB_REPO="${GITLAB_MIRROR_REPO:-Wolfieeewolf/OpenRGB3DSpatialPresets}"
+          TARGET_BRANCH="${GITLAB_MIRROR_BRANCH:-master}"
+          REMOTE_URL="https://oauth2:${GITLAB_MIRROR_TOKEN}@gitlab.com/${GITLAB_REPO}.git"
+          git remote remove gitlab-mirror 2>/dev/null || true
+          git remote add gitlab-mirror "$REMOTE_URL"
+          if [[ "${GITHUB_REF:-}" == refs/tags/* ]]; then
+            TAG_NAME="${GITHUB_REF#refs/tags/}"
+            git push gitlab-mirror "refs/tags/${TAG_NAME}:refs/tags/${TAG_NAME}" --force
+          else
+            git push gitlab-mirror "HEAD:${TARGET_BRANCH}" --force
+          fi
+          echo "GitLab mirror updated: https://gitlab.com/${GITLAB_REPO}"

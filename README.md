@@ -4,7 +4,9 @@ Community **content pack** for the [OpenRGB 3D Spatial](https://github.com/Wolfi
 
 The plugin repo is the **engine only** — all drop-in looks live here. **Same folder names as the plugin data root** — install is copy-paste.
 
-Browsable guide: **[Wiki](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/wiki)** (once published).
+Browsable guide: **[Wiki](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/wiki)**.
+
+**Source of truth:** GitHub. GitLab ([Wolfieeewolf/OpenRGB3DSpatialPresets](https://gitlab.com/Wolfieeewolf/OpenRGB3DSpatialPresets)) is a mirror/backup.
 
 ```text
 %AppData%\OpenRGB\plugins\settings\OpenRGB3DSpatialPlugin\     (Windows)
