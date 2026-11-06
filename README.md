@@ -58,9 +58,17 @@ Engine contracts (plugin repo): [effects-engines.md](https://github.com/Wolfieee
 
 ## Install
 
-**Windows (easiest):** use the plugin release **MSI** — it can install this pack into AppData in the same run (**Typical** = looks/tools, no controllers; **Custom** = pick packs + only the controller brands you own; **Complete** = everything). This repo stays the source of truth; MSI cuts are frozen snapshots.
+**From a plugin release (easiest):** packages embed a frozen snapshot of this repo.
 
-**Manual / Linux / macOS / dev:**
+| OS | Content install |
+|----|-----------------|
+| **Windows** | MSI — **Typical** / **Custom** / **Complete** in the installer |
+| **Linux** | `./install.sh` or `openrgb3d-install-content` — menu: Typical / Complete / Custom (toggle packs) |
+| **macOS** | `./install.sh` from the zip — same Typical / Complete / Custom menu |
+
+Typical = looks/tools (no controllers); Custom = pick packs + brands you own; Complete = everything. This git repo stays the source of truth.
+
+**Manual / dev:**
 
 1. Install a matching [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin) build.
 2. Copy the folders above into the plugin data root (merge OK — keep your local `triggers.json` / swatches if you already customized them).
