@@ -18,7 +18,7 @@ option: Soft | Gentle boundary falloff.
 option: Crisp | Hard silhouette. Breath pulse keeps the chosen shape.
 slider: breath_pulse_pct 0 100 55 pct | Breath pulse: | How far the shell grows/shrinks each breath. 0 = static.
 slider: center_hole_pct 0 100 0 pct | Center hole: | 0 = solid; higher carves an empty core. Ignored in whole-room mode.
-param: anim_time
+param: motion_clock
 param: ndetail
 param: combo edge_profile
 param: unit center_hole_pct
@@ -88,7 +88,7 @@ float shellCover(int shape, float sx, float sy, float sz, float ax, float az)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous anim_time breath - no progress wrap flash. */
+    /* Continuous motion_clock breath - no progress wrap flash. */
     float time_sec = u_params[0];
     float breath_phase = time_sec * 1.15;
     float detail = max(u_params[1], 0.05);

@@ -9,7 +9,7 @@ option: Linear (axis)
 option: From room center
 slider: depth_tone_count 2 64 12 | Depth tones: | How many hue bands across the span
 slider: depth_dim_amount 0 100 22 unit pct | Center dim: | Soft mid-room dimming
-param: anim_time
+param: motion_clock
 param: raw depth_tone_count
 param: unit depth_dim_amount
 param: path_axis
@@ -21,7 +21,7 @@ finish: atlas
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous anim_time scroll - no progress wrap flash. */
+    /* Continuous motion_clock scroll - no progress wrap flash. */
     float pos = u_params[0] * 0.18;
     float hue_span = u_params[1];
     float percent_dim = u_params[2];

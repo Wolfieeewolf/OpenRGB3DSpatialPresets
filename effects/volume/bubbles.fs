@@ -11,7 +11,7 @@ slider: max_radius 50 350 200 unit | Bubble size: | Peak radius in the room
 slider: horizontal_fill 50 180 140 unit pct | Horizontal fill: | XZ spread across the room
 slider: overlap_spacing 10 100 65 unit pct | Min spacing: | Packing of bubble lanes
 slider: launch_randomness 0 100 55 unit pct | Launch randomness: | Jitter in timing and path
-param: time
+param: motion_clock
 param: gcount 6 48
 param: bubble_thick
 param: bubble_rise

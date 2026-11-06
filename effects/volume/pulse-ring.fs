@@ -17,7 +17,7 @@ option: Square
 slider: hole_size 0 75 8 unit pct | Hole size: | Inner dead zone
 slider: pulse_amplitude 20 200 100 unit pct | Pulse amplitude: | Shell brightness
 slider: direction_deg 0 360 0 | Phase: | Ring phase offset
-param: anim_time
+param: motion_clock
 param: unit hole_size
 param: gthickness
 param: unit pulse_amplitude
@@ -106,7 +106,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
-        /* Continuous expand from anim_time - soft dual crest avoids wrap flash. */
+        /* Continuous expand from motion_clock - soft dual crest avoids wrap flash. */
         float expand = fract(time_sec * 0.28 + phase_offset);
         float center = hole_r + expand * usable;
         float prev = hole_r + (expand - 1.0) * usable;

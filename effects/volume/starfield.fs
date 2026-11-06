@@ -20,8 +20,7 @@ slider: star_size 8 140 48 unit pct | Feature size: | Star / streak / wall thick
 slider: fill_amount 40 100 100 unit pct | Field of view: | Zoom of the virtual camera (100 = full room)
 slider: drift_amount 0 100 22 unit pct | Sway: | Camera / field drift amount
 slider: twinkle_speed 0 100 35 unit pct | Sparkle: | Twinkle / arc pulse rate
-param: progress_raw
-param: anim_time
+param: motion_clock
 param: pattern
 param: gcount 16 48
 param: unit star_size
@@ -29,7 +28,8 @@ param: size_star
 param: unit fill_amount
 param: unit drift_amount
 param: unit twinkle_speed
-param: hue_scroll1
+param: hue_scroll_s
+param: freq_n
 finish: hex
 
 # Effect
@@ -43,20 +43,20 @@ float hash_signed(float n)
 }
 float softband(float d, float s)
 {
-    float ss = max(s, 0.022);
+    float ss = max(s, 0.034);
     return exp(-(d * d) / (ss * ss));
 }
 /* Fat core + readable halo - sized for sparse device grids. */
 float sfPoint(float d, float soft)
 {
-    float s = max(soft, 0.028);
-    float core = exp(-(d * d) / (s * s * 0.32));
-    float halo = exp(-(d * d) / (s * s * 1.75)) * 0.42;
+    float s = max(soft, 0.040);
+    float core = exp(-(d * d) / (s * s * 0.30));
+    float halo = exp(-(d * d) / (s * s * 1.90)) * 0.50;
     return clamp(core + halo, 0.0, 1.0);
 }
 float sfCross(vec3 dlt, float soft, float rot)
 {
-    float s = max(soft, 0.026);
+    float s = max(soft, 0.036);
     float c = cos(rot);
     float sn = sin(rot);
     vec3 q = vec3(c * dlt.x + sn * dlt.z, dlt.y, -sn * dlt.x + c * dlt.z);
@@ -114,17 +114,20 @@ vec3 sfRotZ(vec3 p, float a)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* progress kept for phase flavour; continuous motion uses anim_time (u_params[1]). */
-    float progress = u_params[0];
-    float time_sec = u_params[1];
-    int mode = int(clamp(u_params[2], 0.0, 9.0) + 0.5);
-    int count = int(clamp(u_params[3], 12.0, 48.0) + 0.5);
-    float thickness = max(u_params[4], 0.03);
-    float size_m = clamp(u_params[5], 0.35, 2.5);
-    float fill = clamp(u_params[6], 0.4, 1.0);
-    float drift = clamp(u_params[7], 0.0, 1.0);
-    float twinkle = clamp(u_params[8], 0.0, 1.0);
-    float hue_scroll = u_params[9];
+    /* motion_clock scales with Speed (old anim_time was wall-clock on/off only). */
+    float clock_in = u_params[0];
+    int mode = int(clamp(u_params[1], 0.0, 9.0) + 0.5);
+    int count = int(clamp(u_params[2], 12.0, 48.0) + 0.5);
+    float thickness = max(u_params[3], 0.03);
+    float size_m = clamp(u_params[4], 0.35, 2.5);
+    float fill = clamp(u_params[5], 0.4, 1.0);
+    float drift = clamp(u_params[6], 0.0, 1.0);
+    float twinkle = clamp(u_params[7], 0.0, 1.0);
+    float hue_scroll = fract(u_params[8]);
+    float freq_n = clamp(u_params[9], 0.0, 1.0);
+    /* ~wall-clock at Speed 100; Frequency nudges tempo. */
+    float time_sec = clock_in * (0.90 + 0.45 * freq_n);
+    float progress = fract(clock_in * 0.15);
 
     float fov = 2.0 / max(fill, 0.4);
     vec3 led = (p01 - vec3(0.5)) * fov;
@@ -138,7 +141,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float radial = length(vec2(led_vx, led_vy));
     float ang = atan(led_vy, led_vx);
     float voxel = 2.0 / max(u_res, 8.0);
-    float soft_floor = max(voxel * 1.85, 0.030);
+    float soft_floor = max(voxel * 1.85, 0.042);
     float span = 0.96 * (0.72 + 0.48 * size_m);
 
     float intensity = 0.0;

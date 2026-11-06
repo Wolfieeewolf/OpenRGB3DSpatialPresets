@@ -14,7 +14,7 @@ pattern_key: hexlattice_flow_mode
 flow: 0.68
 flow: 1
 flow: 1.55
-param: anim_time
+param: motion_clock
 param: hue_time
 param: detail_norm
 param: size_floor
@@ -49,7 +49,7 @@ float hxSoft(float d, float soft)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous anim_time - no progress wrap flash. */
+    /* Continuous motion_clock - no progress wrap flash. */
     float flow_t = u_params[0] * 0.22;
     float hue_t = u_params[1];
     float detail_norm = clamp(u_params[2], 0.0, 1.0);

@@ -14,7 +14,7 @@ pattern: Ocean drift (waves) | Layered ocean-like motion with softer peaks.
 pattern: Gradient wave | Smoother gradient roll without sharp crests.
 slider: wave_amplitude 20 200 100 unit pct | Amplitude: | Peak height of the surface
 slider: wave_direction_deg 0 360 0 | Wave direction: | Direction of the linear wave
-param: anim_time
+param: motion_clock
 param: wave_freq
 param: unit wave_amplitude
 param: pattern
@@ -25,7 +25,7 @@ finish: hex
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous anim_time - no progress wrap flash. */
+    /* Continuous motion_clock - no progress wrap flash. */
     float travel = u_params[0] * 1.15;
     float freq = max(u_params[1], 0.2);
     float amp = max(u_params[2], 0.2);

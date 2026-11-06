@@ -13,7 +13,7 @@ supports_strip_colormap: true
 supports_height_bands: true
 finish: spiral
 pattern_key: pattern_type
-param: anim_time
+param: motion_clock
 param: spiral_freq
 param: pattern
 param: raw num_arms
@@ -64,7 +64,7 @@ float spArmDist(float spiral_angle, float arms)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous anim_time - no progress wrap flash. */
+    /* Continuous motion_clock - no progress wrap flash. */
     float progress_e = u_params[0];
     float freq_scale_e = max(u_params[1], 0.01);
     int pattern_type = int(clamp(u_params[2], 0.0, 6.0) + 0.5);

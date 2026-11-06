@@ -9,9 +9,10 @@ finish: depth
 supports_strip_colormap: true
 supports_height_bands: true
 pattern_key: pattern_type
-param: anim_time
+param: motion_clock
 param: freq_scale
 param: pattern
+param: freq_n
 
 # Patterns
 pattern: Classic | Layered sines in X/Y plus mild radial and Z terms.
@@ -32,10 +33,12 @@ float finalizePlasma01(float raw, float bias, float gain)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous anim_time - no progress wrap flash. */
-    float prog = u_params[0];
+    /* motion_clock scales with Speed (old anim_time was wall-clock on/off only). */
+    float clock_in = u_params[0];
     float freq_scale_e = max(u_params[1], 0.05);
     int pattern_type = int(u_params[2] + 0.5);
+    float freq_n = clamp(u_params[3], 0.0, 1.0);
+    float prog = clock_in * (0.90 + 0.45 * freq_n);
     /* Soften spatial freq so sparse rooms keep broad lobes. */
     float fs = freq_scale_e * 0.72;
     float coord1 = p01.x;

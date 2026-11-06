@@ -28,7 +28,7 @@ param: ndetail
 param: size
 param: freq_n
 param: pattern
-param: motion_clock
+param: hue_scroll_s
 param: strip_reps
 param: strip_unfold
 param: strip_dir

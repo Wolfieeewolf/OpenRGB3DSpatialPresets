@@ -14,7 +14,7 @@ option: Shear (bands)
 option: Rings (concentric)
 option: Pie slices
 slider: hue_repeats 1 100 1 | Hue repeats: | Rainbow cycles across the plane
-param: anim_time
+param: motion_clock
 param: sign direction
 param: raw hue_repeats
 param: plane
@@ -26,7 +26,7 @@ finish: atlas
 # Effect
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous anim_time - no progress wrap flash. */
+    /* Continuous motion_clock - no progress wrap flash. */
     float progress = u_params[0] * 0.22;
     float dir = u_params[1];
     float wrap = clamp(u_params[2], 0.1, 100.0);

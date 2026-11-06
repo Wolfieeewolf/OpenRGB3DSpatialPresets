@@ -72,9 +72,9 @@ vec3 pfSafeDir(vec3 v, vec3 fallback)
 /* Fat core + halo - sized for sparse device grids. */
 float pfPoint(float d, float soft)
 {
-    float s = max(soft, 0.028);
-    float core = exp(-(d * d) / (s * s * 0.32));
-    float halo = exp(-(d * d) / (s * s * 1.75)) * 0.42;
+    float s = max(soft, 0.040);
+    float core = exp(-(d * d) / (s * s * 0.30));
+    float halo = exp(-(d * d) / (s * s * 1.90)) * 0.50;
     return clamp(core + halo, 0.0, 1.0);
 }
 float pfStreak(vec3 dlt, vec3 dir, float soft_along, float soft_side)
@@ -142,7 +142,7 @@ float pfWisp(vec3 dlt, vec3 axis, float soft)
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
     /* Continuous motion_clock - no progress wrap flash. */
-    float clock = u_params[0];
+    float clock_in = u_params[0];
     int mode = int(clamp(u_params[1], 0.0, 6.0) + 0.5);
     float count_f = clamp(u_params[2], 8.0, 48.0);
     float size01 = clamp(u_params[3], 0.030, 0.30);
@@ -152,6 +152,8 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float fill = clamp(u_params[7], 0.40, 1.6);
     float hue_scroll = fract(u_params[8]);
     float freq_n = clamp(u_params[9], 0.0, 1.0);
+    /* Frequency used to barely matter — scale the clock so the global feels real. */
+    float clock = clock_in * (0.70 + 0.70 * freq_n);
 
     float intensity = 0.0;
     float hue01 = hue_scroll;

@@ -33,7 +33,7 @@ option: Square
 slider: num_divisions 2 16 4 | Panes divisions:
 slider: glow 15 100 55 unit pct | Glow (beams):
 param: pattern
-param: anim_time
+param: motion_clock
 param: size
 param: tight_inv
 param: path_axis
@@ -117,7 +117,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float front_thick = clamp(u_params[11], 0.05, 1.0);
     float freq_n = max(u_params[12], 0.02);
 
-    /* Continuous travel phase from anim_time - no progress wrap flash. */
+    /* Continuous travel phase from motion_clock - no progress wrap flash. */
     float progress = fract(time_sec * freq_n * 0.22);
 
     vec3 l = p01 * 2.0 - 1.0;

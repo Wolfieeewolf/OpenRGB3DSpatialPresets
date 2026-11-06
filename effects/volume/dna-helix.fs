@@ -15,7 +15,7 @@ slider: dna_helix_radius_pct 15 90 55 pct | Helix radius: | Strand orbit radius
 slider: dna_helix_twists 50 2400 600 unit | Twists: | Turns along room height
 slider: dna_helix_thickness_pct 6 70 22 pct | Strand thickness: | Core + glow width
 slider: dna_helix_rung_pct 0 100 55 pct | Rungs: | Ladder rung strength
-param: anim_time
+param: motion_clock
 param: dna_twists
 param: dna_radius
 param: dna_thick
@@ -38,7 +38,7 @@ float dnaSoft(float d, float soft)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous anim_time - no progress wrap flash. */
+    /* Continuous motion_clock - no progress wrap flash. */
     float time_sec = u_params[0];
     float twists = max(u_params[1], 0.35);
     float radius01 = clamp(u_params[2], 0.08, 0.95);
