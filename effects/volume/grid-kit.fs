@@ -24,13 +24,11 @@ param: ndetail
 param: hue_scroll_s
 param: unit sway
 param: unit density
-param: freq_n
-param: phase37
 finish: hex
 
 # Effect
 /* Globals → params.
- * Speed → motion_clock (0 stops). Frequency → freq_n + hue_scroll_s.
+ * Speed → motion_clock (0 stops). Frequency → hue_scroll_s (hue only).
  * Detail → ndetail (edge sharpness). Size → size_star. Thickness → gthickness.
  * Path → path_axis. Scale = occupancy (engine atlas, not packed here). */
 float softband(float d, float w)
@@ -165,12 +163,9 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float hue_scroll = fract(u_params[6]);
     float sway = clamp(u_params[7], 0.0, 1.5);
     float density = clamp(u_params[8], 0.15, 1.0);
-    float freq_n = clamp(u_params[9], 0.0, 1.0);
-    float phase2 = fract(u_params[10]);
 
-    /* Frequency scales how busy motion is (on top of Speed's clock rate). */
-    float busy = 0.45 + 0.90 * freq_n;
-    float motion = clock * busy;
+    /* Speed alone sets the pace (plugin-wide rule); 0.45 keeps the original default feel. */
+    float motion = clock * 0.45;
 
     vec3 p = (p01 - 0.5) * 2.0;
     /* Thickness maps hard; floor keeps sparse viewport grids lit. */
@@ -181,11 +176,11 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     if(mode == 0)
     {
         /* Plane Sweep — Speed/Freq drive sweep; Density = crests; Sway = wobble; Path = axis. */
-        float progress = fract(motion * (0.55 + 0.35 * density) + phase2 * 0.05);
+        float progress = fract(motion * (0.55 + 0.35 * density));
         float tri = 1.0 - abs(2.0 * progress - 1.0);
         float span = 0.92 * clamp(size_m, 0.55, 1.90);
         float center = (tri * 2.0 - 1.0) * span;
-        float wob = sin(motion * (1.10 + 0.80 * sway) + phase2 * 6.2831853) * sway * 0.14;
+        float wob = sin(motion * (1.10 + 0.80 * sway)) * sway * 0.14;
         float coord = (axis == 0) ? p.x : ((axis == 1) ? p.y : p.z);
         float lat0 = (axis == 0) ? p.y : p.x;
         float lat1 = (axis == 2) ? p.y : p.z;
@@ -213,7 +208,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float box_s = 0.72 * clamp(size_m, 0.55, 1.65);
         vec3 b = vec3(box_s);
         float spin = motion * (0.55 + 0.35 * density);
-        float tip = motion * (0.35 + 0.40 * sway) + phase2 * 6.2831853;
+        float tip = motion * (0.35 + 0.40 * sway);
         vec3 q = p;
         if(axis == 0)
         {
@@ -236,7 +231,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         for(int f = 0; f < 6; f++)
             faces = max(faces, facePlane(q, b, ew * 1.15, f));
 
-        int hot = int(mod(floor(motion * (1.10 + 0.70 * density) + phase2 * 3.0), 6.0));
+        int hot = int(mod(floor(motion * (1.10 + 0.70 * density)), 6.0));
         float hot_face = facePlane(q, b, ew * 1.55, hot);
         float pulse = 0.70 + 0.30 * sin(motion * (2.2 + sway) + float(hot));
         intensity = max(edges * 1.05, faces * 0.28);
@@ -256,7 +251,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float fi = float(i);
             float slot_on = 1.0 - step(n_vis, fi);
             float seed = fi * 1.37 + 0.3;
-            float ax = motion * (0.62 + 0.19 * fi) + seed + phase2 * 1.7;
+            float ax = motion * (0.62 + 0.19 * fi) + seed;
             float ay = motion * (0.48 + 0.14 * fi) + seed * 0.7;
             float ph = fi * 0.8975979;
             float r_scale = mix(0.72, 1.0, hash21(vec2(seed, 0.4)));
@@ -295,7 +290,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float hold_dur = mix(1.35, 2.10, 1.0 - 0.35 * density);
         float half_n = n_moves;
         float cycle_len = half_n + hold_dur + half_n + hold_dur;
-        float clock_m = motion * mix(0.48, 0.95, density) + phase2 * 0.11;
+        float clock_m = motion * mix(0.48, 0.95, density);
         /* Skip past the first scramble so we open on a messed-up cube. */
         float shifted = clock_m + half_n;
         float cycle_id = floor(shifted / cycle_len);
@@ -416,11 +411,12 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 4)
     {
+        /* Sphere Roam — glowing ball with a fading tail; Density = ball size; Sway = tail spacing. */
         float a = motion * (0.75 + 0.45 * density);
         float span = 0.78 * clamp(size_m, 0.55, 1.65);
         vec3 c = vec3(
             sin(a) * 0.72,
-            sin(a * 1.3 + phase2 * 6.2831853) * 0.52,
+            sin(a * 1.71) * 0.52,
             cos(a * 0.85 + 1.1) * 0.72) * span;
         if(axis == 1)
             c = vec3(c.x, c.z, c.y);
@@ -435,7 +431,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float a2 = a - fi * 0.28 * (0.55 + 0.45 * sway);
             vec3 c2 = vec3(
                 sin(a2) * 0.72,
-                sin(a2 * 1.3 + phase2 * 6.2831853) * 0.52,
+                sin(a2 * 1.71) * 0.52,
                 cos(a2 * 0.85 + 1.1) * 0.72) * span;
             if(axis == 1)
                 c2 = vec3(c2.x, c2.z, c2.y);
@@ -449,6 +445,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 5)
     {
+        /* Axis Send — streaks fly along the Path axis; Density = streak count. */
         float best = 0.0;
         float best_h = 0.0;
         float n_vis = mix(6.0, 12.0, density);
@@ -462,7 +459,10 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float lat0 = (h * 2.0 - 1.0) * 0.82 * span;
             float lat1 = (h2 * 2.0 - 1.0) * 0.82 * span;
             float speed = 0.45 + 0.75 * hash21(vec2(fi, 7.1));
-            float pos = (fract(motion * speed * 0.35 + h) * 2.0 - 1.0) * 0.96 * span;
+            float run = fract(motion * speed * 0.35 + h);
+            float pos = (run * 2.0 - 1.0) * 0.96 * span;
+            /* Fade in / out at the ends so the wrap never pops inside the box. */
+            float ends = smoothstep(0.0, 0.12, run) * (1.0 - smoothstep(0.88, 1.0, run));
             vec3 c;
             vec3 dir;
             if(axis == 0)
@@ -485,7 +485,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float side = length(dlt - dir * dot(dlt, dir));
             float glow = exp(-(along * along) / max(half_w * half_w * 7.5, 1e-4))
                        * exp(-(side * side) / max(half_w * half_w * 1.40, 1e-4));
-            glow *= slot_on;
+            glow *= slot_on * ends;
             best = max(best, glow);
             if(glow >= best)
                 best_h = fract(h + hue_scroll);
@@ -495,6 +495,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
+        /* Lightning — jagged bolts strike and fade; Density = bolt count; Sway = jag. */
         float best = 0.0;
         float best_h = 0.0;
         float bolts = mix(2.0, 3.0, density);
@@ -503,8 +504,10 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         {
             float fb = float(b);
             float slot_on = 1.0 - step(bolts, fb);
-            float seed = fb * 2.3 + floor(motion * (0.90 + 0.50 * freq_n) + fb);
-            float flash = fract(motion * (0.55 + fb * 0.18) + hash21(vec2(seed, 0.2)));
+            /* One cycle per bolt: each strike gets a new path exactly when it restarts. */
+            float cycle = motion * (0.55 + fb * 0.18) + hash21(vec2(fb, 0.2));
+            float seed = fb * 2.3 + floor(cycle);
+            float flash = fract(cycle);
             float alive = (1.0 - smoothstep(0.0, 0.78, flash)) * slot_on;
             vec3 a0 = vec3(
                 hash21(vec2(seed, 1.0)) * 2.0 - 1.0,

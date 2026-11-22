@@ -244,7 +244,7 @@ void main() {
     spatial_head = """#version 410 core
 uniform float u_time;
 uniform vec2 u_resolution;
-uniform float u_params[4];
+uniform float u_params[8];
 out vec4 frag_color;
 void spatialMain(out vec4 out_color, in vec2 frag_coord);
 """
