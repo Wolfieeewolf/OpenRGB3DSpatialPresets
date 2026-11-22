@@ -293,11 +293,11 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
         float n_moves = floor(mix(6.0, 12.0, density) + 0.5);
         float hold_dur = mix(1.35, 2.10, 1.0 - 0.35 * density);
-        float half = n_moves;
-        float cycle_len = half + hold_dur + half + hold_dur;
+        float half_n = n_moves;
+        float cycle_len = half_n + hold_dur + half_n + hold_dur;
         float clock_m = motion * mix(0.48, 0.95, density) + phase2 * 0.11;
         /* Skip past the first scramble so we open on a messed-up cube. */
-        float shifted = clock_m + half;
+        float shifted = clock_m + half_n;
         float cycle_id = floor(shifted / cycle_len);
         float t = mod(shifted, cycle_len);
 
@@ -307,7 +307,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         float cur_ang = 0.0;
         float sway_n = clamp(sway / 1.5, 0.0, 1.0);
 
-        if(t < half)
+        if(t < half_n)
         {
             float u = t;
             int step_i = int(min(floor(u), n_moves - 1.0));
@@ -318,15 +318,15 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             n_done = step_i;
             cur_ang = clamp(e, 0.0, 1.0) * half_pi;
         }
-        else if(t < half + hold_dur)
+        else if(t < half_n + hold_dur)
         {
             n_done = int(n_moves);
             cur_idx = -1;
             cur_ang = 0.0;
         }
-        else if(t < half + hold_dur + half)
+        else if(t < half_n + hold_dur + half_n)
         {
-            float u = t - half - hold_dur;
+            float u = t - half_n - hold_dur;
             int step_i = int(min(floor(u), n_moves - 1.0));
             float frac = clamp(u - float(step_i), 0.0, 1.0);
             float e = smoothstep(0.0, 1.0, frac);

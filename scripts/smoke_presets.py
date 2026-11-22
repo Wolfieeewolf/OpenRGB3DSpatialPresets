@@ -70,7 +70,9 @@ RESERVED_ID = re.compile(
     r"atomic_uint|coherent|volatile|restrict|readonly|writeonly|subroutine|"
     r"precise|invariant|attribute|varying|common|partition|active|asm|class|"
     r"union|enum|typedef|template|this|resource|public|private|protected|"
-    r"namespace|using|goto|inline|noinline|extern|static|input|output)\b"
+    r"namespace|using|goto|inline|noinline|extern|static|input|output|"
+    r"half|fixed|long|short|unsigned|superp|external|interface|filter|sizeof|cast|"
+    r"hvec[234]|fvec[234])\b"
 )
 
 FINISH_VALUES = {
