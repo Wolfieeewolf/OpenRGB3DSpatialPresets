@@ -75,6 +75,46 @@ RESERVED_ID = re.compile(
     r"hvec[234]|fvec[234])\b"
 )
 
+# Keys the plugin saves for every effect (SpatialEffect3D::SaveSettings plus audio / media /
+# pattern settings). A look's slider / combo / pattern_key shares that JSON object, so reusing
+# one makes the two settings overwrite each other.
+RESERVED_SETTING_KEYS = {
+    "speed", "brightness", "frequency", "detail", "size", "scale_value", "scale_inverted",
+    "effect_bounds_mode", "rainbow_mode", "spatial_mapping_mode", "compass_layer_spin_preset",
+    "effect_sampler_influence_centi", "effect_sampler_compass_north_offset_deg",
+    "effect_compass_discrete_zones", "intensity", "sharpness", "smoothing",
+    "sampling_resolution", "edge_profile", "edge_thickness", "glow_level", "axis_scale_x",
+    "axis_scale_y", "axis_scale_z", "rotation_yaw", "rotation_pitch", "rotation_roll",
+    "shear_xy", "shear_xz", "shear_yz", "volume_shape", "axis_scale_rotation_yaw",
+    "axis_scale_rotation_pitch", "axis_scale_rotation_roll", "colors", "fps", "path_axis",
+    "band_thickness", "edge_fade", "instance_count", "plane", "surface_mask", "offset_x",
+    "offset_y", "offset_z", "reference_mode", "global_ref_x", "global_ref_y", "global_ref_z",
+    "custom_ref_x", "custom_ref_y", "custom_ref_z", "use_custom_ref", "room_output_role",
+    "room_relay_light", "room_emitter_controllers", "room_receiver_controllers",
+    "stratum_layout_mode", "stratum_band_speed_pct", "stratum_band_tight_pct",
+    "stratum_band_phase_deg", "stratum_band_motion_kind", "stratum_band_motion_rate",
+    "strip_cmap_on", "strip_cmap_kernel", "strip_cmap_rep", "strip_cmap_unfold",
+    "strip_cmap_dir", "media_path", "tile_repeat_enabled", "audio_smoothing", "low_hz",
+    "high_hz", "falloff", "peak_boost", "drive_mode", "sustain_reject", "register_role",
+    "pulse_color_mode", "beat_wave_mode", "wave_spread", "wave_decay",
+}
+
+
+def check_setting_keys(header: dict[str, list[str]], path: Path, issues: list[str]) -> None:
+    seen: set[str] = set()
+    for kind in ("slider", "combo", "pattern_key"):
+        for value in header.get(kind, []):
+            name = value.split("|")[0].split()
+            if not name:
+                continue
+            key = name[0]
+            if key in RESERVED_SETTING_KEYS:
+                issues.append(f"{path}: {kind} '{key}' clashes with a built-in setting key")
+            if key in seen:
+                issues.append(f"{path}: setting key '{key}' is used twice")
+            seen.add(key)
+
+
 FINISH_VALUES = {
     "depth",
     "hex",
@@ -168,6 +208,7 @@ def check_volume_fs(path: Path, issues: list[str]) -> None:
         for f in header["finish"]:
             if f not in FINISH_VALUES:
                 issues.append(f"{path}: unknown finish: {f}")
+    check_setting_keys(header, path, issues)
     body = resolve_shader_body(path, header, body)
     if "volumeMain" not in body:
         issues.append(f"{path}: body missing volumeMain")

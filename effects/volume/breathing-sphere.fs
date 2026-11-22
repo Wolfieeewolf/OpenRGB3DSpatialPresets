@@ -13,14 +13,14 @@ option: Rectangle | Rectangular box matching room width vs depth.
 option: Triangle | Triangular prism (flat sides).
 option: Pentagon | Pentagonal prism (flat sides).
 option: Whole room (inhale wave) | No shell - inhale/exhale color wave from the effect origin.
-combo: edge_profile 0 | Edge:
+combo: breathing_edge 0 | Edge:
 option: Soft | Gentle boundary falloff.
 option: Crisp | Hard silhouette. Breath pulse keeps the chosen shape.
 slider: breath_pulse_pct 0 100 55 pct | Breath pulse: | How far the shell grows/shrinks each breath. 0 = static.
 slider: center_hole_pct 0 100 0 pct | Center hole: | 0 = solid; higher carves an empty core. Ignored in whole-room mode.
 param: motion_clock
 param: ndetail
-param: combo edge_profile
+param: combo breathing_edge
 param: unit center_hole_pct
 param: combo breathing_shape
 param: atlas_ax
