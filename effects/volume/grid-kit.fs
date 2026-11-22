@@ -13,8 +13,8 @@ pattern: Rubik Cube
 pattern: Plasma Orb
 pattern: Hyperspace
 pattern: Lightning
-slider: density 20 100 70 unit pct | Density: | How much: beams + trail (Scanner), edge pulses (Hologram), box count, Rubik moves, arc rate (Plasma Orb), star count (Hyperspace), storm level (Lightning: 20 normal, 50 storm, 75 wide storm, 100 the gods are angry)
-slider: sway 0 150 70 unit pct | Sway: | Shape: beam wobble (Scanner), tumble (Hologram), orbit spread, tail length (Plasma Orb), tunnel width (Hyperspace), bolt jag and branch reach (Lightning)
+slider: density 20 100 70 unit pct | Density: | How much: beams + trail (Scanner), edge pulses (Hologram), box count, scramble length (Rubik), arc rate (Plasma Orb), star count (Hyperspace), storm level (Lightning: 20 normal, 50 storm, 75 wide storm, 100 the gods are angry)
+slider: sway 0 150 70 unit pct | Sway: | Shape: beam wobble (Scanner), tumble (Hologram), orbit spread, turn overshoot (Rubik), tail length (Plasma Orb), tunnel width (Hyperspace), bolt jag and branch reach (Lightning)
 param: pattern
 param: motion_clock
 param: gthickness
@@ -60,16 +60,6 @@ vec3 gkRotZ(vec3 p, float a)
     float s = sin(a);
     return vec3(c * p.x - s * p.y, s * p.x + c * p.y, p.z);
 }
-float boxEdgeGlow(vec3 p, vec3 b, float edge_w)
-{
-    float near_x = softband(abs(p.x) - b.x, edge_w);
-    float near_y = softband(abs(p.y) - b.y, edge_w);
-    float near_z = softband(abs(p.z) - b.z, edge_w);
-    float inside = step(abs(p.x), b.x + edge_w)
-                 * step(abs(p.y), b.y + edge_w)
-                 * step(abs(p.z), b.z + edge_w);
-    return max(near_x * near_y, max(near_y * near_z, near_z * near_x)) * inside;
-}
 float facePlane(vec3 p, vec3 b, float edge_w, int face)
 {
     float d = 0.0;
@@ -106,35 +96,17 @@ float facePlane(vec3 p, vec3 b, float edge_w, int face)
     }
     return softband(d, edge_w) * mask;
 }
-int nearestFace(vec3 p, vec3 b)
-{
-    float dxp = abs(p.x - b.x);
-    float dxm = abs(p.x + b.x);
-    float dyp = abs(p.y - b.y);
-    float dym = abs(p.y + b.y);
-    float dzp = abs(p.z - b.z);
-    float dzm = abs(p.z + b.z);
-    float best = dxp;
-    int face = 0;
-    if(dxm < best) { best = dxm; face = 1; }
-    if(dyp < best) { best = dyp; face = 2; }
-    if(dym < best) { best = dym; face = 3; }
-    if(dzp < best) { best = dzp; face = 4; }
-    if(dzm < best) { best = dzm; face = 5; }
-    return face;
-}
-/* Twist one Rubik layer around face axis. soft_w>0.5 = feathered anim edge. */
-vec3 gkTwistLayer(vec3 q, int face, float layer, float ang, float cell, float soft_w)
+/* Twist one Rubik layer around its face axis. Hard layer edges, like a real cube:
+ * a feathered edge snaps when the turn finishes, which reads as a flash. */
+vec3 gkTwistLayer(vec3 q, int face, float layer, float ang, float cell)
 {
     float lc = q.x;
     if(face >= 2 && face < 4)
         lc = q.y;
     else if(face >= 4)
         lc = q.z;
-    float target = layer * cell;
-    float on = step(abs(lc - target), cell * 0.52);
-    if(soft_w > 0.5)
-        on = 1.0 - smoothstep(cell * 0.40, cell * 0.58, abs(lc - target));
+    /* Middle layer is the centre slab; outer layers reach all the way to the walls. */
+    float on = (abs(layer) < 0.5) ? step(abs(lc), cell * 0.5) : step(cell * 0.5, lc * layer);
     float sgn = (mod(float(face), 2.0) < 0.5) ? 1.0 : -1.0;
     vec3 r = q;
     if(face < 2)
@@ -145,11 +117,33 @@ vec3 gkTwistLayer(vec3 q, int face, float layer, float ang, float cell, float so
         r = gkRotZ(q, ang * sgn);
     return mix(q, r, on);
 }
-void gkRubikMove(float mid, float cycle_id, out int face, out float layer, out float dir)
+void gkRubikMoveRaw(float mid, float cycle_id, out int face, out float layer, out float dir)
 {
     face = int(floor(hash21(vec2(mid + 0.17, cycle_id * 0.13 + 1.1)) * 6.0));
     layer = floor(hash21(vec2(mid + 0.31, cycle_id * 0.17 + 2.2)) * 3.0) - 1.0;
     dir = (hash21(vec2(mid + 0.53, cycle_id * 0.19 + 3.3)) > 0.5) ? 1.0 : -1.0;
+}
+/* Random turn `mid` of scramble `cycle_id` (a new sequence every cycle). Never turns the
+ * same axis + layer twice in a row, which would look like nothing or an undo. */
+void gkRubikMove(float mid, float cycle_id, out int face, out float layer, out float dir)
+{
+    gkRubikMoveRaw(mid, cycle_id, face, layer, dir);
+    if(mid > 0.5)
+    {
+        int pf;
+        float pl;
+        float pd;
+        gkRubikMoveRaw(mid - 1.0, cycle_id, pf, pl, pd);
+        if(pf / 2 == face / 2 && pl == layer)
+            layer = mod(layer + 2.0, 3.0) - 1.0;
+    }
+}
+/* One quarter turn over frac 0..1: eased, with optional overshoot that settles by the end. */
+float gkTurnEase(float frac, float overshoot)
+{
+    float f = clamp(frac, 0.0, 1.0);
+    float e = smoothstep(0.0, 1.0, f);
+    return clamp(e + sin(3.14159265 * e) * 0.10 * overshoot * (1.0 - f), 0.0, 1.0);
 }
 float gkSegDist(vec3 p, vec3 a, vec3 b)
 {
@@ -254,16 +248,14 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     else if(mode == 1)
     {
         /* Hologram Box — a projected wireframe cube: energy pulses race along the edges, a
-         * scanline passes through, faint faces, and the odd glitch flicker.
+         * scanline passes through, faint faces, and a soft projector shimmer.
          * Density = pulses per edge; Sway = tumble. */
         float box_s = 0.72 * clamp(size_m, 0.55, 1.65);
         vec3 b = vec3(box_s);
         float sway_n = clamp(sway / 1.5, 0.0, 1.0);
         float spin = motion * 0.70;
         float tip = motion * (0.35 + 0.40 * sway_n);
-        float g_seed = floor(motion * 6.0);
-        float glitch = step(0.94, hash21(vec2(g_seed, 5.5)));
-        vec3 q = p + lat_u * glitch * (hash21(vec2(g_seed, 6.6)) - 0.5) * 0.12;
+        vec3 q = p;
         if(axis == 0)
         {
             q = gkRotX(q, spin);
@@ -296,7 +288,9 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             faces = max(faces, facePlane(q, b, ew * 1.1, f));
         float ax_c = (axis == 0) ? q.x : ((axis == 1) ? q.y : q.z);
         float scan = softband(ax_c - sin(motion * 0.9) * box_s, half_w * 1.2) * inside * 0.75;
-        intensity = max(max(edges * 1.10, faces * 0.18), scan) * (1.0 - 0.6 * glitch);
+        /* Projector shimmer: a soft, continuous brightness ripple (no hard on/off steps). */
+        float shimmer = 0.88 + 0.12 * sin(motion * 9.0 + ax_c * 6.0);
+        intensity = max(max(edges * 1.10, faces * 0.18), scan) * shimmer;
         color_drv = fract(0.50 + 0.06 * ax_c + hue_scroll);
     }
     else if(mode == 2)
@@ -338,87 +332,53 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(mode == 3)
     {
-        /* Rubik — committed 90° layer turns (no snap-back).
-         * Cycle: scramble → hold messy → solve → hold clean → new random scramble…
-         * Clock is offset so the look starts already scrambled. Density = move count. */
-        float box_s = 0.88 * clamp(size_m, 0.55, 1.45);
+        /* Rubik Cube — the room is the cube. Each cycle: hold solved → scramble with a new
+         * random sequence → hold scrambled → solve back → repeat. Every LED shows the
+         * sticker it sits on, so sparse rooms read. Density = moves per scramble;
+         * Sway = overshoot on each turn. */
+        float box_s = clamp(size_m, 0.55, 1.45);
         vec3 b = vec3(box_s);
-        float cell = max(box_s * 2.0 / 3.0, 0.12);
+        float cell = box_s * 2.0 / 3.0;
         float half_pi = 1.5707963;
+        float sway_n = clamp(sway / 1.5, 0.0, 1.0);
 
         float n_moves = floor(mix(6.0, 12.0, density) + 0.5);
-        float hold_dur = mix(1.35, 2.10, 1.0 - 0.35 * density);
-        float half_n = n_moves;
-        float cycle_len = half_n + hold_dur + half_n + hold_dur;
-        float clock_m = motion * mix(0.48, 0.95, density);
-        /* Skip past the first scramble so we open on a messed-up cube. */
-        float shifted = clock_m + half_n;
-        float cycle_id = floor(shifted / cycle_len);
-        float t = mod(shifted, cycle_len);
+        float hold_dur = 1.6;
+        float cycle_len = hold_dur + n_moves + hold_dur + n_moves;
+        float clock_m = motion * mix(0.55, 0.95, density);
+        float cycle_id = floor(clock_m / cycle_len);
+        float t = mod(clock_m, cycle_len);
 
-        /* Phases: scramble → hold scrambled → solve → hold solved. */
+        /* n_done = finished turns; cur_idx / cur_ang = the turn in progress. */
         int n_done = 0;
         int cur_idx = -1;
         float cur_ang = 0.0;
-        float sway_n = clamp(sway / 1.5, 0.0, 1.0);
-
-        if(t < half_n)
+        if(t >= hold_dur && t < hold_dur + n_moves)
         {
-            float u = t;
+            float u = t - hold_dur;
             int step_i = int(min(floor(u), n_moves - 1.0));
-            float frac = clamp(u - float(step_i), 0.0, 1.0);
-            float e = smoothstep(0.0, 1.0, frac);
-            e = e + sin(3.14159265 * e) * 0.10 * sway_n * (1.0 - frac);
+            float e = gkTurnEase(u - float(step_i), sway_n);
             cur_idx = step_i;
             n_done = step_i;
-            cur_ang = clamp(e, 0.0, 1.0) * half_pi;
+            cur_ang = e * half_pi;
         }
-        else if(t < half_n + hold_dur)
+        else if(t >= hold_dur + n_moves && t < 2.0 * hold_dur + n_moves)
         {
             n_done = int(n_moves);
-            cur_idx = -1;
-            cur_ang = 0.0;
         }
-        else if(t < half_n + hold_dur + half_n)
+        else if(t >= 2.0 * hold_dur + n_moves)
         {
-            float u = t - half_n - hold_dur;
+            /* Solve = the scramble played backwards, one turn at a time. */
+            float u = t - 2.0 * hold_dur - n_moves;
             int step_i = int(min(floor(u), n_moves - 1.0));
-            float frac = clamp(u - float(step_i), 0.0, 1.0);
-            float e = smoothstep(0.0, 1.0, frac);
-            e = e + sin(3.14159265 * e) * 0.10 * sway_n * (1.0 - frac);
+            float e = gkTurnEase(u - float(step_i), sway_n);
             cur_idx = int(n_moves) - 1 - step_i;
             n_done = cur_idx;
-            cur_ang = (1.0 - clamp(e, 0.0, 1.0)) * half_pi;
-        }
-        else
-        {
-            n_done = 0;
-            cur_idx = -1;
-            cur_ang = 0.0;
+            cur_ang = (1.0 - e) * half_pi;
         }
 
-        /* Forward warp for spinning geometry. */
-        vec3 q = p;
-        for(int i = 0; i < 12; i++)
-        {
-            float on_i = 1.0 - step(float(n_done), float(i));
-            int mf;
-            float ml;
-            float md;
-            gkRubikMove(float(i), cycle_id, mf, ml, md);
-            vec3 q2 = gkTwistLayer(q, mf, ml, md * half_pi, cell, 0.0);
-            q = mix(q, q2, on_i);
-        }
-        if(cur_idx >= 0)
-        {
-            int cf;
-            float cl;
-            float cd;
-            gkRubikMove(float(cur_idx), cycle_id, cf, cl, cd);
-            q = gkTwistLayer(q, cf, cl, cd * cur_ang, cell, 1.0);
-        }
-
-        /* Inverse map → home facelets for true sticker colors. */
+        /* Sticker lookup: undo the turn in progress, then every finished turn, to find
+         * which home facelet this point is showing right now. */
         vec3 h = p;
         if(cur_idx >= 0)
         {
@@ -426,48 +386,48 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             float cl;
             float cd;
             gkRubikMove(float(cur_idx), cycle_id, cf, cl, cd);
-            h = gkTwistLayer(h, cf, cl, -cd * cur_ang, cell, 1.0);
+            h = gkTwistLayer(h, cf, cl, -cd * cur_ang, cell);
         }
         for(int i = 11; i >= 0; i--)
         {
-            float on_i = 1.0 - step(float(n_done), float(i));
+            if(i >= n_done)
+                continue;
             int mf;
             float ml;
             float md;
             gkRubikMove(float(i), cycle_id, mf, ml, md);
-            vec3 h2 = gkTwistLayer(h, mf, ml, -md * half_pi, cell, 0.0);
-            h = mix(h, h2, on_i);
+            h = gkTwistLayer(h, mf, ml, -md * half_pi, cell);
         }
 
-        vec3 aq = abs(q);
-        float m = max(aq.x, max(aq.y, aq.z));
-        float shell = softband(m - box_s, half_w * mix(1.5, 2.1, detail));
-        float in_face = step(abs(q.x), b.x + half_w * 2.0)
-                      * step(abs(q.y), b.y + half_w * 2.0)
-                      * step(abs(q.z), b.z + half_w * 2.0);
-
-        int face = nearestFace(h, b);
+        /* Face = dominant axis of the home position; uv = position on that face. */
+        vec3 ah = abs(h);
+        int face;
         vec2 uv;
-        if(face == 0 || face == 1)
+        if(ah.x >= ah.y && ah.x >= ah.z)
+        {
+            face = (h.x > 0.0) ? 0 : 1;
             uv = h.yz;
-        else if(face == 2 || face == 3)
+        }
+        else if(ah.y >= ah.z)
+        {
+            face = (h.y > 0.0) ? 2 : 3;
             uv = h.xz;
+        }
         else
+        {
+            face = (h.z > 0.0) ? 4 : 5;
             uv = h.xy;
-        vec2 cell_i = floor((uv + box_s) / cell);
-        cell_i = clamp(cell_i, vec2(0.0), vec2(2.0));
-
+        }
         vec2 local = abs(mod(uv + box_s, cell) - cell * 0.5);
         float groove = softband(min(local.x, local.y), half_w * mix(0.45, 0.75, detail));
-        float sticker = shell * in_face * (1.0 - groove * 0.80);
+        /* Interior LEDs glow a little dimmer than the walls so the cube shape still reads. */
+        vec3 ap = abs(p);
+        float m = max(ap.x, max(ap.y, ap.z)) / box_s;
+        float depth = mix(0.55, 1.0, smoothstep(0.25, 0.90, m));
+        intensity = (1.0 - groove * 0.80) * depth;
 
-        /* Six solid face hues; stickers track through every committed turn. */
-        color_drv = (float(face) + 0.5) / 6.0;
-        color_drv = fract(color_drv + hue_scroll * 0.12);
-
-        float edges = boxEdgeGlow(q, b, half_w * 1.45);
-        intensity = max(sticker * 1.05, edges * 0.70);
-        intensity *= 0.90 + 0.10 * (0.5 + 0.5 * sin(motion * 0.35));
+        /* Six solid face colours; stickers track through every turn. */
+        color_drv = fract((float(face) + 0.5) / 6.0 + hue_scroll * 0.12);
     }
     else if(mode == 4)
     {
