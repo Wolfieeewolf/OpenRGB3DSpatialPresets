@@ -12,7 +12,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float detail = clamp(u_params[3], 0.05, 1.0);
     vec2 p = (uv - 0.5) * zoom;
     float dens = 4.0 + 14.0 * detail;
-    float wave = sin(p.x * dens + u_time) * 0.5 + sin(p.y * dens * 0.75 - u_time * 0.85) * 0.5;
+    float wave = sin(p.x * dens + (u_time * 2.613)) * 0.5 + sin(p.y * dens * 0.75 - u_time * 2.221) * 0.5;
     wave = pow(clamp(wave * 0.5 + 0.5, 0.0, 1.0), contrast);
     float ang = hue * 6.2831853;
     vec3 deep = vec3(0.04, 0.06, 0.18);

@@ -11,7 +11,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (1.6 * zoom);
-    float t = u_time * 0.35;
+    float t = u_time * 0.9145;
     float v = 0.0;
     float band0 = 0.55 + 0.45 * sin(p.x * (1.2) + t * 0.6 + sin(p.y * 2.2 + t * 0.4));
     float curtain0 = exp(-abs(p.y + 0.15 * sin(p.x * 1.5 + t) + 0.36) * (3.0 + detail * 2.0));

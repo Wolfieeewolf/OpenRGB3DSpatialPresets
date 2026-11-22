@@ -11,7 +11,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     float cells = 3.0 + 10.0 * detail;
-    vec2 p = (uv - 0.5) * zoom * cells + vec2(u_time * 0.35, -u_time * 0.22);
+    vec2 p = (uv - 0.5) * zoom * cells + vec2(u_time * 0.9145, -u_time * 0.5748);
     vec2 g = abs(fract(p) - 0.5);
     float checker = step(0.5, mod(floor(p.x) + floor(p.y), 2.0));
     float grid = 1.0 - smoothstep(0.42, 0.48, max(g.x, g.y));

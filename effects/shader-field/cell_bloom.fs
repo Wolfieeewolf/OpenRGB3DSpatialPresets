@@ -12,7 +12,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (3.0 * zoom * (0.7 + detail));
-    p += vec2(u_time * 0.08, -u_time * 0.05);
+    p += vec2(u_time * 0.209, -u_time * 0.1306);
     vec2 g = floor(p);
     vec2 f = fract(p);
     float md = 8.0;
@@ -29,7 +29,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float edge = clamp(sqrt(mid) - sqrt(md), 0.0, 1.0);
     float v = pow(clamp(1.0 - md * 1.8, 0.0, 1.0), mix(1.6, 0.7, contrast / 2.5));
     v *= 0.55 + 0.45 * smoothstep(0.02, 0.12, edge);
-    float h = fract(hue + md * 0.35 + u_time * 0.02);
+    float h = fract(hue + md * 0.35 + u_time * 0.05225);
     vec3 rgb = clamp(abs(mod(h * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
     out_color = vec4(mix(vec3(0.03, 0.04, 0.07), rgb, v), 1.0);
 }

@@ -11,7 +11,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (1.8 * zoom);
-    float t = u_time * 0.35;
+    float t = u_time * 0.9145;
     float r = length(p);
     float a = atan(p.y, p.x);
     float petals = 3.0 + floor(5.0 * detail + 0.5);

@@ -16,7 +16,7 @@ slider: color_mix 0 100 40 pct | Color mix | Host Color / Rainbow / Pattern blen
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord) {
     vec2 uv = frag_coord / max(u_resolution, vec2(1.0));
-    float t = u_time * 0.4;
+    float t = u_time * 1.045;
     float dens = mix(8.0, 28.0, u_params[4]);
     vec2 cell = floor(uv * dens);
     vec2 f = fract(uv * dens) - 0.5;

@@ -13,7 +13,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     vec2 p = (uv - 0.5) * zoom + 0.5;
     float vel = 1.6 + 2.2 * detail;
     float len = mix(18.0, 8.0, detail);
-    float t = u_time * vel;
+    float t = (u_time * 2.613) * vel;
     float aspect = u_resolution.x / max(u_resolution.y, 1.0);
     vec2 q = (p - 0.5) * vec2(aspect, 1.0) + 0.5;
     float d0 = length((q - vec2(0.0, 0.0)) * u_resolution.xy / max(u_resolution.y, 1.0));
@@ -22,7 +22,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float d3 = length((q - vec2(1.0, 1.0)) * u_resolution.xy / max(u_resolution.y, 1.0));
     float w = sin(d0 / len - t) + sin(d1 / len - t) + sin(d2 / len - t) + sin(d3 / len - t);
     float v = pow(clamp(0.5 + 0.25 * w, 0.0, 1.0), contrast);
-    float h = fract(hue + 0.08 * w + u_time * 0.02);
+    float h = fract(hue + 0.08 * w + u_time * 0.05225);
     vec3 crest = clamp(abs(mod(h * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
     crest = crest * crest * (3.0 - 2.0 * crest);
     out_color = vec4(mix(vec3(0.02, 0.05, 0.14), crest, v), 1.0);

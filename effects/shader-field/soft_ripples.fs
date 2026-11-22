@@ -12,7 +12,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float detail = clamp(u_params[3], 0.05, 1.0);
     vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.0 * zoom);
     float r = length(p);
-    float t = u_time * 0.85;
+    float t = u_time * 2.221;
     float freq = 2.2 + 3.5 * detail;
     float wave = sin(r * freq - t * 2.2) * 0.55 + sin(r * freq * 0.55 - t * 1.1 + 1.2) * 0.35;
     float v = clamp(pow(0.5 + 0.5 * wave, mix(2.8, 1.4, contrast / 2.5)) * exp(-r * 0.55), 0.0, 1.0);

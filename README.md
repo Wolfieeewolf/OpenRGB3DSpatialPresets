@@ -1,17 +1,38 @@
 # OpenRGB 3D Spatial Presets
 
-Community **content pack** for the [OpenRGB 3D Spatial](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin) plugin: controller layouts, effect looks, Action tools, triggers, and Movie Sync helpers.
+The **effects, tools and device layouts** for the [OpenRGB 3D Spatial](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin) plugin.
 
-The plugin repo is the **engine only** — all drop-in looks live here. **Same folder names as the plugin data root** — install is copy-paste.
+The plugin is only the engine and ships with **no effects**. Without this pack the Effect Library is empty and pressing Start does nothing.
 
-Browsable guide: **[Wiki](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/wiki)**.
+## Install (2 minutes)
 
-**Source of truth:** GitHub. GitLab ([Wolfieeewolf/OpenRGB3DSpatialPresets](https://gitlab.com/Wolfieeewolf/OpenRGB3DSpatialPresets)) is a mirror/backup.
+1. Install the plugin first — see the [plugin Getting Started guide](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/wiki/Getting-Started).
+2. Download this repo: green **Code → Download ZIP** (or `git clone`).
+3. Copy these folders from the zip into the plugin folder (create it if it doesn't exist):
 
-```text
-%AppData%\OpenRGB\plugins\settings\OpenRGB3DSpatialPlugin\     (Windows)
-~/.config/OpenRGB/plugins/settings/OpenRGB3DSpatialPlugin/     (Linux)
-```
+   | OS | Plugin folder |
+   | --- | --- |
+   | Windows | `%AppData%\OpenRGB\plugins\settings\OpenRGB3DSpatialPlugin\` |
+   | Linux / macOS | `~/.config/OpenRGB/plugins/settings/OpenRGB3DSpatialPlugin/` |
+
+   | Folder | You get | Need it? |
+   | --- | --- | --- |
+   | `effects/` | All the looks in the **Effect Library** | **Yes** |
+   | `controllers/` | Ready-made layouts for common devices (**Object Creator → Add from preset**) | Recommended |
+   | `action-editor/` | Tools for building your own light shows | If you use Actions |
+   | `triggers/` | Lighting that fires on events | If you use Triggers |
+   | `movie-sync/` | Lighting synced to video (VLC) | If you use Movie Sync |
+
+   Already customised `triggers.json` or swatches? Merge instead of overwriting.
+4. Restart OpenRGB.
+
+To update later, download again and copy over the top.
+
+Browsable guide: **[Wiki](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPresets/wiki)**. Source of truth is GitHub; GitLab ([Wolfieeewolf/OpenRGB3DSpatialPresets](https://gitlab.com/Wolfieeewolf/OpenRGB3DSpatialPresets)) is a mirror.
+
+---
+
+*The rest of this page is for people browsing or contributing content.*
 
 ## Folders
 
@@ -56,33 +77,13 @@ Finished packs use `*.action.json` (`openrgb3d.action`). Timeline tools use `*.f
 
 Engine contracts (plugin repo): [effects-engines.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/effects-engines.md) · [content-library.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/content-library.md).
 
-## Install
-
-**From a plugin release (easiest):** packages embed a frozen snapshot of this repo.
-
-| OS | Content install |
-|----|-----------------|
-| **Windows** | MSI — **Typical** / **Custom** / **Complete** in the installer |
-| **Linux** | `./install.sh` or `openrgb3d-install-content` — menu: Typical / Complete / Custom (toggle packs) |
-| **macOS** | `./install.sh` from the zip — same Typical / Complete / Custom menu |
-
-Typical = looks/tools (no controllers); Custom = pick packs + brands you own; Complete = everything. This git repo stays the source of truth.
-
-**Manual / dev:**
-
-1. Install a matching [OpenRGB3DSpatialPlugin](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin) build.
-2. Copy the folders above into the plugin data root (merge OK — keep your local `triggers.json` / swatches if you already customized them).
-3. Restart OpenRGB.
+## Checking content changes
 
 ```text
 python scripts/smoke_presets.py
 ```
 
 Optional: `python scripts/smoke_presets.py --compile-glsl` (needs `moderngl`).
-
-### Controllers only
-
-Copy from [`controllers/`](controllers/), then **Object Creator** → **Add from preset**.
 
 ## Browse controller presets
 

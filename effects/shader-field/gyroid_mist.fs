@@ -11,7 +11,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.4 * zoom);
-    float t = u_time * 0.4;
+    float t = u_time * 1.045;
     float s = 2.2 + 4.0 * detail;
     float g = sin(p.x * s + t) * cos(p.y * s - t * 0.8)
             + sin((p.x + p.y) * s * 0.7 - t)

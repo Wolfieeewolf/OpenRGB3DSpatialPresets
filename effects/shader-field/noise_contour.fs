@@ -26,10 +26,10 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.4 * zoom * (0.7 + detail));
-    float noise_fac = ncFbm(p * (2.0 + 2.5 * detail), u_time * 0.55);
+    float noise_fac = ncFbm(p * (2.0 + 2.5 * detail), u_time * 1.437);
     float contour = 0.5 * (1.0 - cos((18.0 + 28.0 * detail) * 3.14159265 * noise_fac));
     float clip = smoothstep(0.55, mix(0.85, 0.98, contrast / 2.5), contour);
-    float h = fract(hue + noise_fac * 0.35 + u_time * 0.02);
+    float h = fract(hue + noise_fac * 0.35 + u_time * 0.05225);
     vec3 rgb = mix(vec3(0.85, 0.05, 0.75), vec3(0.05, 0.85, 0.90), noise_fac);
     vec3 tint = clamp(abs(mod(h * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
     out_color = vec4(mix(rgb, tint, 0.35) * clip * (0.35 + 0.65 * contour), 1.0);

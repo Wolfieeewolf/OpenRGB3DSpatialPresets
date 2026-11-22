@@ -16,7 +16,7 @@ slider: color_mix 0 100 60 pct | Color mix | 0 = shader colors only, 100 = host 
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord) {
     vec2 uv = frag_coord / max(u_resolution, vec2(1.0));
-    float t = u_time * 0.35;
+    float t = u_time * 0.9145;
     float d = u_params[4];
     float n = 0.5 + 0.5 * sin((uv.x * 8.0 + t) * (1.0 + d))
                     * sin((uv.y * 6.0 - t * 0.7) * (1.0 + d * 0.5));

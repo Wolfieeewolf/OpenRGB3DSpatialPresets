@@ -16,17 +16,17 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     vec3 final_color = vec3(0.0);
     float dens = 3.5 + 3.0 * detail;
     vec2 u = p - 0.5; u *= sin(0.0 - length(u));
-    float d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.3) * 0.6);
+    float d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.7838) * 0.6);
     d = clamp(pow(0.03 / max(d, 0.02), mix(0.85, 1.25, contrast / 2.5)), 0.0, 2.5);
-    final_color += nwPalette(length(p0) - u_time * 0.25 + 10.0 + hue) * d;
+    final_color += nwPalette(length(p0) - u_time * 0.6532 + 10.0 + hue) * d;
     u = p; u.x = -u.x; u = u - 0.5 + 1.0; u *= sin(1.0 - length(u));
-    d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.3) * 0.6);
+    d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.7838) * 0.6);
     d = clamp(pow(0.03 / max(d, 0.02), mix(0.85, 1.25, contrast / 2.5)), 0.0, 2.5);
-    final_color += nwPalette(length(p0) - u_time * 0.25 + 10.0 + hue) * d;
+    final_color += nwPalette(length(p0) - u_time * 0.6532 + 10.0 + hue) * d;
     u = p - 0.5 + 2.0; u *= sin(2.0 - length(u));
-    d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.3) * 0.6);
+    d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.7838) * 0.6);
     d = clamp(pow(0.03 / max(d, 0.02), mix(0.85, 1.25, contrast / 2.5)), 0.0, 2.5);
-    final_color += nwPalette(length(p0) - u_time * 0.25 + 10.0 + hue) * d;
+    final_color += nwPalette(length(p0) - u_time * 0.6532 + 10.0 + hue) * d;
     final_color *= clamp(0.55 / max(length(p0), 0.35), 0.0, 1.35);
     out_color = vec4(clamp(final_color, 0.0, 1.0), 1.0);
 }

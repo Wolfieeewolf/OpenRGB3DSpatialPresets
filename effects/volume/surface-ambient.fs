@@ -33,6 +33,7 @@ param: sa_freq
 param: motion_hz
 param: speed_mul
 param: sa_feature
+param: motion_hz_ref
 finish: surface
 # Effect
 float saHash(vec2 p)
@@ -494,7 +495,8 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float speed = max(0.0, u_params[6]);
     float band_mul = max(0.0, u_params[7]);
     float feature = max(0.45, u_params[8]);
-    float time_e = u_time * speed * band_mul;
+    /* u_time is Speed-scaled seconds; × Speed-100 Hz = motion cycles (speed still shapes motion below). */
+    float time_e = u_time * max(0.0, u_params[9]) * band_mul;
 
     float nx = p01.x;
     float ny = p01.y;
