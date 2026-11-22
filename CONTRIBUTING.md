@@ -18,6 +18,11 @@ This repo holds **drop-in content**: controller layouts, effect looks (`.fs` / `
 - Follow the plugin contracts: [effects-engines.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/effects-engines.md), [content-library.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/content-library.md), [shader-conversion.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/shader-conversion.md).
 - One primary file per look; put it in the matching `effects/<engine>/` or `action-editor/toolbox/` folder.
 - Run `python scripts/smoke_presets.py` before opening a PR when you touch effects or actions.
+- New to writing looks? Start with the wiki page [Writing Effects](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/wiki/Writing-Effects).
+
+## AI tools
+
+AI-assisted content is welcome here, and crediting the AI in commits is fine. You own what you submit: test it in OpenRGB before opening a PR.
 
 ## Controller presets
 
