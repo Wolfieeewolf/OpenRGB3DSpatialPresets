@@ -29,7 +29,7 @@ param: phase37
 finish: hex
 
 # Effect
-/* Globals → params:
+/* Globals → params.
  * Speed → motion_clock (0 stops). Frequency → freq_n + hue_scroll_s.
  * Detail → ndetail (edge sharpness). Size → size_star. Thickness → gthickness.
  * Path → path_axis. Scale = occupancy (engine atlas, not packed here). */
