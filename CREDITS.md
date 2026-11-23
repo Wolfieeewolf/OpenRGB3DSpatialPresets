@@ -24,6 +24,8 @@ Some of these provided ideas and techniques only; from others, code was adapted.
 | 16×16×16 (4096 LED) cube project | No licence stated (ideas only) |
 | [Effekseer](https://effekseer.github.io/en/index.html) sample effects and community effect packs | Per pack (ideas only) |
 | Blood: Coagulated voxel mod by Cheello and Adam Matthews | Ideas only |
+| [Vixen](https://github.com/VixenLights/Vixen) sequencer and editor layout | Ideas only |
+| [xLights](https://github.com/xLightsSequencer/xLights) sequencer timeline and 3D layout | Ideas only |
 | [Particleify](https://particleify.talizen.com/generator) | Website (ideas only) |
 | [Shadertoy](https://www.shadertoy.com/) and its shader authors | Per shader; CC BY-NC-SA 3.0 by default |
 | [Sketchfab](https://sketchfab.com/feed) | Per model (ideas only) |
