@@ -74,4 +74,4 @@ GitHub is the main repository; [GitLab](https://gitlab.com/Wolfieeewolf/OpenRGB3
 
 ## License
 
-GPL-2.0-only, the same as the plugin. See [LICENSE](LICENSE). Credits for the ideas and code this pack builds on are in [CREDITS.md](CREDITS.md).
+GPL-2.0-or-later, the same as the plugin and OpenRGB. See [LICENSE](LICENSE). Credits for the ideas and code this pack builds on are in [CREDITS.md](CREDITS.md).
