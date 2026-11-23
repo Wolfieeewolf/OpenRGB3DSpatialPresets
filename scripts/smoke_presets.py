@@ -38,9 +38,6 @@ KNOWN_HEADER_KEYS = {
     "resolution",
     "rainbow",
     "needs_frequency",
-    "needs_arms",  # reserved no-op (catalog skip); prefer slider: num_arms
-    "show_axis",  # reserved no-op
-    "soft_catch",  # legacy no-op (FolderVolume / catalog skip)
     "user_colors",
     "pattern_label",
     "combo",
@@ -126,7 +123,7 @@ FINISH_VALUES = {
     "audio",
 }
 
-# FolderVolume categories under effects/ (legacy name "spatial" → volume).
+# FolderVolume categories under effects/.
 VOLUME_FOLDERS = ("volume", "audio", "media")
 EFFECTS = ROOT / "effects"
 ACTION_EDITOR = ROOT / "action-editor"

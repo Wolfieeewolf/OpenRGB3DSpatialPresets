@@ -18,6 +18,7 @@ This repo holds **drop-in content**: controller layouts, effect looks (`.fs` / `
 - Follow the plugin contracts: [effects-engines.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/effects-engines.md), [content-library.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/content-library.md), [shader-conversion.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/shader-conversion.md).
 - One primary file per look; put it in the matching `effects/<engine>/` or `action-editor/toolbox/` folder.
 - Run `python scripts/smoke_presets.py` before opening a PR when you touch effects or actions.
+- Ideas from other projects are welcome. Copied code must come from a GPL-2.0-compatible licence (MIT, BSD, zlib, GPL-2.0, EUPL-1.2 and similar) and name its source in a `# Source: <url> by <author> (<licence>)` header line. Shadertoy code is CC BY-NC-SA 3.0 by default and cannot be copied; see [shader-conversion.md](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/blob/main/Documentation/shader-conversion.md#licences).
 - New to writing looks? Start with the wiki page [Writing Effects](https://github.com/Wolfieeewolf/OpenRGB3DSpatialPlugin/wiki/Writing-Effects).
 
 ## AI tools
@@ -104,4 +105,4 @@ Maintainers will check:
 
 ## License
 
-By contributing, you agree your preset JSON is licensed under the same terms as this repository (see [README](README.md#license)).
+This repository is licensed GPL-2.0-only (see [LICENSE](LICENSE)). By contributing, you agree your contribution is licensed under the same terms. Credits for borrowed ideas and code are in [CREDITS.md](CREDITS.md).
