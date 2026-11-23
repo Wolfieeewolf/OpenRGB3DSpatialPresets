@@ -3,7 +3,11 @@ name: Soft Blobs
 description: Neon metaballs.
 
 # Effect
-vec3 sbPalette(float t){vec3 a=vec3(0.660,0.560,0.680);vec3 b=vec3(0.718,0.438,0.720);vec3 c=vec3(0.520,0.100,0.520);vec3 d=vec3(-0.60,-0.30,-0.09);return a+b*cos(6.28318*(c*t+d));}
+vec2 sbCenter(float i, float t)
+{
+    return 0.7 * vec2(sin(t * (0.6 + 0.13 * i) + i * 1.7), cos(t * (0.5 + 0.11 * i) + i * 2.3));
+}
+
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
 {
     vec2 uv = frag_coord / u_resolution;
@@ -12,21 +16,22 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (1.7 * zoom);
-    vec2 p0 = p;
-    vec3 final_color = vec3(0.0);
-    float dens = 6.0 + 6.0 * detail;
-    vec2 u = p - 0.5; u *= sin(0.0 - length(p0));
-    float d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.6532) * 0.5);
-    d = clamp(pow(0.03 / max(d, 0.02), mix(1.0, 1.45, contrast / 2.5)), 0.0, 2.2);
-    final_color += sbPalette(length(p0) - u_time * 0.6532 + hue) * d;
-    u = p - 0.5 + 1.0; u *= sin(5.0 - length(p0));
-    d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.6532) * 0.5);
-    d = clamp(pow(0.03 / max(d, 0.02), mix(1.0, 1.45, contrast / 2.5)), 0.0, 2.2);
-    final_color += sbPalette(length(p0) - u_time * 0.6532 + hue) * d;
-    u = p - 0.5 + 2.0; u *= sin(10.0 - length(p0));
-    d = abs(sin(length(u) * exp(-length(p0)) * dens + u_time * 0.6532) * 0.5);
-    d = clamp(pow(0.03 / max(d, 0.02), mix(1.0, 1.45, contrast / 2.5)), 0.0, 2.2);
-    final_color += sbPalette(length(p0) - u_time * 0.6532 + hue) * d;
-    final_color *= clamp(1.0 / max(length(p0), 0.4), 0.0, 1.4);
-    out_color = vec4(clamp(final_color, 0.0, 1.0), 1.0);
+    float t = u_time * 0.6532;
+
+    /* Metaballs: each blob adds r^2 / d^2; the surface sits where the sum reaches 1. */
+    float field = 0.0;
+    float r2 = 0.03 + 0.05 * detail;
+    for(int i = 0; i < 5; i++)
+    {
+        vec2 d = p - sbCenter(float(i), t);
+        field += r2 / max(dot(d, d), 1e-4);
+    }
+    float rim = exp(-abs(field - 1.0) * mix(3.0, 9.0, contrast / 2.5));
+    float fill = clamp((field - 1.0) * 0.25, 0.0, 0.6);
+    float v = clamp(rim + fill, 0.0, 1.0);
+
+    /* Field saturated so blob cores stay one colour instead of cycling. */
+    float h = fract(hue + 0.85 + 0.12 * sin(min(field, 2.0) * 1.2 + t));
+    vec3 rgb = clamp(abs(mod(h * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
+    out_color = vec4(mix(vec3(0.02, 0.0, 0.04), rgb, v), 1.0);
 }
