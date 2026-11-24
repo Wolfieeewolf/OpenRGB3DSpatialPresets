@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: scale
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: scale 0 100 50 pct | Scale | Cell size (0 = off)
 
 float vwHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
@@ -34,7 +34,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     float scale = (2.2 + 5.0 * detail) * dens_mul * mix(0.45, 2.2, tweak);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (zoom * scale);
+    vec2 p = (uv - 0.5) * (zoom * scale);
     p += 0.15 * vec2(sin(u_time * 0.9145), cos(u_time * 0.7316));
     vec2 g = floor(p);
     vec2 f = fract(p);

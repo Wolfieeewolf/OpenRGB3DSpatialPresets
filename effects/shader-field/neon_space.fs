@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: amount
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: amount 0 100 50 pct | Amount | Star amount (0 = off)
 
 float nsHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
@@ -33,7 +33,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.6 * (zoom * dens_mul) * (0.8 + detail));
+    vec2 p = (uv - 0.5) * (2.6 * (zoom * dens_mul) * (0.8 + detail));
     p += 0.1 * vec2(sin(u_time * 0.5225), cos(u_time * 0.4442));
     vec2 g = floor(p);
     vec2 f = fract(p) - 0.5;

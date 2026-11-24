@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: rim
-slider: wash 0 100 55 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 55 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: rim 0 100 50 pct | Rim | Portal edge thickness
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
@@ -31,11 +31,12 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.0 * zoom);
+    vec2 p = (uv - 0.5) * (2.0 * zoom);
     float r = length(p);
     float a = atan(p.y, p.x);
     float t = u_time * 1.35;
-    float radius = 0.35 + 0.12 * sin(t * 0.8);
+    /* Rim sits in room UV (edge mid r=1); keep a readable portal without clipping sides. */
+    float radius = 0.72 + 0.12 * sin(t * 0.8);
     float thick = mix(0.02, 0.18, tweak);
     float rim = exp(-pow(abs(r - radius) / max(thick, 0.01), 2.0) * 5.0);
     float swirl = 0.5 + 0.5 * sin(a * (3.0 + 4.0 * detail) * dens_mul + r * 8.0 - t * 3.0);

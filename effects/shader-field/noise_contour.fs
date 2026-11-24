@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: bands
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: bands 0 100 55 pct | Bands | Contour count (0 = off)
 
 float ncHash11(float t){return fract(sin(t*56789.0)*56789.0);}
@@ -47,7 +47,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.4 * (zoom * dens_mul) * (0.7 + detail));
+    vec2 p = (uv - 0.5) * (2.4 * (zoom * dens_mul) * (0.7 + detail));
     float noise_fac =(ncFbm(p * (2.0 + 2.5 * detail), u_time * 1.437)) ;
     float contour = 0.5 * (1.0 - cos((18.0 + 28.0 * detail) * mix(0.35, 2.2, tweak) * 3.14159265 * noise_fac));
     float h = fract(hue + noise_fac * 0.35 + u_time * 0.05225);

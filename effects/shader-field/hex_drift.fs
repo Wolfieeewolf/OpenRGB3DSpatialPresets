@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: cells
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: cells 0 100 50 pct | Cells | Hex cell density (0 = off)
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
@@ -32,7 +32,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (3.2 * zoom * dens_mul * mix(0.45, 2.2, tweak) * (0.7 + detail));
+    vec2 p = (uv - 0.5) * (3.2 * zoom * dens_mul * mix(0.45, 2.2, tweak) * (0.7 + detail));
     float t = u_time * 1.045;
     p += vec2(sin(t * 0.7), cos(t * 0.55)) * 0.15;
     vec2 r = vec2(1.0, 0.8660254);

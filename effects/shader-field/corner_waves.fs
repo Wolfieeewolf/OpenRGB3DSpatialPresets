@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: length
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: length 0 100 45 pct | Wavelength | Ripple wavelength (0 = off)
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
@@ -32,16 +32,15 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
+    /* Room UV square (no atlas aspect) — distances in [0,√2] from each corner. */
     vec2 p = (uv - 0.5) * (zoom * dens_mul) + 0.5;
     float vel = 1.6 + 2.2 * detail;
-    float len = mix(18.0, 8.0, detail) / mix(0.45, 2.2, tweak);
+    float len = mix(0.22, 0.10, detail) / mix(0.45, 2.2, tweak);
     float t = (u_time * 2.613) * vel;
-    float aspect = u_resolution.x / max(u_resolution.y, 1.0);
-    vec2 q = (p - 0.5) * vec2(aspect, 1.0) + 0.5;
-    float d0 = length((q - vec2(0.0, 0.0)) * u_resolution.xy / max(u_resolution.y, 1.0));
-    float d1 = length((q - vec2(1.0, 0.0)) * u_resolution.xy / max(u_resolution.y, 1.0));
-    float d2 = length((q - vec2(0.0, 1.0)) * u_resolution.xy / max(u_resolution.y, 1.0));
-    float d3 = length((q - vec2(1.0, 1.0)) * u_resolution.xy / max(u_resolution.y, 1.0));
+    float d0 = length(p - vec2(0.0, 0.0));
+    float d1 = length(p - vec2(1.0, 0.0));
+    float d2 = length(p - vec2(0.0, 1.0));
+    float d3 = length(p - vec2(1.0, 1.0));
     float w = sin(d0 / len - t) + sin(d1 / len - t) + sin(d2 / len - t) + sin(d3 / len - t);
     float v = pow(clamp(0.5 + 0.25 * w, 0.0, 1.0), contrast);
     float h = fract(hue + 0.08 * w + u_time * 0.05225);

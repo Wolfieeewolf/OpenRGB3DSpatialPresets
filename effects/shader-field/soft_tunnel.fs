@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: depth
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: depth 0 100 55 pct | Depth | How far the tunnel recedes
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
@@ -30,7 +30,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.0 * zoom);
+    vec2 p = (uv - 0.5) * (2.0 * zoom);
     float r = length(p);
     float a = atan(p.y, p.x);
     float t = u_time * 1.15;
@@ -38,7 +38,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float rings = dens_mul * (4.0 + 6.0 * detail);
     float tunnel = 1.0 / max(r * z + 0.18, 0.08);
     float stripes = 0.5 + 0.5 * sin(tunnel * rings - t * 3.2 + a * (2.0 + 2.0 * detail));
-    float v = pow(clamp(stripes * exp(-r * 0.55), 0.0, 1.0), mix(2.0, 0.85, contrast / 2.5));
+    float v = pow(clamp(stripes * exp(-r * 0.28), 0.0, 1.0), mix(2.0, 0.85, contrast / 2.5));
     float h = fract(hue + tunnel * 0.04 + a * 0.03 + t * 0.02);
     vec3 rgb = vfxHsv2rgb(vec3(h, 0.82, 1.0));
     {

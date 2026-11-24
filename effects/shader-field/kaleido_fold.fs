@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: folds
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: folds 0 100 50 pct | Folds | Mirror slice count
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
@@ -31,7 +31,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.0 * zoom * dens_mul);
+    vec2 p = (uv - 0.5) * (2.0 * zoom * dens_mul);
     float t = u_time * 0.95;
     float n = 3.0 + floor(mix(2.0, 8.0, tweak));
     float a = atan(p.y, p.x);
@@ -42,7 +42,8 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     q.x += 0.25 * sin(q.y * (3.0 + 4.0 * detail) + t);
     float v = 0.5 + 0.5 * sin(q.x * (5.0 + 6.0 * detail) + t) * cos(q.y * (4.0 + 5.0 * detail) - t);
     v = pow(clamp(v, 0.0, 1.0), mix(1.8, 0.8, contrast / 2.5));
-    v *= 1.0 - smoothstep(0.9, 1.45, r);
+    /* Soft edge past UV corners (√2); keep folds filling the room box. */
+    v *= 1.0 - smoothstep(1.35, 1.85, r);
     float h = fract(hue + a * 0.15 + r * 0.08 + t * 0.03);
     vec3 rgb = vfxHsv2rgb(vec3(h, 0.88, 1.0));
     {

@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: strands
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: strands 0 100 50 pct | Strands | Ribbon count
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
@@ -31,7 +31,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.0 * zoom);
+    vec2 p = (uv - 0.5) * (2.0 * zoom);
     float t = u_time * 1.05;
     float n = mix(3.0, 14.0, tweak) * dens_mul;
     float x = p.x * n;

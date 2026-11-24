@@ -11,8 +11,8 @@ param: hue
 param: detail
 param: wash
 param: density
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
 {
@@ -28,7 +28,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
     /* Ideas only (swirl / domain-warp shaders): nested current + soft arms. Clean-room. */
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.0 * (zoom * dens_mul));
+    vec2 p = (uv - 0.5) * (2.0 * (zoom * dens_mul));
     float t = u_time * 1.306;
     vec2 q = p;
     q.x += 0.42 * sin(q.y * (2.0 + 3.0 * detail) + t);
@@ -41,7 +41,8 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float v = sin(q.x * (3.0 + 5.0 * detail) + t) * cos(q.y * (3.0 + 4.0 * detail) - t);
     v = v * 0.72 + 0.28 * sin(rad * (4.0 + 3.0 * detail) - t * 1.1) * arms;
     v = pow(clamp(v * 0.5 + 0.5, 0.0, 1.0), mix(1.7, 0.8, contrast / 2.5));
-    v *= 1.0 - smoothstep(0.95, 1.55, rad);
+    /* Soft edge past UV corners (√2); keep currents filling the room box. */
+    v *= 1.0 - smoothstep(1.35, 1.85, rad);
     float h = fract(hue + rad * 0.08 + ang * 0.02 + t * 0.02);
     vec3 rgb = vfxHsv2rgb(vec3(h, 0.85, 1.0));
     rgb = mix(vec3(1.0), rgb, 0.65);

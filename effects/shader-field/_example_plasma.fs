@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: amount
-slider: wash 0 100 60 pct | Wash | Soft fill amount (0 = sharper crests, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Pattern spacing / feature count
+slider: wash 0 100 60 pct | Wash: | Soft fill amount (0 = sharper crests, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Pattern spacing / feature count
 slider: amount 0 100 55 pct | Amount | Pattern thickness
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord) {

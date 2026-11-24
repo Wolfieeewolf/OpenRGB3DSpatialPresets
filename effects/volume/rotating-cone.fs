@@ -6,7 +6,7 @@ description: Soft searchlight cones on floor, ceiling, walls, or center (denser 
 instances: 1
 global: speed brightness frequency size scale fps color surface position strip bands count
 resolution: 48
-combo: cone_spot_surface | Surface:
+combo: cone_spot_surface | Aim:
 option: Center | Spatial Anchor occupancy mid-plane.
 option: Ceiling | Room ceiling in occupancy XZ.
 option: Floor | Room floor in occupancy XZ.

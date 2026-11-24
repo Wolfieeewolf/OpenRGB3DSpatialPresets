@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: rings
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: rings 0 100 50 pct | Rings | Fire ring count (0 = off)
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)

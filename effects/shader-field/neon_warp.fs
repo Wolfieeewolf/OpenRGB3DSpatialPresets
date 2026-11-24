@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: rings
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: rings 0 100 55 pct | Rings | Tunnel ring density
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
@@ -30,7 +30,7 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (1.8 * zoom);
+    vec2 p = (uv - 0.5) * (1.8 * zoom);
     float t = u_time * 0.7838;
 
     float r = max(length(p), 0.02);
@@ -38,7 +38,8 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float depth = 0.35 / r + t;
     float rings = abs(sin(depth * (mix(1.5, 5.0, tweak) + 3.0 * detail) * dens_mul + a * 2.0 + sin(depth * 0.7) * 1.5));
     float glow = clamp(pow(0.06 / max(rings, 0.02), mix(0.8, 1.3, contrast / 2.5)), 0.0, 2.0);
-    glow *= smoothstep(0.0, 0.25, r) * clamp(1.4 - r * 0.6, 0.0, 1.0);
+    /* Inner hole + soft fade past UV corners (√2 ≈ 1.41). */
+    glow *= smoothstep(0.0, 0.25, r) * clamp(1.85 - r * 0.45, 0.0, 1.0);
     float fog = clamp(0.12 / max(r, 0.05), 0.0, 0.55);
     float crest = pow(clamp(glow * 0.55, 0.0, 1.0), 2.2);
     float lit = mix(crest, clamp(glow * 0.55 + fog, 0.0, 1.0), wash);

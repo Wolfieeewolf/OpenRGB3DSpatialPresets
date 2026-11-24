@@ -12,9 +12,9 @@ param: detail
 param: wash
 param: density
 param: spin
-slider: wash 0 100 55 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
-slider: spin 0 100 40 pct | Spin | Angular twist of the rings
+slider: wash 0 100 55 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: spin 0 100 40 pct | Spin: | Angular twist of the rings
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord)
 {
@@ -30,14 +30,15 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    vec2 p = (uv - 0.5) * vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0) * (2.0 * zoom);
+    vec2 p = (uv - 0.5) * (2.0 * zoom);
     float r = length(p);
     float a = atan(p.y, p.x);
     float t = u_time * 1.55;
     float twist = a * mix(0.0, 2.5, tweak);
     float rings = dens_mul * (5.0 + 8.0 * detail);
     float v = pow(abs(sin(r * rings - t * 2.8 + twist)), mix(1.4, 3.2, contrast / 2.5));
-    v *= 1.0 - smoothstep(0.85, 1.35, r);
+    /* Soft edge past UV corners (√2); keep the disc filling the room box. */
+    v *= 1.0 - smoothstep(1.35, 1.85, r);
     float h = fract(hue + r * 0.12 + a * 0.04 + t * 0.03);
     vec3 rgb = vfxHsv2rgb(vec3(h, 0.9, 1.0));
     {

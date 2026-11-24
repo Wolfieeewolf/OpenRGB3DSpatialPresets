@@ -12,8 +12,8 @@ param: detail
 param: wash
 param: density
 param: bands
-slider: wash 0 100 60 pct | Wash | Soft fill (0 = off — crests only on black, 100 = full soft look)
-slider: density 0 100 50 pct | Density | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
+slider: wash 0 100 60 pct | Wash: | Soft fill (0 = off — crests only on black, 100 = full soft look)
+slider: density 0 100 50 pct | Density: | Feature spacing / count (0 = sparse / nearly off, 100 = dense)
 slider: bands 0 100 55 pct | Bands | Curtain fold count
 
 void spatialMain(out vec4 out_color, in vec2 frag_coord) {
