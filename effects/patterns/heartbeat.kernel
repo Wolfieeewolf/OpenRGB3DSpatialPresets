@@ -3,7 +3,16 @@ name: Heartbeat
 index: 39
 
 # Kernel
-float u = fractf(tsec * 0.8);
-if(u < 0.12) k = sin(TWO_PI * u / 0.12);
-else if(u < 0.2) k = 0.35 * sin(TWO_PI * (u - 0.12) / 0.08);
-else k = -0.55 + 0.2 * sin(TWO_PI * s01 * r);
+float u = fractf(tsec * 0.85 + ph * 0.05);
+float lub = 0.0;
+float dub = 0.0;
+if(u < 0.10)
+{
+    lub = sin(TWO_PI * u / 0.10);
+}
+else if(u < 0.18)
+{
+    dub = 0.55 * sin(TWO_PI * (u - 0.10) / 0.08);
+}
+float spatial = 0.12 * sin(TWO_PI * s01 * r);
+k = clamp(max(lub, dub) + spatial - 0.35, -1.0, 1.0);

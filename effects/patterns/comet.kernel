@@ -3,4 +3,7 @@ name: Comet / taper
 index: 5
 
 # Kernel
-k = pow(1.0 - u_phase, 2.2) * 2.0 - 1.0;
+float head = smstep(0.0, 0.08, 1.0 - u_phase);
+float body = pow(max(0.0, 1.0 - u_phase), 2.05);
+float tip = pow(max(0.0, 1.0 - u_phase * 1.35), 4.5) * 0.55;
+k = clamp(max(body, tip) * head * 2.0 - 1.0, -1.0, 1.0);

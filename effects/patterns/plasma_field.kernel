@@ -1,0 +1,11 @@
+# Name
+name: Plasma field (2D pilot)
+index: 49
+palette: spectrum
+
+# Kernel
+float a = sin(TWO_PI * (s01 * r + t01 * 1.3 + tsec * 0.06));
+float b = cos(TWO_PI * (s01 * r * 0.7 - t01 * 1.1 + ph));
+float c = sin(TWO_PI * ((s01 + t01) * r * 0.55 + tsec * 0.04));
+float v = a * b * 0.55 + c * 0.45;
+k = clamp(tanh(v * 1.5), -1.0, 1.0);

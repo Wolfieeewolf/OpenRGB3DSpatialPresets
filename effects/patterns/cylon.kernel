@@ -4,9 +4,12 @@ index: 28
 palette: cylon
 
 # Kernel
-float u = abs(fractf(s01 * r + ph) - 0.5) * 2.0;
-float eye = fractf(tsec * 0.18);
-float d1 = abs(u - eye * 2.0);
-float d2 = abs(u - fractf(eye + 0.5) * 2.0);
-float v = max(1.0 - d1 * 5.0, 1.0 - d2 * 5.0);
-k = clamp(v * 2.0 - 1.0, -1.0, 1.0);
+float eye = 0.5 + 0.5 * sin(TWO_PI * tsec * 0.09);
+float u = fractf(s01 * r);
+float d1 = abs(u - eye);
+d1 = min(d1, 1.0 - d1);
+float d2 = abs(u - fractf(eye + 0.5));
+d2 = min(d2, 1.0 - d2);
+float e1 = (1.0 - smstep(0.0, 0.035, d1)) + 0.35 * (1.0 - smstep(0.0, 0.11, d1));
+float e2 = (1.0 - smstep(0.0, 0.035, d2)) + 0.35 * (1.0 - smstep(0.0, 0.11, d2));
+k = clamp(max(e1, e2) * 2.0 - 1.0, -1.0, 1.0);

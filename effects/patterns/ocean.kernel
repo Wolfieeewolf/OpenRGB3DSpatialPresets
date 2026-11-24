@@ -4,5 +4,9 @@ index: 21
 palette: ocean
 
 # Kernel
-float v = sin(TWO_PI * (s01 * r + tsec * 0.04)) * 0.5 + sin(TWO_PI * (s01 * r * 0.6 + ph + tsec * 0.07)) * 0.35 + sin(TWO_PI * (s01 * r * 2.1 + tsec * 0.03)) * 0.15;
+float w1 = sin(TWO_PI * (s01 * r + tsec * 0.045 + ph * 0.2));
+float w2 = sin(TWO_PI * (s01 * r * 0.62 + ph + tsec * 0.078));
+float w3 = sin(TWO_PI * (s01 * r * 2.15 - tsec * 0.032));
+float foam = pow(max(0.0, 0.5 + 0.5 * w1), 3.2) * 0.35;
+float v = w1 * 0.48 + w2 * 0.34 + w3 * 0.18 + foam;
 k = clamp(v, -1.0, 1.0);

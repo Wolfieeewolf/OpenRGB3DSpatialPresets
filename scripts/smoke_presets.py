@@ -91,7 +91,7 @@ RESERVED_SETTING_KEYS = {
     "stratum_layout_mode", "stratum_band_speed_pct", "stratum_band_tight_pct",
     "stratum_band_phase_deg", "stratum_band_motion_kind", "stratum_band_motion_rate",
     "strip_cmap_on", "strip_cmap_kernel", "strip_cmap_rep", "strip_cmap_unfold",
-    "strip_cmap_dir", "media_path", "tile_repeat_enabled", "audio_smoothing", "low_hz",
+    "strip_cmap_dir", "strip_cmap_color_from", "media_path", "tile_repeat_enabled", "audio_smoothing", "low_hz",
     "high_hz", "falloff", "peak_boost", "drive_mode", "sustain_reject", "register_role",
     "pulse_color_mode", "beat_wave_mode", "wave_spread", "wave_decay",
 }

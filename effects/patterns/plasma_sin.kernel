@@ -4,5 +4,8 @@ index: 26
 palette: spectrum
 
 # Kernel
-float v = sin(TWO_PI * (s01 + ph)) * cos(TWO_PI * (s01 * r * 0.5 + tsec * 0.07)) * sin(TWO_PI * (s01 * r + ph * 0.3));
-k = clamp(v * 1.25, -1.0, 1.0);
+float a = sin(TWO_PI * (s01 * r + ph + tsec * 0.05));
+float b = cos(TWO_PI * (s01 * r * 0.55 + tsec * 0.08));
+float c = sin(TWO_PI * (s01 * r * 1.7 - ph * 0.4 + tsec * 0.03));
+float v = a * b * 0.65 + c * 0.35;
+k = clamp(tanh(v * 1.45), -1.0, 1.0);

@@ -1,0 +1,11 @@
+# Name
+name: Ribbons 3D (pilot)
+index: 51
+palette: lissajous
+
+# Kernel
+float band1 = abs(sin(TWO_PI * (s01 * r * 2.0 + t01 * 1.4 + u01 * 0.8 - tsec * 0.07)));
+float band2 = abs(sin(TWO_PI * (s01 * r * 3.1 - t01 * 0.9 + u01 * 1.2 + ph)));
+float ribbon = (1.0 - smstep(0.0, 0.18, band1)) * 0.7 + (1.0 - smstep(0.0, 0.14, band2)) * 0.55;
+float depth = 0.65 + 0.35 * sin(TWO_PI * (u01 + tsec * 0.05));
+k = clamp(ribbon * depth * 2.0 - 1.0, -1.0, 1.0);

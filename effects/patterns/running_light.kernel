@@ -4,6 +4,8 @@ index: 14
 palette: chase
 
 # Kernel
-float u = fractf(s01 * r - ph - tsec * 0.22);
-float w = smstep(0.0, 0.08, u) * (1.0 - smstep(0.12, 0.2, u));
-k = w * 2.0 - 1.0;
+float u = fractf(s01 * r - ph - tsec * 0.26);
+float core = smstep(0.0, 0.04, u) * (1.0 - smstep(0.05, 0.10, u));
+float tail = max(0.0, 1.0 - u * 7.0);
+tail = pow(tail, 2.2) * 0.55;
+k = clamp(max(core, tail) * 2.0 - 1.0, -1.0, 1.0);

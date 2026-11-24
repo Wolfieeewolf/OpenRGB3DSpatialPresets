@@ -1,0 +1,27 @@
+# Name
+name: Cell lattice (2D pilot)
+index: 50
+palette: spectrum
+
+# Kernel
+float gx = s01 * r * 5.0;
+float gy = t01 * r * 5.0;
+float ix = floor(gx);
+float iy = floor(gy);
+float fx = fractf(gx);
+float fy = fractf(gy);
+float best = 8.0;
+for(int j = -1; j <= 1; j++)
+{
+    for(int i = -1; i <= 1; i++)
+    {
+        float cx = float(i) + hash11(ix + float(i) + (iy + float(j)) * 19.7) - 0.5;
+        float cy = float(j) + hash11(iy + float(j) + (ix + float(i)) * 7.3 + 3.1) - 0.5;
+        float dx = fx - cx;
+        float dy = fy - cy;
+        best = min(best, dx * dx + dy * dy);
+    }
+}
+float cell = 1.0 - smstep(0.0, 0.22, sqrt(best));
+float pulse = 0.85 + 0.15 * sin(TWO_PI * (tsec * 0.08 + ph));
+k = clamp(cell * pulse * 2.0 - 1.0, -1.0, 1.0);

@@ -1,11 +1,14 @@
 # Name
 name: Sparkle
 index: 8
+palette: sparkle
 
 # Kernel
-float t = s01 * r * 28.0 + ph * 11.0;
+float t = s01 * r * 32.0 + ph * 11.0 + tsec * 2.2;
+float cell = floor(t);
 float tw = fractf(t);
-float h = hash11(floor(t) * 0.031 + 9.1);
-float bright = (h > 0.72) ? 1.0 : -0.65;
-float decay = max(0.0, 1.0 - tw * 1.8);
-k = bright * decay + (-0.65) * (1.0 - decay);
+float h = hash11(cell * 0.031 + 9.1);
+float on = step(0.78, h);
+float decay = pow(max(0.0, 1.0 - tw * 1.55), 1.8);
+float pop = on * decay;
+k = clamp(pop * 2.0 - 1.0, -1.0, 1.0);

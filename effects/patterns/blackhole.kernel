@@ -6,8 +6,9 @@ palette: blackhole
 # Kernel
 float d = abs(s01 - 0.5) * 2.0;
 float pulse = 0.55 + 0.45 * sin(TWO_PI * (tsec * 0.14 + ph));
-float hole = smstep(0.0, 0.22 * pulse, d);
-float rim_center = 0.42 * pulse;
-float rim = 1.0 - smstep(0.0, 0.10, abs(d - rim_center));
-rim = rim * rim;
-k = clamp((rim * 0.85 + (1.0 - hole) * 0.15) * 2.0 - 1.0, -1.0, 1.0);
+float hole = smstep(0.0, 0.20 * pulse, d);
+float rim_center = 0.40 * pulse;
+float rim = 1.0 - smstep(0.0, 0.085, abs(d - rim_center));
+rim = pow(rim, 1.6);
+float glow = (1.0 - smstep(0.0, 0.55, d)) * 0.12;
+k = clamp((rim * 0.9 + glow + (1.0 - hole) * 0.08) * 2.0 - 1.0, -1.0, 1.0);
