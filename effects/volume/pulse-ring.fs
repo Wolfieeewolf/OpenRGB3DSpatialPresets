@@ -2,7 +2,8 @@
 name: Pulse Ring
 class: PulseRing
 category: Volume
-description: Soft expanding shells that stay visible on sparse LED rooms
+description: Soft expanding shells that stay visible on sparse LED rooms (denser atlas + vfx soft edges)
+resolution: 48
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness
 pattern_label: Style:
 pattern_key: ring_style
@@ -27,7 +28,9 @@ param: turn direction_deg
 param: combo pulse_shape
 param: size_ring
 param: hue_scroll_s
+colors: 042F2E 0F766E 2DD4BF 5EEAD4 CCFBF1 F0FDFA
 finish: hex
+# Source: Godot VFX Library flash_white / energy_barrier (haowg) - motion only: expanding shell crest, soft afterimage. Clean-room; no code copied.
 
 # Effect
 float hexMetric(vec2 p)
@@ -54,10 +57,7 @@ float footprintXZ(vec2 p, int shape)
 }
 float softBand(float dist_to_edge, float half_w)
 {
-    float s = max(half_w, 0.028);
-    float core = exp(-(dist_to_edge * dist_to_edge) / (s * s * 0.40));
-    float halo = exp(-(dist_to_edge * dist_to_edge) / (s * s * 1.70)) * 0.40;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(dist_to_edge, max(half_w, 0.028));
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
@@ -106,18 +106,19 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
-        /* Continuous expand from motion_clock - soft dual crest avoids wrap flash. */
+        /* Dual crest: leading shell + fading afterimage (no wrap flash). */
         float expand = fract(time_sec * 0.28 + phase_offset);
         float center = hole_r + expand * usable;
         float prev = hole_r + (expand - 1.0) * usable;
         float ring0 = softBand(d - center, half_w);
-        float ring1 = softBand(d - prev, half_w) * (1.0 - expand);
-        intensity = max(ring0, ring1) * height_mul;
+        float ring1 = softBand(d - prev, half_w * 1.15) * (1.0 - expand) * 0.72;
+        float crest = softBand(d - center, max(half_w * 0.45, 0.018)) * 0.55;
+        intensity = max(max(ring0, ring1), crest) * height_mul;
         intensity *= smoothstep(hole_r - 0.04, hole_r + 0.02, d);
         intensity *= amp;
         color_drv = fract(clamp((d - hole_r) / usable, 0.0, 1.0) * 0.85 + hue_scroll);
     }
 
     intensity = clamp(intensity, 0.0, 1.0);
-    out_color = vec4(intensity, color_drv, 0.0, 1.0);
+    out_color = vec4(intensity, color_drv, clamp(pow(clamp(intensity, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0), 1.0);
 }

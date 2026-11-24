@@ -2,7 +2,8 @@
 name: Space
 class: Starfield
 category: Volume
-description: Stars, streaks, and tunnels that fill a sparse LED room
+description: Stars, streaks, and tunnels that fill a sparse LED room (denser atlas + vfx soft edges)
+resolution: 48
 global: speed brightness frequency detail size scale fps color surface position strip bands count
 pattern_label: Mode:
 pattern_key: mode
@@ -30,29 +31,25 @@ param: unit drift_amount
 param: unit twinkle_speed
 param: hue_scroll_s
 param: freq_n
+colors: 020617 1E3A8A 6366F1 C4B5FD FDE68A FFFBEB
 finish: hex
+# Source: Godot VFX Library starSky.gdshader (Brian Smith / steampunkdemon, MIT via haowg pack) - motion/colour only: near/far layers, soft disks, cooler far / hotter near. Clean-room; no code copied.
+# Source: LED cube fly-through demos (ideas only) - sparse-room fill, streak warp.
 
 # Effect
-float hash11(float n)
-{
-    return fract(sin(n * 127.1) * 43758.5453);
-}
+float hash11(float n) { return vfxHash11(n); }
 float hash_signed(float n)
 {
     return hash11(n) * 2.0 - 1.0;
 }
 float softband(float d, float s)
 {
-    float ss = max(s, 0.034);
-    return exp(-(d * d) / (ss * ss));
+    return vfxSoftBand(d, max(s, 0.028));
 }
 /* Fat core + readable halo - sized for sparse device grids. */
 float sfPoint(float d, float soft)
 {
-    float s = max(soft, 0.040);
-    float core = exp(-(d * d) / (s * s * 0.30));
-    float halo = exp(-(d * d) / (s * s * 1.90)) * 0.50;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(d, max(soft, 0.040));
 }
 float sfCross(vec3 dlt, float soft, float rot)
 {
@@ -114,7 +111,6 @@ vec3 sfRotZ(vec3 p, float a)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* motion_clock scales with Speed (old anim_time was wall-clock on/off only). */
     float clock_in = u_params[0];
     int mode = int(clamp(u_params[1], 0.0, 9.0) + 0.5);
     int count = int(clamp(u_params[2], 12.0, 48.0) + 0.5);
@@ -125,7 +121,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float twinkle = clamp(u_params[7], 0.0, 1.0);
     float hue_scroll = fract(u_params[8]);
     float freq_n = clamp(u_params[9], 0.0, 1.0);
-    /* ~wall-clock at Speed 100; Frequency nudges tempo. */
     float time_sec = clock_in * (0.90 + 0.45 * freq_n);
     float progress = fract(clock_in * 0.15);
 
@@ -418,8 +413,12 @@ void volumeMain(out vec4 out_color, in vec3 p01)
             if(contrib > best)
             {
                 best = contrib;
-                best_h = fract(hx * 0.7 + hy * 0.3 + hue_scroll);
-                best_hot = (mode == 1) ? clamp((bright - 0.35) * 1.2, 0.0, 1.0) : (1.0 - z01) * 0.35;
+                /* Far = cooler violet bias; near = warmer (LoRA near/far colours). */
+                float nearness = 1.0 - z01;
+                best_h = fract(hue_scroll + mix(0.68, 0.06, nearness) * 0.55 + hx * 0.12);
+                best_hot = (mode == 1)
+                    ? clamp((bright - 0.35) * 1.2, 0.0, 1.0)
+                    : clamp(nearness * 0.55 + 0.12, 0.0, 1.0);
             }
         }
         intensity = clamp(best * 2.05, 0.0, 1.0);
@@ -428,7 +427,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
-        /* Warp / Hyperdrive - continuous fly-through streaks (no progress wrap flash). */
+        /* Warp / Hyperdrive - continuous fly-through streaks. */
         float soft = max(0.038, max(thickness * 0.65 * size_m, soft_floor));
         float travel = time_sec * ((mode == 3) ? 0.62 : 0.38);
         float streak_mul = (mode == 3) ? (14.0 + 16.0 * size_m) : (8.0 + 10.0 * size_m);

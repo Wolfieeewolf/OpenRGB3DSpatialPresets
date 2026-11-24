@@ -1,11 +1,11 @@
 name: Audio Pulse
 class: AudioPulse
 category: Audio
-description: Beat-triggered shockwaves from the origin driven by onset detection
+description: Beat-triggered shockwaves from the origin driven by onset detection (denser atlas + vfx soft edges)
 drive: audio
 audio_preset: beat
 global: audio speed brightness frequency size scale color bands strip
-resolution: 24
+resolution: 48
 user_colors: 1
 needs_frequency: true
 slider: particle_amount 0 100 14 | Surface sparks: | Sparse spark particles on the shell (0 = smooth ring only).

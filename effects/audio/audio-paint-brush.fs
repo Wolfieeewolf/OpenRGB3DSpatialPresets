@@ -1,11 +1,11 @@
 name: Audio Paint Brush
 class: AudioPaintBrush
 category: Audio
-description: Soft Lissajous ribbons driven by bass / mid / treble bands
+description: Soft Lissajous ribbons driven by bass / mid / treble bands (denser atlas + vfx soft edges)
 drive: audio
 audio_preset: spectrum
 global: audio speed brightness frequency detail size scale color bands thickness
-resolution: 20
+resolution: 48
 user_colors: 1
 rainbow: true
 slider: chaos 0 150 45 unit pct | Phase chaos: | Phase offset spread between ribbons.

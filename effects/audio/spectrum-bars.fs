@@ -1,12 +1,12 @@
 name: Spectrum Bars
 class: SpectrumBars
 category: Audio
-description: Spectrum bar graph in the zone driven by Listen Role / Hz band
+description: Spectrum bar graph in the zone driven by Listen Role / Hz band (denser atlas + vfx soft edges)
 drive: audio
 audio_preset: spectrum
 audio_media: bands
 global: audio brightness frequency size scale color bands strip
-resolution: 22
+resolution: 48
 user_colors: 2
 needs_frequency: true
 slider: roll_speed 0 200 0 unit pct | Roll speed: | Scrolls the bar pattern along the spectrum axis over time.

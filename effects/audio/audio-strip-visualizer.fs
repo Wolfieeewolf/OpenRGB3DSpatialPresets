@@ -1,12 +1,12 @@
 name: Audio Strip Visualizer
 class: AudioStripVisualizer
 category: Audio
-description: Strip-first spectrum bars or scrolling spectrogram driven by Listen Role / Hz band
+description: Strip-first spectrum bars or scrolling spectrogram driven by Listen Role / Hz band (denser atlas + vfx soft edges)
 drive: audio
 audio_preset: spectrum
 audio_media: spectrogram
 global: audio speed brightness frequency size scale color strip path
-resolution: 22
+resolution: 48
 user_colors: 2
 needs_frequency: true
 combo: display_mode | Display:

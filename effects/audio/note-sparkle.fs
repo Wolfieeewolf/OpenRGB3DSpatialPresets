@@ -1,11 +1,11 @@
 name: Note Sparkle
 class: NoteSparkle
 category: Audio
-description: ColorChord note particle cloud (hull + sparks) driven by high / melody register
+description: ColorChord note particle cloud (hull + sparks) driven by high / melody register (denser atlas + vfx soft edges)
 drive: audio
 audio_preset: high_sparkle
 global: audio speed brightness frequency size scale color bands strip
-resolution: 22
+resolution: 48
 user_colors: 1
 needs_frequency: true
 slider: particle_amount 0 100 50 unit pct | Particle amount: | Density of the note sparkle cloud (0 = soft hull only).
@@ -27,8 +27,7 @@ finish: audio
 # Effect
 float sparkHash01(vec3 p, float salt)
 {
-    float n = dot(p, vec3(12.9898, 78.233, 37.719)) + salt * 19.19;
-    return fract(sin(n) * 43758.5453);
+    return vfxHash31(p + vec3(salt * 0.17));
 }
 
 vec3 sparkHash3(vec3 p, float salt)
@@ -37,12 +36,6 @@ vec3 sparkHash3(vec3 p, float salt)
         sparkHash01(p, salt),
         sparkHash01(p + vec3(17.1, 9.3, 3.7), salt + 1.3),
         sparkHash01(p + vec3(5.5, 21.2, 11.9), salt + 2.7));
-}
-
-float sparkSmoothstep(float e0, float e1, float x)
-{
-    float t = clamp((x - e0) / max(1e-5, e1 - e0), 0.0, 1.0);
-    return t * t * (3.0 - 2.0 * t);
 }
 
 void volumeMain(out vec4 out_color, in vec3 p01)
@@ -84,12 +77,10 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float hull_r  = hull_size * breathe * (0.72 + 0.48 * size_m);
     float shell_w = (0.035 + 0.055 / falloff) * size_m / tight;
     shell_w *= (0.85 + 0.25 * detail);
-    float hull    = 1.0 - sparkSmoothstep(0.0, shell_w, abs(radial - hull_r));
-    hull *= hull;
+    float hull = vfxShell(radial - hull_r, max(shell_w, 0.018));
 
     float cyl       = length(vec2(c.x, c.z));
-    float cyl_hull  = 1.0 - sparkSmoothstep(0.0, shell_w * 1.15, abs(cyl - hull_r * 0.92));
-    cyl_hull *= cyl_hull * 0.65;
+    float cyl_hull  = vfxShell(cyl - hull_r * 0.92, max(shell_w * 1.15, 0.018)) * 0.65;
 
     /* Hull only when gate is well above noise floor. */
     float hull_layer = max(hull, cyl_hull) * (0.35 + 0.65 * energy_gate) * gate_mask;
@@ -123,12 +114,10 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         drifted.y += (rnd.y - 0.5) * 0.08 * turbulence;
 
         float pr       = length(drifted - vec3(0.5));
-        float near_hull = 1.0 - sparkSmoothstep(0.0, shell_w * 2.4, abs(pr - hull_r));
+        float near_hull = vfxShell(pr - hull_r, max(shell_w * 2.4, 0.022));
         float pd       = length(p01 - drifted);
         float glow_r   = mix(0.055, 0.028, detail) * size_m * (0.75 + 0.5 / tight);
-        float glow     = sparkSmoothstep(glow_r, 0.0, pd);
-        glow *= glow;
-        glow *= near_hull;
+        float glow     = vfxCoreRim(pd, max(glow_r, 0.016)) * near_hull;
 
         float note_sel = rnd.x * max(note_count, 1.0);
         int ni = int(floor(note_sel));
@@ -150,8 +139,8 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float particle_layer = best_p * (0.55 + 0.45 * high01 + 0.25 * mid01);
     float intensity = clamp(hull_layer * 0.55 + particle_layer * 1.35, 0.0, 1.0);
     intensity *= energy_gate;
-    /* Quiet dark - suppress near-silent sparkle. Uses tighter range than before (0.10-0.16). */
-    intensity *= sparkSmoothstep(0.10, 0.16, energy_gate);
+    /* Quiet dark: gate 0.10-0.16 suppresses near-silent sparkle. */
+    intensity *= smoothstep(0.10, 0.16, energy_gate);
 
     float hue01 = 0.55;
     if(hue_w > 1e-4)

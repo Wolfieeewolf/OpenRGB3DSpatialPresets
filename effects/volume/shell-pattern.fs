@@ -2,9 +2,9 @@
 name: Shell Pattern
 class: ShellPattern
 category: Volume
-description: Soft shell, bars, and bursts that stay lit on sparse LED rooms
+description: Soft shell, bars, and bursts that stay lit on sparse LED rooms (denser atlas + vfx soft edges)
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness edge
-resolution: 22
+resolution: 48
 pattern_source: kernels
 pattern_label: Pattern:
 pattern_key: shellpattern_pattern_id
@@ -32,6 +32,7 @@ param: hue_scroll_s
 param: strip_reps
 param: strip_unfold
 param: strip_dir
+colors: 164E63 0891B2 22D3EE 67E8F9 CFFAFE F0FDFA
 finish: hex
 
 # Effect
@@ -41,11 +42,6 @@ float smstep(float e0, float e1, float x)
 {
     float t = clamp((x - e0) / max(e1 - e0, 1e-5), 0.0, 1.0);
     return t * t * (3.0 - 2.0 * t);
-}
-float satTanh(float x)
-{
-    float e = exp(clamp(2.0 * x, -20.0, 20.0));
-    return (e - 1.0) / (e + 1.0);
 }
 float evalStripKernelSigned(int kid, float s01, float phase01, float repeats, float time_sec)
 {
@@ -186,10 +182,7 @@ float cubeHash11(float n)
 }
 float softBand(float d, float sigma)
 {
-    float s = max(sigma, 0.028);
-    float core = exp(-(d * d) / (s * s * 0.45));
-    float halo = exp(-(d * d) / (s * s * 1.70)) * 0.38;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(d, max(sigma, 0.028));
 }
 float lifeEnv(float life)
 {
@@ -393,5 +386,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     else
         intensity = evalRain(l, k, amp, clock, sigma, detail, size_m, freq_n);
 
-    out_color = vec4(clamp(intensity, 0.0, 1.0), clamp((k + 1.0) * 0.5, 0.0, 1.0), 0.0, 1.0);
+    float gloss01 = clamp(pow(clamp(intensity, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0);
+    out_color = vec4(clamp(intensity, 0.0, 1.0), clamp((k + 1.0) * 0.5, 0.0, 1.0), gloss01, 1.0);
 }

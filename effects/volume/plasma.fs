@@ -3,8 +3,9 @@ name: Plasma
 class: Plasma
 global: speed brightness frequency detail size scale fps color surface position strip bands
 category: Volume
-description: Layered room plasma that stays readable on sparse LED grids
-colors: 00FF00 FF00FF FFFF00
+description: Layered room plasma that stays readable on sparse LED grids (denser atlas + vfx soft edges)
+resolution: 48
+colors: 0A1A2E 0E4D6B 1FA8A0 C45CFF F0C84A FFF8E8
 finish: depth
 supports_strip_colormap: true
 supports_height_bands: true

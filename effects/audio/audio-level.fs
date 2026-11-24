@@ -1,11 +1,11 @@
 name: Audio Level
 class: AudioLevel
 category: Audio
-description: Rising fill surface driven by Listen Role / Hz band
+description: Rising fill surface driven by Listen Role / Hz band (denser atlas + vfx soft edges)
 drive: audio
 audio_preset: level
 global: audio speed brightness frequency detail size scale path strip bands color
-resolution: 20
+resolution: 48
 user_colors: 1
 slider: wave_amount 0 50 6 unit pct | Boundary wave: | Wobble on the lit/dark boundary.
 slider: edge_soft 2 50 8 unit pct | Edge softness: | Transition thickness at the fill surface.

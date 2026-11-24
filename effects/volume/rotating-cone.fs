@@ -2,10 +2,10 @@
 name: Rotating Cone Spotlights
 class: RotatingConeSpotlights
 category: Volume
-description: Soft searchlight cones on floor, ceiling, walls, or center
+description: Soft searchlight cones on floor, ceiling, walls, or center (denser atlas + vfx soft edges)
 instances: 1
 global: speed brightness frequency size scale fps color surface position strip bands count
-resolution: 28
+resolution: 48
 combo: cone_spot_surface | Surface:
 option: Center | Spatial Anchor occupancy mid-plane.
 option: Ceiling | Room ceiling in occupancy XZ.
@@ -55,6 +55,7 @@ param: unit cone3_u
 param: unit cone3_v
 param: unit cone4_u
 param: unit cone4_v
+colors: 3B0764 7E22CE A855F7 D8B4FE F3E8FF FAF5FF
 finish: hsv
 
 # Effect

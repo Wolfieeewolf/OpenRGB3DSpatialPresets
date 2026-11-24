@@ -2,7 +2,8 @@
 name: Depth Tone
 class: DepthTone
 category: Volume
-description: Soft hue steps across the room that stay bright on sparse LEDs
+description: Soft hue steps across the room that stay bright on sparse LEDs (denser atlas + vfx soft edges)
+resolution: 48
 global: speed brightness frequency detail size scale fps color surface position strip bands path
 combo: depth_layout | Layout:
 option: Linear (axis)
@@ -16,6 +17,7 @@ param: path_axis
 param: combo depth_layout
 param: size_depth
 param: ndetail
+colors: 0F172A 1E293B 334155 64748B CBDBF1 F8FAFC
 finish: atlas
 
 # Effect

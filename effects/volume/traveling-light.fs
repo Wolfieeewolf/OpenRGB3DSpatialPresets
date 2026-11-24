@@ -2,7 +2,8 @@
 name: Traveling Light
 class: TravelingLight
 category: Volume
-description: Soft traveling beams and fronts that survive sparse LED rooms
+description: Soft traveling beams and fronts that survive sparse LED rooms (denser atlas + vfx soft edges)
+resolution: 48
 global: speed brightness frequency detail size scale fps color surface position path plane strip bands
 pattern_label: Style:
 pattern_key: mode
@@ -45,6 +46,7 @@ param: combo front_shape
 param: combo front_edge
 param: cent front_thickness
 param: travel_freq
+colors: 451A03 9A3412 EA580C FBBF24 FEF3C7 FFFBEB
 finish: hex
 
 # Effect
@@ -55,10 +57,7 @@ float smstep(float e0, float e1, float x)
 }
 float softBand(float d, float sigma)
 {
-    float s = max(sigma, 0.028);
-    float core = exp(-(d * d) / (s * s * 0.45));
-    float halo = exp(-(d * d) / (s * s * 1.65)) * 0.38;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(d, max(sigma, 0.028));
 }
 float axisComp(vec3 p, int ax)
 {

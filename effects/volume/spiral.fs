@@ -3,11 +3,10 @@ name: Spiral
 class: Spiral
 global: speed brightness frequency detail size scale fps color surface position strip bands
 category: Volume
-description: Soft spinning arms and funnels that stay lit on sparse LED rooms
-colors: FF0000 00FF00 0000FF
-rainbow: true
-resolution: 24
-user_colors: 2
+description: Soft spinning arms and funnels that stay lit on sparse LED rooms (denser atlas + vfx soft edges)
+colors: 1A0A2E 4B1FA8 2EC4FF F05AC8 F5C84A FFF5EE
+resolution: 48
+user_colors: 6
 needs_frequency: false
 supports_strip_colormap: true
 supports_height_bands: true
@@ -21,6 +20,8 @@ param: unit gap_size
 param: detail
 param: unit coil_amount
 param: unit height_coil_amount
+# Source: Effekseer Magical Spiral pack (ideas only) - bright arm cores, funnel wind ribbons. Clean-room; no .efk code copied.
+# Source: OpenRGB Effects Plugin / WLED spiral looks (ideas only) - multi-arm spin readable on sparse LEDs.
 
 # Controls
 slider: num_arms 2 8 3 | Arms: | Number of spiral arms
@@ -41,10 +42,7 @@ pattern: Tornado / Twister | Funnel wall and wind ribbons climbing the room.
 float spSaturate(float v) { return clamp(v, 0.0, 1.0); }
 float spSoft(float d, float w)
 {
-    float s = max(w, 0.028);
-    float core = exp(-(d * d) / (s * s * 0.45));
-    float halo = exp(-(d * d) / (s * s * 1.65)) * 0.38;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(d, max(w, 0.028));
 }
 float spRidge(float d, float soft_w, float crisp_w)
 {
@@ -64,7 +62,6 @@ float spArmDist(float spiral_angle, float arms)
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
-    /* Continuous motion_clock - no progress wrap flash. */
     float progress_e = u_params[0];
     float freq_scale_e = max(u_params[1], 0.01);
     int pattern_type = int(clamp(u_params[2], 0.0, 6.0) + 0.5);
@@ -97,10 +94,12 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     {
         float d = spArmDist(spiral_angle, num_arms);
         float ridge = spRidge(d, soft_w, crisp_w);
+        /* Hot centerline bead (LoRA: Magical Spiral arm cores). */
+        float bead = spSoft(d, max(crisp_w * 0.55, 0.016)) * 0.42;
         float secondary = spRidge(spArmDist(spiral_angle * 0.5 + norm_twist * freq_scale_e, num_arms),
                                   soft_w * 1.35, crisp_w * 1.4) * 0.28;
         float lift = 0.5 + 0.5 * cos(norm_twist * freq_scale_e * 3.0 + progress_e * 0.45);
-        spiral_value = spSaturate(ridge * (0.75 + 0.25 * lift) + secondary);
+        spiral_value = spSaturate(ridge * (0.75 + 0.25 * lift) + secondary + bead);
         spiral_value *= 0.55 + 0.45 * (1.0 - r01 * 0.35);
     }
     else if(pattern_type == 1)
@@ -201,5 +200,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         spiral_value *= 0.55 + 0.45 * (1.0 - gap_factor * 0.5);
     }
 
-    out_color = vec4(clamp(spiral_value, 0.0, 1.0), 0.0, 0.0, 1.0);
+    float gloss01 = clamp(pow(clamp(spiral_value, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0);
+    out_color = vec4(clamp(spiral_value, 0.0, 1.0), gloss01, gloss01, 1.0);
 }

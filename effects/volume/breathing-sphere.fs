@@ -2,9 +2,9 @@
 name: Breathing Sphere
 class: BreathingSphere
 category: Volume
-description: Soft breathing shell or whole-room inhale that fills sparse LED rooms
+description: Soft breathing shell or whole-room inhale that fills sparse LED rooms (denser atlas + vfx soft edges)
 global: speed brightness frequency detail size scale fps color surface position strip bands
-resolution: 28
+resolution: 48
 rainbow: true
 combo: breathing_shape | Shape:
 option: Sphere | Round 3D ball shell.
@@ -30,6 +30,7 @@ param: size
 param: atlas_sx
 param: atlas_sy
 param: atlas_sz
+colors: 082F49 0E7490 22D3EE 67E8F9 E0F2FE F8FAFC
 finish: hex
 
 # Effect
@@ -40,10 +41,7 @@ float smstep(float e0, float e1, float x)
 }
 float bsSoft(float d, float soft)
 {
-    float s = max(soft, 0.028);
-    float core = exp(-(d * d) / (s * s * 0.40));
-    float halo = exp(-(d * d) / (s * s * 1.70)) * 0.40;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(d, max(soft, 0.028));
 }
 float polyRadialXZ(vec2 p, float n)
 {
@@ -121,7 +119,8 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         if(pulse_strength < 0.001)
             air = 0.85;
         float hue01 = clamp(dist_norm, 0.0, 1.0);
-        out_color = vec4(clamp(air, 0.0, 1.0), hue01, 0.0, 1.0);
+        float air_gloss = clamp(pow(clamp(air, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0);
+        out_color = vec4(clamp(air, 0.0, 1.0), hue01, air_gloss, 1.0);
         return;
     }
 
@@ -178,5 +177,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         norm_in_shell = clamp((distance - r_in) / max(R - r_in, 1e-4), 0.0, 1.2);
     }
 
-    out_color = vec4(clamp(sphere_intensity, 0.0, 1.0), clamp(norm_in_shell, 0.0, 1.0), 0.0, 1.0);
+    float gloss01 = clamp(pow(clamp(sphere_intensity, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0);
+    out_color = vec4(clamp(sphere_intensity, 0.0, 1.0), clamp(norm_in_shell, 0.0, 1.0), gloss01, 1.0);
 }

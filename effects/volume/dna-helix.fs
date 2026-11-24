@@ -2,7 +2,8 @@
 name: DNA Helix
 class: DNAHelix
 category: Volume
-description: Soft double helix that stays readable on sparse LED grids
+description: Soft double helix that stays readable on sparse LED grids (denser atlas + vfx soft edges)
+resolution: 48
 global: speed brightness frequency detail size scale fps color surface position strip bands
 rainbow: true
 pattern_label: Look:
@@ -21,6 +22,7 @@ param: dna_radius
 param: dna_thick
 param: dna_rung
 param: pattern
+colors: 14532D 16A34A 4ADE80 A3E635 FDE047 FFFBEB
 finish: hex
 
 # Effect
@@ -31,10 +33,7 @@ float smstep(float e0, float e1, float x)
 }
 float dnaSoft(float d, float soft)
 {
-    float s = max(soft, 0.028);
-    float core = exp(-(d * d) / (s * s * 0.35));
-    float halo = exp(-(d * d) / (s * s * 1.70)) * 0.42;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(d, max(soft, 0.028));
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {

@@ -2,7 +2,8 @@
 name: Grid Kit
 class: GridKit
 category: Volume
-description: Scanner lasers, a hologram cube, roaming boxes, a Rubik cube, a plasma orb, hyperspace and lightning for 3D LED rooms
+description: Scanner lasers, a hologram cube, roaming boxes, a Rubik cube, a plasma orb, hyperspace and lightning for 3D LED rooms (denser atlas + vfx soft edges)
+resolution: 48
 global: speed brightness frequency detail size scale fps color surface position strip bands path thickness
 pattern_label: Mode:
 pattern_key: mode
@@ -24,6 +25,7 @@ param: ndetail
 param: hue_scroll_s
 param: unit sway
 param: unit density
+colors: 0C4A6E 0284C7 38BDF8 7DD3FC E0F2FE F8FAFC
 finish: hex
 
 # Effect
@@ -33,15 +35,9 @@ finish: hex
  * Path → path_axis. Scale = occupancy (engine atlas, not packed here). */
 float softband(float d, float w)
 {
-    float hw = max(w, 0.036);
-    float core = exp(-(d * d) / (hw * hw * 0.50));
-    float halo = exp(-(d * d) / (hw * hw * 1.85)) * 0.48;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(d, max(w, 0.028));
 }
-float hash21(vec2 p)
-{
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
-}
+float hash21(vec2 p) { return vfxHash21(p); }
 vec3 gkRotY(vec3 p, float a)
 {
     float c = cos(a);
@@ -650,5 +646,5 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
 
     intensity = clamp(intensity * mix(1.08, 1.40, detail * 0.5 + 0.5), 0.0, 1.0);
-    out_color = vec4(intensity, fract(color_drv), 0.0, 1.0);
+    out_color = vec4(intensity, fract(color_drv), clamp(pow(clamp(intensity, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0), 1.0);
 }

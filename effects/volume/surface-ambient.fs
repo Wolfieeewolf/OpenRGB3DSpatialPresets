@@ -2,9 +2,9 @@
 name: Surface Ambient
 class: SurfaceAmbient
 category: Volume
-description: Soft room-shell materials (fire, water, lava) for sparse LED rooms
+description: Soft room-shell materials (fire, water, lava) for sparse LED rooms (denser atlas + vfx soft edges)
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness
-resolution: 30
+resolution: 48
 user_colors: 1
 sample: room
 combo: style 1 | Preset:
@@ -34,6 +34,7 @@ param: motion_hz
 param: speed_mul
 param: sa_feature
 param: motion_hz_ref
+colors: 0C4A6E 0369A1 38BDF8 7DD3FC FEF08A FFFBEB
 finish: surface
 # Effect
 float saHash(vec2 p)

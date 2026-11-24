@@ -2,7 +2,8 @@
 name: Harmonic Pulse
 class: HarmonicPulse
 category: Volume
-description: Soft room-wide harmonic pulse readable on sparse LED grids
+description: Soft room-wide harmonic pulse readable on sparse LED grids (denser atlas + vfx soft edges)
+resolution: 48
 global: speed brightness frequency detail size scale fps color surface position strip bands
 pattern_index: 1
 pattern_label: Color pulse:
@@ -21,6 +22,7 @@ param: unit harmonic_zoom_wobble
 param: unit harmonic_pulse_contrast
 param: harmonic_density
 param: unit harmonic_spatial_amount
+colors: 4C0519 9F1239 E11D48 FB7185 FECACA FFF1F2
 finish: hex
 
 # Effect

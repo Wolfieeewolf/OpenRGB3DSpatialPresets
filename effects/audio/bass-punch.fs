@@ -6,7 +6,7 @@ drive: audio
 audio_preset: low_punch
 shader: audio-pulse
 global: audio speed brightness frequency size scale color bands strip
-resolution: 24
+resolution: 48
 user_colors: 1
 needs_frequency: true
 slider: particle_amount 0 100 12 | Surface sparks: | Sparse spark particles on the shell (0 = smooth ring only).

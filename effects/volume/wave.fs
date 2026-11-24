@@ -2,9 +2,9 @@
 name: Wave
 class: Wave
 category: Volume
-description: Soft traveling room wave that stays lit on sparse LED grids
+description: Soft traveling room wave that stays lit on sparse LED grids (denser atlas + vfx soft edges)
 global: speed brightness frequency detail size scale fps color surface position strip bands thickness edge
-resolution: 18
+resolution: 48
 pattern_label: Style:
 pattern_key: wave_style
 pattern: Sinus (Mega-Cube) | Classic mega-cube style sinusoid in radius and travel.
@@ -20,6 +20,7 @@ param: unit wave_amplitude
 param: pattern
 param: deg wave_direction_deg
 param: gthickness
+colors: 0C4A6E 0369A1 0EA5E9 38BDF8 BAE6FD F0F9FF
 finish: hex
 
 # Effect
@@ -54,9 +55,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
 
     float d = abs(l.y - surface_y);
     float soft = max(sigma, 0.032);
-    float core = exp(-(d * d) / (soft * soft * 0.45));
-    float halo = exp(-(d * d) / (soft * soft * 1.75)) * 0.40;
-    float intensity = clamp(core + halo, 0.0, 1.0);
+    float intensity = vfxCoreRim(d, soft);
     float pos_norm = clamp((surface_y / amp + 1.0) * 0.5, 0.0, 1.0);
-    out_color = vec4(intensity, pos_norm, 0.0, 1.0);
+    out_color = vec4(intensity, pos_norm, clamp(pow(clamp(intensity, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0), 1.0);
 }

@@ -3,11 +3,12 @@ name: Hex Lattice
 class: HexLattice
 category: Volume
 global: speed brightness frequency detail size scale fps color surface position strip
-description: Soft honeycomb lattice that stays readable on sparse LED rooms
+description: Soft honeycomb lattice that stays readable on sparse LED rooms (denser atlas + vfx soft edges)
 rainbow: true
-resolution: 22
+resolution: 48
 user_colors: 1
 supports_strip_colormap: true
+colors: 1E1B4B 312E81 6366F1 A5B4FC E0E7FF F8FAFC
 finish: hex
 pattern_label: Flow mode:
 pattern_key: hexlattice_flow_mode
@@ -42,10 +43,7 @@ float hash12(vec2 p)
 }
 float hxSoft(float d, float soft)
 {
-    float s = max(soft, 0.028);
-    float core = exp(-(d * d) / (s * s * 0.45));
-    float halo = exp(-(d * d) / (s * s * 1.70)) * 0.38;
-    return clamp(core + halo, 0.0, 1.0);
+    return vfxCoreRim(d, max(soft, 0.028));
 }
 void volumeMain(out vec4 out_color, in vec3 p01)
 {
@@ -86,5 +84,5 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float v = clamp(edge * (0.82 + 0.18 * pulse) + cell_fill, 0.0, 1.0);
 
     float h01 = fract(id.x * 0.045 + id.y * 0.030 + hcell * 0.18 + (local01.y - 0.5) * 0.10 + hue_t);
-    out_color = vec4(v, h01, 0.0, 1.0);
+    out_color = vec4(v, h01, clamp(pow(clamp(v, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0), 1.0);
 }
