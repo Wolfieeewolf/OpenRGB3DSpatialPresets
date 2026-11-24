@@ -1,0 +1,17 @@
+# Name
+name: Swirlpool (kaleido)
+index: 53
+palette: spectrum
+
+# Kernel
+float cx = s01 - 0.5;
+float cy = t01 - 0.5;
+float rad = sqrt(cx * cx + cy * cy) * (0.85 + 0.35 * r);
+float ang = atan(cy, cx);
+float folds = 3.0 + floor(r * 2.0);
+float folded = abs(fractf(ang / TWO_PI * folds + tsec * 0.05 + ph) - 0.5) * 2.0;
+float arm = 1.0 - smstep(0.0, 0.22, abs(sin(ang * folds + rad * (6.0 + 4.0 * r) - tsec * 0.55)));
+float ring = 1.0 - smstep(0.0, 0.12, abs(sin(rad * (8.0 + 3.0 * r) - tsec * 0.35)));
+float v = arm * (0.55 + 0.45 * folded) + ring * 0.35;
+v *= 1.0 - smstep(0.55, 0.95, rad);
+k = clamp(v * 2.0 - 1.0, -1.0, 1.0);

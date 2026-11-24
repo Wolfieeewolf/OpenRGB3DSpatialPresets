@@ -60,15 +60,18 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else if(pattern_type == 1)
     {
+        /* Ideas only (kaleido / swirlpool feel): polar fold + Z lift for sparse rooms. */
         float angle = atan(coord2 - 0.5, coord1 - 0.5);
         float radius = sqrt((coord1 - 0.5) * (coord1 - 0.5) + (coord2 - 0.5) * (coord2 - 0.5));
+        float fold = abs(fract(angle / 6.2831853 * 3.0 + prog * 0.08) - 0.5) * 2.0;
         plasma_value =
             sin(angle * 3.0 + radius * fs * 7.5 + prog * 0.70) +
             sin(angle * 2.0 - radius * fs * 5.5 + prog * 0.52) +
             cos(angle * 5.0 + radius * fs * 3.6 - prog * 0.60) +
+            0.85 * sin(fold * 6.2831853 + radius * fs * 4.0 - prog * 0.45) +
             sin(coord3 * fs * 4.2 + prog * 0.35) +
             cos((angle * 2.0 + coord3 * fs * 2.8) + prog * 0.40);
-        plasma_value = finalizePlasma01(plasma_value, -0.02, 1.22);
+        plasma_value = finalizePlasma01(plasma_value, -0.02, 1.18);
     }
     else if(pattern_type == 2)
     {
@@ -104,15 +107,18 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
+        /* Ideas only (perlin/doom fire wind): lateral sway + rising tongues. */
         float y = coord2 - prog * 0.18;
-        float turb = 0.20 * sin((coord1 * 2.6 + coord3 * 2.2) * fs * 6.0 + prog * 1.1);
-        float xw = coord1 + turb * sin(y * fs * 7.5 + prog * 0.55);
-        float zw = coord3 + turb * cos(y * fs * 7.0 - prog * 0.48);
+        float wind = 0.12 * sin(prog * 0.55 + coord2 * 3.0);
+        float turb = 0.22 * sin((coord1 * 2.6 + coord3 * 2.2) * fs * 6.0 + prog * 1.1);
+        float xw = coord1 + wind + turb * sin(y * fs * 7.5 + prog * 0.55);
+        float zw = coord3 + wind * 0.7 + turb * cos(y * fs * 7.0 - prog * 0.48);
         float tongues =
             sin(xw * fs * 10.0 + prog * 0.90) +
             cos(zw * fs * 8.5 - prog * 0.70) +
             0.7 * sin((xw + zw) * fs * 6.5 + y * fs * 11.0 - prog * 1.4) +
-            0.5 * cos(y * fs * 12.0 + prog * 0.42);
+            0.55 * cos(y * fs * 12.0 + prog * 0.42) +
+            0.35 * sin((xw - zw) * fs * 5.0 + y * fs * 8.0 - prog * 1.05);
         float floor_heat = pow(clamp(1.0 - coord2, 0.0, 1.0), 0.50);
         plasma_value = tongues * (0.35 + 0.65 * floor_heat) + 1.35 * floor_heat;
         plasma_value = pow(clamp((plasma_value + 3.0) / 6.0, 0.0, 1.0), 0.68);

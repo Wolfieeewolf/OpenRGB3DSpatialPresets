@@ -1,0 +1,18 @@
+# Name
+name: Honeycomb
+index: 55
+palette: spectrum
+
+# Kernel
+float scale = 4.0 + 3.0 * r;
+float hx = s01 * scale;
+float hy = t01 * scale * 1.1547005;
+float rx = abs(fractf(hx + 0.5) - 0.5);
+float ry = abs(fractf(hy / 1.7320508 + 0.5) - 0.5);
+float hex = max(rx * 0.8660254 + ry * 0.5, ry);
+float edge = 1.0 - smstep(0.28, 0.42, hex);
+float fill = 1.0 - smstep(0.0, 0.32, hex);
+float cell_id = floor(hx) + floor(hy) * 13.0;
+float pulse = 0.75 + 0.25 * sin(TWO_PI * (tsec * 0.07 + hash11(cell_id) + ph));
+float v = mix(fill * 0.35, edge, 0.65) * pulse;
+k = clamp(v * 2.0 - 1.0, -1.0, 1.0);

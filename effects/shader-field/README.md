@@ -29,3 +29,5 @@ Add another `param:` + `slider:` when a look has a distinct knob globals do not 
 **Overlay atlas** is engine-fixed at **1024×576**. LED colours use GPU UV point-eval. Prefer `(frag_coord * 2.0 - u_resolution.xy) / u_resolution.y` or the classic `(uv - 0.5) * aspect * zoom` form already used by restored looks. Size (`u_params[0]`) scales feature density on that plane.
 
 `_example_plasma.fs` is the header template for new looks.
+
+Library target is **50** `.fs` looks (including the example). Newer gap-fillers: Soft Tunnel, Kaleido Fold, Lightning Veins, Caustic Pools, Hypno Disc, Particle Drift, Pulse Starburst, Marble Flow, Ribbon Curtain, Warp Portal, Zigzag Bands.

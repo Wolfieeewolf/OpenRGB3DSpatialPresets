@@ -1,0 +1,33 @@
+# Name
+name: Fireworks nova
+index: 54
+palette: sparkle
+
+# Kernel
+float cx = s01 - 0.5;
+float cy = t01 - 0.5;
+float rad = sqrt(cx * cx + cy * cy);
+float life = fractf(tsec * 0.22 + ph * 0.31);
+float seed = floor(tsec * 0.22 + ph * 0.31);
+float ox = hash11(seed * 1.7 + 0.3) - 0.5;
+float oy = hash11(seed * 2.9 + 1.1) - 0.5;
+float dx0 = cx - ox * 0.35;
+float dy0 = cy - oy * 0.35;
+float pr = sqrt(dx0 * dx0 + dy0 * dy0);
+float shell = abs(pr - life * 0.55);
+float ring = (1.0 - smstep(0.0, 0.045, shell)) * (1.0 - life);
+float sparks = 0.0;
+for(int i = 0; i < 5; i++)
+{
+    float a = (float(i) + hash11(seed + float(i) * 0.17)) * (TWO_PI / 5.0);
+    float sx = ox * 0.35 + cos(a) * life * 0.5;
+    float sy = oy * 0.35 + sin(a) * life * 0.5;
+    float ddx = cx - sx;
+    float ddy = cy - sy;
+    float d = sqrt(ddx * ddx + ddy * ddy);
+    sparks += (1.0 - smstep(0.0, 0.04, d)) * (1.0 - life);
+}
+float dust = step(0.96, hash11(s01 * 40.0 + t01 * 17.0 + seed)) * (1.0 - life) * 0.35;
+float v = max(ring, sparks * 0.85) + dust;
+v *= 0.7 + 0.3 * (1.0 - smstep(0.0, 0.7, rad));
+k = clamp(v * 2.0 - 1.0, -1.0, 1.0);

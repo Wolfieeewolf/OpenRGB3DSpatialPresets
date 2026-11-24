@@ -1,0 +1,14 @@
+# Name
+name: Wavy bands
+index: 56
+palette: ocean
+
+# Kernel
+float travel = tsec * 0.12 + ph;
+float undulate = 0.08 * sin(TWO_PI * (t01 * 2.0 + travel * 0.7));
+float band = fractf(s01 * r * (2.5 + r) + undulate + travel);
+float crest = 1.0 - smstep(0.0, 0.12, abs(band - 0.5) * 2.0);
+float soft = 1.0 - smstep(0.0, 0.45, abs(band - 0.5) * 2.0);
+float second = 1.0 - smstep(0.0, 0.18, abs(fractf(s01 * r * 1.4 - t01 * 0.6 + travel * 0.55) - 0.5) * 2.0);
+float v = crest * 0.75 + soft * 0.35 + second * 0.25;
+k = clamp(v * 2.0 - 1.0, -1.0, 1.0);

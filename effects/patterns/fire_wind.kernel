@@ -1,0 +1,21 @@
+# Name
+name: Fire wind (rising heat)
+index: 52
+palette: fire
+
+# Kernel
+float wind = 0.12 * sin(TWO_PI * (tsec * 0.11 + t01 * 0.8));
+float x = fractf(s01 * r + wind + 0.08 * sin(TWO_PI * (t01 + tsec * 0.07)));
+float y = fractf(t01 * 0.85 + tsec * 0.14);
+float heat = 0.0;
+for(int o = 0; o < 4; o++)
+{
+    float f = pow(2.0, float(o));
+    float drift = tsec * (0.09 + 0.04 * float(o)) + wind * (1.2 + 0.3 * float(o));
+    heat += sin(TWO_PI * (x * f * 0.55 + y * f * 0.9 + ph + drift)) / f;
+    heat += 0.18 * sin(TWO_PI * (x * f * 1.1 - y * f * 0.65 - drift * 1.25)) / f;
+}
+float tip = pow(max(0.0, 0.5 + 0.5 * heat), 1.65);
+float rise = 1.0 - smstep(0.05, 0.95, y);
+float dens = (0.35 + 0.65 * tip) * (0.45 + 0.55 * rise);
+k = clamp(tanh(dens * 1.7) * 2.0 - 1.0, -1.0, 1.0);
