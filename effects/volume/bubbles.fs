@@ -164,6 +164,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
         }
     }
 
-    float gloss01 = clamp(pow(clamp(intensity, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0);
-    out_color = vec4(clamp(intensity, 0.0, 1.0), hue01, gloss01, 1.0);
+    /* Finish gloss (.b) — must not redeclare slider gloss01 (GLSL compile fail → black). */
+    float finish_gloss = clamp(max(gloss01, pow(clamp(intensity, 0.0, 1.0), 1.35) * 0.92), 0.0, 1.0);
+    out_color = vec4(clamp(intensity, 0.0, 1.0), hue01, finish_gloss, 1.0);
 }

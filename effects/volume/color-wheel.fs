@@ -22,7 +22,7 @@ param: plane
 param: combo hue_geometry_mode
 param: freq_spin
 param: size_floor
-colors: FF006E FB5607 FFC300 8338EC 3A86FF FFFFFF
+colors: FF006E FB5607 FFC300 8338EC 3A86FF
 finish: atlas
 
 # Effect
@@ -77,5 +77,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     if(geom != 2)
         hue_turns += progress * dir;
     float ang = hue_turns * 6.2831855;
-    out_color = vec4(cos(ang) * 0.5 + 0.5, sin(ang) * 0.5 + 0.5, clamp(pow(clamp(cos(ang) * 0.5 + 0.5, 0.0, 1.0), 1.35) * 0.92, 0.0, 1.0), 1.0);
+    /* finish: atlas — xy encode hue via atan2; z must stay 0 so value = 1 (not gloss).
+       Packing gloss into .b carved a dark/blue seam in the wheel. */
+    out_color = vec4(cos(ang) * 0.5 + 0.5, sin(ang) * 0.5 + 0.5, 0.0, 1.0);
 }
