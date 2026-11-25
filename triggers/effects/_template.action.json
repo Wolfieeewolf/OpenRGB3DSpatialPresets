@@ -1,5 +1,5 @@
 // =============================================================================
-// Effect pack template  (openrgb3d.action v4)
+// Effect pack template  (openrgb3d.action v5)
 // Copy this file, rename it, then edit the values below.
 // Same schema for library/packs/ (Effect Pack maker) and library/movie-cue/ (Movie Cue).
 // Comments are supported when loading (.action.json). Saving from the in-app
@@ -8,7 +8,7 @@
 {
   // --- Pack identity ---------------------------------------------------------
   "format": "openrgb3d.action",
-  "version": 4,
+  "version": 5,
   "id": "my_effect_id",
   "name": "My Effect Name",
 
@@ -70,12 +70,11 @@
           "direction": "right",
           "axis_space": "room",
           "axis_mode": "preset",
-          "axis_yaw_deg": 0.0,
-          "axis_pitch_deg": 0.0,
           "speed": 1.0,
           "pulse_length": 0.2,
           "period_ms": 1000,
           "reverse": false
+          // effect_size: 1.0 — scale multiplier for shader/particle volume effects
         }
       ]
     }

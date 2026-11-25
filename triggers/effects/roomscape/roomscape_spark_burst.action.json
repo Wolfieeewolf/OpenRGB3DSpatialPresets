@@ -58,6 +58,11 @@
             { "pos": 0.45, "color": "#FFB450" },
             { "pos": 1.0, "color": "#FFE8A0" }
           ],
+          "intensity_curve": [
+            { "pos": 0.0, "value": 1.0 },
+            { "pos": 0.7, "value": 0.9 },
+            { "pos": 1.0, "value": 0.0 }
+          ],
           "direction": "right",
           "axis_space": "room",
           "axis_mode": "preset",
