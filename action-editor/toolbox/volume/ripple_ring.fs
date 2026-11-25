@@ -12,18 +12,24 @@ swatch: 100 200 255
 
 void volumeMain(out vec4 out_color, in vec3 p01) {
     vec3 p = p01 * 2.0 - 1.0;
-    float r = length(p);
-    float prog = clamp(u_params[0], 0.0, 1.0);
-    float inten = clamp(u_params[1], 0.0, 1.0);
-    float band = 0.18 + 0.35 * clamp(u_params[2], 0.05, 1.0);
+    float prog = vfxSaturate(u_params[0]);
+    float inten = vfxSaturate(u_params[1]);
+    float size = clamp(u_params[2], 0.05, 1.0);
+    // Shockwave: warp the sample point so the front ripples instead of being a perfect sphere
+    vec3 q = vfxDomainWarp(p * 1.4, u_time * 0.6, 0.10 + 0.08 * size) / 1.4;
+    float r = length(q);
     float front = prog * 1.65;
-    float ring = 1.0 - smoothstep(0.0, band, abs(r - front));
-    // Fill inside the wave so the room lights up, not just a thin shell
-    float fill = (1.0 - smoothstep(0.0, front + band * 0.5, r)) * (1.0 - prog * 0.55);
-    float cover = max(ring, fill * 0.55);
+    float band = 0.16 + 0.30 * size;
+    float ring = vfxShell(r - front, band);
+    // Wake: churning light left behind the front, so the room floods rather than blinks
+    float churn = vfxFbm3(p * 2.2 + vec3(0.0, u_time * 0.4, 0.0), 3.0);
+    float wake = 1.0 - smoothstep(front - band, front + band * 0.5, r);
+    wake *= (0.35 + 0.65 * churn) * (1.0 - prog * 0.6);
+    float cover = max(ring, wake * 0.6);
     cover *= 1.0 - smoothstep(0.78, 1.0, prog);
-    float a = cover * inten;
+    float a = vfxSaturate(cover) * inten;
     if(a < 1e-4) { out_color = vec4(0.0); return; }
-    vec3 col = mix(vec3(0.1, 0.35, 0.85), vec3(0.85, 0.95, 1.0), clamp(cover, 0.0, 1.0));
+    vec3 col = mix(vec3(0.08, 0.28, 0.85), vec3(0.35, 0.75, 1.0), churn);
+    col = mix(col, vec3(0.9, 0.97, 1.0), vfxSaturate(ring * 1.2 - 0.2));
     out_color = vec4(col * a, a);
 }

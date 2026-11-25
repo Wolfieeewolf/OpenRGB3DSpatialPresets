@@ -11,17 +11,22 @@ slider: size 0 100 35
 swatch: 255 220 120
 
 void volumeMain(out vec4 out_color, in vec3 p01) {
-    float prog = clamp(u_params[0], 0.0, 1.0);
-    float inten = clamp(u_params[1], 0.0, 1.0);
+    float prog = vfxSaturate(u_params[0]);
+    float inten = vfxSaturate(u_params[1]);
     float dens = clamp(u_params[2], 0.05, 1.0);
-    vec3 g = floor(p01 * mix(8.0, 28.0, dens));
-    float n = fract(sin(dot(g, vec3(12.9898, 78.233, 45.164))) * 43758.5453);
+    // One possible spark per cell, at a random spot inside it, glowing softly
+    vec3 g = p01 * mix(6.0, 18.0, dens);
+    vec3 id = floor(g);
+    vec3 f = fract(g);
+    float n = vfxHash31(id);
+    vec3 c = 0.25 + 0.5 * vec3(vfxHash31(id + 1.3), vfxHash31(id + 2.7), vfxHash31(id + 4.1));
+    float glow = vfxSoftBand(length(f - c), 0.6);
+    float twinkle = vfxPulse01(u_time * (10.0 + 8.0 * n) + vfxHash31(id + 7.7) * 6.283, 2.0);
     float life = 1.0 - smoothstep(0.0, 1.0, prog);
     life *= 1.0 - smoothstep(0.88, 1.0, prog);
-    float spark = step(0.92, n) * life;
-    float flicker = step(0.5, fract(n * 17.0 + u_time * 9.0));
-    float a = spark * flicker * inten;
+    float a = step(0.82, n) * glow * twinkle * life * inten;
     if(a < 1e-4) { out_color = vec4(0.0); return; }
-    vec3 col = mix(vec3(1.0, 0.6, 0.2), vec3(1.0, 1.0, 0.85), n);
+    // Hot white when it flares, cooling to orange as it fades
+    vec3 col = vfxHeatRgb(0.55 + 0.45 * twinkle * life);
     out_color = vec4(col * a, a);
 }

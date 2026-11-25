@@ -11,33 +11,26 @@ slider: size 0 100 70
 swatch: 40 255 160
 
 void volumeMain(out vec4 out_color, in vec3 p01) {
-    float inten = clamp(u_params[1], 0.0, 1.0);
+    float inten = vfxSaturate(u_params[1]);
     float scale = clamp(u_params[2], 0.05, 1.0);
-    float t = u_time * (0.32 + 0.38 * scale);
-    float x = p01.x;
+    float t = u_time * (0.25 + 0.3 * scale);
     float y = p01.y;
-    float z = p01.z;
-    // Layered curtains with shear + slow lateral drift (LED-cube aurora language)
-    float shear = y * (2.2 + 1.4 * scale);
-    float c1 = sin((x * 6.5 + z * 2.8) + t + shear);
-    float c2 = sin((x * 10.5 - z * 4.5) - t * 1.25 + y * 3.6);
-    float c3 = sin((x * 3.8 + z * 7.5) + t * 0.65 + y * 1.2);
-    float ribbon = 0.5 + 0.3 * c1 + 0.24 * c2 + 0.16 * c3;
-    ribbon = pow(clamp(ribbon, 0.0, 1.0), 1.25);
-    // Soft vertical band - bright mid, never a hard cutoff that leaves floors dead
-    float height = smoothstep(0.02, 0.28, y) * (1.0 - smoothstep(0.82, 1.0, y));
-    height = max(height, 0.22);
-    float dens = ribbon * (0.4 + 0.6 * height);
-    // Occasional bright filament so the look has character, not flat wash
-    float filament = pow(max(0.0, c1 * c2), 3.0) * 0.55;
-    dens = clamp(dens + filament, 0.0, 1.0);
+    // Curtains are folded sheets: warp the floor plan so the sheets bend and drift
+    vec3 w = vfxDomainWarp(vec3(p01.x * 2.0, y * 0.6, p01.z * 2.0), t, 0.35);
+    float fold1 = sin(w.x * 4.0 + w.z * 2.5 + t + y * (1.8 + scale));
+    float fold2 = sin(w.x * 2.6 - w.z * 3.8 - t * 1.2 + y * 1.1);
+    float soft = 0.22 + 0.14 * scale;
+    float sheet = max(vfxCoreRim(fold1 * 0.35, soft), vfxCoreRim(fold2 * 0.35, soft) * 0.8);
+    // Vertical rays streaming up the curtain
+    float rays = 0.55 + 0.45 * vfxNoise3(vec3(w.x * 9.0, y * 1.2 - t * 0.8, w.z * 9.0));
+    float height = smoothstep(0.0, 0.3, y) * (1.0 - smoothstep(0.85, 1.0, y));
+    height = max(height, 0.25);
+    float haze = 0.08 * vfxFbm3(vec3(p01.x * 3.0, y * 2.0, p01.z * 3.0) + t * 0.3, 3.0);
+    float dens = vfxSaturate(sheet * rays * (0.4 + 0.6 * height) + haze);
     if(dens < 0.035) { out_color = vec4(0.0); return; }
-    vec3 g = vec3(0.1, 0.95, 0.42);
-    vec3 c = vec3(0.2, 0.5, 1.0);
-    vec3 m = vec3(0.9, 0.3, 1.0);
-    vec3 col = mix(g, c, clamp(0.5 + 0.5 * c2, 0.0, 1.0));
-    col = mix(col, m, clamp(0.3 + 0.4 * c3, 0.0, 1.0) * (1.0 - y));
-    col = mix(col, vec3(0.85, 1.0, 0.95), filament);
+    // Green base, cyan middle, magenta crown - like a real aurora
+    vec3 col = vfxPalette3(y, vec3(0.1, 1.0, 0.45), vec3(0.15, 0.75, 0.9), vec3(0.8, 0.25, 1.0));
+    col = mix(col, vec3(0.85, 1.0, 0.95), vfxSaturate(sheet * rays - 0.75) * 2.0);
     float a = dens * inten;
     out_color = vec4(col * a, a);
 }
