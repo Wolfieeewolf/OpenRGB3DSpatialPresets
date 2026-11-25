@@ -146,7 +146,7 @@ def build_catalog(presets: list[dict], notes: list[dict]) -> str:
         "",
         "Browse controller layout presets by category. Install by copying files from "
         "[`controllers/`](../controllers/) into your OpenRGB plugin settings folder "
-        "(see the [README](../README.md#how-to-install)).",
+        "(see the [README](../README.md#installation)).",
         "",
         f"**{len(presets)}** preset(s) in this repository.",
         "",

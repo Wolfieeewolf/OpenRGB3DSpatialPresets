@@ -2,7 +2,7 @@
 
 # Available presets
 
-Browse controller layout presets by category. Install by copying files from [`controllers/`](../controllers/) into your OpenRGB plugin settings folder (see the [README](../README.md#how-to-install)).
+Browse controller layout presets by category. Install by copying files from [`controllers/`](../controllers/) into your OpenRGB plugin settings folder (see the [README](../README.md#installation)).
 
 **12** preset(s) in this repository.
 
