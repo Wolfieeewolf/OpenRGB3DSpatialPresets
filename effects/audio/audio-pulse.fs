@@ -71,7 +71,6 @@ float pulseClassicShell(float distance, float radius_basis, float age, float pul
     float secondary = 1.0 - pulseSmoothstep(secondary_radius - wave_thickness * 0.45,
                                             secondary_radius + wave_thickness * 0.55,
                                             distance);
-    /* Quieter secondary - was 0.62, less wash. */
     secondary *= exp(-abs(distance - secondary_radius) * 0.11) * 0.42;
 
     float shock_age = exp(-age * 2.4);
@@ -80,7 +79,6 @@ float pulseClassicShell(float distance, float radius_basis, float age, float pul
         * sin(distance * freq_rip * 10.0 - burst_phase * 6.2831853);
     shock *= exp(-distance * 0.065);
 
-    /* Quieter core - was 0.4. */
     float core = 0.0;
     if(distance < explosion_radius * 0.24)
         core = (1.0 - distance / (explosion_radius * 0.24 + 1e-4)) * 0.28;
@@ -220,7 +218,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     }
     else
     {
-        /* Removed ×1.28 boost - host handles brightness. */
         energy = c0;
         if(c1 > energy) { energy = c1; best_idx = 1.0; }
         if(c2 > energy) { energy = c2; best_idx = 2.0; }

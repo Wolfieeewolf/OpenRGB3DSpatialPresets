@@ -1,4 +1,4 @@
-name: Scan sweep
+name: Scan Sweep
 class: shader_field_scan_sweep
 category: Shader Field
 description: Hard scanner beam sweeping across the projection plane (Wash / Density / look sliders; vfx colour)

@@ -74,7 +74,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     {
         float a = atan(lz, lx);
         float da1 = abs(mod(a - phase + 3.14159265, 6.2831853) - 3.14159265);
-        float da2 = abs(mod(a - phase - 3.14159265 + 3.14159265, 6.2831853) - 3.14159265);
+        float da2 = abs(mod(a - phase, 6.2831853) - 3.14159265);
         float ang = min(da1, da2);
         float rad = length(vec2(lx, lz));
         float ribbon = dnaSoft(ang, 0.38 + thickness) *

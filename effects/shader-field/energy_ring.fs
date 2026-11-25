@@ -1,4 +1,4 @@
-name: Energy ring
+name: Energy Ring
 class: shader_field_energy_ring
 category: Shader Field
 description: Expanding sci-fi ring / portal disc projected onto the room (Wash / Density / look sliders; vfx colour)

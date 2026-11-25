@@ -47,7 +47,6 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float radial = clamp(length(c) / 0.8660254, 0.0, 1.0);
     float radial_profile = clamp(1.0 - radial * 0.40, 0.60, 1.0);
 
-    /* Very subtle sweep (0.94-1.0) - old 0.70 floor caused ambient flicker. */
     float sweep = 0.94 + 0.06 * sin((u_params[5] + axis_rolled) * 6.2831853);
 
     float energy = band_value * bar * radial_profile * sweep;

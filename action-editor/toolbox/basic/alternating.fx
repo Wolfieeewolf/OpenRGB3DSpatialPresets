@@ -1,6 +1,6 @@
 # Name
 name: Alternating
-description: Neighbouring LEDs swap colours (one colour ↔ off; two+ swap stops)
+description: Alternating groups of LEDs swap colours (one colour ↔ off; two+ swap stops)
 section: basic
 
 # Look

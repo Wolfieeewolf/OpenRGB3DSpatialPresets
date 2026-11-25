@@ -96,7 +96,7 @@ void volumeMain(out vec4 out_color, in vec3 p01)
     float thick01 = clamp(u_params[13], 0.0, 1.0);
     float detail = clamp(u_params[14], 0.05, 1.0);
 
-    /* Film thickness 0 = off (works even before a plugin rebuild of bubble_thick). */
+    /* Film thickness 0 = off. */
     if(thick01 < 0.01 || thick < 1e-4)
     {
         out_color = vec4(0.0);

@@ -3,7 +3,7 @@ name: Stepped
 index: 10
 
 # Kernel
-float u = fractf(s01 * r + ph + 400.0);
+float u = fractf(s01 * r + ph);
 float s = floor(u * 8.0);
 s = clamp(s, 0.0, 7.0);
 k = (s / 7.0) * 2.0 - 1.0;

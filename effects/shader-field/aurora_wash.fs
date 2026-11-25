@@ -1,4 +1,4 @@
-name: Aurora wash
+name: Aurora Wash
 class: shader_field_aurora_wash
 category: Shader Field
 description: Soft vertical aurora curtains - atmosphere wash for walls / ceiling projection (Wash / Density / look sliders; vfx colour)

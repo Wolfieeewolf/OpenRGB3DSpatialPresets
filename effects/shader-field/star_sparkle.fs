@@ -1,4 +1,4 @@
-name: Star sparkle
+name: Star Sparkle
 class: shader_field_star_sparkle
 category: Shader Field
 description: Twinkling star field on the projection plane - pairs with Particles starfield (Wash / Density / look sliders; vfx colour)

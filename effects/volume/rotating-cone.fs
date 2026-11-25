@@ -32,7 +32,7 @@ slider: cone4_v 0 100 50 pct | Cone 4 V:
 slider: cone_spot_scale 5 500 101 | Cone scale: | Beam width. Lower = tighter, higher = wider wash.
 slider: cone_spot_hue01 0 1000 0 | Hue shift: | Static hue offset. Frequency scrolls hue on top.
 slider: cone_spot_motion 20 300 100 | Motion rate: | Multiplies Speed for aim sweep.
-slider: cone_spot_wander 15 200 100 | Path wander: | How much the aim tumbles.
+slider: cone_spot_wander 15 200 100 | Path: | How much the aim tumbles.
 param: cone_clock
 param: cone_scale
 param: milli cone_spot_hue01

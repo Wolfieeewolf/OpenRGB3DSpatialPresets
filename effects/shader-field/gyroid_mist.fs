@@ -1,7 +1,7 @@
 name: Gyroid Mist
 class: shader_field_gyroid_mist
 category: Shader Field
-description: Soft SDF wash (Wash / Density / look sliders; vfx colour)
+description: Soft gyroid-pattern wash (Wash / Density / look sliders; vfx colour)
 global: color speed brightness size scale detail frequency
 user_colors: 1
 colors: #40E0FF #FFFFFF

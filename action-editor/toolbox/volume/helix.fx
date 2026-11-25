@@ -40,6 +40,9 @@ v = dx * bx + dy * by + dz * bz
 ang = atan2(v, u) / (2 * 3.141592653589793) + 0.5
 ang = ang - floor(ang)
 twist = fmod(along * 3 + time_ms * 0.001 * max(0.05, speed) + 1, 1)
+if invert == 1
+twist = 1 - twist
+end
 delta = abs(ang - twist)
 delta = min(delta, 1 - delta)
 band = clamp(pulse, 0.06, 0.4)

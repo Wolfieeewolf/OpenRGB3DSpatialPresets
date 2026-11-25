@@ -5,5 +5,5 @@ palette: sin3
 
 # Kernel
 float a = TWO_PI * (s01 * r + tsec * 0.09 + ph);
-float v = sin(a) + sin(a + 2.094) + sin(a + 4.189);
-k = clamp(v * 0.42, -1.0, 1.0);
+float v = sin(a) + sin(a * 1.5 + 2.094) + sin(a * 2.0 + 4.189);
+k = clamp(v * 0.33, -1.0, 1.0);

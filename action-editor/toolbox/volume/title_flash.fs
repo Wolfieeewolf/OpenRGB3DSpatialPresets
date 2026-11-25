@@ -19,7 +19,6 @@ void volumeMain(out vec4 out_color, in vec3 p01) {
     float flash = attack * decay;
     // Hard gate so the last frames are fully black before the pack stops.
     flash *= 1.0 - smoothstep(0.82, 0.98, prog);
-    // Pulse widens coverage; low pulse keeps a soft centre falloff.
     float cover = mix(0.55, 1.0, scale);
     float a = flash * inten * (cover + (1.0 - cover) * (1.0 - length(p01 - vec3(0.5))));
     if(a < 1e-4) { out_color = vec4(0.0); return; }

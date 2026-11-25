@@ -1,4 +1,4 @@
-name: Ripple Ember
+name: Ember Field
 class: shader_field_ember_field
 category: Shader Field
 description: Expanding fire rings with warm ember falloff (Wash / Density / look sliders; vfx colour)

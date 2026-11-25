@@ -27,7 +27,6 @@ void spatialMain(out vec4 out_color, in vec2 frag_coord)
     float contrast = clamp(u_params[1], 0.35, 2.5);
     float hue = fract(u_params[2]);
     float detail = clamp(u_params[3], 0.05, 1.0);
-    /* Ideas only (swirl / domain-warp shaders): nested current + soft arms. Clean-room. */
     vec2 p = (uv - 0.5) * (2.0 * (zoom * dens_mul));
     float t = u_time * 1.306;
     vec2 q = p;
