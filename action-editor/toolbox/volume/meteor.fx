@@ -21,20 +21,23 @@ head0 = fmod(time_ms * 0.001 * max(0.05, speed), 1)
 if invert == 1
 head0 = 1 - head0
 end
+# Bright head with a halo; the tail tapers and crackles as it burns
 delta = head0 - along
-cover = 0
+cover = glow(delta, 0.025 + trail * 0.06)
 if delta >= 0 && delta <= trail
-cover = 1 - (delta / trail)
+burn = 0.65 + 0.35 * noise(along * 35, time_ms * 0.015, 7)
+cover = max(cover, pow(1 - delta / trail, 1.8) * burn)
 end
-if cover <= 0.001
+if cover <= 0.02
 h = hash01_mix(seed, 2654435761, 0)
 head = fmod(head0 + h * 0.85, 1)
 delta = head - along
+cover = glow(delta, 0.025 + trail * 0.06) * 0.85
 if delta >= 0 && delta <= trail
-cover = (1 - (delta / trail)) * 0.85
+cover = max(cover, pow(1 - delta / trail, 1.8) * 0.85)
 end
 end
-if cover <= 0.001
+if cover <= 0.02
 off
 end
 intensity = intensity * cover

@@ -20,6 +20,8 @@ t = time_ms * 0.001 * max(0.15, speed)
 wave = 0.5 + 0.5 * sin(nx * 7.5 + t * 1.15 + nz * 4.2)
 wave2 = 0.5 + 0.5 * sin(nx * 3.2 - t * 0.65 + nz * 2.4)
 swell = 0.55 * wave + 0.45 * wave2
+# Rolling fractal swell on top of the long waves
+swell = 0.5 * swell + 0.5 * fbm(nx * 4 + t * 0.5, ny * 2, nz * 4 - t * 0.3, 3)
 ripple = 0.5 + 0.5 * sin((nx + nz) * 10.0 - t * 1.8)
 horizon_band = max(0.02, 0.06 + 0.28 * clamp(pulse, 0, 1))
 water = clamp((0.52 - ny) / horizon_band, 0, 1)
@@ -28,5 +30,8 @@ ocean_t = clamp(0.02 + swell * 0.32 + ny * 0.2 + ripple * 0.06, 0, 0.48)
 sky_t = clamp(0.55 + (ny - 0.48) * 0.9 + wave * 0.04, 0.52, 1)
 paint_mix(ocean_t, sky_t, sky)
 ocean_i = 0.38 + 0.45 * swell + 0.17 * ripple
+# Sun glints flickering on the water
+glint = pow(noise(nx * 20 + t, ny * 6, nz * 20 - t * 0.8), 8)
+ocean_i = min(1, ocean_i + glint * 0.8)
 sky_i = 0.32 + 0.22 * wave + 0.28 * ny
 intensity = intensity * (water * ocean_i + sky * sky_i)

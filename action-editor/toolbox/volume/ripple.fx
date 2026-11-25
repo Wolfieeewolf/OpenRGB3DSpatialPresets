@@ -16,17 +16,13 @@ knobs: speed pulse
 
 # Effect
 band = clamp(pulse, 0.06, 0.4)
-front = fmod(time_ms * 0.001 * max(0.05, speed), 1)
-cover = 0
-wave = abs(radius - front)
-if wave <= band
-cover = 1 - (wave / band)
-end
-wave2 = abs(radius - fmod(front + 0.5, 1))
-if wave2 <= band
-cover = max(cover, (1 - (wave2 / band)) * 0.75)
-end
-if cover <= 0.001
+t = time_ms * 0.001 * max(0.05, speed)
+front = fmod(t, 1)
+# Rings wobble a little so they read as water, not a perfect sphere
+r = radius + (noise(nx * 4, ny * 4 + t, nz * 4) - 0.5) * band * 0.6
+cover = glow(r - front, band * 0.7)
+cover = max(cover, glow(r - fmod(front + 0.5, 1), band * 0.7) * 0.75)
+if cover <= 0.02
 off
 end
 intensity = intensity * cover

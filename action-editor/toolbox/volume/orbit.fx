@@ -47,17 +47,13 @@ end
 width = clamp(pulse, 0.06, 0.5)
 delta = ang - head
 delta = delta - floor(delta + 0.5)
-lead = width * 0.25
-trail = width
-cover = 0
-if delta >= 0 && delta <= lead
-cover = 1 - (delta / lead)
-end
-if delta < 0 && -delta <= trail
-cover = 1 + (delta / trail)
+# Bright head with a tail trailing behind it
+cover = glow(delta, width * 0.18)
+if delta < 0 && -delta <= width
+cover = max(cover, pow(1 + delta / width, 1.5))
 end
 cover = cover * (0.45 + 0.55 * (1 - clamp(radius, 0, 1) * 0.5))
-if cover <= 0.001
+if cover <= 0.02
 off
 end
 intensity = intensity * cover

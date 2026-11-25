@@ -23,9 +23,14 @@ along = 1 - along
 end
 trail = clamp(pulse, 0.08, 0.7)
 delta = head - along
-if delta < 0 || delta > trail
+# Bright head with a soft halo, and a tapering tail that sparkles
+cover = glow(delta, 0.03 + trail * 0.08)
+if delta >= 0 && delta <= trail
+sparkle = 0.7 + 0.3 * noise(along * 40, time_ms * 0.012, 3)
+cover = max(cover, pow(1 - delta / trail, 1.6) * sparkle)
+end
+if cover <= 0.02
 off
 end
-cover = 1 - (delta / trail)
 intensity = intensity * cover
 paint(cover)

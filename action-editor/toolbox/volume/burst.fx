@@ -20,19 +20,18 @@ knobs: speed pulse
 
 # Effect
 edge = clamp(pulse, 0.06, 0.45)
+t = time_ms * 0.001 * max(0.05, speed)
 front = progress * (1 + 2 * edge)
-d = front - radius
-cover = 0
-if d >= 0 && d <= edge
-cover = 1 - (d / edge)
+# Turbulent shock front: noise pushes the edge in and out
+wob = (fbm(nx * 3 + t, ny * 3 - t * 0.7, nz * 3, 3) - 0.5) * edge * 0.8
+d = front + wob - radius
+cover = glow(d - edge * 0.3, edge * 0.7)
+# Fireball at the origin for the first beat
+if progress < 0.3
+cover = max(cover, (1 - progress / 0.3) * gauss(radius, 0.35 + progress))
 end
-if d < 0 && -d <= edge * 0.35
-cover = 1 + (d / (edge * 0.35))
-end
-if progress < 0.2
-cover = max(cover, (1 - progress / 0.2) * (1 - clamp(radius, 0, 1)))
-end
-if cover <= 0.001
+cover = cover * (1 - smoothstep(0.85, 1, progress))
+if cover <= 0.02
 off
 end
 intensity = intensity * cover

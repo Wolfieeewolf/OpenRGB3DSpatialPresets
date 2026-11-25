@@ -46,8 +46,10 @@ end
 delta = abs(ang - twist)
 delta = min(delta, 1 - delta)
 band = clamp(pulse, 0.06, 0.4)
-if delta > band
+# Glowing strand: hot core, soft rim
+cover = glow(delta, band * 0.6)
+if cover <= 0.02
 off
 end
-intensity = intensity * (1 - (delta / band))
+intensity = intensity * cover
 paint(along)

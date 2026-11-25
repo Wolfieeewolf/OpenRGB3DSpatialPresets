@@ -17,17 +17,12 @@ knobs: speed
 
 # Effect
 edge = 0.12
+t = time_ms * 0.001 * max(0.05, speed)
 front = progress * (1 + 2 * edge) - edge
-d = front - radius
-cover = 0
-if d >= edge
-cover = 1
-else
-if d > -edge
-cover = (d + edge) / (2 * edge)
-end
-end
-if cover <= 0.001
+# Ragged, glowing edge as the sphere grows
+d = front - radius + (fbm(nx * 3 - t, ny * 3, nz * 3 + t, 3) - 0.5) * edge * 1.2
+cover = max(smoothstep(-edge, edge, d), glow(d, edge * 0.8))
+if cover <= 0.02
 off
 end
 intensity = intensity * cover
